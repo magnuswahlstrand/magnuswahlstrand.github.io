@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>android on Develop me</title>
+    <link>https://kyeett.github.io/tags/android/</link>
+    <description>Recent content in android on Develop me</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 05 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kyeett.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Push Notifications pt.1</title>
+      <link>https://kyeett.github.io/post/2019-10-05-push-notifications/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2019-10-05-push-notifications/</guid>
+      <description>&lt;p&gt;I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!&lt;/p&gt;
+
+&lt;p&gt;The goal of this guide is to build a simple Android app and send a &amp;ldquo;Hello, world&amp;rdquo; push notification. The end result will look something like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

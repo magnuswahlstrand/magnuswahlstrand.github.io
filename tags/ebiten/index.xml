@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ebiten on Develop me</title>
+    <link>https://kyeett.github.io/tags/ebiten/</link>
+    <description>Recent content in ebiten on Develop me</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 29 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kyeett.github.io/tags/ebiten/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2D animation: Screen shake</title>
+      <link>https://kyeett.github.io/post/2019-04-29-screen-shake/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2019-04-29-screen-shake/</guid>
+      <description>&lt;p&gt;A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one &lt;em&gt;simple&lt;/em&gt; and one &lt;em&gt;nice&lt;/em&gt;. The end result will look something like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2D animation: Transitions</title>
+      <link>https://kyeett.github.io/post/2019-04-28-2d-transitions/</link>
+      <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2019-04-28-2d-transitions/</guid>
+      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

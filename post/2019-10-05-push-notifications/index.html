@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Push Notifications pt.1 - Develop me</title>
+  <meta property="og:title" content="Push Notifications pt.1" />
+  <meta name="twitter:title" content="Push Notifications pt.1" />
+  <meta name="description" content="Send your first push">
+  <meta property="og:description" content="Send your first push">
+  <meta name="twitter:description" content="Send your first push">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Develop me",
+    
+    "url": "https:\/\/kyeett.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/kyeett.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/kyeett.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/kyeett.github.io\/post\/2019-10-05-push-notifications\/",
+          "name": "Push notifications pt.1"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "Push Notifications pt.1",
+  "description" : "I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!\nThe goal of this guide is to build a simple Android app and send a \x26ldquo;Hello, world\x26rdquo; push notification. The end result will look something like this\n",
+  "inLanguage" : "en",
+  "wordCount":  0 ,
+  "datePublished" : "2019-10-05T00:00:00",
+  "dateModified" : "2019-10-05T00:00:00",
+  "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "android, push notifications, firebase, mobile, fcm" ],
+  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/post\/2019-10-05-push-notifications\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/kyeett.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Push Notifications pt.1" />
+<meta property="og:description" content="Send your first push">
+<meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://kyeett.github.io/post/2019-10-05-push-notifications/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Develop me" />
+  <meta name="twitter:title" content="Push Notifications pt.1" />
+  <meta name="twitter:description" content="Send your first push">
+  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Wahlstra" />
+  <meta name="twitter:creator" content="@Wahlstra" />
+  <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Wahlstra" />
+  <meta name="twitter:creator" content="@Wahlstra" />
+  <meta property="og:url" content="https://kyeett.github.io/post/2019-10-05-push-notifications/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Develop me" />
+
+  <meta name="generator" content="Hugo 0.55.4" />
+  <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://kyeett.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://kyeett.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://kyeett.github.io">Develop me</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Samples" href="/">Samples</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Develop me" href="https://kyeett.github.io">
+            <img class="avatar-img" src="https://kyeett.github.io/img/avatar-icon.png" alt="Develop me" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Push Notifications pt.1</h1>
+              
+              
+              
+                
+                  <h2 class="post-subheading">Send your first push</h2>
+                
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on October 5, 2019
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;0&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;0&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!</p>
+
+<p>The goal of this guide is to build a simple Android app and send a &ldquo;Hello, world&rdquo; push notification. The end result will look something like this</p>
+
+<p><img src="/img/push-notifications/1_hello_push.png" alt="End result" /></p>
+
+<h2 id="what-are-push-notifications">What are push notifications?</h2>
+
+<p>Push notifications are messages that are sent from an app <em>publisher</em> to the <em>users</em> of the app, and usually shows up in the system tray. The user doesn&rsquo;t have to have the app opened in order to do so (in fact, some many notifications only show up when the user is not in the app). Push notifications can be used for many things, both good and bad.</p>
+
+<p><strong>Example of notifications</strong></p>
+
+<ul>
+<li>Your taxi has arrived</li>
+<li>A friend has sent you a message in the app</li>
+<li>Your local team just scored</li>
+<li>There is a sale on your favorite food</li>
+</ul>
+
+<p>Read more about push notifications <a href="https://www.airship.com/resources/explainer/push-notifications-explained/">here</a>.</p>
+
+<h1 id="creating-the-app">Creating the app</h1>
+
+<p>I really had no idea how to create push notifications for Android apps, but it turns out Google has done a stellar job simplifying the setup. Especially if you are using Android studio, and choose their <a href="https://firebase.google.com/docs/cloud-messaging">Firebase Cloud Messaging</a> (FCM for short). I followed <a href="https://firebase.google.com/docs/cloud-messaging">this Google guide</a>, see steps in next section.</p>
+
+<p><em>Note 1: FCM also works with iOS. Guide <a href="https://firebase.google.com/docs/cloud-messaging/ios/client">here</a>.</em></p>
+
+<p><em>Note 2: FCM can be used for sending messages in general, not just push notifications for the mobile phones. It also works on the Web (using javascript), C++ and Unity.</em></p>
+
+<h2 id="setting-up-in-android-studio-fcm">Setting up in Android Studio + FCM</h2>
+
+<p>I used <a href="https://firebase.google.com/docs/android/setup#assistant">Option 2 from this guide</a> from google to setup FCM in Android Studio, using the <code>Firebase Assistant</code>.</p>
+
+<p>Go to <strong>Tools &ndash;&gt; Firebase</strong> and click <em>Cloud Messaging</em> and start the wizard</p>
+
+<ol>
+<li>Click <strong>Connect your app to Firebase</strong></li>
+<li>Add <strong>FCM</strong> to your app</li>
+<li>Create the service described in step 3 <strong>Handle messages</strong> by
+
+<ul>
+<li><strong>File &gt; New &gt; Service &gt; Service</strong></li>
+<li>I named mine <strong>MyMessagingService</strong></li>
+<li>You can skip the <code>onMessageReceived()</code> for now. To simplify things, we will only receive notifications when the app is in background mode</li>
+</ul></li>
+</ol>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.pushnotifications</span>
+
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">com.google.firebase.messaging.FirebaseMessagingService</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">android.util.Log</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">com.google.firebase.messaging.RemoteMessage</span>
+
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MyMessagingService</span> : FirebaseMessagingService() {
+
+    <span style="color:#000;font-weight:bold">val</span> TAG = <span style="color:#d14">&#34;Firebase Messaging Svc&#34;</span>
+
+    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onNewToken</span>(token: String?) {
+        Log.d(TAG, <span style="color:#d14">&#34;Refreshed token: &#34;</span> + token<span style="color:#000;font-weight:bold">!!</span>)
+    }
+
+    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onMessageReceived</span>(remoteMessage: RemoteMessage) {
+        <span style="color:#998;font-style:italic">// Not needed yet
+</span><span style="color:#998;font-style:italic"></span>    }
+}</code></pre></div>
+<h3 id="save-the-fcm-registration-token">Save the FCM Registration Token</h3>
+
+<p>In order for FCM to know which mobile to send the notification to, we need the FCM Registration Token. Whenever a new token is created, the method <code>onNewToken(token: String?)</code> above is called. For now, we can retreive the token by logging it to Logcat. Build and start the app, and you should see something like this in the log:</p>
+
+<p><code>D/Firebase Messaging Svc: Refreshed token: edMi2AGjEDk:APA91bFUddgbBAORuG7_2AByF6uptYTunk6alvb5a4R2vNninp...</code></p>
+
+<p>Copy the full token (it should be a lot longer the one above), and save it for later. If you lose it, you have to remove the application from your phone/emulator and reinstall it.</p>
+
+<p>That is is, codewise! Now we just need to send the notification.</p>
+
+<h2 id="sending-the-notification">Sending the notification</h2>
+
+<p>To send a test notification, we go the <a href="https://console.firebase.google.com/">firebase console</a></p>
+
+<ol>
+<li>Click the project you set up in the previous step. In my case &ldquo;pushnotifications&rdquo;</li>
+<li>Click <strong>Cloud Messaging</strong></li>
+<li>Click the button at the top <strong>Send your first message</strong></li>
+<li>Fill in the form to create your notifications (emojis copied from <a href="https://getemoji.com/">here</a>).</li>
+</ol>
+
+<p><img src="/img/push-notifications/1_firebase_admin.png" alt="Firebase admin" /></p>
+
+<ol>
+<li>Click <strong>Send test message</strong></li>
+<li>Add the FCM registration token from the logs (see the previous section)</li>
+</ol>
+
+<p><img src="/img/push-notifications/1_send_push.png" alt="Send push" /></p>
+
+<ol>
+<li>Press <strong>test</strong> button (<strong>Note: the application <em>MUST</em> be in background mode, otherwise the notification will not show up, since we have not implemented <code>onMessageReceived()</code></strong>)</li>
+</ol>
+
+<p>And voilá, I receive a nice emoji push notification. That is it for this introduction.</p>
+
+<p><img src="/img/push-notifications/1_hello_push.png" alt="End result" /></p>
+
+<h2 id="possible-improvements">Possible improvements</h2>
+
+<p>There are several improvements that can be considered already.</p>
+
+<ul>
+<li>Show notifications when the app is active (in the foreground)</li>
+<li>Take the user to a specific view in the app when the notification is clicked (deep links)</li>
+<li>Make the notification permament (for example, while the user is logged in)</li>
+</ul>
+
+<h2 id="code">Code</h2>
+
+<p>The code for the push notification is background mode is <a href="https://github.com/kyeett/android-push-notifications/tree/background-mode">here</a>.</p>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://kyeett.github.io/tags/android/">android</a>&nbsp;
+            
+              <a href="https://kyeett.github.io/tags/push-notifications/">push notifications</a>&nbsp;
+            
+              <a href="https://kyeett.github.io/tags/firebase/">firebase</a>&nbsp;
+            
+              <a href="https://kyeett.github.io/tags/mobile/">mobile</a>&nbsp;
+            
+              <a href="https://kyeett.github.io/tags/fcm/">fcm</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f&amp;text=Push%20Notifications%20pt.1&amp;via=Wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//plus.google.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f" target="_blank" title="Share on Google Plus">
+          <i class="fab fa-google-plus"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f&amp;title=Push%20Notifications%20pt.1" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f&amp;title=Push%20Notifications%20pt.1" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f&amp;title=Push%20Notifications%20pt.1" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-05-push-notifications%2f&amp;description=Push%20Notifications%20pt.1" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+              </div>
+            </section>
+        
+
+        
+          
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://kyeett.github.io/post/2019-04-29-screen-shake/" data-toggle="tooltip" data-placement="top" title="2D animation: Screen shake">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/kyeett" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/Wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://kyeett.github.io/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2019
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://kyeett.github.io">Develop me</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://kyeett.github.io/js/main.js"></script>
+<script src="https://kyeett.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://kyeett.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
