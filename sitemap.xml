@@ -4,13 +4,54 @@
   
   <url>
     <loc>https://kyeett.github.io/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/post/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/post/2019-10-06-notifications/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/android/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/fcm/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/mobile/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/notifications/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/push-notifications/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -20,37 +61,7 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/tags/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/android/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/fcm/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://kyeett.github.io/tags/firebase/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/mobile/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/push-notifications/</loc>
     <lastmod>2019-10-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
