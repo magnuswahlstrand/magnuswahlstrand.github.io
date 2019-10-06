@@ -63,7 +63,7 @@
   "headline": "2D animation: Screen shake",
   "description" : "A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one simple and one nice. The end result will look something like this\n",
   "inLanguage" : "en",
-  "wordCount":  343 ,
+  "wordCount":  465 ,
   "datePublished" : "2019-04-29T00:00:00",
   "dateModified" : "2019-04-29T00:00:00",
   "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
@@ -261,10 +261,10 @@
   <i class="fas fa-calendar"></i>&nbsp;Posted on April 29, 2019
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;343&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;465&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
@@ -332,10 +332,39 @@ dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="co
 <h2 id="nice-r-screen-shake">Nice(r) screen shake</h2>
 
 <p>As you see above, we get a black border around the image when we shake. While it is not terrible, we can do better! What we want to do is something like the image below, i.e. draw <strong>more</strong> to the temp image than we will draw to the screen. Then we can draw the content of the red rectangle onto the screen.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+   <span style="color:#000;font-weight:bold">...</span>
+   <span style="color:#998;font-style:italic">// Create a screent hat is larger than our actual screen
+</span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen, err = ebiten.<span style="color:#900;font-weight:bold">NewImage</span>(screenWidth<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, screenHeight<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, ebiten.FilterDefault)
+   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
+   }
+   <span style="color:#000;font-weight:bold">...</span>
+}</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, t <span style="color:#458;font-weight:bold">float64</span>) {
+   <span style="color:#998;font-style:italic">// Draw scene onto tmpScreen
+</span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
 
+   <span style="color:#998;font-style:italic">// Draw tmpScreen on an offset (screen shake) applied
+</span><span style="color:#998;font-style:italic"></span>   op <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{}
+   op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>padding, <span style="color:#000;font-weight:bold">-</span>padding)
+   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
+      amplitude <span style="color:#000;font-weight:bold">:=</span> maxAmplitude <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
+      dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+      dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+      op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>dx, <span style="color:#000;font-weight:bold">-</span>dy)
+   }
+
+   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(biggerTmpScreen, op)
+}</code></pre></div>
+<p>This function is called from the main game loop.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+   <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen, t) <span style="color:#998;font-style:italic">// Previously simpleScreenShake(screen, t)
+</span><span style="color:#998;font-style:italic"></span>   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">60.0</span>
+   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+}</code></pre></div>
 <p><img src="/img/screenshake/shake-rectangle.gif" alt="End result" /></p>
 
-<p><a href="https://jonny.morrill.me/en/blog/gamedev-how-to-implement-a-camera-shake-effect/">https://jonny.morrill.me/en/blog/gamedev-how-to-implement-a-camera-shake-effect/</a></p>
+<p><em>Code for the nicer shake is <a href="https://github.com/kyeett/animex/blob/nicer-shake/screenshake/main.go">here</a></em>.</p>
 
         
           <div class="blog-tags">
