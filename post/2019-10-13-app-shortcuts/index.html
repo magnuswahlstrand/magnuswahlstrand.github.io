@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>App shortcuts - Develop me</title>
+  <meta property="og:title" content="App shortcuts" />
+  <meta name="twitter:title" content="App shortcuts" />
+  <meta name="description" content="This article covers how to create Android app shortcuts like the one below.
+
+">
+  <meta property="og:description" content="This article covers how to create Android app shortcuts like the one below.
+
+">
+  <meta name="twitter:description" content="This article covers how to create Android app shortcuts like the one below.
+
+">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Develop me",
+    
+    "url": "https:\/\/kyeett.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/kyeett.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/kyeett.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/kyeett.github.io\/post\/2019-10-13-app-shortcuts\/",
+          "name": "App shortcuts"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "App shortcuts",
+  "description" : "This article covers how to create Android app shortcuts like the one below.\n",
+  "inLanguage" : "en",
+  "wordCount":  0 ,
+  "datePublished" : "2019-10-13T00:00:00",
+  "dateModified" : "2019-10-13T00:00:00",
+  "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "android, mobile" ],
+  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/post\/2019-10-13-app-shortcuts\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/kyeett.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="App shortcuts" />
+<meta property="og:description" content="This article covers how to create Android app shortcuts like the one below.
+
+">
+<meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://kyeett.github.io/post/2019-10-13-app-shortcuts/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Develop me" />
+  <meta name="twitter:title" content="App shortcuts" />
+  <meta name="twitter:description" content="This article covers how to create Android app shortcuts like the one below.
+
+">
+  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Wahlstra" />
+  <meta name="twitter:creator" content="@Wahlstra" />
+  <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@Wahlstra" />
+  <meta name="twitter:creator" content="@Wahlstra" />
+  <meta property="og:url" content="https://kyeett.github.io/post/2019-10-13-app-shortcuts/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Develop me" />
+
+  <meta name="generator" content="Hugo 0.55.4" />
+  <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://kyeett.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://kyeett.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://kyeett.github.io">Develop me</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Samples" href="/">Samples</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="Develop me" href="https://kyeett.github.io">
+            <img class="avatar-img" src="https://kyeett.github.io/img/avatar-icon.png" alt="Develop me" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>App shortcuts</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on October 13, 2019
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;0&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;0&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>This article covers how to create Android app shortcuts like the one below.</p>
+
+<p><img src="/img/app-shortcuts/target.png" alt="Target" /></p>
+
+<h2 id="setup">Setup</h2>
+
+<p>First, since this article will be using icons quite a bit, let&rsquo;s add a few vector graphics and replace the default Android app icon with our own.</p>
+
+<ul>
+<li><strong>New &gt; Vector Asset &gt; Clip Art &gt;</strong> Select the icon you want</li>
+</ul>
+
+<p>I used</p>
+
+<ul>
+<li>ic_app_icon.xml (from <strong>fiber_new</strong> icon)</li>
+<li>ic_battery_shortcut.xml (from <strong>battery_unknown</strong> icon)</li>
+<li>ic_widgets_shortcut.xml (from <strong>widgets</strong> icon)</li>
+</ul>
+
+<p>Then we can change the app icon by updating the AndroidManifest</p>
+
+<p><em><strong>AndroidManifest.xml</strong></em></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;application</span>
+        <span style="color:#a61717;background-color:#e3d2d2">...</span>
+        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
+        <span style="color:#008080">android:roundIcon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
+        <span style="color:#a61717;background-color:#e3d2d2">...</span>
+        <span style="color:#000080">&gt;</span>
+    ...
+<span style="color:#000080">&lt;/application&gt;</span></code></pre></div>
+<p>And create the text for the shortcuts</p>
+
+<p><em><strong>res/values/strings.xml</strong></em></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;resources&gt;</span>
+    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;app_name&#34;</span><span style="color:#000080">&gt;</span>New App<span style="color:#000080">&lt;/string&gt;</span>
+    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>Charge<span style="color:#000080">&lt;/string&gt;</span>
+    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>Widgets<span style="color:#000080">&lt;/string&gt;</span>
+<span style="color:#000080">&lt;/resources&gt;</span></code></pre></div>
+<h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
+
+<p>Once the setup is done, we can create the actual shortcuts. Add the following meta-data tag inside your <em><strong>AndroidManifest.xml</strong></em>, and create the corresponding <strong>res/xml/shortcuts.xml</strong> file.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">...
+<span style="color:#000080">&lt;activity</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
+    ...
+    <span style="color:#000080">&lt;meta-data</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;android.app.shortcuts&#34;</span>
+        <span style="color:#008080">android:resource=</span><span style="color:#d14">&#34;@xml/shortcuts&#34;</span> <span style="color:#000080">/&gt;</span>
+    ...
+<span style="color:#000080">&lt;/activity&gt;</span></code></pre></div>
+<p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
+
+<p><em><strong>res/xml/shortcuts.xml</strong></em></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;shortcuts</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#000080">&gt;</span>
+    <span style="color:#000080">&lt;shortcut</span>
+        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;show widgets&#34;</span>
+        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_widgets_shortcut&#34;</span>
+        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>
+        <span style="color:#000080">&lt;intent</span>
+            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
+            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
+            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
+            <span style="color:#000080">/&gt;</span>
+    <span style="color:#000080">&lt;/shortcut&gt;</span>
+
+    <span style="color:#000080">&lt;shortcut</span>
+        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;charge&#34;</span>
+        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_battery_shortcut&#34;</span>
+        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>
+        <span style="color:#000080">&lt;intent</span>
+            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
+            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
+            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
+            <span style="color:#000080">/&gt;</span>
+    <span style="color:#000080">&lt;/shortcut&gt;</span>
+<span style="color:#000080">&lt;/shortcuts&gt;</span></code></pre></div>
+<p>Finally, we update the text in the app based on which action was clicked:</p>
+
+<p><em><strong>MainActivity.kt</strong></em></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.myintenttutorial</span>
+
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">androidx.appcompat.app.AppCompatActivity</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">android.os.Bundle</span>
+<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">kotlinx.android.synthetic.main.activity_main.*</span>
+
+<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MainActivity</span> : AppCompatActivity() {
+
+    <span style="color:#000;font-weight:bold">val</span> CHARGE_BATTERY_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
+    <span style="color:#000;font-weight:bold">val</span> SHOW_WIDGETS_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
+
+    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
+        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        <span style="color:#998;font-style:italic">// Following code added
+</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> action: String? = intent<span style="color:#000;font-weight:bold">?.</span>action
+        text_view.text = <span style="color:#000;font-weight:bold">when</span> (action) {
+            CHARGE_BATTERY_ACTION -&gt; <span style="color:#d14">&#34;Charging battery&#34;</span>
+            SHOW_WIDGETS_ACTION -&gt; <span style="color:#d14">&#34;Showing some widgets&#34;</span>
+            <span style="color:#000;font-weight:bold">else</span> -&gt; <span style="color:#d14">&#34;Main app&#34;</span>
+        }
+    }
+}</code></pre></div>
+<p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data=&quot;content://cafe.gophers.myintenttutorial/?from=shortcut_charge&quot;</code></em></p>
+
+<h2 id="end-result">End result</h2>
+
+<p>Here is the end result. By clicking on the app icon, we come to the main activity with the default text, and if we press and hold we can click one of the shortcuts we have defined.</p>
+
+<p><img src="/img/app-shortcuts/complete.gif" alt="End result" /></p>
+
+<h3 id="code">Code</h3>
+
+<p>The code can be found <a href="https://github.com/kyeett/android-app-shortcuts">here</a>.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+<li><a href="https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts">Android: creating shortcuts</a></li>
+<li><a href="https://stackoverflow.com/questions/42554349/how-to-add-data-to-app-shortcut-intent">SO: How to add data to app shortcut Intent</a></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://kyeett.github.io/tags/android/">android</a>&nbsp;
+            
+              <a href="https://kyeett.github.io/tags/mobile/">mobile</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f&amp;text=App%20shortcuts&amp;via=Wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//plus.google.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f" target="_blank" title="Share on Google Plus">
+          <i class="fab fa-google-plus"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f&amp;title=App%20shortcuts" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f&amp;title=App%20shortcuts" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f&amp;title=App%20shortcuts" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2019-10-13-app-shortcuts%2f&amp;description=App%20shortcuts" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+              </div>
+            </section>
+        
+
+        
+          
+          
+          <h4 class="see-also">See also</h4>
+          <ul>
+          
+            <li><a href="/post/2019-10-06-notifications/">Push Notifications pt.2</a></li>
+          
+            <li><a href="/post/2019-10-05-push-notifications/">Push Notifications pt.1</a></li>
+          
+          </ul>
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://kyeett.github.io/post/2019-10-06-notifications/" data-toggle="tooltip" data-placement="top" title="Push Notifications pt.2">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/kyeett" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/Wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://kyeett.github.io/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2019
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://kyeett.github.io">Develop me</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://kyeett.github.io/js/main.js"></script>
+<script src="https://kyeett.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://kyeett.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

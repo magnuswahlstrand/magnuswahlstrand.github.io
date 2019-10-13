@@ -5,10 +5,21 @@
     <link>https://kyeett.github.io/tags/mobile/</link>
     <description>Recent content in mobile on Develop me</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kyeett.github.io/tags/mobile/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>App shortcuts</title>
+      <link>https://kyeett.github.io/post/2019-10-13-app-shortcuts/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2019-10-13-app-shortcuts/</guid>
+      <description>&lt;p&gt;This article covers how to create Android app shortcuts like the one below.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34; /&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Push Notifications pt.2</title>
