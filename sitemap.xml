@@ -3,26 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://kyeett.github.io/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/post/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kyeett.github.io/tags/</loc>
-    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/bootstrap/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/javascript/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/jquery/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</loc>
+    <lastmod>2019-11-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -5,10 +5,23 @@
     <link>https://kyeett.github.io/post/</link>
     <description>Recent content in Posts on Develop me</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kyeett.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Slack: Search bar</title>
+      <link>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</guid>
+      <description>&lt;p&gt;I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/slack-clone/6_end_result.gif&#34; alt=&#34;Search overlay&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Automatic key rotation on Heroku</title>
