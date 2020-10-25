@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>firebase on Develop me</title>
@@ -17,10 +17,8 @@
       
       <guid>https://kyeett.github.io/post/2019-10-05-push-notifications/</guid>
       <description>&lt;p&gt;I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!&lt;/p&gt;
-
 &lt;p&gt;The goal of this guide is to build a simple Android app and send a &amp;ldquo;Hello, world&amp;rdquo; push notification. The end result will look something like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -11,13 +11,10 @@
   <meta property="og:title" content="App shortcuts" />
   <meta name="twitter:title" content="App shortcuts" />
   <meta name="description" content="This article covers how to create Android app shortcuts like the one below.
-
 ">
   <meta property="og:description" content="This article covers how to create Android app shortcuts like the one below.
-
 ">
   <meta name="twitter:description" content="This article covers how to create Android app shortcuts like the one below.
-
 ">
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
 {
@@ -90,7 +87,6 @@
 
 <meta property="og:title" content="App shortcuts" />
 <meta property="og:description" content="This article covers how to create Android app shortcuts like the one below.
-
 ">
 <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
 <meta property="og:url" content="https://kyeett.github.io/post/2019-10-13-app-shortcuts/" />
@@ -98,7 +94,6 @@
 <meta property="og:site_name" content="Develop me" />
   <meta name="twitter:title" content="App shortcuts" />
   <meta name="twitter:description" content="This article covers how to create Android app shortcuts like the one below.
-
 ">
   <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
@@ -114,7 +109,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Develop me" />
 
-  <meta name="generator" content="Hugo 0.55.4" />
+  <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -294,27 +289,19 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>This article covers how to create Android app shortcuts like the one below.</p>
-
-<p><img src="/img/app-shortcuts/target.png" alt="Target" /></p>
-
+<p><img src="/img/app-shortcuts/target.png" alt="Target"></p>
 <h2 id="setup">Setup</h2>
-
 <p>First, since this article will be using icons quite a bit, let&rsquo;s add a few vector graphics and replace the default Android app icon with our own.</p>
-
 <ul>
 <li><strong>New &gt; Vector Asset &gt; Clip Art &gt;</strong> Select the icon you want</li>
 </ul>
-
 <p>I used</p>
-
 <ul>
 <li>ic_app_icon.xml (from <strong>fiber_new</strong> icon)</li>
 <li>ic_battery_shortcut.xml (from <strong>battery_unknown</strong> icon)</li>
 <li>ic_widgets_shortcut.xml (from <strong>widgets</strong> icon)</li>
 </ul>
-
 <p>Then we can change the app icon by updating the AndroidManifest</p>
-
 <p><em><strong>AndroidManifest.xml</strong></em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;application</span>
         <span style="color:#a61717;background-color:#e3d2d2">...</span>
@@ -323,17 +310,15 @@
         <span style="color:#a61717;background-color:#e3d2d2">...</span>
         <span style="color:#000080">&gt;</span>
     ...
-<span style="color:#000080">&lt;/application&gt;</span></code></pre></div>
-<p>And create the text for the shortcuts</p>
-
+<span style="color:#000080">&lt;/application&gt;</span>
+</code></pre></div><p>And create the text for the shortcuts</p>
 <p><em><strong>res/values/strings.xml</strong></em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;resources&gt;</span>
     <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;app_name&#34;</span><span style="color:#000080">&gt;</span>New App<span style="color:#000080">&lt;/string&gt;</span>
     <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>Charge<span style="color:#000080">&lt;/string&gt;</span>
     <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>Widgets<span style="color:#000080">&lt;/string&gt;</span>
-<span style="color:#000080">&lt;/resources&gt;</span></code></pre></div>
-<h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
-
+<span style="color:#000080">&lt;/resources&gt;</span>
+</code></pre></div><h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
 <p>Once the setup is done, we can create the actual shortcuts. Add the following meta-data tag inside your <em><strong>AndroidManifest.xml</strong></em>, and create the corresponding <strong>res/xml/shortcuts.xml</strong> file.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">...
 <span style="color:#000080">&lt;activity</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
@@ -341,9 +326,8 @@
     <span style="color:#000080">&lt;meta-data</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;android.app.shortcuts&#34;</span>
         <span style="color:#008080">android:resource=</span><span style="color:#d14">&#34;@xml/shortcuts&#34;</span> <span style="color:#000080">/&gt;</span>
     ...
-<span style="color:#000080">&lt;/activity&gt;</span></code></pre></div>
-<p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
-
+<span style="color:#000080">&lt;/activity&gt;</span>
+</code></pre></div><p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
 <p><em><strong>res/xml/shortcuts.xml</strong></em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;shortcuts</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#000080">&gt;</span>
     <span style="color:#000080">&lt;shortcut</span>
@@ -367,9 +351,8 @@
             <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
             <span style="color:#000080">/&gt;</span>
     <span style="color:#000080">&lt;/shortcut&gt;</span>
-<span style="color:#000080">&lt;/shortcuts&gt;</span></code></pre></div>
-<p>Finally, we update the text in the app based on which action was clicked:</p>
-
+<span style="color:#000080">&lt;/shortcuts&gt;</span>
+</code></pre></div><p>Finally, we update the text in the app based on which action was clicked:</p>
 <p><em><strong>MainActivity.kt</strong></em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.myintenttutorial</span>
 
@@ -394,21 +377,14 @@
             <span style="color:#000;font-weight:bold">else</span> -&gt; <span style="color:#d14">&#34;Main app&#34;</span>
         }
     }
-}</code></pre></div>
-<p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data=&quot;content://cafe.gophers.myintenttutorial/?from=shortcut_charge&quot;</code></em></p>
-
+}
+</code></pre></div><p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data=&quot;content://cafe.gophers.myintenttutorial/?from=shortcut_charge&quot;</code></em></p>
 <h2 id="end-result">End result</h2>
-
 <p>Here is the end result. By clicking on the app icon, we come to the main activity with the default text, and if we press and hold we can click one of the shortcuts we have defined.</p>
-
-<p><img src="/img/app-shortcuts/complete.gif" alt="End result" /></p>
-
+<p><img src="/img/app-shortcuts/complete.gif" alt="End result"></p>
 <h3 id="code">Code</h3>
-
 <p>The code can be found <a href="https://github.com/kyeett/android-app-shortcuts">here</a>.</p>
-
 <h3 id="links">Links</h3>
-
 <ul>
 <li><a href="https://developer.android.com/guide/topics/ui/shortcuts/creating-shortcuts">Android: creating shortcuts</a></li>
 <li><a href="https://stackoverflow.com/questions/42554349/how-to-add-data-to-app-shortcut-intent">SO: How to add data to app shortcut Intent</a></li>
@@ -581,7 +557,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

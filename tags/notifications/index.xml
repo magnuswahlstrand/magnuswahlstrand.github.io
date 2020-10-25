@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>notifications on Develop me</title>
@@ -17,14 +17,12 @@
       
       <guid>https://kyeett.github.io/post/2019-10-06-notifications/</guid>
       <description>&lt;p&gt;In &lt;a href=&#34;https://kyeett.github.io/post/2019-10-05-push-notifications/&#34;&gt;Part 1&lt;/a&gt; we learned how to send push notifications from &lt;a href=&#34;https://console.firebase.google.com&#34;&gt;Firebase Cloud Messaging console&lt;/a&gt;. There are a number of improvements we can make:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#show-notification-in-foregrounded-app&#34;&gt;Show notification when the app in in the foreground&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#go-to-specific-view&#34;&gt;Go to a specific view in the app when clicked&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Buttons directly in the notifications&lt;/li&gt;
 &lt;li&gt;Keep the notification open while the app is open&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Let&amp;rsquo;s get started!&lt;/p&gt;</description>
     </item>
     

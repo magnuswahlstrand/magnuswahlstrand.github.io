@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Develop me</title>
@@ -11,15 +11,24 @@
     
     
     <item>
+      <title>Getting started with sqlc</title>
+      <link>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Slack: Search bar</title>
       <link>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</guid>
       <description>&lt;p&gt;I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/slack-clone/6_end_result.gif&#34; alt=&#34;Search overlay&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/slack-clone/6_end_result.gif&#34; alt=&#34;Search overlay&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.&lt;/p&gt;</description>
     </item>
     
@@ -30,7 +39,6 @@
       
       <guid>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</guid>
       <description>&lt;p&gt;Automatic key rotation is a simple way of improving the security of an app.&lt;/p&gt;
-
 &lt;p&gt;In this example, I have two services running on &lt;a href=&#34;https://www.heroku.com/&#34;&gt;Heroku&lt;/a&gt;. The goal is that the API key in &lt;code&gt;service-1&lt;/code&gt; one can be rotated smoothly (every 2 week), while &lt;code&gt;service-2&lt;/code&gt; uses the rotating API keys to connect to &lt;code&gt;service-1&lt;/code&gt;.
 We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons/securekey&#34;&gt;securekey&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
@@ -51,8 +59,7 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
       
       <guid>https://kyeett.github.io/post/2019-10-13-app-shortcuts/</guid>
       <description>&lt;p&gt;This article covers how to create Android app shortcuts like the one below.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,14 +69,12 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
       
       <guid>https://kyeett.github.io/post/2019-10-06-notifications/</guid>
       <description>&lt;p&gt;In &lt;a href=&#34;https://kyeett.github.io/post/2019-10-05-push-notifications/&#34;&gt;Part 1&lt;/a&gt; we learned how to send push notifications from &lt;a href=&#34;https://console.firebase.google.com&#34;&gt;Firebase Cloud Messaging console&lt;/a&gt;. There are a number of improvements we can make:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#show-notification-in-foregrounded-app&#34;&gt;Show notification when the app in in the foreground&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#go-to-specific-view&#34;&gt;Go to a specific view in the app when clicked&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Buttons directly in the notifications&lt;/li&gt;
 &lt;li&gt;Keep the notification open while the app is open&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Let&amp;rsquo;s get started!&lt;/p&gt;</description>
     </item>
     
@@ -80,10 +85,8 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
       
       <guid>https://kyeett.github.io/post/2019-10-05-push-notifications/</guid>
       <description>&lt;p&gt;I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!&lt;/p&gt;
-
 &lt;p&gt;The goal of this guide is to build a simple Android app and send a &amp;ldquo;Hello, world&amp;rdquo; push notification. The end result will look something like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -93,8 +96,7 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
       
       <guid>https://kyeett.github.io/post/2019-04-29-screen-shake/</guid>
       <description>&lt;p&gt;A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one &lt;em&gt;simple&lt;/em&gt; and one &lt;em&gt;nice&lt;/em&gt;. The end result will look something like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -104,9 +106,7 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
       
       <guid>https://kyeett.github.io/post/2019-04-28-2d-transitions/</guid>
       <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     

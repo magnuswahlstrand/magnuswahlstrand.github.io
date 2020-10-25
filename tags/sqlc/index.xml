@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sqlc on Develop me</title>
+    <link>https://kyeett.github.io/tags/sqlc/</link>
+    <description>Recent content in sqlc on Develop me</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kyeett.github.io/tags/sqlc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting started with sqlc</title>
+      <link>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

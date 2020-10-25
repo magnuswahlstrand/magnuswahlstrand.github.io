@@ -12,17 +12,11 @@
   <meta name="twitter:title" content="Slack: Search bar" />
   <meta name="description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
 
-
-
 In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.">
   <meta property="og:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
 
-
-
 In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.">
   <meta name="twitter:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
-
-
 
 In this …">
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
@@ -75,7 +69,7 @@ In this …">
   "headline": "Slack: Search bar",
   "description" : "I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation\/search bar that makes navigation the channels effortless.\nIn this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.\n",
   "inLanguage" : "en",
-  "wordCount":  0 ,
+  "wordCount":  657 ,
   "datePublished" : "2020-01-12T00:00:00",
   "dateModified" : "2020-01-12T00:00:00",
   "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
@@ -97,8 +91,6 @@ In this …">
 <meta property="og:title" content="Slack: Search bar" />
 <meta property="og:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
 
-
-
 In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.">
 <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
 <meta property="og:url" content="https://kyeett.github.io/post/2020-01-12-search-bar-overlay/" />
@@ -106,8 +98,6 @@ In this article I try to recreate the basic look and functionality of it using H
 <meta property="og:site_name" content="Develop me" />
   <meta name="twitter:title" content="Slack: Search bar" />
   <meta name="twitter:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
-
-
 
 In this …">
   <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
@@ -124,7 +114,7 @@ In this …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Develop me" />
 
-  <meta name="generator" content="Hugo 0.55.4" />
+  <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -277,10 +267,10 @@ In this …">
   <i class="fas fa-calendar"></i>&nbsp;Posted on January 12, 2020
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;0&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;0&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;657&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
@@ -304,34 +294,22 @@ In this …">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.</p>
-
-<p><img src="/img/slack-clone/6_end_result.gif" alt="Search overlay" /></p>
-
+<p><img src="/img/slack-clone/6_end_result.gif" alt="Search overlay"></p>
 <p>In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.</p>
-
 <h2 id="overview">Overview</h2>
-
 <p>To recreate the search bar, we need three parts:</p>
-
 <ol>
 <li>A semi-transparent gray overlay that covers the chat</li>
 <li>An input field where the search terms is entered</li>
 <li>An area below the input field where the result can be shown in real time</li>
 </ol>
-
 <p>If you click on the gray overlay, or the x in the top right corner, both the overlay and search bar should disappear.
 If we enter something into the input field, we will show a few dummy search results, without pressing enter.</p>
-
 <h2 id="implementation">Implementation</h2>
-
 <p>It turns out that <a href="https://getbootstrap.com/">Bootstrap</a> (opensource UI framework from Twitter) has done most of the work for us with their Modals.</p>
-
 <p>Using the example code from <a href="https://getbootstrap.com/docs/4.4/components/modal/#live-demo">Modal: live-demo</a> we can already get a nice popup with a button in the top right corner to close it, and a gray overlay that covers the background. All we need to do is to add some styling and handle searches</p>
-
-<p><img src="/img/slack-clone/4_simple_modal.png" alt="Simple modal" /></p>
-
+<p><img src="/img/slack-clone/4_simple_modal.png" alt="Simple modal"></p>
 <h3 id="styling">Styling</h3>
-
 <p>Here is the updated modal</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#998;font-style:italic">&lt;!-- Modal --&gt;</span>
 &lt;<span style="color:#000080">div</span>
@@ -363,8 +341,8 @@ If we enter something into the input field, we will show a few dummy search resu
       /&gt;
     &lt;/<span style="color:#000080">div</span>&gt;
   &lt;/<span style="color:#000080">div</span>&gt;
-&lt;/<span style="color:#000080">div</span>&gt;</code></pre></div>
-<p><em>Styling:</em></p>
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></div><p><em>Styling:</em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#000080">style</span>&gt;
   .<span style="color:#458;font-weight:bold">search-close</span><span style="color:#000;font-weight:bold">,</span>
   .<span style="color:#458;font-weight:bold">search-icon</span> {
@@ -377,25 +355,25 @@ If we enter something into the input field, we will show a few dummy search resu
     <span style="color:#000;font-weight:bold">right</span>: <span style="color:#099">0</span><span style="color:#458;font-weight:bold">px</span>;
     <span style="color:#000;font-weight:bold">cursor</span>: hand;
   }
-&lt;/<span style="color:#000080">style</span>&gt;</code></pre></div>
-<hr />
-
+&lt;/<span style="color:#000080">style</span>&gt;
+</code></pre></div><hr>
 <p>A few highlights:</p>
-
 <ul>
-<li><p>Changed the modal class from <code>modal</code> to <code>modal-lg</code> to make it fill up more space. More info <a href="https://getbootstrap.com/docs/4.0/components/modal/#optional-sizes">here</a>.</p></li>
-
-<li><p>Added a magnifying glass icon from <a href="https://fontawesome.com/">FontAwesome</a> to clarify that it is a search window</p></li>
-
-<li><p>Replaced the bootstrap <code>x</code> icon with the <code>x</code> from <a href="https://fontawesome.com/">FontAwesome</a></p></li>
-
-<li><p>I made both the magnifying glass and the close button use <code>position:absolute;</code> to float on top of the input field.</p></li>
+<li>
+<p>Changed the modal class from <code>modal</code> to <code>modal-lg</code> to make it fill up more space. More info <a href="https://getbootstrap.com/docs/4.0/components/modal/#optional-sizes">here</a>.</p>
+</li>
+<li>
+<p>Added a magnifying glass icon from <a href="https://fontawesome.com/">FontAwesome</a> to clarify that it is a search window</p>
+</li>
+<li>
+<p>Replaced the bootstrap <code>x</code> icon with the <code>x</code> from <a href="https://fontawesome.com/">FontAwesome</a></p>
+</li>
+<li>
+<p>I made both the magnifying glass and the close button use <code>position:absolute;</code> to float on top of the input field.</p>
+</li>
 </ul>
-
-<p><img src="/img/slack-clone/5_layout_updated.png" alt="Layout updated" /></p>
-
+<p><img src="/img/slack-clone/5_layout_updated.png" alt="Layout updated"></p>
 <h3 id="search-results">Search results</h3>
-
 <p>When a user starts typing in the search field, we should show some results. Add the following inside the modal</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#998;font-style:italic">&lt;!-- Dummy search results --&gt;</span>
 &lt;<span style="color:#000080">div</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;search_results&#34;</span>&gt;
@@ -406,8 +384,8 @@ If we enter something into the input field, we will show a few dummy search resu
     &lt;<span style="color:#000080">li</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;list-group-item&#34;</span>&gt;Porta ac consectetur ac&lt;/<span style="color:#000080">li</span>&gt;
     &lt;<span style="color:#000080">li</span> <span style="color:#008080">class</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;list-group-item&#34;</span>&gt;Vestibulum at eros&lt;/<span style="color:#000080">li</span>&gt;
   &lt;/<span style="color:#000080">ul</span>&gt;
-&lt;/<span style="color:#000080">div</span>&gt;</code></pre></div>
-<p><em>Styling:</em></p>
+&lt;/<span style="color:#000080">div</span>&gt;
+</code></pre></div><p><em>Styling:</em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#458;font-weight:bold">search_results</span> {
   <span style="color:#000;font-weight:bold">border-top</span>: <span style="color:#099">1</span><span style="color:#458;font-weight:bold">px</span> <span style="color:#000;font-weight:bold">solid</span> <span style="color:#000;font-weight:bold">lightgray</span>;
   <span style="color:#000;font-weight:bold">display</span>: <span style="color:#000;font-weight:bold">none</span>;
@@ -426,8 +404,8 @@ If we enter something into the input field, we will show a few dummy search resu
   <span style="color:#000;font-weight:bold">background-color</span>: <span style="color:#000;font-weight:bold">cornflowerblue</span>;
   <span style="color:#000;font-weight:bold">color</span>: <span style="color:#000;font-weight:bold">white</span>;
   <span style="color:#000;font-weight:bold">cursor</span>: hand;
-}</code></pre></div>
-<p>Using jQuery and some javascript, we can complete the solution.</p>
+}
+</code></pre></div><p>Using jQuery and some javascript, we can complete the solution.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">$(<span style="color:#0086b3">document</span>).ready(<span style="color:#000;font-weight:bold">function</span>() {
   <span style="color:#998;font-style:italic">// Focus the search input whenever the modal is shown
 </span><span style="color:#998;font-style:italic"></span>  $(<span style="color:#d14">&#34;#search_modal&#34;</span>).on(<span style="color:#d14">&#34;hidden.bs.modal&#34;</span>, <span style="color:#000;font-weight:bold">function</span>(e) {
@@ -450,25 +428,15 @@ If we enter something into the input field, we will show a few dummy search resu
     }
   });
 });
-</code></pre></div>
-<p>That&rsquo;s it! Now we have the base a nice search bar.</p>
-
-<p><img src="/img/slack-clone/6_end_result.gif" alt="Search overlay" /></p>
-
+</code></pre></div><p>That&rsquo;s it! Now we have the base a nice search bar.</p>
+<p><img src="/img/slack-clone/6_end_result.gif" alt="Search overlay"></p>
 <h3 id="improvements">Improvements</h3>
-
 <p>Here are some further improvements</p>
-
 <h4 id="1-keyboard-navigation">1. Keyboard navigation</h4>
-
 <p>We could add keyboard navigation of search results, for example, pressing down arrow could highlight the first search result, and pressing enter would navigate us to that result.</p>
-
 <h4 id="2-shortcut-to-open-search-bar">2. Shortcut to open search bar</h4>
-
 <p>Ideally we should have keyboard shortcut to open the search bar. Slack for example uses <code>cmd+K</code> on Mac. Could easily be added using one of the many jQuery plugins, for example <a href="https://github.com/jeresig/jquery.hotkeys">jeresig/jquery.hotkeys</a></p>
-
 <h4 id="3-actual-search-data">3. Actual search data</h4>
-
 <p>Of course, everything would be more fun with real data :-)</p>
 
         
@@ -560,6 +528,10 @@ If we enter something into the input field, we will show a few dummy search resu
             </li>
           
           
+            <li class="next">
+              <a href="https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/" data-toggle="tooltip" data-placement="top" title="Getting started with sqlc">Next Post &rarr;</a>
+            </li>
+          
         </ul>
       
 
@@ -627,7 +599,7 @@ If we enter something into the input field, we will show a few dummy search resu
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

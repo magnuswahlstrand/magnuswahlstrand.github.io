@@ -1,17 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kyeett.github.io/tags/bootstrap/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/database/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kyeett.github.io/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/javascript/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/jquery/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/postgres/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/post/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -20,27 +48,13 @@
   </url>
   
   <url>
+    <loc>https://kyeett.github.io/tags/sqlc/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kyeett.github.io/tags/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/bootstrap/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/javascript/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/jquery/</loc>
-    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -51,13 +65,26 @@
   <url>
     <loc>https://kyeett.github.io/tags/heroku/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/tags/security/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/go/</loc>
+    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/golang/</loc>
+    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/websocket/</loc>
+    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -66,15 +93,8 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/tags/golang/</loc>
-    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/websocket/</loc>
-    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://kyeett.github.io/tags/android/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -83,15 +103,23 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/tags/android/</loc>
+    <loc>https://kyeett.github.io/tags/mobile/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/tags/mobile/</loc>
-    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://kyeett.github.io/tags/fcm/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/notifications/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/push-notifications/</loc>
+    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -100,32 +128,13 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/tags/fcm/</loc>
-    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/notifications/</loc>
-    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/push-notifications/</loc>
-    <lastmod>2019-10-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://kyeett.github.io/tags/firebase/</loc>
+    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/post/2019-10-05-push-notifications/</loc>
     <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/firebase/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -136,31 +145,21 @@
   <url>
     <loc>https://kyeett.github.io/tags/2d-graphics/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/tags/animation/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/tags/ebiten/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/tags/gamedev/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/go/</loc>
-    <lastmod>2019-04-29T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -174,12 +173,10 @@
   
   <url>
     <loc>https://kyeett.github.io/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/page/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

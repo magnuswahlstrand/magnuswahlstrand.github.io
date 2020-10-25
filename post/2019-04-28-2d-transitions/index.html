@@ -104,7 +104,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Develop me" />
 
-  <meta name="generator" content="Hugo 0.55.4" />
+  <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -288,23 +288,17 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>The other day, I watched a a playthrough of the 2D platformer <a href="https://yachtclubgames.com/shovel-knight/">Shovel Knight</a>. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library <a href="https://ebiten.org/">Ebiten</a>. Here is the end result:</p>
-
-<p><img src="/img/2d-transitions/final.gif" alt="End result" /></p>
-
+<p><img src="/img/2d-transitions/final.gif" alt="End result"></p>
 <p><em>Note: I have borrowed the background images and scoreboard in the from <a href="https://yachtclubgames.com/shovel-knight/">Shovel Knight</a> itself.</em></p>
-
 <h2 id="setup">Setup</h2>
-
 <p>Before we can create transitions, we need some nice graphics to transition to and from. I took a couple of screenshots from the studio website.</p>
-
 <p>As I want to be able compile the examples using GopherJS, I had to do a few extra steps:</p>
-
 <ol>
 <li>Save the images as <code>[]byte</code> using <a href="https://github.com/jteeuwen/go-bindata">go-bindata</a>
-
 <ul>
 <li>In my case <code>go-bindata -pkg shovelknightresources *.png</code></li>
-</ul></li>
+</ul>
+</li>
 <li>The images <code>[]byte</code> are then accessed as <code>shovelknightresources.Asset(&quot;scene_1.png&quot;)</code></li>
 <li>Use my utility package <a href="https://github.com/kyeett/ebitendrawutil">kyeett/ebitendrawutil</a> to simplify the loading of the images</li>
 </ol>
@@ -325,8 +319,8 @@
 </span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> ebiten.<span style="color:#900;font-weight:bold">Run</span>(update, screenWidth, screenHeight, <span style="color:#099">1</span>, <span style="color:#d14">&#34;my application&#34;</span>); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
       log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
    }
-}</code></pre></div>
-<p>The following function draws the two images to the screen (<a href="https://github.com/kyeett/animex/blob/transitions-part-1/transitions/main.go">full code here</a>).</p>
+}
+</code></pre></div><p>The following function draws the two images to the screen (<a href="https://github.com/kyeett/animex/blob/transitions-part-1/transitions/main.go">full code here</a>).</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
    <span style="color:#998;font-style:italic">// Draw the scenes
 </span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
@@ -334,21 +328,16 @@
    <span style="color:#998;font-style:italic">// Draw scoreboard
 </span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scoreboard, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}</code></pre></div>
-<p><img src="/img/2d-transitions/static.png" alt="Static scene" /></p>
-
+}
+</code></pre></div><p><img src="/img/2d-transitions/static.png" alt="Static scene"></p>
 <h2 id="growing-rectangle">Growing Rectangle</h2>
-
 <p>Let&rsquo;s start with the easiest transition: <em>a rectangle that expands from the center</em></p>
-
 <p>The function below takes care of drawing and growing a rectangle from width and height = 0 to full size of <code>maxRect</code>. It uses a few utility strucs and functions from Peter Hellberg&rsquo;s <a href="https://godoc.org/github.com/peterhellberg/gfx">gfx</a> package. Specifically:</p>
-
 <ul>
 <li><code>gfx.Vec</code> - representing a 2D point, or vector</li>
 <li><code>gfx.Rect</code> - representing a rectangle</li>
 <li><code>gfx.Lerp/Vec.Lerp</code> - <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a> between two values or vectors</li>
 </ul>
-
 <p>Note: <em><code>ebitenutil.DrawRect</code> is really intended for debugging</em></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionGrowingRect draws a rectangle that grows from the center to fill maxRect as t goes from 0 to 1
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
@@ -356,8 +345,8 @@
    w <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">W</span>(), t)
    h <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">H</span>(), t)
    ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, v.X, v.Y, w, h, clr)
-}</code></pre></div>
-<p>Then we add the following to our update function. <code>maxRect</code> is the rectangle we want to cover over time.</p>
+}
+</code></pre></div><p>Then we add the following to our update function. <code>maxRect</code> is the rectangle we want to cover over time.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
    <span style="color:#000;font-weight:bold">...</span>
    <span style="color:#998;font-style:italic">// Draw transition
@@ -372,19 +361,15 @@
       t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">0.01</span>
    }
    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}</code></pre></div>
-<p><em>code for part two &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-2/transitions/">here</a></em></p>
-
-<p><img src="/img/2d-transitions/grow-rect.gif" alt="Growing rectangle" /></p>
-
+}
+</code></pre></div><p><em>code for part two &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-2/transitions/">here</a></em></p>
+<p><img src="/img/2d-transitions/grow-rect.gif" alt="Growing rectangle"></p>
 <h2 id="shrinking-rectangle">Shrinking Rectangle</h2>
-
 <p>The growing rectangle is best as a transition <strong><em>out</em></strong> of a scene. To transition <strong><em>in</em></strong> to a scene, we want a shrinking rectangle. Lucky for us, this is trivial to implement. We just need to change the time-constant input from <code>t</code> to <code>1-t</code>. It is questionable if this should even be it&rsquo;s own function, but here it is:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
    <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
-}</code></pre></div>
-<p>Now we can transition for real between scenes. I have added a second scene <code>&quot;scene_2.png&quot;</code> and made the <code>update</code> function toggle between them.</p>
-
+}
+</code></pre></div><p>Now we can transition for real between scenes. I have added a second scene <code>&quot;scene_2.png&quot;</code> and made the <code>update</code> function toggle between them.</p>
 <p><strong>Note:</strong> <em>I have put <code>TransitionShrinkingRect</code> before <code>TransitionGrowingRect</code> in the second switch below</em>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
    <span style="color:#998;font-style:italic">// Draw the scenes
@@ -415,13 +400,10 @@
       n = <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> n
    }
    <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}</code></pre></div>
-<p><em>code for part three &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-3/transitions/">here</a></em></p>
-
-<p><img src="/img/2d-transitions/grow-shrink-rect.gif" alt="Growing-Shrinking rectangle" /></p>
-
-<h2 id="shrinking-growing-frame">Shrinking/Growing Frame</h2>
-
+}
+</code></pre></div><p><em>code for part three &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-3/transitions/">here</a></em></p>
+<p><img src="/img/2d-transitions/grow-shrink-rect.gif" alt="Growing-Shrinking rectangle"></p>
+<h2 id="shrinkinggrowing-frame">Shrinking/Growing Frame</h2>
 <p>Neither of the effects in the previous sections <em>are actually in</em> Shovel Knight, as far as I know. What we need is a growing/shinking frame!
 For this I use my own util-package <a href="https://github.com/kyeett/ebitendrawutil">kyeett/ebitendrawutil</a> and especially <code>DrawRect()</code>. This draws a rectangle with a border and a transparent fill.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionGrowingBorder draws a border that expands inwards until it fills maxRect
@@ -433,13 +415,10 @@ For this I use my own util-package <a href="https://github.com/kyeett/ebitendraw
 <span style="color:#998;font-style:italic">// TransitionShrinkingBorder is TransitionGrowingBorder run backwards
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingBorder</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
    <span style="color:#900;font-weight:bold">TransitionGrowingBorder</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
-}</code></pre></div>
-<p><em>code for part four &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-4/transitions/">here</a></em></p>
-
-<p><img src="/img/2d-transitions/grow-shrink-rect-frame.gif" alt="Growing-Shrinking rectangle and frame" /></p>
-
+}
+</code></pre></div><p><em>code for part four &gt; <a href="https://github.com/kyeett/animex/blob/transitions-part-4/transitions/">here</a></em></p>
+<p><img src="/img/2d-transitions/grow-shrink-rect-frame.gif" alt="Growing-Shrinking rectangle and frame"></p>
 <h2 id="blinds">Blinds</h2>
-
 <p>Last example I will add is a blinds transition, where several rectangles animates up to fill the target rectangle.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionBlinds draws n rectangles that expands up to cover maxRect  as t goes from 0 to 1
 </span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionBlinds</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, nRectangles <span style="color:#458;font-weight:bold">int</span>, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
@@ -450,12 +429,10 @@ For this I use my own util-package <a href="https://github.com/kyeett/ebitendraw
       height <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, blindMaxHeight, t)
       ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, x, y, maxRect.<span style="color:#900;font-weight:bold">W</span>(), height, clr)
    }
-}</code></pre></div>
-<p>Here is the end result. <em>The final code &gt; <a href="https://github.com/kyeett/animex/tree/master/transitions">here</a></em></p>
-
-<p><img src="/img/2d-transitions/final.gif" alt="End result" /></p>
-
-<hr />
+}
+</code></pre></div><p>Here is the end result. <em>The final code &gt; <a href="https://github.com/kyeett/animex/tree/master/transitions">here</a></em></p>
+<p><img src="/img/2d-transitions/final.gif" alt="End result"></p>
+<hr>
 
         
           <div class="blog-tags">
@@ -617,7 +594,7 @@ For this I use my own util-package <a href="https://github.com/kyeett/ebitendraw
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

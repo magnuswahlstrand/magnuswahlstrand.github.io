@@ -104,7 +104,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Develop me" />
 
-  <meta name="generator" content="Hugo 0.55.4" />
+  <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -284,9 +284,7 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>Let&rsquo;s create a simple web server that runs on <a href="https://www.heroku.com">Heroku</a> and accepts websockets connections.</p>
-
 <h2 id="setup-web-server">Setup web server</h2>
-
 <p>Before we do anything else, let&rsquo;s set up a simple webserver using the http router <a href="https://github.com/go-chi/chi"><code>go-chi</code></a>.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">package</span> main
 
@@ -315,33 +313,25 @@
    <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> http.<span style="color:#900;font-weight:bold">ListenAndServe</span>(<span style="color:#d14">&#34;:8080&#34;</span>, r); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
       log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
    }
-}</code></pre></div>
-<p>Start the server using <code>go run main.go</code> and go to <a href="http://localhost:8080">http://localhost:8080</a> and you should see</p>
-
+}
+</code></pre></div><p>Start the server using <code>go run main.go</code> and go to http://localhost:8080 and you should see</p>
 <blockquote>
 <p>Welcome, home!</p>
 </blockquote>
-
-<p>You can also go to <a href="http://localhost:8080/ws">http://localhost:8080/ws</a></p>
-
+<p>You can also go to http://localhost:8080/ws</p>
 <blockquote>
 <p>Welcome, sock!</p>
 </blockquote>
-
 <h3 id="code">Code</h3>
-
 <p><em>The code for the base serveris <a href="https://github.com/kyeett/websockets-server/tree/pt1-simple-webserver">here</a>.</em></p>
-
 <h2 id="upgrading-to-websockets">Upgrading to Websockets</h2>
-
 <p>Now we can turn one of the endpoints into a websocket endpoint. One of the most commonly used websocket implementations in Go is <a href="https://github.com/gorilla/websocket">gorilla/websocket</a>. Some examples
 <em><a href="https://github.com/gorilla/websocket/tree/master/examples/echo">here</a>.</em></p>
-
 <p><strong>Step 1</strong>: Create a wrapper for the <code>websocket.Upgrader</code></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> server <span style="color:#000;font-weight:bold">struct</span> {
    websocket.Upgrader
-}</code></pre></div>
-<p><strong>Step 2:</strong> Turn <code>wsHandler</code> into <code>func (s *server) wsHandler</code></p>
+}
+</code></pre></div><p><strong>Step 2:</strong> Turn <code>wsHandler</code> into <code>func (s *server) wsHandler</code></p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (s <span style="color:#000;font-weight:bold">*</span>server) <span style="color:#900;font-weight:bold">wsHandler</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
    ws, err <span style="color:#000;font-weight:bold">:=</span> s.Upgrader.<span style="color:#900;font-weight:bold">Upgrade</span>(w, r, <span style="color:#000;font-weight:bold">nil</span>)
    <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
@@ -350,9 +340,8 @@
    }
    <span style="color:#000;font-weight:bold">defer</span> ws.<span style="color:#900;font-weight:bold">Close</span>()
    ws.<span style="color:#900;font-weight:bold">WriteMessage</span>(websocket.TextMessage, []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;Welcome, sock&#34;</span>))
-}</code></pre></div>
-<p>The code above upgrades HTTP connection to use the websocket protocol, handles errors if any and sends a message to the client.</p>
-
+}
+</code></pre></div><p>The code above upgrades HTTP connection to use the websocket protocol, handles errors if any and sends a message to the client.</p>
 <p><strong>Step 3:</strong> Finally, instantiate a <code>server</code> object in the main and use its handlers in the router.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
     <span style="color:#000;font-weight:bold">var</span> s server
@@ -360,35 +349,24 @@
     r.<span style="color:#900;font-weight:bold">Get</span>(<span style="color:#d14">&#34;/&#34;</span>, s.homeHandler)
     r.<span style="color:#900;font-weight:bold">Get</span>(<span style="color:#d14">&#34;/ws&#34;</span>, s.wsHandler)
     <span style="color:#000;font-weight:bold">...</span>
-}</code></pre></div>
-<h3 id="testing-the-connection">Testing the connection</h3>
-
+}
+</code></pre></div><h3 id="testing-the-connection">Testing the connection</h3>
 <p>To test the websockets, we cannot use the browser directly, or we get the error:</p>
-
 <blockquote>
 <p>Bad Request websocket: the client is not using the websocket protocol: &lsquo;upgrade&rsquo; token not found in &lsquo;Connection&rsquo; header</p>
 </blockquote>
-
 <p>Instead, we can use a command line tool to connect to the server, for example <a href="https://github.com/hashrocket/ws">hashrocket/ws</a>.</p>
-
 <p>Start the server again <code>go run main.go</code> and then make a request using <code>ws</code>:</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; ws ws://localhost:8080/ws
 Welcome, sock
-websocket: close <span style="color:#099">1006</span> <span style="color:#000;font-weight:bold">(</span>abnormal closure<span style="color:#000;font-weight:bold">)</span>: unexpected EOF</code></pre></div>
-<p>As you see we successfully received the response <code>&quot;Welcome, sock&quot;</code>, and then the server closes the connection. Success!</p>
-
+websocket: close <span style="color:#099">1006</span> <span style="color:#000;font-weight:bold">(</span>abnormal closure<span style="color:#000;font-weight:bold">)</span>: unexpected EOF
+</code></pre></div><p>As you see we successfully received the response <code>&quot;Welcome, sock&quot;</code>, and then the server closes the connection. Success!</p>
 <h3 id="code-1">Code</h3>
-
 <p><em>The code for the websocket server is <a href="https://github.com/kyeett/websockets-server/tree/pt2-websocket-endpoint">here</a>.</em></p>
-
 <h2 id="deploy-to-heroku">Deploy to Heroku</h2>
-
 <p>Next step is to deploy the server to Heroku, so that everyone can enjoy our websocket server.</p>
-
 <p><strong>Note:</strong> this assumes that you have a Heroku account and that you have the <a href="https://devcenter.heroku.com/articles/heroku-cli"><code>heroku-cli</code></a> installed.</p>
-
 <h3 id="set-variable-port">Set variable PORT</h3>
-
 <p>The Heroku dynos give can give you a new port every time it is deployed. This means that we cannot use the hardcoded <code>:8080</code> anymore. Use the environment variable <code>PORT</code> instead.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
    port, exists <span style="color:#000;font-weight:bold">:=</span> os.<span style="color:#900;font-weight:bold">LookupEnv</span>(<span style="color:#d14">&#34;PORT&#34;</span>)
@@ -401,22 +379,19 @@ websocket: close <span style="color:#099">1006</span> <span style="color:#000;fo
    <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> http.<span style="color:#900;font-weight:bold">ListenAndServe</span>(<span style="color:#d14">&#34;:&#34;</span><span style="color:#000;font-weight:bold">+</span>port, r); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
       log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
    }
-}</code></pre></div>
-<h3 id="add-app-dependencies">Add app dependencies</h3>
-
+}
+</code></pre></div><h3 id="add-app-dependencies">Add app dependencies</h3>
 <p>Heroku supports multiple dependency managers, but I normally use <a href="https://github.com/golang/dep"><code>dep</code></a>. Initialize it:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dep init</code></pre></div>
-<p>This creates the <code>Gopkg.toml</code> and <code>Gopkg.lock</code> and a <code>vendor</code>folder with our dependencies like so</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dep init
+</code></pre></div><p>This creates the <code>Gopkg.toml</code> and <code>Gopkg.lock</code> and a <code>vendor</code>folder with our dependencies like so</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Gopkg.toml
 Gopkg.lock
 vendor/
    github.com/
       go-chi/
-      gorilla/</code></pre></div>
-<p>More details <a href="https://devcenter.heroku.com/categories/managing-go-dependencies">here</a>.</p>
-
+      gorilla/
+</code></pre></div><p>More details <a href="https://devcenter.heroku.com/categories/managing-go-dependencies">here</a>.</p>
 <h3 id="heroku-configuration">Heroku configuration</h3>
-
 <p>In the <code>Gopkg.toml</code> we add some metadata that Heroku will read</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[metadata.heroku]
   root<span style="color:#a61717;background-color:#e3d2d2">-</span>package = <span style="color:#d14">&#34;github.com/kyeett/websockets&#34;</span>
@@ -424,38 +399,30 @@ vendor/
   install = [
       <span style="color:#d14">&#34;.&#34;</span>,
   ]
-  ensure = <span style="color:#d14">&#34;false&#34;</span></code></pre></div>
-<p><strong>root-package</strong>: the name here affects the binary time. In my case this will cause the installed binary to be called <code>websockets</code>.</p>
-
+  ensure = <span style="color:#d14">&#34;false&#34;</span>
+</code></pre></div><p><strong>root-package</strong>: the name here affects the binary time. In my case this will cause the installed binary to be called <code>websockets</code>.</p>
 <p><strong>install:</strong>
 <code>.</code> is default installation path. If you have a <code>cmd</code> directory you can use something like <code>./cmd/...</code>.</p>
-
 <p>More details <a href="https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-go">here</a>.</p>
-
 <p>We also need a <code>Procfile</code> in the base of the repo that tell Heroku that we want to run a web server, and where the binary is found</p>
-
 <p><strong>Procfile</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">web: bin/websockets</code></pre></div>
-<h3 id="create-heroku-app">Create Heroku App</h3>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">web: bin/websockets
+</code></pre></div><h3 id="create-heroku-app">Create Heroku App</h3>
 <p>Create the Heroku app from the command line.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku apps:create some-websockets-server --region eu --buildpack heroku/go</code></pre></div>
-<p>This configures it to run on the EU server (US default), and tells it to download the <code>go</code> buildpack.</p>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku apps:create some-websockets-server --region eu --buildpack heroku/go
+</code></pre></div><p>This configures it to run on the EU server (US default), and tells it to download the <code>go</code> buildpack.</p>
 <p>Next we make sure we link our git repo to heroku, and then we can push the current master to the heroku remote.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku git:remote some-websockets-server</code></pre></div>
-<p><em><strong>Note:</strong> make sure to commit everything before pushing.</em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push heroku master</code></pre></div>
-<h3 id="testing-the-connection-again">Testing the connection again</h3>
-
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku git:remote some-websockets-server
+</code></pre></div><p><em><strong>Note:</strong> make sure to commit everything before pushing.</em></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git push heroku master
+</code></pre></div><h3 id="testing-the-connection-again">Testing the connection again</h3>
 <p>Finally, we can test the connection again, but this time with the url we got from <code>heroku apps:create</code> command.</p>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; ws ws://some-websockets-server.herokuapp.com/ws
 Welcome, sock
-websocket: close <span style="color:#099">1006</span> <span style="color:#000;font-weight:bold">(</span>abnormal closure<span style="color:#000;font-weight:bold">)</span>: unexpected EOF</code></pre></div>
-<p>Great! Everything works as expected. If something went wrong, and you need to monitor your deployed app, you can use the following command.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku logs --tail -a some-websockets-server</code></pre></div>
-<h3 id="code-2">Code</h3>
-
+websocket: close <span style="color:#099">1006</span> <span style="color:#000;font-weight:bold">(</span>abnormal closure<span style="color:#000;font-weight:bold">)</span>: unexpected EOF
+</code></pre></div><p>Great! Everything works as expected. If something went wrong, and you need to monitor your deployed app, you can use the following command.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">heroku logs --tail -a some-websockets-server
+</code></pre></div><h3 id="code-2">Code</h3>
 <p><em>The code for the Heroku app is <a href="https://github.com/kyeett/websockets-server/tree/pt3-deploy-to-heroku">here</a>.</em></p>
 
         
@@ -618,7 +585,7 @@ websocket: close <span style="color:#099">1006</span> <span style="color:#000;fo
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

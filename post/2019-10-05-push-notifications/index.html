@@ -104,7 +104,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Develop me" />
 
-  <meta name="generator" content="Hugo 0.55.4" />
+  <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -288,50 +288,35 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <p>I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!</p>
-
 <p>The goal of this guide is to build a simple Android app and send a &ldquo;Hello, world&rdquo; push notification. The end result will look something like this</p>
-
-<p><img src="/img/push-notifications/1_hello_push.png" alt="End result" /></p>
-
+<p><img src="/img/push-notifications/1_hello_push.png" alt="End result"></p>
 <h2 id="what-are-push-notifications">What are push notifications?</h2>
-
 <p>Push notifications are messages that are sent from an app <em>publisher</em> to the <em>users</em> of the app, and usually shows up in the system tray. The user doesn&rsquo;t have to have the app opened in order to do so (in fact, some many notifications only show up when the user is not in the app). Push notifications can be used for many things, both good and bad.</p>
-
 <p><strong>Example of notifications</strong></p>
-
 <ul>
 <li>Your taxi has arrived</li>
 <li>A friend has sent you a message in the app</li>
 <li>Your local team just scored</li>
 <li>There is a sale on your favorite food</li>
 </ul>
-
 <p>Read more about push notifications <a href="https://www.airship.com/resources/explainer/push-notifications-explained/">here</a>.</p>
-
 <h1 id="creating-the-app">Creating the app</h1>
-
 <p>I really had no idea how to create push notifications for Android apps, but it turns out Google has done a stellar job simplifying the setup. Especially if you are using Android studio, and choose their <a href="https://firebase.google.com/docs/cloud-messaging">Firebase Cloud Messaging</a> (FCM for short). I followed <a href="https://firebase.google.com/docs/cloud-messaging">this Google guide</a>, see steps in next section.</p>
-
 <p><em>Note 1: FCM also works with iOS. Guide <a href="https://firebase.google.com/docs/cloud-messaging/ios/client">here</a>.</em></p>
-
 <p><em>Note 2: FCM can be used for sending messages in general, not just push notifications for the mobile phones. It also works on the Web (using javascript), C++ and Unity.</em></p>
-
-<h2 id="setting-up-in-android-studio-fcm">Setting up in Android Studio + FCM</h2>
-
+<h2 id="setting-up-in-android-studio--fcm">Setting up in Android Studio + FCM</h2>
 <p>I used <a href="https://firebase.google.com/docs/android/setup#assistant">Option 2 from this guide</a> from google to setup FCM in Android Studio, using the <code>Firebase Assistant</code>.</p>
-
 <p>Go to <strong>Tools &ndash;&gt; Firebase</strong> and click <em>Cloud Messaging</em> and start the wizard</p>
-
 <ol>
 <li>Click <strong>Connect your app to Firebase</strong></li>
 <li>Add <strong>FCM</strong> to your app</li>
 <li>Create the service described in step 3 <strong>Handle messages</strong> by
-
 <ul>
 <li><strong>File &gt; New &gt; Service &gt; Service</strong></li>
 <li>I named mine <strong>MyMessagingService</strong></li>
 <li>You can skip the <code>onMessageReceived()</code> for now. To simplify things, we will only receive notifications when the app is in background mode</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 <div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.pushnotifications</span>
 
@@ -350,57 +335,49 @@
     <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onMessageReceived</span>(remoteMessage: RemoteMessage) {
         <span style="color:#998;font-style:italic">// Not needed yet
 </span><span style="color:#998;font-style:italic"></span>    }
-}</code></pre></div>
-<h3 id="save-the-fcm-registration-token">Save the FCM Registration Token</h3>
-
+}
+</code></pre></div><h3 id="save-the-fcm-registration-token">Save the FCM Registration Token</h3>
 <p>In order for FCM to know which mobile to send the notification to, we need the FCM Registration Token. Whenever a new token is created, the method <code>onNewToken(token: String?)</code> above is called. For now, we can retreive the token by logging it to Logcat. Build and start the app, and you should see something like this in the log:</p>
-
 <p><code>D/Firebase Messaging Svc: Refreshed token: edMi2AGjEDk:APA91bFUddgbBAORuG7_2AByF6uptYTunk6alvb5a4R2vNninp...</code></p>
-
 <p>Copy the full token (it should be a lot longer the one above), and save it for later. If you lose it, you have to remove the application from your phone/emulator and reinstall it.</p>
-
 <p>That is is, codewise! Now we just need to send the notification.</p>
-
 <h2 id="sending-the-notification">Sending the notification</h2>
-
 <p>To send a test notification, we go the <a href="https://console.firebase.google.com/">firebase console</a></p>
-
 <ol>
-<li>Click the project you set up in the previous step. In my case &ldquo;pushnotifications&rdquo;</li>
-<li>Click <strong>Cloud Messaging</strong></li>
-<li>Click the button at the top <strong>Send your first message</strong></li>
-<li>Fill in the form to create your notifications (emojis copied from <a href="https://getemoji.com/">here</a>).</li>
+<li>
+<p>Click the project you set up in the previous step. In my case &ldquo;pushnotifications&rdquo;</p>
+</li>
+<li>
+<p>Click <strong>Cloud Messaging</strong></p>
+</li>
+<li>
+<p>Click the button at the top <strong>Send your first message</strong></p>
+</li>
+<li>
+<p>Fill in the form to create your notifications (emojis copied from <a href="https://getemoji.com/">here</a>).</p>
+<p><img src="/img/push-notifications/1_firebase_admin.png" alt="Firebase admin"></p>
+</li>
+<li>
+<p>Click <strong>Send test message</strong></p>
+</li>
+<li>
+<p>Add the FCM registration token from the logs (see the previous section)</p>
+<p><img src="/img/push-notifications/1_send_push.png" alt="Send push"></p>
+</li>
+<li>
+<p>Press <strong>test</strong> button (<strong>Note: the application <em>MUST</em> be in background mode, otherwise the notification will not show up, since we have not implemented <code>onMessageReceived()</code></strong>)</p>
+</li>
 </ol>
-
-<p><img src="/img/push-notifications/1_firebase_admin.png" alt="Firebase admin" /></p>
-
-<ol>
-<li>Click <strong>Send test message</strong></li>
-<li>Add the FCM registration token from the logs (see the previous section)</li>
-</ol>
-
-<p><img src="/img/push-notifications/1_send_push.png" alt="Send push" /></p>
-
-<ol>
-<li>Press <strong>test</strong> button (<strong>Note: the application <em>MUST</em> be in background mode, otherwise the notification will not show up, since we have not implemented <code>onMessageReceived()</code></strong>)</li>
-</ol>
-
 <p>And voilá, I receive a nice emoji push notification. That is it for this introduction.</p>
-
-<p><img src="/img/push-notifications/1_hello_push.png" alt="End result" /></p>
-
+<p><img src="/img/push-notifications/1_hello_push.png" alt="End result"></p>
 <h2 id="possible-improvements">Possible improvements</h2>
-
 <p>There are several improvements that can be considered already.</p>
-
 <ul>
 <li>Show notifications when the app is active (in the foreground)</li>
 <li>Take the user to a specific view in the app when the notification is clicked (deep links)</li>
 <li>Make the notification permament (for example, while the user is logged in)</li>
 </ul>
-
 <h2 id="code">Code</h2>
-
 <p>The code for the push notification is background mode is <a href="https://github.com/kyeett/android-push-notifications/tree/background-mode">here</a>.</p>
 
         
@@ -567,7 +544,7 @@
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.55.4</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

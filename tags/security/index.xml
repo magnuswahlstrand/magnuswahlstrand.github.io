@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>security on Develop me</title>
@@ -17,7 +17,6 @@
       
       <guid>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</guid>
       <description>&lt;p&gt;Automatic key rotation is a simple way of improving the security of an app.&lt;/p&gt;
-
 &lt;p&gt;In this example, I have two services running on &lt;a href=&#34;https://www.heroku.com/&#34;&gt;Heroku&lt;/a&gt;. The goal is that the API key in &lt;code&gt;service-1&lt;/code&gt; one can be rotated smoothly (every 2 week), while &lt;code&gt;service-2&lt;/code&gt; uses the rotating API keys to connect to &lt;code&gt;service-1&lt;/code&gt;.
 We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons/securekey&#34;&gt;securekey&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
