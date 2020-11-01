@@ -5,7 +5,7 @@
     <link>https://kyeett.github.io/tags/postgres/</link>
     <description>Recent content in postgres on Develop me</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kyeett.github.io/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>Getting started with sqlc</title>
       <link>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
       
       <guid>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</guid>
       <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.

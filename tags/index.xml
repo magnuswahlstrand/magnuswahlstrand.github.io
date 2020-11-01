@@ -5,10 +5,46 @@
     <link>https://kyeett.github.io/tags/</link>
     <description>Recent content in Tags on Develop me</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kyeett.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>go</title>
+      <link>https://kyeett.github.io/tags/go/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlc</title>
+      <link>https://kyeett.github.io/tags/sqlc/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/tags/sqlc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>database</title>
+      <link>https://kyeett.github.io/tags/database/</link>
+      <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/tags/database/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://kyeett.github.io/tags/postgres/</link>
+      <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/tags/postgres/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>bootstrap</title>
@@ -16,15 +52,6 @@
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://kyeett.github.io/tags/bootstrap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>database</title>
-      <link>https://kyeett.github.io/tags/database/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyeett.github.io/tags/database/</guid>
       <description></description>
     </item>
     
@@ -47,24 +74,6 @@
     </item>
     
     <item>
-      <title>postgres</title>
-      <link>https://kyeett.github.io/tags/postgres/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyeett.github.io/tags/postgres/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sqlc</title>
-      <link>https://kyeett.github.io/tags/sqlc/</link>
-      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyeett.github.io/tags/sqlc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>heroku</title>
       <link>https://kyeett.github.io/tags/heroku/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
@@ -79,15 +88,6 @@
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://kyeett.github.io/tags/security/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://kyeett.github.io/tags/go/</link>
-      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyeett.github.io/tags/go/</guid>
       <description></description>
     </item>
     
