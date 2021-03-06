@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>orm on wahlstrand.dev</title>
+    <link>https://kyeett.github.io/tags/orm/</link>
+    <description>Recent content in orm on wahlstrand.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kyeett.github.io/tags/orm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to GORM</title>
+      <link>https://kyeett.github.io/articles/idea_2021-03-05-a-fantastic-orm-in-go/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_2021-03-05-a-fantastic-orm-in-go/</guid>
+      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Introduction to GORM</title>
+      <link>https://kyeett.github.io/fragments/idea_2021-03-05-a-fantastic-orm-in-go/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/fragments/idea_2021-03-05-a-fantastic-orm-in-go/</guid>
+      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

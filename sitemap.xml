@@ -3,18 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kyeett.github.io/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+    <loc>https://kyeett.github.io/articles/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/fragments/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://kyeett.github.io/tags/go/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
+    <loc>https://kyeett.github.io/articles/idea_2021-03-05-a-fantastic-orm-in-go/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/fragments/idea_2021-03-05-a-fantastic-orm-in-go/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/orm/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/postgres/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -23,12 +53,7 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2020-10-31-state-machines-in-go/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/</loc>
+    <loc>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</loc>
     <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url>
   
@@ -38,12 +63,7 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/</loc>
-    <lastmod>2020-10-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kyeett.github.io/tags/postgres/</loc>
+    <loc>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</loc>
     <lastmod>2020-10-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -63,12 +83,12 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</loc>
+    <loc>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</loc>
+    <loc>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -93,7 +113,7 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-10-19-heroku-websockets/</loc>
+    <loc>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -103,7 +123,12 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-10-13-app-shortcuts/</loc>
+    <loc>https://kyeett.github.io/articles/2019-10-13-app-shortcuts/</loc>
+    <lastmod>2019-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
   </url>
   
@@ -128,7 +153,7 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-10-06-notifications/</loc>
+    <loc>https://kyeett.github.io/articles/2019-10-06-notifications/</loc>
     <lastmod>2019-10-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -138,12 +163,12 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-10-05-push-notifications/</loc>
+    <loc>https://kyeett.github.io/articles/2019-10-05-push-notifications/</loc>
     <lastmod>2019-10-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-04-29-screen-shake/</loc>
+    <loc>https://kyeett.github.io/articles/2019-04-29-screen-shake/</loc>
     <lastmod>2019-04-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -168,8 +193,36 @@
   </url>
   
   <url>
-    <loc>https://kyeett.github.io/post/2019-04-28-2d-transitions/</loc>
+    <loc>https://kyeett.github.io/articles/2019-04-28-2d-transitions/</loc>
     <lastmod>2019-04-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/asciinema/</loc>
+    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/articles/idea_2019-04-26-asciinema/</loc>
+    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/documentation/</loc>
+    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/tags/tools/</loc>
+    <lastmod>2019-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/articles/idea_2019-10-17-lambda-functions/</loc>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/articles/idea_episodes/</loc>
   </url>
   
   <url>
@@ -182,6 +235,10 @@
   
   <url>
     <loc>https://kyeett.github.io/page/</loc>
+  </url>
+  
+  <url>
+    <loc>https://kyeett.github.io/page/now/</loc>
   </url>
   
 </urlset>

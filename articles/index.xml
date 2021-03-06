@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Articles on wahlstrand.dev</title>
+    <link>https://kyeett.github.io/articles/</link>
+    <description>Recent content in Articles on wahlstrand.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kyeett.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to GORM</title>
+      <link>https://kyeett.github.io/articles/idea_2021-03-05-a-fantastic-orm-in-go/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_2021-03-05-a-fantastic-orm-in-go/</guid>
+      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>State machines in Go</title>
+      <link>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s implement a simple state machine in Go that is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;easy to understand&lt;/li&gt;
+&lt;li&gt;easy to extend&lt;/li&gt;
+&lt;li&gt;easy to test&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The full code is available in the &lt;a href=&#34;https://github.com/kyeett/state-machines-in-go&#34;&gt;repo&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Getting started with sqlc</title>
+      <link>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
+      <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</guid>
+      <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Slack: Search bar</title>
+      <link>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</link>
+      <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</guid>
+      <description>&lt;p&gt;I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/slack-clone/6_end_result.gif&#34; alt=&#34;Search overlay&#34;&gt;&lt;/p&gt;
+&lt;p&gt;In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Automatic key rotation on Heroku</title>
+      <link>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</link>
+      <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</guid>
+      <description>&lt;p&gt;Automatic key rotation is a simple way of improving the security of an app.&lt;/p&gt;
+&lt;p&gt;In this example, I have two services running on &lt;a href=&#34;https://www.heroku.com/&#34;&gt;Heroku&lt;/a&gt;. The goal is that the API key in &lt;code&gt;service-1&lt;/code&gt; one can be rotated smoothly (every 2 week), while &lt;code&gt;service-2&lt;/code&gt; uses the rotating API keys to connect to &lt;code&gt;service-1&lt;/code&gt;.
+We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons/securekey&#34;&gt;securekey&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Websockets on Heroku</title>
+      <link>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>App shortcuts</title>
+      <link>https://kyeett.github.io/articles/2019-10-13-app-shortcuts/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-10-13-app-shortcuts/</guid>
+      <description>&lt;p&gt;This article covers how to create Android app shortcuts like the one below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>App shortcuts</title>
+      <link>https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/</guid>
+      <description>&lt;p&gt;This article covers how to create Android app shortcuts like the one below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/urakozz/go-dynamodb-stream-subscriber&#34;&gt;https://github.com/urakozz/go-dynamodb-stream-subscriber&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Useful tools:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/aaronshaf/dynamodb-admin&#34;&gt;https://github.com/aaronshaf/dynamodb-admin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;http://localhost:8000/shell/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;docker run -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -inMemory -sharedDb&lt;/p&gt;
+&lt;p&gt;aws dynamodb create-table &amp;ndash;table-name Transactions &amp;ndash;attribute-definitions AttributeName=ID,AttributeType=S &amp;ndash;key-schema AttributeName=ID,KeyType=HASH &amp;ndash;stream-specification StreamEnabled=true,StreamViewType=&amp;quot;NEW_AND_OLD_IMAGES&amp;rdquo; &amp;ndash;provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 &amp;ndash;endpoint-url http://0.0.0.0:8000&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;var&lt;/span&gt; params &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; {
+    TableName&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;Transactions&amp;#39;&lt;/span&gt;,
+    Item&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; { 
+        ID&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;123-123-123&amp;#34;&lt;/span&gt;,
+    }
+};
+docClient.put(params, &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;function&lt;/span&gt;(err, data) {
+    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) ppJson(err); &lt;span style=&#34;color:#998;font-style:italic&#34;&gt;// an error occurred
+&lt;/span&gt;&lt;span style=&#34;color:#998;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;else&lt;/span&gt; ppJson(data); &lt;span style=&#34;color:#998;font-style:italic&#34;&gt;// successful response
+&lt;/span&gt;&lt;span style=&#34;color:#998;font-style:italic&#34;&gt;&lt;/span&gt;});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;aws dynamodb put-item \                                                                                130 ↵
+&amp;ndash;table-name Transactions&lt;br&gt;
+&amp;ndash;item ID={S=&amp;quot;123-123-124&amp;rdquo;} &amp;ndash;endpoint-url http://0.0.0.0:8000&lt;/p&gt;
+&lt;p&gt;aws dynamodb put-item&lt;br&gt;
+&amp;ndash;table-name Transactions&lt;br&gt;
+&amp;ndash;item ID={S=&amp;quot;123-123-123&amp;rdquo;},Timestamp={S=&amp;quot;2016-11-18:14:32:17&amp;rdquo;},Message={S=&amp;quot;Testing&amp;hellip;1&amp;hellip;2&amp;hellip;3&amp;rdquo;}&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Push Notifications pt.2</title>
+      <link>https://kyeett.github.io/articles/2019-10-06-notifications/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-10-06-notifications/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://kyeett.github.io/articles/2019-10-05-push-notifications/&#34;&gt;Part 1&lt;/a&gt; we learned how to send push notifications from &lt;a href=&#34;https://console.firebase.google.com&#34;&gt;Firebase Cloud Messaging console&lt;/a&gt;. There are a number of improvements we can make:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#show-notification-in-foregrounded-app&#34;&gt;Show notification when the app in in the foreground&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#go-to-specific-view&#34;&gt;Go to a specific view in the app when clicked&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Buttons directly in the notifications&lt;/li&gt;
+&lt;li&gt;Keep the notification open while the app is open&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&amp;rsquo;s get started!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Push Notifications pt.1</title>
+      <link>https://kyeett.github.io/articles/2019-10-05-push-notifications/</link>
+      <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-10-05-push-notifications/</guid>
+      <description>&lt;p&gt;I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!&lt;/p&gt;
+&lt;p&gt;The goal of this guide is to build a simple Android app and send a &amp;ldquo;Hello, world&amp;rdquo; push notification. The end result will look something like this&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/push-notifications/1_hello_push.png&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2D animation: Screen shake</title>
+      <link>https://kyeett.github.io/articles/2019-04-29-screen-shake/</link>
+      <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-04-29-screen-shake/</guid>
+      <description>&lt;p&gt;A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one &lt;em&gt;simple&lt;/em&gt; and one &lt;em&gt;nice&lt;/em&gt;. The end result will look something like this&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2D animation: Transitions</title>
+      <link>https://kyeett.github.io/articles/2019-04-28-2d-transitions/</link>
+      <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-04-28-2d-transitions/</guid>
+      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Asciinema - terminal recorder</title>
+      <link>https://kyeett.github.io/articles/idea_2019-04-26-asciinema/</link>
+      <pubDate>Fri, 26 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_2019-04-26-asciinema/</guid>
+      <description>Usage In my case, I copied the link Share&amp;ndash;&amp;gt;Markdown and pasted into this document. This renders the frame above
+What is it?  cli for to record session   ** Advantage over GIFs
+ Textbased - everything in the player can be selected and copied   ** Advantage over capturing all text
+ You   Links
+ Getting started   https://asciinema.org/docs/how-it-works
+https://asciinema.org/docs/getting-started
+ asciinema: Start wars  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kyeett.github.io/articles/idea_2019-10-17-lambda-functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_2019-10-17-lambda-functions/</guid>
+      <description>https://kia6e50rbd.execute-api.eu-central-1.amazonaws.com/Prod/hello/
+Hello, 35.159.22.145
+https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-hello-world.html
+10871 sam init &amp;ndash;runtime go
+10882 sam build 10883 sam package &amp;ndash;output-template packaged.yaml &amp;ndash;s3-bucket lambda-world-bucket 10884 aws cloudformation deploy &amp;ndash;template-file /Users/test/repo/aws/lambda-world/sam-app/packaged.yaml &amp;ndash;stack-name lambda-world-stack 10885 aws cloudformation deploy &amp;ndash;template-file /Users/test/repo/aws/lambda-world/sam-app/packaged.yaml &amp;ndash;stack-name lambda-world-stack &amp;ndash;capabilities CAPABILITY_IAM 10886 aws cloudformation describe-stacks &amp;ndash;stack-name aws-sam-getting-started &amp;ndash;region eu-central-1 &amp;ndash;query &amp;ldquo;Stacks[].Outputs&amp;rdquo;\n 10887 aws cloudformation describe-stacks &amp;ndash;stack-name lamdda-world-stack &amp;ndash;region eu-central-1 &amp;ndash;query &amp;ldquo;Stacks[].Outputs&amp;rdquo;\n 10888 aws cloudformation describe-stacks &amp;ndash;stack-name lambda-world-stack &amp;ndash;region eu-central-1 &amp;ndash;query &amp;ldquo;Stacks[].Outputs&amp;rdquo;\n
+sam local start-api 130 ↵</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://kyeett.github.io/articles/idea_episodes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/idea_episodes/</guid>
+      <description>http://wakingup.libsyn.com/155-mental-models - I especially liked the discussion around making projections about the futures</description>
+    </item>
+    
+  </channel>
+</rss>

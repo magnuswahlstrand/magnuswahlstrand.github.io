@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>bootstrap on Develop me</title>
+    <title>bootstrap on wahlstrand.dev</title>
     <link>https://kyeett.github.io/tags/bootstrap/</link>
-    <description>Recent content in bootstrap on Develop me</description>
+    <description>Recent content in bootstrap on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 12 Jan 2020 00:00:00 +0000</lastBuildDate>
     
@@ -12,10 +12,10 @@
     
     <item>
       <title>Slack: Search bar</title>
-      <link>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</link>
+      <link>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/post/2020-01-12-search-bar-overlay/</guid>
+      <guid>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</guid>
       <description>&lt;p&gt;I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/slack-clone/6_end_result.gif&#34; alt=&#34;Search overlay&#34;&gt;&lt;/p&gt;
 &lt;p&gt;In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.&lt;/p&gt;</description>

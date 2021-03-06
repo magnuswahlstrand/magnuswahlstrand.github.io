@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>heroku on Develop me</title>
+    <title>heroku on wahlstrand.dev</title>
     <link>https://kyeett.github.io/tags/heroku/</link>
-    <description>Recent content in heroku on Develop me</description>
+    <description>Recent content in heroku on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 29 Nov 2019 00:00:00 +0000</lastBuildDate>
     
@@ -12,10 +12,10 @@
     
     <item>
       <title>Automatic key rotation on Heroku</title>
-      <link>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</link>
+      <link>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/post/2019-11-30-heroku-secrets-rotation/</guid>
+      <guid>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</guid>
       <description>&lt;p&gt;Automatic key rotation is a simple way of improving the security of an app.&lt;/p&gt;
 &lt;p&gt;In this example, I have two services running on &lt;a href=&#34;https://www.heroku.com/&#34;&gt;Heroku&lt;/a&gt;. The goal is that the API key in &lt;code&gt;service-1&lt;/code&gt; one can be rotated smoothly (every 2 week), while &lt;code&gt;service-2&lt;/code&gt; uses the rotating API keys to connect to &lt;code&gt;service-1&lt;/code&gt;.
 We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons/securekey&#34;&gt;securekey&lt;/a&gt;.&lt;/p&gt;</description>
@@ -23,10 +23,10 @@ We will use the Heroku plugin &lt;a href=&#34;https://elements.heroku.com/addons
     
     <item>
       <title>Websockets on Heroku</title>
-      <link>https://kyeett.github.io/post/2019-10-19-heroku-websockets/</link>
+      <link>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/post/2019-10-19-heroku-websockets/</guid>
+      <guid>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
     </item>
     
