@@ -283,77 +283,6 @@ if (!doNotTrack) {
             </article>
           
             <article class="post-preview">
-              <a href="https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/">
-                <h2 class="post-title">App shortcuts</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 13, 2019
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;408&nbsp;words
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
-  
-  
-</span>
-
-
-              </p>
-              <div class="post-entry">
-                
-                  <p>This article covers how to create Android app shortcuts like the one below.</p>
-<p><img src="/img/app-shortcuts/target.png" alt="Target"></p>
-<p><a href="https://github.com/urakozz/go-dynamodb-stream-subscriber">https://github.com/urakozz/go-dynamodb-stream-subscriber</a></p>
-<p>Useful tools:</p>
-<ul>
-<li><a href="https://github.com/aaronshaf/dynamodb-admin">https://github.com/aaronshaf/dynamodb-admin</a></li>
-<li>http://localhost:8000/shell/</li>
-</ul>
-<p>docker run -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -inMemory -sharedDb</p>
-<p>aws dynamodb create-table &ndash;table-name Transactions &ndash;attribute-definitions AttributeName=ID,AttributeType=S &ndash;key-schema AttributeName=ID,KeyType=HASH &ndash;stream-specification StreamEnabled=true,StreamViewType=&quot;NEW_AND_OLD_IMAGES&rdquo; &ndash;provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 &ndash;endpoint-url http://0.0.0.0:8000</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#000;font-weight:bold">var</span> params <span style="color:#000;font-weight:bold">=</span> {
-    TableName<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Transactions&#39;</span>,
-    Item<span style="color:#000;font-weight:bold">:</span> { 
-        ID<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;123-123-123&#34;</span>,
-    }
-};
-docClient.put(params, <span style="color:#000;font-weight:bold">function</span>(err, data) {
-    <span style="color:#000;font-weight:bold">if</span> (err) ppJson(err); <span style="color:#998;font-style:italic">// an error occurred
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">else</span> ppJson(data); <span style="color:#998;font-style:italic">// successful response
-</span><span style="color:#998;font-style:italic"></span>});
-</code></pre></div><p>aws dynamodb put-item \                                                                                130 ↵
-&ndash;table-name Transactions<br>
-&ndash;item ID={S=&quot;123-123-124&rdquo;} &ndash;endpoint-url http://0.0.0.0:8000</p>
-<p>aws dynamodb put-item<br>
-&ndash;table-name Transactions<br>
-&ndash;item ID={S=&quot;123-123-123&rdquo;},Timestamp={S=&quot;2016-11-18:14:32:17&rdquo;},Message={S=&quot;Testing&hellip;1&hellip;2&hellip;3&rdquo;}</p>
-                  <a href="https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <div class="blog-tags">
-                  
-                    <a href="https://kyeett.github.io/tags/android/">android</a>&nbsp;
-                  
-                    <a href="https://kyeett.github.io/tags/mobile/">mobile</a>&nbsp;
-                  
-                </div>
-              
-
-            </article>
-          
-            <article class="post-preview">
               <a href="https://kyeett.github.io/articles/2019-10-06-notifications/">
                 <h2 class="post-title">Push Notifications pt.2</h2>
 
@@ -524,7 +453,7 @@ docClient.put(params, <span style="color:#000;font-weight:bold">function</span>(
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2021
+            2020
           
 
           

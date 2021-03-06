@@ -21,40 +21,6 @@
     </item>
     
     <item>
-      <title>App shortcuts</title>
-      <link>https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/</link>
-      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyeett.github.io/articles/idea_2019-10-16-dynamodb-local/</guid>
-      <description>&lt;p&gt;This article covers how to create Android app shortcuts like the one below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/app-shortcuts/target.png&#34; alt=&#34;Target&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/urakozz/go-dynamodb-stream-subscriber&#34;&gt;https://github.com/urakozz/go-dynamodb-stream-subscriber&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Useful tools:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/aaronshaf/dynamodb-admin&#34;&gt;https://github.com/aaronshaf/dynamodb-admin&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;http://localhost:8000/shell/&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;docker run -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -inMemory -sharedDb&lt;/p&gt;
-&lt;p&gt;aws dynamodb create-table &amp;ndash;table-name Transactions &amp;ndash;attribute-definitions AttributeName=ID,AttributeType=S &amp;ndash;key-schema AttributeName=ID,KeyType=HASH &amp;ndash;stream-specification StreamEnabled=true,StreamViewType=&amp;quot;NEW_AND_OLD_IMAGES&amp;rdquo; &amp;ndash;provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 &amp;ndash;endpoint-url http://0.0.0.0:8000&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;var&lt;/span&gt; params &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;=&lt;/span&gt; {
-    TableName&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#39;Transactions&amp;#39;&lt;/span&gt;,
-    Item&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; { 
-        ID&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#d14&#34;&gt;&amp;#34;123-123-123&amp;#34;&lt;/span&gt;,
-    }
-};
-docClient.put(params, &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;function&lt;/span&gt;(err, data) {
-    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;if&lt;/span&gt; (err) ppJson(err); &lt;span style=&#34;color:#998;font-style:italic&#34;&gt;// an error occurred
-&lt;/span&gt;&lt;span style=&#34;color:#998;font-style:italic&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;else&lt;/span&gt; ppJson(data); &lt;span style=&#34;color:#998;font-style:italic&#34;&gt;// successful response
-&lt;/span&gt;&lt;span style=&#34;color:#998;font-style:italic&#34;&gt;&lt;/span&gt;});
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;aws dynamodb put-item \                                                                                130 ↵
-&amp;ndash;table-name Transactions&lt;br&gt;
-&amp;ndash;item ID={S=&amp;quot;123-123-124&amp;rdquo;} &amp;ndash;endpoint-url http://0.0.0.0:8000&lt;/p&gt;
-&lt;p&gt;aws dynamodb put-item&lt;br&gt;
-&amp;ndash;table-name Transactions&lt;br&gt;
-&amp;ndash;item ID={S=&amp;quot;123-123-123&amp;rdquo;},Timestamp={S=&amp;quot;2016-11-18:14:32:17&amp;rdquo;},Message={S=&amp;quot;Testing&amp;hellip;1&amp;hellip;2&amp;hellip;3&amp;rdquo;}&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Push Notifications pt.2</title>
       <link>https://kyeett.github.io/articles/2019-10-06-notifications/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
