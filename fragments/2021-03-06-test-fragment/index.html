@@ -8,14 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Using an ORM with Go - wahlstrand.dev</title>
-  <meta property="og:title" content="Using an ORM with Go" />
-  <meta name="twitter:title" content="Using an ORM with Go" />
   <meta name="description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
 When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
-  <meta property="og:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
-  <meta name="twitter:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion …">
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -92,6 +86,7 @@ When I started web programming in Go, I quickly adopted the community notion (fr
 <meta property="og:url" content="https://kyeett.github.io/fragments/2021-03-06-test-fragment/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="wahlstrand.dev" />
+
   <meta name="twitter:title" content="Using an ORM with Go" />
   <meta name="twitter:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
 When I started web programming in Go, I quickly adopted the community notion …">
@@ -100,15 +95,6 @@ When I started web programming in Go, I quickly adopted the community notion …
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@wahlstra" />
-  <meta name="twitter:creator" content="@wahlstra" />
-  <meta property="og:url" content="https://kyeett.github.io/fragments/2021-03-06-test-fragment/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="wahlstrand.dev" />
-
   <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -344,13 +330,6 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
   
       
       <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-test-fragment%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
-        </a>
-      </li>
-  
-      
-      <li>
         <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-test-fragment%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
@@ -386,21 +365,31 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+            
           
-          <h4 class="see-also">See also</h4>
-          <ul>
+
           
-            <li><a href="/articles/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
-          
-            <li><a href="/articles/2019-04-28-2d-transitions/">2D animation: Transitions</a></li>
-          
-          </ul>
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
+                
+                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
+                
+                    <li><a href="/articles/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
+                
+                    <li><a href="/articles/2019-04-28-2d-transitions/">2D animation: Transitions</a></li>
+                
+              </ul>
+
           
         
       </article>
@@ -422,7 +411,8 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -446,9 +436,7 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
               </li>
           
           <li>
-            
-            <a href="https://kyeett.github.io/index.xml" title="RSS">
-            
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -476,7 +464,7 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -501,6 +489,7 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
 
 
 
+    
   </body>
 </html>
 

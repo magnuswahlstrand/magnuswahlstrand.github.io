@@ -8,17 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Slack: Search bar - wahlstrand.dev</title>
-  <meta property="og:title" content="Slack: Search bar" />
-  <meta name="twitter:title" content="Slack: Search bar" />
   <meta name="description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
 
 In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.">
-  <meta property="og:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
-
-In this article I try to recreate the basic look and functionality of it using HTML, Bootstrap and jQuery. I will not focus on the backend part, but rather getting the right look and feel.">
-  <meta name="twitter:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
-
-In this …">
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -96,6 +88,7 @@ In this article I try to recreate the basic look and functionality of it using H
 <meta property="og:url" content="https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="wahlstrand.dev" />
+
   <meta name="twitter:title" content="Slack: Search bar" />
   <meta name="twitter:description" content="I use Slack a lot in my day-to-day work, and I think the UI is excellent. One of the things I like the most is the quick navigation/search bar that makes navigation the channels effortless.
 
@@ -105,15 +98,6 @@ In this …">
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@wahlstra" />
-  <meta name="twitter:creator" content="@wahlstra" />
-  <meta property="og:url" content="https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="wahlstrand.dev" />
-
   <meta name="generator" content="Hugo 0.69.2" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -468,13 +452,6 @@ If we enter something into the input field, we will show a few dummy search resu
   
       
       <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fkyeett.github.io%2farticles%2f2020-01-12-search-bar-overlay%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
-        </a>
-      </li>
-  
-      
-      <li>
         <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2farticles%2f2020-01-12-search-bar-overlay%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
@@ -510,12 +487,14 @@ If we enter something into the input field, we will show a few dummy search resu
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+
           
         
       </article>
@@ -545,7 +524,8 @@ If we enter something into the input field, we will show a few dummy search resu
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -569,9 +549,7 @@ If we enter something into the input field, we will show a few dummy search resu
               </li>
           
           <li>
-            
-            <a href="https://kyeett.github.io/index.xml" title="RSS">
-            
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -599,7 +577,7 @@ If we enter something into the input field, we will show a few dummy search resu
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -624,6 +602,7 @@ If we enter something into the input field, we will show a few dummy search resu
 
 
 
+    
   </body>
 </html>
 
