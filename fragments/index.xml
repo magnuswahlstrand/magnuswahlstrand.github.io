@@ -5,20 +5,19 @@
     <link>https://kyeett.github.io/fragments/</link>
     <description>Recent content in Fragments on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kyeett.github.io/fragments/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Introduction to GORM</title>
-      <link>https://kyeett.github.io/fragments/idea_2021-03-05-a-fantastic-orm-in-go/</link>
-      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      <title>Using an ORM with Go</title>
+      <link>https://kyeett.github.io/fragments/2021-03-06-test-fragment/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/fragments/idea_2021-03-05-a-fantastic-orm-in-go/</guid>
-      <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
+      <guid>https://kyeett.github.io/fragments/2021-03-06-test-fragment/</guid>
+      <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
     </item>
     
   </channel>
