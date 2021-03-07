@@ -5,11 +5,7 @@
     <link>https://kyeett.github.io/tags/database/</link>
     <description>Recent content in database on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://kyeett.github.io/tags/database/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/database/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Getting started with sqlc</title>
       <link>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>

@@ -5,11 +5,7 @@
     <link>https://kyeett.github.io/tags/notifications/</link>
     <description>Recent content in notifications on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://kyeett.github.io/tags/notifications/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/notifications/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Push Notifications pt.2</title>
       <link>https://kyeett.github.io/articles/2019-10-06-notifications/</link>
