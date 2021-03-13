@@ -5,7 +5,16 @@
     <link>https://kyeett.github.io/</link>
     <description>Recent content on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACID transactions</title>
+      <link>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</guid>
+      <description>&lt;p&gt;The last few days, I&amp;rsquo;ve been down the rabbit hole of learning more about Postgres and databases in general. Here are a few things I have explored, along with useful resources. Let&amp;rsquo;s start with the basics.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>State machines in Go</title>
       <link>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</link>
@@ -34,10 +43,10 @@ In this article I cover how to set up a very useful application that insert anim
     
     <item>
       <title>Using an ORM with Go</title>
-      <link>https://kyeett.github.io/fragments/2021-03-06-test-fragment/</link>
+      <link>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/fragments/2021-03-06-test-fragment/</guid>
+      <guid>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
       <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
     </item>
@@ -151,7 +160,7 @@ Qualities I have the following qualities:
       <guid>https://kyeett.github.io/page/now/</guid>
       <description>It&amp;rsquo;s 2021. The world is still in lockdown. I&amp;rsquo;m working from home from my girlfriend&amp;rsquo;s apartment in Stockholm.
 Some things I&amp;rsquo;m working on:
- Write every day Read 3-4 technical articles per week of blogs that I enjoy, and spend some time to analyze their style. As with many things in life, it is good role models to emulate as I try to make their style my own. Take a walk every day   This is a now page, and if you have your own site, you can make one, too!</description>
+ Write every day Read 3-4 technical articles per week of blogs that I enjoy, and spend some time to analyze their style. As with many things in life, having good role models to emulate is great, before making their style my own. Take a walk every day   This is a now page, and if you have your own site, you can make one, too!</description>
     </item>
     
   </channel>

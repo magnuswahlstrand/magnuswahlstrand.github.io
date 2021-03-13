@@ -5,7 +5,16 @@
     <link>https://kyeett.github.io/tags/postgres/</link>
     <description>Recent content in postgres on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 25 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACID transactions</title>
+      <link>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</link>
+      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</guid>
+      <description>&lt;p&gt;The last few days, I&amp;rsquo;ve been down the rabbit hole of learning more about Postgres and databases in general. Here are a few things I have explored, along with useful resources. Let&amp;rsquo;s start with the basics.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Getting started with sqlc</title>
       <link>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
