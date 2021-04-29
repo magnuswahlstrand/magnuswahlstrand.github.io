@@ -7,9 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Using an ORM with Go - wahlstrand.dev</title>
-  <meta name="description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
+  <title>infrastructure - wahlstrand.dev</title>
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -30,66 +28,14 @@ When I started web programming in Go, I quickly adopted the community notion (fr
   
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@id": "https:\/\/kyeett.github.io",
-          "name": "home"
-        }
-    },{
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": "https:\/\/kyeett.github.io\/fragments\/2021-03-06-using-an-orm-with-go\/",
-          "name": "Using an orm with go"
-        }
-    }]
-}
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Article",
-  "author": {
-    "name" : "Magnus Wahlstrand"
-  },
-  "headline": "Using an ORM with Go",
-  "description" : "A while back @brandur\u0026rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).\nWhen I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?\n",
-  "inLanguage" : "en",
-  "wordCount":  244 ,
-  "datePublished" : "2020-03-06T00:00:00",
-  "dateModified" : "2020-03-06T00:00:00",
-  "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
-  "keywords" : [ "go, orm, gorm" ],
-  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/fragments\/2021-03-06-using-an-orm-with-go\/",
-  "publisher" : {
-    "@type": "Organization",
-    "name" : "https:\/\/kyeett.github.io",
-    "logo" : {
-        "@type" : "ImageObject",
-        "url" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
-        "height" :  60 ,
-        "width" :  60
-    }
-  }
-}
-</script>
 
-<meta property="og:title" content="Using an ORM with Go" />
-<meta property="og:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
+<meta property="og:title" content="infrastructure" />
 <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-<meta property="og:url" content="https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/" />
+<meta property="og:url" content="https://kyeett.github.io/tags/infrastructure/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="wahlstrand.dev" />
 
-  <meta name="twitter:title" content="Using an ORM with Go" />
-  <meta name="twitter:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion …">
+  <meta name="twitter:title" content="infrastructure" />
   <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@wahlstra" />
@@ -252,9 +198,9 @@ if (!doNotTrack) {
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="fragments-heading">
+            <div class="tags-heading">
               
-                <h1>Using an ORM with Go</h1>
+                <h1>infrastructure</h1>
               
               
                 <hr class="small">
@@ -270,150 +216,67 @@ if (!doNotTrack) {
 
 
     
-<div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-        <p>A while back <a href="https://twitter.com/brandur">@brandur&rsquo;s</a> article <a href="https://brandur.org/http-transactions">Using Atomic Transactions</a>, I realised that I have actually never used an ORM (<a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">wiki</a>).</p>
-<p>When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?</p>
-<p>I think the aversion to ORM-like frameworks might be caused by Go&rsquo;s design principle to show the underlying complexity of certain operations.</p>
-<p>For example:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// Go
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">for</span> _, u <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> users {
-    <span style="color:#000;font-weight:bold">if</span> u.Type <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;admin&#34;</span> {
-        <span style="color:#000;font-weight:bold">continue</span>
-    }
-    adminUsers = <span style="color:#0086b3">append</span>(adminUsers, u)
-}
-</code></pre></div><p>is preferred over something like this</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#998;font-style:italic">// Java
-</span><span style="color:#998;font-style:italic"></span>CollectionUtils<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">filter</span><span style="color:#000;font-weight:bold">(</span>result<span style="color:#000;font-weight:bold">,</span> o <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000;font-weight:bold">((</span>User<span style="color:#000;font-weight:bold">)</span> o<span style="color:#000;font-weight:bold">).</span><span style="color:#008080">getType</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#a61717;background-color:#e3d2d2">&#39;</span>admin<span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#000;font-weight:bold">);</span>
-</code></pre></div><p>For web development, many people seem to prefer using the standard library, or lightweight packages like <a href="https://github.com/jmoiron/sqlx">jmoiron/sqlx</a> (for SQL)
-or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
-<p>I have used these lightweight tools extensively, and they are great! It has forced me to learn a lot about databases, SQL, and building REST APIs for production environments.</p>
-<p>But (sometimes 🙂) I think, why <strong>can&rsquo;t</strong> Go be like Ruby?</p>
-<p>Most hobby projects fall into these categories, that make them good candidates for using an ORM:</p>
-<ul>
-<li>Have very few users (usually just me), meaning performance requirement is low</li>
-<li>Require no migrations</li>
-<li>Require no advanced queries</li>
-<li>Are built to validate or test an idea</li>
-</ul>
-<p>There are downsides to using something more complex like an ORM, but after having worked professionally with Go and web development for more than 3 years. I be ready to handle them.</p>
-
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         
-          <div class="blog-tags">
-            
-              <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
-            
-              <a href="https://kyeett.github.io/tags/orm/">orm</a>&nbsp;
-            
-              <a href="https://kyeett.github.io/tags/gorm/">gorm</a>&nbsp;
-            
-          </div>
+        <div class="posts-list">
+          
+            <article class="post-preview">
+    <a href="https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/">
+        <h2 class="post-title">Useful Terraform snippets</h2>
         
-
         
-            <hr/>
-            <section id="social-share">
-              <div class="list-inline footer-links">
-                
+        
+    </a>
 
-<div class="share-box" aria-hidden="true">
-    <ul class="share">
-      
-      <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;text=Using%20an%20ORM%20with%20Go&amp;via=wahlstra" target="_blank" title="Share on Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
+    <p class="post-meta">
+        <span class="post-meta">
   
-      
-      <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f" target="_blank" title="Share on Facebook">
-          <i class="fab fa-facebook"></i>
-        </a>
-      </li>
   
-      
-      <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on Reddit">
-          <i class="fab fa-reddit"></i>
-        </a>
-      </li>
+  <i class="fas fa-calendar"></i>&nbsp;Posted on April 2, 2020
   
-      
-      <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
   
-      
-      <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on StumbleUpon">
-          <i class="fab fa-stumbleupon"></i>
-        </a>
-      </li>
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
   
-      
-      <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;description=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on Pinterest">
-          <i class="fab fa-pinterest"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
   
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;283&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
 
-              </div>
-            </section>
+
+    </p>
+    <div class="post-entry">
         
-
+        <p>A while back I was introduced to <a href="https://www.terraform.io/">Terraform</a> by a colleague. Since then, I have started using it more and more both at work and for my own projects.</p>
+<p>Terraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of <a href="https://www.hashicorp.com/">HashiCorp&rsquo;s</a> tools in the past (Consul, Vault, &hellip;) and they all have great user experience and good documentation, and Terraform is no exception.</p>
+        <a href="https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/" class="post-read-more">[Read More]</a>
         
-          
-            
-          
+    </div>
 
-          
-                  <h4 class="see-also">See also</h4>
-                  <ul>
-                
-                
-                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
-                
-                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
-                
-                    <li><a href="/articles/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
-                
-                    <li><a href="/articles/2019-04-28-2d-transitions/">2D animation: Transitions</a></li>
-                
-              </ul>
-
-          
+    
+    <div class="blog-tags">
         
-      </article>
-
-      
-        <ul class="pager blog-pager">
-          
-          
-            <li class="next">
-              <a href="https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/" data-toggle="tooltip" data-placement="top" title="Useful Terraform snippets">Next Post &rarr;</a>
-            </li>
-          
-        </ul>
-      
-
-
-      
+        <a href="https://kyeett.github.io/tags/terraform/">terraform</a>&nbsp;
         
+        <a href="https://kyeett.github.io/tags/infrastructure/">infrastructure</a>&nbsp;
         
-      
+    </div>
+    
 
+</article>
+          
+        </div>
+        
+      </div>
     </div>
   </div>
-</div>
 
       
 <footer>
@@ -440,7 +303,7 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
               </li>
           
           <li>
-            <a href="" title="RSS">
+            <a href="/tags/infrastructure/index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>

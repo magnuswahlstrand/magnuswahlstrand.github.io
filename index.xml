@@ -42,6 +42,16 @@ In this article I cover how to set up a very useful application that insert anim
     </item>
     
     <item>
+      <title>Useful Terraform snippets</title>
+      <link>https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/</guid>
+      <description>&lt;p&gt;A while back I was introduced to &lt;a href=&#34;https://www.terraform.io/&#34;&gt;Terraform&lt;/a&gt; by a colleague. Since then, I have started using it more and more both at work and for my own projects.&lt;/p&gt;
+&lt;p&gt;Terraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of &lt;a href=&#34;https://www.hashicorp.com/&#34;&gt;HashiCorp&amp;rsquo;s&lt;/a&gt; tools in the past (Consul, Vault, &amp;hellip;) and they all have great user experience and good documentation, and Terraform is no exception.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Using an ORM with Go</title>
       <link>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>

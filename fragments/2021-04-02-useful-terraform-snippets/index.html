@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Using an ORM with Go - wahlstrand.dev</title>
-  <meta name="description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
+  <title>Useful Terraform snippets - wahlstrand.dev</title>
+  <meta name="description" content="A while back I was introduced to Terraform by a colleague. Since then, I have started using it more and more both at work and for my own projects.
+Terraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of HashiCorp&rsquo;s tools in the past (Consul, Vault, &hellip;) and they all have great user experience and good documentation, and Terraform is no exception.">
   <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -45,8 +45,8 @@ When I started web programming in Go, I quickly adopted the community notion (fr
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/kyeett.github.io\/fragments\/2021-03-06-using-an-orm-with-go\/",
-          "name": "Using an orm with go"
+          "@id": "https:\/\/kyeett.github.io\/fragments\/2021-04-02-useful-terraform-snippets\/",
+          "name": "Useful terraform snippets"
         }
     }]
 }
@@ -57,15 +57,15 @@ When I started web programming in Go, I quickly adopted the community notion (fr
   "author": {
     "name" : "Magnus Wahlstrand"
   },
-  "headline": "Using an ORM with Go",
-  "description" : "A while back @brandur\u0026rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).\nWhen I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?\n",
+  "headline": "Useful Terraform snippets",
+  "description" : "A while back I was introduced to Terraform by a colleague. Since then, I have started using it more and more both at work and for my own projects.\nTerraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of HashiCorp\u0026rsquo;s tools in the past (Consul, Vault, \u0026hellip;) and they all have great user experience and good documentation, and Terraform is no exception.\n",
   "inLanguage" : "en",
-  "wordCount":  244 ,
-  "datePublished" : "2020-03-06T00:00:00",
-  "dateModified" : "2020-03-06T00:00:00",
+  "wordCount":  283 ,
+  "datePublished" : "2020-04-02T00:00:00",
+  "dateModified" : "2020-04-02T00:00:00",
   "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
-  "keywords" : [ "go, orm, gorm" ],
-  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/fragments\/2021-03-06-using-an-orm-with-go\/",
+  "keywords" : [ "terraform, infrastructure" ],
+  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/fragments\/2021-04-02-useful-terraform-snippets\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/kyeett.github.io",
@@ -79,17 +79,17 @@ When I started web programming in Go, I quickly adopted the community notion (fr
 }
 </script>
 
-<meta property="og:title" content="Using an ORM with Go" />
-<meta property="og:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?">
+<meta property="og:title" content="Useful Terraform snippets" />
+<meta property="og:description" content="A while back I was introduced to Terraform by a colleague. Since then, I have started using it more and more both at work and for my own projects.
+Terraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of HashiCorp&rsquo;s tools in the past (Consul, Vault, &hellip;) and they all have great user experience and good documentation, and Terraform is no exception.">
 <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-<meta property="og:url" content="https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/" />
+<meta property="og:url" content="https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="wahlstrand.dev" />
 
-  <meta name="twitter:title" content="Using an ORM with Go" />
-  <meta name="twitter:description" content="A while back @brandur&rsquo;s article Using Atomic Transactions, I realised that I have actually never used an ORM (wiki).
-When I started web programming in Go, I quickly adopted the community notion …">
+  <meta name="twitter:title" content="Useful Terraform snippets" />
+  <meta name="twitter:description" content="A while back I was introduced to Terraform by a colleague. Since then, I have started using it more and more both at work and for my own projects.
+Terraform is a declarative tool for managing …">
   <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@wahlstra" />
@@ -254,7 +254,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="fragments-heading">
               
-                <h1>Using an ORM with Go</h1>
+                <h1>Useful Terraform snippets</h1>
               
               
                 <hr class="small">
@@ -274,41 +274,87 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>A while back <a href="https://twitter.com/brandur">@brandur&rsquo;s</a> article <a href="https://brandur.org/http-transactions">Using Atomic Transactions</a>, I realised that I have actually never used an ORM (<a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">wiki</a>).</p>
-<p>When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?</p>
-<p>I think the aversion to ORM-like frameworks might be caused by Go&rsquo;s design principle to show the underlying complexity of certain operations.</p>
-<p>For example:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// Go
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">for</span> _, u <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> users {
-    <span style="color:#000;font-weight:bold">if</span> u.Type <span style="color:#000;font-weight:bold">!=</span> <span style="color:#d14">&#34;admin&#34;</span> {
-        <span style="color:#000;font-weight:bold">continue</span>
-    }
-    adminUsers = <span style="color:#0086b3">append</span>(adminUsers, u)
+        <p>A while back I was introduced to <a href="https://www.terraform.io/">Terraform</a> by a colleague. Since then, I have started using it more and more both at work and for my own projects.</p>
+<p>Terraform is a declarative tool for managing infrastructure. You specify what resources and resource state you want, in configuration files, and Terraform gets it to that state. I have used some of <a href="https://www.hashicorp.com/">HashiCorp&rsquo;s</a> tools in the past (Consul, Vault, &hellip;) and they all have great user experience and good documentation, and Terraform is no exception.</p>
+<h2 id="snippets">Snippets</h2>
+<h3 id="gitignore">.gitignore</h3>
+<p>Before you start, make sure to use a good .gitignore configuration to avoid committing secrets and sensitive information. Here is Github&rsquo;s  <a href="https://github.com/github/gitignore/blob/master/Terraform.gitignore">Terraform .gitignore</a>.</p>
+<h3 id="terraform-s3-backend">Terraform S3 backend</h3>
+<p>For production systems it is better to store state centrally, rather than locally. I have used S3 for this. More information here: <a href="https://www.terraform.io/docs/language/settings/backends/s3.html">Terraform S3 Backend</a>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#a61717;background-color:#e3d2d2">terraform</span> {
+  <span style="color:#a61717;background-color:#e3d2d2">backend</span> <span style="color:#000080">&#34;s3&#34;</span> {
+    <span style="color:#a61717;background-color:#e3d2d2">bucket</span> <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#000080">&#34;heroku-terraform-backend-v1&#34;</span>
+    <span style="color:#a61717;background-color:#e3d2d2">key</span> <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#d14">&#34;heroku.tfstate&#34;</span>
+    <span style="color:#a61717;background-color:#e3d2d2">region</span> <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#d14">&#34;eu-north-1&#34;</span>
+    <span style="color:#a61717;background-color:#e3d2d2">profile</span> <span style="color:#a61717;background-color:#e3d2d2">=</span> <span style="color:#d14">&#34;terraform-s3&#34;</span>
+  }
 }
-</code></pre></div><p>is preferred over something like this</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#998;font-style:italic">// Java
-</span><span style="color:#998;font-style:italic"></span>CollectionUtils<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">filter</span><span style="color:#000;font-weight:bold">(</span>result<span style="color:#000;font-weight:bold">,</span> o <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000;font-weight:bold">((</span>User<span style="color:#000;font-weight:bold">)</span> o<span style="color:#000;font-weight:bold">).</span><span style="color:#008080">getType</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#a61717;background-color:#e3d2d2">&#39;</span>admin<span style="color:#a61717;background-color:#e3d2d2">&#39;</span><span style="color:#000;font-weight:bold">);</span>
-</code></pre></div><p>For web development, many people seem to prefer using the standard library, or lightweight packages like <a href="https://github.com/jmoiron/sqlx">jmoiron/sqlx</a> (for SQL)
-or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
-<p>I have used these lightweight tools extensively, and they are great! It has forced me to learn a lot about databases, SQL, and building REST APIs for production environments.</p>
-<p>But (sometimes 🙂) I think, why <strong>can&rsquo;t</strong> Go be like Ruby?</p>
-<p>Most hobby projects fall into these categories, that make them good candidates for using an ORM:</p>
-<ul>
-<li>Have very few users (usually just me), meaning performance requirement is low</li>
-<li>Require no migrations</li>
-<li>Require no advanced queries</li>
-<li>Are built to validate or test an idea</li>
-</ul>
-<p>There are downsides to using something more complex like an ORM, but after having worked professionally with Go and web development for more than 3 years. I be ready to handle them.</p>
+</code></pre></div><h3 id="heroku">Heroku</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf">terraform {
+ ...<span style="color:#998;font-style:italic">
+</span><span style="color:#998;font-style:italic">  # Include the Heroku provider
+</span><span style="color:#998;font-style:italic"></span>  required_providers {
+    <span style="color:#008080">heroku</span> = {
+      <span style="color:#008080">source</span> = <span style="color:#d14">&#34;heroku/heroku&#34;</span>
+      <span style="color:#008080">version</span> = <span style="color:#d14">&#34;3.2.0&#34;</span>
+    }
+  }
+}
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#998;font-style:italic"># Configure the Heroku provider
+</span><span style="color:#998;font-style:italic">// https://www.terraform.io/docs/language/values/variables.html#variable-definitions-tfvars-files
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">provider</span> <span style="color:#d14">&#34;heroku&#34;</span> {
+  <span style="color:#008080">email</span> = <span style="color:#0086b3">var</span>.heroku_email
+  <span style="color:#008080">api_key</span> = <span style="color:#0086b3">var</span>.heroku_api_key
+}
+</code></pre></div><p><strong>secret.auto.tfvars</strong> (should NOT be commited)</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">heroku_api_key = &#34;065211f9-12df-43b6-9c40-c2aea3ed24ad&#34;
+heroku_email = &#34;magnus@mail.com&#34;
+</code></pre></div><h3 id="loading-json">Loading JSON</h3>
+<h4 id="from-s3">From S3</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#998;font-style:italic">// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket_object
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">data</span> <span style="color:#d14">&#34;aws_s3_bucket_object&#34;</span> <span style="color:#d14">&#34;sensitive_vars&#34;</span> {
+    <span style="color:#008080">bucket</span> = <span style="color:#d14">&#34;my-very-sensitive-data-bucket&#34;</span>
+    <span style="color:#008080">key</span>    = <span style="color:#d14">&#34;data.json&#34;</span>
+}
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf">locals {
+    <span style="color:#008080">sensitive</span> =<span style="color:#0086b3"> jsondecode</span>(<span style="color:#0086b3">data</span>.aws_s3_bucket_object.sensitive_vars.body)
+}
+</code></pre></div><h4 id="from-gcp-storage">From GCP storage</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#000;font-weight:bold">data</span> <span style="color:#d14">&#34;google_storage_bucket_object_content&#34;</span> <span style="color:#d14">&#34;sensitive_gcp_vars&#34;</span> {
+  <span style="color:#008080">bucket</span> = <span style="color:#d14">&#34;my-very-sensitive-data-bucket-on-gcp&#34;</span>
+  <span style="color:#008080">name</span>   = <span style="color:#d14">&#34;folder/butterfly01.json&#34;</span>
+}
+
+
+locals {
+  <span style="color:#008080">sensitive_gcp</span> =<span style="color:#0086b3"> jsondecode</span>(<span style="color:#0086b3">data</span>.google_storage_bucket_object_content.sensitive_gcp_vars.content)
+}
+</code></pre></div><h3 id="using-local-variables">Using local variables</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#000;font-weight:bold">resource</span> <span style="color:#d14">&#34;heroku_app&#34;</span> <span style="color:#d14">&#34;default&#34;</span> {
+    <span style="color:#008080">name</span> = <span style="color:#d14">&#34;my-cool-terraform-app&#34;</span>
+    <span style="color:#008080">region</span> = <span style="color:#d14">&#34;eu&#34;</span>
+
+    <span style="color:#008080">config_vars</span> = {
+        <span style="color:#008080">FOOBAR</span> = <span style="color:#d14">&#34;barfoo2&#34;</span>
+    }
+
+    <span style="color:#008080">sensitive_config_vars</span> = {
+        <span style="color:#008080">USERNAME</span> = local.sensitive.username,
+        <span style="color:#008080">PASSWORD</span> = local.sensitive.password,
+    }
+
+    <span style="color:#008080">buildpacks</span> = [
+        <span style="color:#d14">&#34;heroku/go&#34;</span>
+    ]
+}
+</code></pre></div>
 
         
           <div class="blog-tags">
             
-              <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
+              <a href="https://kyeett.github.io/tags/terraform/">terraform</a>&nbsp;
             
-              <a href="https://kyeett.github.io/tags/orm/">orm</a>&nbsp;
-            
-              <a href="https://kyeett.github.io/tags/gorm/">gorm</a>&nbsp;
+              <a href="https://kyeett.github.io/tags/infrastructure/">infrastructure</a>&nbsp;
             
           </div>
         
@@ -323,42 +369,42 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;text=Using%20an%20ORM%20with%20Go&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f&amp;text=Useful%20Terraform%20snippets&amp;via=wahlstra" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f&amp;title=Useful%20Terraform%20snippets" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f&amp;title=Useful%20Terraform%20snippets" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;title=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f&amp;title=Useful%20Terraform%20snippets" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-03-06-using-an-orm-with-go%2f&amp;description=Using%20an%20ORM%20with%20Go" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2ffragments%2f2021-04-02-useful-terraform-snippets%2f&amp;description=Useful%20Terraform%20snippets" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -372,23 +418,6 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
 
         
           
-            
-          
-
-          
-                  <h4 class="see-also">See also</h4>
-                  <ul>
-                
-                
-                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
-                
-                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
-                
-                    <li><a href="/articles/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
-                
-                    <li><a href="/articles/2019-04-28-2d-transitions/">2D animation: Transitions</a></li>
-                
-              </ul>
 
           
         
@@ -397,10 +426,10 @@ or <a href="https://github.com/go-chi/chi">go-chi/chi</a> (for routing).</p>
       
         <ul class="pager blog-pager">
           
-          
-            <li class="next">
-              <a href="https://kyeett.github.io/fragments/2021-04-02-useful-terraform-snippets/" data-toggle="tooltip" data-placement="top" title="Useful Terraform snippets">Next Post &rarr;</a>
+            <li class="previous">
+              <a href="https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/" data-toggle="tooltip" data-placement="top" title="Using an ORM with Go">&larr; Previous Post</a>
             </li>
+          
           
         </ul>
       
