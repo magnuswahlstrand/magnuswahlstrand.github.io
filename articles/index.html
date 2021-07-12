@@ -41,7 +41,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.81.0" />
+  <meta name="generator" content="Hugo 0.83.1" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -223,6 +223,58 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+    <a href="https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/">
+        <h2 class="post-title">Running Google Pub/Sub locally</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on July 11, 2021
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;832&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>I have recently started using Google&rsquo;s event queue &ldquo;<a href="https://cloud.google.com/pubsub"><strong>Cloud Pub/Sub</strong></a>&rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.</p>
+<p>Here is a quick guide how I set up my integration test locally using the <strong>Pub/Sub</strong> emulator. Code examples are written in Go.</p>
+        <a href="https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://kyeett.github.io/tags/gcp/">gcp</a>&nbsp;
+        
+        <a href="https://kyeett.github.io/tags/pubsub/">pubsub</a>&nbsp;
+        
+        <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
     <a href="https://kyeett.github.io/articles/2021-03-12-acid-transactions/">
         <h2 class="post-title">ACID transactions</h2>
         
@@ -240,7 +292,7 @@ if (!doNotTrack) {
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;772&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;739&nbsp;words
   
   
     
@@ -431,6 +483,8 @@ In this article I cover how to set up a very useful application that insert anim
         
         <a href="https://kyeett.github.io/tags/jquery/">jquery</a>&nbsp;
         
+        <a href="https://kyeett.github.io/tags/web/">web</a>&nbsp;
+        
     </div>
     
 
@@ -529,7 +583,7 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
         
         <a href="https://kyeett.github.io/tags/websocket/">websocket</a>&nbsp;
         
-        <a href="https://kyeett.github.io/tags/golang/">golang</a>&nbsp;
+        <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
         
         <a href="https://kyeett.github.io/tags/heroku/">heroku</a>&nbsp;
         
@@ -715,66 +769,6 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 
 </article>
           
-            <article class="post-preview">
-    <a href="https://kyeett.github.io/articles/2019-04-29-screen-shake/">
-        <h2 class="post-title">2D animation: Screen shake</h2>
-        
-        <h3 class="post-subtitle">
-            Code examples in Go &#43; Ebiten
-        </h3>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on April 29, 2019
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;466&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one <em>simple</em> and one <em>nice</em>. The end result will look something like this</p>
-<p><img src="/img/screenshake/shake.gif" alt="End result"></p>
-        <a href="https://kyeett.github.io/articles/2019-04-29-screen-shake/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
-        
-        <a href="https://kyeett.github.io/tags/ebiten/">ebiten</a>&nbsp;
-        
-        <a href="https://kyeett.github.io/tags/animation/">animation</a>&nbsp;
-        
-        <a href="https://kyeett.github.io/tags/2d-graphics/">2d graphics</a>&nbsp;
-        
-        <a href="https://kyeett.github.io/tags/gamedev/">gamedev</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -843,7 +837,7 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.81.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

@@ -2,10 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</loc>
-    <lastmod>2021-03-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kyeett.github.io/articles/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/tags/gcp/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/tags/go/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/tags/pubsub/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/tags/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/</loc>
+    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://kyeett.github.io/articles/2021-03-12-acid-transactions/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyeett.github.io/tags/db/</loc>
@@ -14,17 +32,8 @@
     <loc>https://kyeett.github.io/tags/postgres/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kyeett.github.io/tags/</loc>
-    <lastmod>2021-03-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://kyeett.github.io/tags/theory/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kyeett.github.io/</loc>
-    <lastmod>2021-03-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kyeett.github.io/tags/go/</loc>
-    <lastmod>2020-10-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyeett.github.io/tags/sqlc/</loc>
     <lastmod>2020-10-31T00:00:00+00:00</lastmod>
@@ -71,6 +80,9 @@
     <loc>https://kyeett.github.io/articles/2020-01-12-search-bar-overlay/</loc>
     <lastmod>2020-01-12T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://kyeett.github.io/tags/web/</loc>
+    <lastmod>2020-01-12T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://kyeett.github.io/articles/2019-11-30-heroku-secrets-rotation/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
   </url><url>
@@ -79,9 +91,6 @@
   </url><url>
     <loc>https://kyeett.github.io/tags/security/</loc>
     <lastmod>2019-11-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://kyeett.github.io/tags/golang/</loc>
-    <lastmod>2019-10-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyeett.github.io/tags/websocket/</loc>
     <lastmod>2019-10-19T00:00:00+00:00</lastmod>

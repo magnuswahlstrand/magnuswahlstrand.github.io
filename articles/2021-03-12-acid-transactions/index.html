@@ -59,7 +59,7 @@
   "headline": "ACID transactions",
   "description" : "The last few days, I\u0026rsquo;ve been down the rabbit hole of learning more about Postgres and databases in general. Here are a few things I have explored, along with useful resources. Let\u0026rsquo;s start with the basics.\n",
   "inLanguage" : "en",
-  "wordCount":  772 ,
+  "wordCount":  739 ,
   "datePublished" : "2021-03-12T00:00:00",
   "dateModified" : "2021-03-12T00:00:00",
   "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
@@ -92,7 +92,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.81.0" />
+  <meta name="generator" content="Hugo 0.83.1" />
   <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -277,18 +277,18 @@ if (!doNotTrack) {
 <h3 id="atomicity">Atomicity</h3>
 <p><a href="https://en.wikipedia.org/wiki/Atomicity_(database_systems)">Atomicity</a> means that transactions consisting of multiple statements should succeed or fail completely. Martin Kleppman (<a href="https://www.youtube.com/watch?v=5ZjhNTM8XU8">YouTube</a>) suggested the alternative term &ldquo;Abortability&rdquo;, that I think is a bit more clear.</p>
 <p>Take an example in Postgres, where <strong>atomicity</strong> is typically achieved using <code>BEGIN TRANSACTIONS</code> and <code>COMMIT TRANSACTIONS</code>. Let&rsquo;s say we have two tables, one with users and one with user related events. We want to guarantee that both rows are inserted, or none of them.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">CREATE</span> <span style="color:#000;font-weight:bold">TABLE</span> users(id <span style="color:#0086b3">INT</span> <span style="color:#000;font-weight:bold">UNIQUE</span>);
-<span style="color:#000;font-weight:bold">CREATE</span> <span style="color:#000;font-weight:bold">TABLE</span> users_events(<span style="color:#000;font-weight:bold">type</span> <span style="color:#0086b3">TEXT</span>);
-
-<span style="color:#000;font-weight:bold">BEGIN</span>; <span style="color:#998;font-style:italic">-- Begin transaction
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> users_events <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;user 1 created&#39;</span>);
-<span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> users <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#099">1</span>);
-<span style="color:#000;font-weight:bold">COMMIT</span>; <span style="color:#998;font-style:italic">-- Commit both statements to the database
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>users(id<span style="color:#bbb"> </span><span style="color:#0086b3">INT</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">UNIQUE</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">CREATE</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">TABLE</span><span style="color:#bbb"> </span>users_events(<span style="color:#000;font-weight:bold">type</span><span style="color:#bbb"> </span><span style="color:#0086b3">TEXT</span>);<span style="color:#bbb">
+</span><span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">BEGIN</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">-- Begin transaction
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">INTO</span><span style="color:#bbb"> </span>users_events<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#d14">&#39;user 1 created&#39;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">INTO</span><span style="color:#bbb"> </span>users<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#099">1</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">COMMIT</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">-- Commit both statements to the database
 </span></code></pre></div><p>Now, if we get an error half way (maybe the database connection timed out, or in the case below there is already a user with the same ID). We use <code>ROLLBACK</code> to abort the transaction.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">BEGIN</span>; <span style="color:#998;font-style:italic">-- Begin transaction
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> users_events <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;user 1 created again&#39;</span>);
-<span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> users <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#099">1</span>); <span style="color:#998;font-style:italic">-- ERROR: duplicate key value violates unique constraint &#34;users_id_key&#34;
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">ROLLBACK</span>; <span style="color:#998;font-style:italic">-- Abort the transaction and both statements
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">BEGIN</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">-- Begin transaction
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">INTO</span><span style="color:#bbb"> </span>users_events<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#d14">&#39;user 1 created again&#39;</span>);<span style="color:#bbb">
+</span><span style="color:#bbb"></span><span style="color:#000;font-weight:bold">INSERT</span><span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">INTO</span><span style="color:#bbb"> </span>users<span style="color:#bbb"> </span><span style="color:#000;font-weight:bold">VALUES</span><span style="color:#bbb"> </span>(<span style="color:#099">1</span>);<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">-- ERROR: duplicate key value violates unique constraint &#34;users_id_key&#34;
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">ROLLBACK</span>;<span style="color:#bbb"> </span><span style="color:#998;font-style:italic">-- Abort the transaction and both statements
 </span></code></pre></div><p>And so we have an atomic transaction!</p>
 <h3 id="consistency">Consistency</h3>
 <p><a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">Consistency</a> means that the database should be in a valid state, before and after a transaction. What does valid mean? It means that it is <em>consistent</em> to whatever rules have been defined.
@@ -437,6 +437,10 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
             </li>
           
           
+            <li class="next">
+              <a href="https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/" data-toggle="tooltip" data-placement="top" title="Running Google Pub/Sub locally">Next Post &rarr;</a>
+            </li>
+          
         </ul>
       
 
@@ -503,7 +507,7 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.81.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

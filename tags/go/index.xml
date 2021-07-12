@@ -5,7 +5,17 @@
     <link>https://kyeett.github.io/tags/go/</link>
     <description>Recent content in go on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Running Google Pub/Sub locally</title>
+      <link>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
+      <description>&lt;p&gt;I have recently started using Google&amp;rsquo;s event queue &amp;ldquo;&lt;a href=&#34;https://cloud.google.com/pubsub&#34;&gt;&lt;strong&gt;Cloud Pub/Sub&lt;/strong&gt;&lt;/a&gt;&amp;rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.&lt;/p&gt;
+&lt;p&gt;Here is a quick guide how I set up my integration test locally using the &lt;strong&gt;Pub/Sub&lt;/strong&gt; emulator. Code examples are written in Go.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>State machines in Go</title>
       <link>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</link>
@@ -40,6 +50,15 @@ In this article I cover how to set up a very useful application that insert anim
       <guid>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
       <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Websockets on Heroku</title>
+      <link>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</link>
+      <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</guid>
+      <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
     </item>
     
     <item>

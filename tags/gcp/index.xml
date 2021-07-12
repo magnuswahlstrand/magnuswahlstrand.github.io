@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gcp on wahlstrand.dev</title>
+    <link>https://kyeett.github.io/tags/gcp/</link>
+    <description>Recent content in gcp on wahlstrand.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/gcp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Running Google Pub/Sub locally</title>
+      <link>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
+      <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
+      <description>&lt;p&gt;I have recently started using Google&amp;rsquo;s event queue &amp;ldquo;&lt;a href=&#34;https://cloud.google.com/pubsub&#34;&gt;&lt;strong&gt;Cloud Pub/Sub&lt;/strong&gt;&lt;/a&gt;&amp;rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.&lt;/p&gt;
+&lt;p&gt;Here is a quick guide how I set up my integration test locally using the &lt;strong&gt;Pub/Sub&lt;/strong&gt; emulator. Code examples are written in Go.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
