@@ -2,83 +2,83 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on wahlstrand.dev</title>
-    <link>https://kyeett.github.io/tags/go/</link>
+    <link>https://magnuswahlstrand.github.io/tags/go/</link>
     <description>Recent content in go on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Running Google Pub/Sub locally</title>
-      <link>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
       <description>&lt;p&gt;I have recently started using Google&amp;rsquo;s event queue &amp;ldquo;&lt;a href=&#34;https://cloud.google.com/pubsub&#34;&gt;&lt;strong&gt;Cloud Pub/Sub&lt;/strong&gt;&lt;/a&gt;&amp;rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.&lt;/p&gt;
 &lt;p&gt;Here is a quick guide how I set up my integration test locally using the &lt;strong&gt;Pub/Sub&lt;/strong&gt; emulator. Code examples are written in Go.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>State machines in Go</title>
-      <link>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2020-10-31-state-machines-in-go/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s implement a simple state machine in Go that is:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;easy to understand&lt;/li&gt;
 &lt;li&gt;easy to extend&lt;/li&gt;
 &lt;li&gt;easy to test&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The full code is available in the &lt;a href=&#34;https://github.com/kyeett/state-machines-in-go&#34;&gt;repo&lt;/a&gt;.&lt;/p&gt;</description>
+&lt;p&gt;The full code is available in the &lt;a href=&#34;https://github.com/magnuswahlstrand/state-machines-in-go&#34;&gt;repo&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Getting started with sqlc</title>
-      <link>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2020-10-25-getting-started-with-sqlc/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</guid>
       <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
 In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Using an ORM with Go</title>
-      <link>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</link>
+      <link>https://magnuswahlstrand.github.io/fragments/2021-03-06-using-an-orm-with-go/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
+      <guid>https://magnuswahlstrand.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
       <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Websockets on Heroku</title>
-      <link>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2019-10-19-heroku-websockets/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2D animation: Screen shake</title>
-      <link>https://kyeett.github.io/articles/2019-04-29-screen-shake/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-04-29-screen-shake/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2019-04-29-screen-shake/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-04-29-screen-shake/</guid>
       <description>&lt;p&gt;A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one &lt;em&gt;simple&lt;/em&gt; and one &lt;em&gt;nice&lt;/em&gt;. The end result will look something like this&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2D animation: Transitions</title>
-      <link>https://kyeett.github.io/articles/2019-04-28-2d-transitions/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-04-28-2d-transitions/</link>
       <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/articles/2019-04-28-2d-transitions/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-04-28-2d-transitions/</guid>
       <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://kyeett.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>
     </item>
     

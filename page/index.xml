@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on wahlstrand.dev</title>
-    <link>https://kyeett.github.io/page/</link>
+    <link>https://magnuswahlstrand.github.io/page/</link>
     <description>Recent content in Pages on wahlstrand.dev</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://kyeett.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://magnuswahlstrand.github.io/page/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About me</title>
-      <link>https://kyeett.github.io/page/about/</link>
+      <link>https://magnuswahlstrand.github.io/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/page/about/</guid>
+      <guid>https://magnuswahlstrand.github.io/page/about/</guid>
       <description>My name is Magnus Wahlstrand. I am an engineer, based in Stockholm Sweden. I love programming.
 I enjoy developing things that are easy to maintain and observe long term. If shortcuts are needed, I believe in taking the time to clean up afterwards to keep the quality of the code base high over time.
 Qualities I have the following qualities:
@@ -19,10 +19,10 @@ Qualities I have the following qualities:
     
     <item>
       <title>What I&#39;m Doing Now</title>
-      <link>https://kyeett.github.io/page/now/</link>
+      <link>https://magnuswahlstrand.github.io/page/now/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/page/now/</guid>
+      <guid>https://magnuswahlstrand.github.io/page/now/</guid>
       <description>It&amp;rsquo;s 2021. The world is still in lockdown. I&amp;rsquo;m working from home from my girlfriend&amp;rsquo;s apartment in Stockholm.
 Some things I&amp;rsquo;m working on:
  Write every day Read 3-4 technical articles per week of blogs that I enjoy, and spend some time to analyze their style. As with many things in life, having good role models to emulate is great, before making their style my own. Take a walk every day   This is a now page, and if you have your own site, you can make one, too!</description>

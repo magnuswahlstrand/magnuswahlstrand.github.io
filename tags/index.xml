@@ -2,268 +2,268 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on wahlstrand.dev</title>
-    <link>https://kyeett.github.io/tags/</link>
+    <link>https://magnuswahlstrand.github.io/tags/</link>
     <description>Recent content in Tags on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://kyeett.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gcp</title>
-      <link>https://kyeett.github.io/tags/gcp/</link>
+      <link>https://magnuswahlstrand.github.io/tags/gcp/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/gcp/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/gcp/</guid>
       <description></description>
     </item>
     
     <item>
       <title>go</title>
-      <link>https://kyeett.github.io/tags/go/</link>
+      <link>https://magnuswahlstrand.github.io/tags/go/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/go/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pubsub</title>
-      <link>https://kyeett.github.io/tags/pubsub/</link>
+      <link>https://magnuswahlstrand.github.io/tags/pubsub/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/pubsub/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/pubsub/</guid>
       <description></description>
     </item>
     
     <item>
       <title>db</title>
-      <link>https://kyeett.github.io/tags/db/</link>
+      <link>https://magnuswahlstrand.github.io/tags/db/</link>
       <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/db/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/db/</guid>
       <description></description>
     </item>
     
     <item>
       <title>postgres</title>
-      <link>https://kyeett.github.io/tags/postgres/</link>
+      <link>https://magnuswahlstrand.github.io/tags/postgres/</link>
       <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/postgres/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/postgres/</guid>
       <description></description>
     </item>
     
     <item>
       <title>theory</title>
-      <link>https://kyeett.github.io/tags/theory/</link>
+      <link>https://magnuswahlstrand.github.io/tags/theory/</link>
       <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/theory/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/theory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sqlc</title>
-      <link>https://kyeett.github.io/tags/sqlc/</link>
+      <link>https://magnuswahlstrand.github.io/tags/sqlc/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/sqlc/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/sqlc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>database</title>
-      <link>https://kyeett.github.io/tags/database/</link>
+      <link>https://magnuswahlstrand.github.io/tags/database/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/database/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/database/</guid>
       <description></description>
     </item>
     
     <item>
       <title>infrastructure</title>
-      <link>https://kyeett.github.io/tags/infrastructure/</link>
+      <link>https://magnuswahlstrand.github.io/tags/infrastructure/</link>
       <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/infrastructure/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/infrastructure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>terraform</title>
-      <link>https://kyeett.github.io/tags/terraform/</link>
+      <link>https://magnuswahlstrand.github.io/tags/terraform/</link>
       <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/terraform/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/terraform/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gorm</title>
-      <link>https://kyeett.github.io/tags/gorm/</link>
+      <link>https://magnuswahlstrand.github.io/tags/gorm/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/gorm/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/gorm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>orm</title>
-      <link>https://kyeett.github.io/tags/orm/</link>
+      <link>https://magnuswahlstrand.github.io/tags/orm/</link>
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/orm/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/orm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bootstrap</title>
-      <link>https://kyeett.github.io/tags/bootstrap/</link>
+      <link>https://magnuswahlstrand.github.io/tags/bootstrap/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/bootstrap/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/bootstrap/</guid>
       <description></description>
     </item>
     
     <item>
       <title>javascript</title>
-      <link>https://kyeett.github.io/tags/javascript/</link>
+      <link>https://magnuswahlstrand.github.io/tags/javascript/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/javascript/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>jquery</title>
-      <link>https://kyeett.github.io/tags/jquery/</link>
+      <link>https://magnuswahlstrand.github.io/tags/jquery/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/jquery/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/jquery/</guid>
       <description></description>
     </item>
     
     <item>
       <title>web</title>
-      <link>https://kyeett.github.io/tags/web/</link>
+      <link>https://magnuswahlstrand.github.io/tags/web/</link>
       <pubDate>Sun, 12 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/web/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/web/</guid>
       <description></description>
     </item>
     
     <item>
       <title>heroku</title>
-      <link>https://kyeett.github.io/tags/heroku/</link>
+      <link>https://magnuswahlstrand.github.io/tags/heroku/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/heroku/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/heroku/</guid>
       <description></description>
     </item>
     
     <item>
       <title>security</title>
-      <link>https://kyeett.github.io/tags/security/</link>
+      <link>https://magnuswahlstrand.github.io/tags/security/</link>
       <pubDate>Fri, 29 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/security/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>websocket</title>
-      <link>https://kyeett.github.io/tags/websocket/</link>
+      <link>https://magnuswahlstrand.github.io/tags/websocket/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/websocket/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/websocket/</guid>
       <description></description>
     </item>
     
     <item>
       <title>android</title>
-      <link>https://kyeett.github.io/tags/android/</link>
+      <link>https://magnuswahlstrand.github.io/tags/android/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/android/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>mobile</title>
-      <link>https://kyeett.github.io/tags/mobile/</link>
+      <link>https://magnuswahlstrand.github.io/tags/mobile/</link>
       <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/mobile/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/mobile/</guid>
       <description></description>
     </item>
     
     <item>
       <title>fcm</title>
-      <link>https://kyeett.github.io/tags/fcm/</link>
+      <link>https://magnuswahlstrand.github.io/tags/fcm/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/fcm/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/fcm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>notifications</title>
-      <link>https://kyeett.github.io/tags/notifications/</link>
+      <link>https://magnuswahlstrand.github.io/tags/notifications/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/notifications/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/notifications/</guid>
       <description></description>
     </item>
     
     <item>
       <title>push notifications</title>
-      <link>https://kyeett.github.io/tags/push-notifications/</link>
+      <link>https://magnuswahlstrand.github.io/tags/push-notifications/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/push-notifications/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/push-notifications/</guid>
       <description></description>
     </item>
     
     <item>
       <title>firebase</title>
-      <link>https://kyeett.github.io/tags/firebase/</link>
+      <link>https://magnuswahlstrand.github.io/tags/firebase/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/firebase/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/firebase/</guid>
       <description></description>
     </item>
     
     <item>
       <title>2d graphics</title>
-      <link>https://kyeett.github.io/tags/2d-graphics/</link>
+      <link>https://magnuswahlstrand.github.io/tags/2d-graphics/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/2d-graphics/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/2d-graphics/</guid>
       <description></description>
     </item>
     
     <item>
       <title>animation</title>
-      <link>https://kyeett.github.io/tags/animation/</link>
+      <link>https://magnuswahlstrand.github.io/tags/animation/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/animation/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/animation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ebiten</title>
-      <link>https://kyeett.github.io/tags/ebiten/</link>
+      <link>https://magnuswahlstrand.github.io/tags/ebiten/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/ebiten/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/ebiten/</guid>
       <description></description>
     </item>
     
     <item>
       <title>gamedev</title>
-      <link>https://kyeett.github.io/tags/gamedev/</link>
+      <link>https://magnuswahlstrand.github.io/tags/gamedev/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://kyeett.github.io/tags/gamedev/</guid>
+      <guid>https://magnuswahlstrand.github.io/tags/gamedev/</guid>
       <description></description>
     </item>
     
