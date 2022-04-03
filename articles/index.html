@@ -223,6 +223,112 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+    <a href="https://magnuswahlstrand.github.io/articles/2022-03-07-one-to-many/">
+        <h2 class="post-title">SQLALchemy: One to many-relationships</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on March 7, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1254&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage.
+For Python, the most commonly used SQL library is <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. It is usually used as an Object–relational mapping (<a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">ORM</a>). While I have used Python in the past, I haven&rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.</p>
+        <a href="https://magnuswahlstrand.github.io/articles/2022-03-07-one-to-many/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://magnuswahlstrand.github.io/tags/python/">python</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/sqlalchemy/">sqlalchemy</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/psql/">psql</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/postgres/">postgres</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
+    <a href="https://magnuswahlstrand.github.io/articles/2022-02-27-audit-logs-in-postgres/">
+        <h2 class="post-title">Audit tables in Postgres</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on February 27, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;800&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>A while back I watched <a href="https://www.youtube.com/watch?v=j6ow-UemzBc">this video</a> (summary <a href="https://www.infoq.com/news/2018/07/bryzek-microservice-architecture/">here</a>) with Michael Bryzek (Flow.io, Gilt). He presented how they do <a href="https://en.wikipedia.org/wiki/Change_data_capture">Change Data Capture</a> (CDC) with PostgreSQL and DynamoDB. One goal with CDC is that changes to databases rows and tables can be propagated to other parts of the system. In microservices systems, this can be used to build read-projections, or just keep local caches of data.</p>
+<p><a href="https://www.postgresql.org/">Postgres</a> is one of my favorite databases to work with in production (and probably the one I most experience with), but I have little or experience working features such as PostgreSQL triggers and stored procedures. In this blog post, I explore how to use triggers to create a simple audit table in Postgres.</p>
+        <a href="https://magnuswahlstrand.github.io/articles/2022-02-27-audit-logs-in-postgres/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://magnuswahlstrand.github.io/tags/psql/">psql</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/postgres/">postgres</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/cdc/">cdc</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
     <a href="https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/">
         <h2 class="post-title">Running Google Pub/Sub locally</h2>
         
@@ -642,133 +748,6 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 
 </article>
           
-            <article class="post-preview">
-    <a href="https://magnuswahlstrand.github.io/articles/2019-10-06-notifications/">
-        <h2 class="post-title">Push Notifications pt.2</h2>
-        
-        <h3 class="post-subtitle">
-            Creating in-app notifications
-        </h3>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 6, 2019
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;560&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>In <a href="https://magnuswahlstrand.github.io/articles/2019-10-05-push-notifications/">Part 1</a> we learned how to send push notifications from <a href="https://console.firebase.google.com">Firebase Cloud Messaging console</a>. There are a number of improvements we can make:</p>
-<ul>
-<li><a href="#show-notification-in-foregrounded-app">Show notification when the app in in the foreground</a></li>
-<li><a href="#go-to-specific-view">Go to a specific view in the app when clicked</a></li>
-<li>Buttons directly in the notifications</li>
-<li>Keep the notification open while the app is open</li>
-</ul>
-<p>Let&rsquo;s get started!</p>
-        <a href="https://magnuswahlstrand.github.io/articles/2019-10-06-notifications/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://magnuswahlstrand.github.io/tags/android/">android</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/push-notifications/">push notifications</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/notifications/">notifications</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/mobile/">mobile</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/fcm/">fcm</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://magnuswahlstrand.github.io/articles/2019-10-05-push-notifications/">
-        <h2 class="post-title">Push Notifications pt.1</h2>
-        
-        <h3 class="post-subtitle">
-            Send your first push
-        </h3>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on October 5, 2019
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;668&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>I am currently learning how to create Android apps using Kotlin, and today I exploring how to send push notifications!</p>
-<p>The goal of this guide is to build a simple Android app and send a &ldquo;Hello, world&rdquo; push notification. The end result will look something like this</p>
-<p><img src="/img/push-notifications/1_hello_push.png" alt="End result"></p>
-        <a href="https://magnuswahlstrand.github.io/articles/2019-10-05-push-notifications/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://magnuswahlstrand.github.io/tags/android/">android</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/push-notifications/">push notifications</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/firebase/">firebase</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/mobile/">mobile</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/fcm/">fcm</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -827,7 +806,7 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2021
+            2022
           
 
           

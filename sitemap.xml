@@ -3,7 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://magnuswahlstrand.github.io/articles/</loc>
-    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/postgres/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/psql/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/python/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/sqlalchemy/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/articles/2022-03-07-one-to-many/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/</loc>
+    <lastmod>2022-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/articles/2022-02-27-audit-logs-in-postgres/</loc>
+    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/cdc/</loc>
+    <lastmod>2022-02-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/gcp/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
@@ -17,19 +44,10 @@
     <loc>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</loc>
     <lastmod>2021-07-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://magnuswahlstrand.github.io/tags/</loc>
-    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://magnuswahlstrand.github.io/</loc>
-    <lastmod>2021-07-11T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://magnuswahlstrand.github.io/articles/2021-03-12-acid-transactions/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/db/</loc>
-    <lastmod>2021-03-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://magnuswahlstrand.github.io/tags/postgres/</loc>
     <lastmod>2021-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/theory/</loc>

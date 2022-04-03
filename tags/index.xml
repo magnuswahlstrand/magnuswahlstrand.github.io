@@ -5,7 +5,52 @@
     <link>https://magnuswahlstrand.github.io/tags/</link>
     <description>Recent content in Tags on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postgres</title>
+      <link>https://magnuswahlstrand.github.io/tags/postgres/</link>
+      <pubDate>Mon, 07 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>psql</title>
+      <link>https://magnuswahlstrand.github.io/tags/psql/</link>
+      <pubDate>Mon, 07 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/psql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://magnuswahlstrand.github.io/tags/python/</link>
+      <pubDate>Mon, 07 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlalchemy</title>
+      <link>https://magnuswahlstrand.github.io/tags/sqlalchemy/</link>
+      <pubDate>Mon, 07 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/sqlalchemy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cdc</title>
+      <link>https://magnuswahlstrand.github.io/tags/cdc/</link>
+      <pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/cdc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>gcp</title>
       <link>https://magnuswahlstrand.github.io/tags/gcp/</link>
@@ -39,15 +84,6 @@
       <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/db/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgres</title>
-      <link>https://magnuswahlstrand.github.io/tags/postgres/</link>
-      <pubDate>Fri, 12 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/postgres/</guid>
       <description></description>
     </item>
     
