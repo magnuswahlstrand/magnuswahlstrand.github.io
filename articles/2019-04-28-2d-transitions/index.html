@@ -92,7 +92,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -290,34 +290,34 @@ if (!doNotTrack) {
 <li>The images <code>[]byte</code> are then accessed as <code>shovelknightresources.Asset(&quot;scene_1.png&quot;)</code></li>
 <li>Use my utility package <a href="https://github.com/magnuswahlstrand/ebitendrawutil">magnuswahlstrand/ebitendrawutil</a> to simplify the loading of the images</li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-    <span style="color:#998;font-style:italic">// Load resources
-</span><span style="color:#998;font-style:italic"></span>   scene1Data, err <span style="color:#000;font-weight:bold">:=</span> shovelknightresources.<span style="color:#900;font-weight:bold">Asset</span>(<span style="color:#d14">&#34;scene_1.png&#34;</span>)
-   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
-   }
-   scoreboardData, err <span style="color:#000;font-weight:bold">:=</span> shovelknightresources.<span style="color:#900;font-weight:bold">Asset</span>(<span style="color:#d14">&#34;scoreboard.png&#34;</span>)
-   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
-   }
-   scene1 = ebitendrawutil.<span style="color:#900;font-weight:bold">ImageFromBytes</span>(scene1Data)
-   scoreboard = ebitendrawutil.<span style="color:#900;font-weight:bold">ImageFromBytes</span>(scoreboardData)
-
-   <span style="color:#998;font-style:italic">// Start the Ebiten update loop
-</span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> ebiten.<span style="color:#900;font-weight:bold">Run</span>(update, screenWidth, screenHeight, <span style="color:#099">1</span>, <span style="color:#d14">&#34;my application&#34;</span>); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
-   }
-}
-</code></pre></div><p>The following function draws the two images to the screen (<a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-1/transitions/main.go">full code here</a>).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
-   <span style="color:#998;font-style:italic">// Draw the scenes
-</span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-
-   <span style="color:#998;font-style:italic">// Draw scoreboard
-</span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scoreboard, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><img src="/img/2d-transitions/static.png" alt="Static scene"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">// Load resources
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   scene1Data, err <span style="color:#000;font-weight:bold">:=</span> shovelknightresources.<span style="color:#900;font-weight:bold">Asset</span>(<span style="color:#d14">&#34;scene_1.png&#34;</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   scoreboardData, err <span style="color:#000;font-weight:bold">:=</span> shovelknightresources.<span style="color:#900;font-weight:bold">Asset</span>(<span style="color:#d14">&#34;scoreboard.png&#34;</span>)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   scene1 = ebitendrawutil.<span style="color:#900;font-weight:bold">ImageFromBytes</span>(scene1Data)
+</span></span><span style="display:flex;"><span>   scoreboard = ebitendrawutil.<span style="color:#900;font-weight:bold">ImageFromBytes</span>(scoreboardData)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Start the Ebiten update loop
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> ebiten.<span style="color:#900;font-weight:bold">Run</span>(update, screenWidth, screenHeight, <span style="color:#099">1</span>, <span style="color:#d14">&#34;my application&#34;</span>); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The following function draws the two images to the screen (<a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-1/transitions/main.go">full code here</a>).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw the scenes
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw scoreboard
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scoreboard, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/img/2d-transitions/static.png" alt="Static scene"></p>
 <h2 id="growing-rectangle">Growing Rectangle</h2>
 <p>Let&rsquo;s start with the easiest transition: <em>a rectangle that expands from the center</em></p>
 <p>The function below takes care of drawing and growing a rectangle from width and height = 0 to full size of <code>maxRect</code>. It uses a few utility strucs and functions from Peter Hellberg&rsquo;s <a href="https://godoc.org/github.com/peterhellberg/gfx">gfx</a> package. Specifically:</p>
@@ -327,98 +327,98 @@ if (!doNotTrack) {
 <li><code>gfx.Lerp/Vec.Lerp</code> - <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a> between two values or vectors</li>
 </ul>
 <p>Note: <em><code>ebitenutil.DrawRect</code> is really intended for debugging</em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionGrowingRect draws a rectangle that grows from the center to fill maxRect as t goes from 0 to 1
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
-   v <span style="color:#000;font-weight:bold">:=</span> maxRect.<span style="color:#900;font-weight:bold">Center</span>().<span style="color:#900;font-weight:bold">Lerp</span>(maxRect.Min, t)
-   w <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">W</span>(), t)
-   h <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">H</span>(), t)
-   ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, v.X, v.Y, w, h, clr)
-}
-</code></pre></div><p>Then we add the following to our update function. <code>maxRect</code> is the rectangle we want to cover over time.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
-   <span style="color:#000;font-weight:bold">...</span>
-   <span style="color:#998;font-style:italic">// Draw transition
-</span><span style="color:#998;font-style:italic"></span>   scoreboardHeight <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">44.0</span>
-   maxRect <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">R</span>(<span style="color:#099">0</span>, scoreboardHeight, screenWidth, screenHeight)
-   <span style="color:#000;font-weight:bold">switch</span> step {
-   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
-      <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, t, colornames.Black)
-   }
-   <span style="color:#000;font-weight:bold">...</span>
-   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
-      t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">0.01</span>
-   }
-   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><em>code for part two &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-2/transitions/">here</a></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// TransitionGrowingRect draws a rectangle that grows from the center to fill maxRect as t goes from 0 to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
+</span></span><span style="display:flex;"><span>   v <span style="color:#000;font-weight:bold">:=</span> maxRect.<span style="color:#900;font-weight:bold">Center</span>().<span style="color:#900;font-weight:bold">Lerp</span>(maxRect.Min, t)
+</span></span><span style="display:flex;"><span>   w <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">W</span>(), t)
+</span></span><span style="display:flex;"><span>   h <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, maxRect.<span style="color:#900;font-weight:bold">H</span>(), t)
+</span></span><span style="display:flex;"><span>   ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, v.X, v.Y, w, h, clr)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Then we add the following to our update function. <code>maxRect</code> is the rectangle we want to cover over time.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw transition
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   scoreboardHeight <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">44.0</span>
+</span></span><span style="display:flex;"><span>   maxRect <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">R</span>(<span style="color:#099">0</span>, scoreboardHeight, screenWidth, screenHeight)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">switch</span> step {
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, t, colornames.Black)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
+</span></span><span style="display:flex;"><span>      t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">0.01</span>
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>code for part two &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-2/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-rect.gif" alt="Growing rectangle"></p>
 <h2 id="shrinking-rectangle">Shrinking Rectangle</h2>
 <p>The growing rectangle is best as a transition <strong><em>out</em></strong> of a scene. To transition <strong><em>in</em></strong> to a scene, we want a shrinking rectangle. Lucky for us, this is trivial to implement. We just need to change the time-constant input from <code>t</code> to <code>1-t</code>. It is questionable if this should even be it&rsquo;s own function, but here it is:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
-   <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
-}
-</code></pre></div><p>Now we can transition for real between scenes. I have added a second scene <code>&quot;scene_2.png&quot;</code> and made the <code>update</code> function toggle between them.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingRect</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
+</span></span><span style="display:flex;"><span>   <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now we can transition for real between scenes. I have added a second scene <code>&quot;scene_2.png&quot;</code> and made the <code>update</code> function toggle between them.</p>
 <p><strong>Note:</strong> <em>I have put <code>TransitionShrinkingRect</code> before <code>TransitionGrowingRect</code> in the second switch below</em>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
-   <span style="color:#998;font-style:italic">// Draw the scenes
-</span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">switch</span> n {
-   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
-      screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">1</span>: <span style="color:#998;font-style:italic">// NEW
-</span><span style="color:#998;font-style:italic"></span>      screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene2, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-   }
-
-   <span style="color:#998;font-style:italic">// Draw transition
-</span><span style="color:#998;font-style:italic"></span>   scoreboardHeight <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">44.0</span>
-   maxRect <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">R</span>(<span style="color:#099">0</span>, scoreboardHeight, screenWidth, screenHeight)
-   <span style="color:#000;font-weight:bold">switch</span> <span style="color:#0086b3">int</span>(t) {
-   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
-      <span style="color:#900;font-weight:bold">TransitionShrinkingRect</span>(screen, maxRect, t, colornames.Black)
-   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">1</span>:
-      offset <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">1.0</span> <span style="color:#998;font-style:italic">// NEW
-</span><span style="color:#998;font-style:italic"></span>      <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, t<span style="color:#000;font-weight:bold">-</span>offset, colornames.Black)
-   }
-
-   <span style="color:#998;font-style:italic">// Draw scoreboard
-</span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scoreboard, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-
-   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">0.01</span>
-   <span style="color:#000;font-weight:bold">if</span> t <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">2</span> { <span style="color:#998;font-style:italic">// UPDATED
-</span><span style="color:#998;font-style:italic"></span>      t = <span style="color:#099">0</span>
-      n = <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> n
-   }
-   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><em>code for part three &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-3/transitions/">here</a></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw the scenes
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   <span style="color:#000;font-weight:bold">switch</span> n {
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>      screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">1</span>: <span style="color:#998;font-style:italic">// NEW
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>      screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene2, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw transition
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   scoreboardHeight <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">44.0</span>
+</span></span><span style="display:flex;"><span>   maxRect <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">R</span>(<span style="color:#099">0</span>, scoreboardHeight, screenWidth, screenHeight)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">switch</span> <span style="color:#0086b3">int</span>(t) {
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">0</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#900;font-weight:bold">TransitionShrinkingRect</span>(screen, maxRect, t, colornames.Black)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">case</span> <span style="color:#099">1</span>:
+</span></span><span style="display:flex;"><span>      offset <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">1.0</span> <span style="color:#998;font-style:italic">// NEW
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>      <span style="color:#900;font-weight:bold">TransitionGrowingRect</span>(screen, maxRect, t<span style="color:#000;font-weight:bold">-</span>offset, colornames.Black)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw scoreboard
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(scoreboard, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">0.01</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> t <span style="color:#000;font-weight:bold">&gt;=</span> <span style="color:#099">2</span> { <span style="color:#998;font-style:italic">// UPDATED
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>      t = <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>      n = <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">-</span> n
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>code for part three &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-3/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-shrink-rect.gif" alt="Growing-Shrinking rectangle"></p>
 <h2 id="shrinkinggrowing-frame">Shrinking/Growing Frame</h2>
 <p>Neither of the effects in the previous sections <em>are actually in</em> Shovel Knight, as far as I know. What we need is a growing/shinking frame!
 For this I use my own util-package <a href="https://github.com/magnuswahlstrand/ebitendrawutil">magnuswahlstrand/ebitendrawutil</a> and especially <code>DrawRect()</code>. This draws a rectangle with a border and a transparent fill.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionGrowingBorder draws a border that expands inwards until it fills maxRect
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionGrowingBorder</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
-   min <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">MathMin</span>(maxRect.<span style="color:#900;font-weight:bold">W</span>(), maxRect.<span style="color:#900;font-weight:bold">H</span>())
-   ebitendrawutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, maxRect, colornames.Black, <span style="color:#0086b3">int</span>(t<span style="color:#000;font-weight:bold">*</span>min<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2.0</span>))
-}
-
-<span style="color:#998;font-style:italic">// TransitionShrinkingBorder is TransitionGrowingBorder run backwards
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingBorder</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
-   <span style="color:#900;font-weight:bold">TransitionGrowingBorder</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
-}
-</code></pre></div><p><em>code for part four &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-4/transitions/">here</a></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// TransitionGrowingBorder draws a border that expands inwards until it fills maxRect
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionGrowingBorder</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
+</span></span><span style="display:flex;"><span>   min <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">MathMin</span>(maxRect.<span style="color:#900;font-weight:bold">W</span>(), maxRect.<span style="color:#900;font-weight:bold">H</span>())
+</span></span><span style="display:flex;"><span>   ebitendrawutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, maxRect, colornames.Black, <span style="color:#0086b3">int</span>(t<span style="color:#000;font-weight:bold">*</span>min<span style="color:#000;font-weight:bold">/</span><span style="color:#099">2.0</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// TransitionShrinkingBorder is TransitionGrowingBorder run backwards
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionShrinkingBorder</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
+</span></span><span style="display:flex;"><span>   <span style="color:#900;font-weight:bold">TransitionGrowingBorder</span>(screen, maxRect, <span style="color:#099">1</span><span style="color:#000;font-weight:bold">-</span>t, clr)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>code for part four &gt; <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-4/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-shrink-rect-frame.gif" alt="Growing-Shrinking rectangle and frame"></p>
 <h2 id="blinds">Blinds</h2>
 <p>Last example I will add is a blinds transition, where several rectangles animates up to fill the target rectangle.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// TransitionBlinds draws n rectangles that expands up to cover maxRect  as t goes from 0 to 1
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionBlinds</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, nRectangles <span style="color:#458;font-weight:bold">int</span>, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
-   blindMaxHeight <span style="color:#000;font-weight:bold">:=</span> maxRect.<span style="color:#900;font-weight:bold">H</span>() <span style="color:#000;font-weight:bold">/</span> <span style="color:#0086b3">float64</span>(nRectangles)
-   <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">0</span>; i &lt; nRectangles; i<span style="color:#000;font-weight:bold">++</span> {
-      x <span style="color:#000;font-weight:bold">:=</span> maxRect.Min.X
-      y <span style="color:#000;font-weight:bold">:=</span> maxRect.Min.Y <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">float64</span>(i)<span style="color:#000;font-weight:bold">*</span>blindMaxHeight
-      height <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, blindMaxHeight, t)
-      ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, x, y, maxRect.<span style="color:#900;font-weight:bold">W</span>(), height, clr)
-   }
-}
-</code></pre></div><p>Here is the end result. <em>The final code &gt; <a href="https://github.com/magnuswahlstrand/animex/tree/master/transitions">here</a></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// TransitionBlinds draws n rectangles that expands up to cover maxRect  as t goes from 0 to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TransitionBlinds</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, maxRect gfx.Rect, nRectangles <span style="color:#458;font-weight:bold">int</span>, t <span style="color:#458;font-weight:bold">float64</span>, clr color.Color) {
+</span></span><span style="display:flex;"><span>   blindMaxHeight <span style="color:#000;font-weight:bold">:=</span> maxRect.<span style="color:#900;font-weight:bold">H</span>() <span style="color:#000;font-weight:bold">/</span> <span style="color:#0086b3">float64</span>(nRectangles)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">for</span> i <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">0</span>; i &lt; nRectangles; i<span style="color:#000;font-weight:bold">++</span> {
+</span></span><span style="display:flex;"><span>      x <span style="color:#000;font-weight:bold">:=</span> maxRect.Min.X
+</span></span><span style="display:flex;"><span>      y <span style="color:#000;font-weight:bold">:=</span> maxRect.Min.Y <span style="color:#000;font-weight:bold">+</span> <span style="color:#0086b3">float64</span>(i)<span style="color:#000;font-weight:bold">*</span>blindMaxHeight
+</span></span><span style="display:flex;"><span>      height <span style="color:#000;font-weight:bold">:=</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">0</span>, blindMaxHeight, t)
+</span></span><span style="display:flex;"><span>      ebitenutil.<span style="color:#900;font-weight:bold">DrawRect</span>(screen, x, y, maxRect.<span style="color:#900;font-weight:bold">W</span>(), height, clr)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here is the end result. <em>The final code &gt; <a href="https://github.com/magnuswahlstrand/animex/tree/master/transitions">here</a></em></p>
 <p><img src="/img/2d-transitions/final.gif" alt="End result"></p>
 <hr>
 
@@ -505,6 +505,8 @@ For this I use my own util-package <a href="https://github.com/magnuswahlstrand/
                   <ul>
                 
                 
+                    <li><a href="/hidden/2022-04-11-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
                     <li><a href="/articles/2021-07-11-testing-pubsub-locally/">Running Google Pub/Sub locally</a></li>
                 
                     <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
@@ -512,8 +514,6 @@ For this I use my own util-package <a href="https://github.com/magnuswahlstrand/
                     <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
                 
                     <li><a href="/fragments/2021-03-06-using-an-orm-with-go/">Using an ORM with Go</a></li>
-                
-                    <li><a href="/articles/2019-10-19-heroku-websockets/">Websockets on Heroku</a></li>
                 
               </ul>
 
@@ -595,7 +595,7 @@ For this I use my own util-package <a href="https://github.com/magnuswahlstrand/
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

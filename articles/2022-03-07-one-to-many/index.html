@@ -60,7 +60,7 @@ For Python, the most commonly used SQL library is SQLAlchemy. It is usually used
   "headline": "SQLALchemy: One to many-relationships",
   "description" : "When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage. For Python, the most commonly used SQL library is SQLAlchemy. It is usually used as an Object–relational mapping (ORM). While I have used Python in the past, I haven\u0026rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.\n",
   "inLanguage" : "en",
-  "wordCount":  1254 ,
+  "wordCount":  1244 ,
   "datePublished" : "2022-03-07T00:00:00",
   "dateModified" : "2022-03-07T00:00:00",
   "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
@@ -94,7 +94,7 @@ For Python, the most commonly used SQL library is SQLAlchemy. It is usually used
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -288,33 +288,33 @@ For Python, the most commonly used SQL library is <a href="https://www.sqlalchem
 </ul>
 <p>Let&rsquo;s get started.</p>
 <h4 id="tables">Tables</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy</span> <span style="color:#000;font-weight:bold">import</span> Column, Integer, String, ForeignKey
-<span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy.orm</span> <span style="color:#000;font-weight:bold">import</span> declarative_base, relationship
-
-Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
-
-
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Company</span>(Base):
-    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;companies&#39;</span>
-    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>)
-    employees <span style="color:#000;font-weight:bold">=</span> relationship(<span style="color:#d14">&#34;Employee&#34;</span>)
-
-
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Employee</span>(Base):
-    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;employees&#39;</span>
-    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#999">True</span>)
-    name <span style="color:#000;font-weight:bold">=</span> Column(String)
-    company_id <span style="color:#000;font-weight:bold">=</span> Column(Integer, ForeignKey(<span style="color:#d14">&#39;companies.id&#39;</span>))
-</code></pre></div><p>We have two models <code>Company</code> and <code>Employee</code>. They have a one to many-relationship.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy</span> <span style="color:#000;font-weight:bold">import</span> Column, Integer, String, ForeignKey
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy.orm</span> <span style="color:#000;font-weight:bold">import</span> declarative_base, relationship
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Company</span>(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;companies&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    employees <span style="color:#000;font-weight:bold">=</span> relationship(<span style="color:#d14">&#34;Employee&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Employee</span>(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;employees&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    name <span style="color:#000;font-weight:bold">=</span> Column(String)
+</span></span><span style="display:flex;"><span>    company_id <span style="color:#000;font-weight:bold">=</span> Column(Integer, ForeignKey(<span style="color:#d14">&#39;companies.id&#39;</span>))
+</span></span></code></pre></div><p>We have two models <code>Company</code> and <code>Employee</code>. They have a one to many-relationship.</p>
 <p>The following code inserts a company with two employees. The <code>relationship(&quot;Employee&quot;)</code> on the <code>Company</code> model ensure that the <strong>employee</strong>-table will be updated as well.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    company <span style="color:#000;font-weight:bold">=</span> Company()
-    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> [
-        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Magnus&#39;</span>),
-        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;John&#39;</span>)
-    ]
-    session<span style="color:#000;font-weight:bold">.</span>add(company)
-</code></pre></div><h4 id="result">Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> Company()
+</span></span><span style="display:flex;"><span>    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> [
+</span></span><span style="display:flex;"><span>        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Magnus&#39;</span>),
+</span></span><span style="display:flex;"><span>        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;John&#39;</span>)
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(company)
+</span></span></code></pre></div><h4 id="result">Result</h4>
 <p><strong>company</strong>-table</p>
 <table>
 <thead>
@@ -352,10 +352,10 @@ Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
 </table>
 <h3 id="cascading-deletes">Cascading deletes</h3>
 <p>If we are a ruthless manager, we can also do updates like firing all our employees (managers are stored in a separate table).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
-    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> []
-</code></pre></div><p>Unfortunately, the ruthless manager&rsquo;s upper management can still see the traces of the employees in the dabase.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> []
+</span></span></code></pre></div><p>Unfortunately, the ruthless manager&rsquo;s upper management can still see the traces of the employees in the dabase.</p>
 <p><strong>employees</strong>-table</p>
 <table>
 <thead>
@@ -379,12 +379,12 @@ Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
 </tbody>
 </table>
 <p>If we want that these entries should be removed from that table when they are removed from the parent table, we need to change the <code>relationship()</code></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">  class Company(Base):
-      __tablename__ = &#39;companies&#39;
-      id = Column(Integer, primary_key=True)
-<span style="color:#000;background-color:#fdd">--    employees = relationship(&#34;Employee&#34;)
-</span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">++    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
-</span></code></pre></div><p>Now, if we run our code again, everything looks nice and clean.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>  class Company(Base):
+</span></span><span style="display:flex;"><span>      __tablename__ = &#39;companies&#39;
+</span></span><span style="display:flex;"><span>      id = Column(Integer, primary_key=True)
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">--    employees = relationship(&#34;Employee&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">++    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
+</span></span></span></code></pre></div><p>Now, if we run our code again, everything looks nice and clean.</p>
 <p><strong>employees</strong>-table</p>
 <table>
 <thead>
@@ -398,78 +398,78 @@ Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
 <p><em><strong>Note:</strong> The employees will be deleted any time the association between them and a company is lost, i.e. also if the company row itself is deleted.</em></p>
 <h3 id="back-propagation">Back propagation</h3>
 <p>The last requirement from the list is back propagation. If a child entity is added to its table, will it be visible when the parent is queried?</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-    
-<span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has the following employees:&#34;</span>)
-    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees:
-        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
-</code></pre></div><p><strong>Output</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Company <span style="color:#099">1</span> has the following employees:
-- Magnus
-- John
-- Lisa
-</code></pre></div><h3 id="relationship-loading-techniques">Relationship loading techniques</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has the following employees:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees:
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has the following employees:
+</span></span><span style="display:flex;"><span>- Magnus
+</span></span><span style="display:flex;"><span>- John
+</span></span><span style="display:flex;"><span>- Lisa
+</span></span></code></pre></div><h3 id="relationship-loading-techniques">Relationship loading techniques</h3>
 <p>In SQLAlchemy there are a few gotchas around how relationships are loaded. While I think in many scenarios should avoid complicated relationship updating technique (and if needed, should be covered by tests), it is worth knowing some things about it.</p>
 <h4 id="example-1-lazy-loading-default">Example 1: Lazy loading (default)</h4>
 <p>In the scope of a single session, we can perform both the insert, and the listing of employees. This will work, because the <code>company.employees</code> is actually loaded lazily when it is first used.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has the following employees:&#34;</span>)
-    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees: <span style="color:#998;font-style:italic"># </span>
-        <span style="color:#000;font-weight:bold">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
-</code></pre></div><p>This can be observed by setting <code>echo=True</code> on the engine, like so <code>engine = create_engine(url, echo=True)</code>, and running the script again.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">Company 1 has the following employees:
-<span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine SELECT employees.id AS employees_id, employees.name AS employees_name, employees.company_id AS employees_company_id
-</span><span style="color:#000;background-color:#dfd">+FROM employees
-</span><span style="color:#000;background-color:#dfd">+WHERE %(param_1)s = employees.company_id
-</span><span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {&#39;param_1&#39;: 1}
-</span><span style="color:#000;background-color:#dfd"></span>\- Magnus
-\- John
-\- Lisa
-</code></pre></div><p>As you can see, SQLAlchemy will do an additional trip to the DB when looking up the company employees. In fact, <code>company.employees</code> will only be loaded <strong>once per session</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has the following employees:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees: <span style="color:#998;font-style:italic"># </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
+</span></span></code></pre></div><p>This can be observed by setting <code>echo=True</code> on the engine, like so <code>engine = create_engine(url, echo=True)</code>, and running the script again.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>Company 1 has the following employees:
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine SELECT employees.id AS employees_id, employees.name AS employees_name, employees.company_id AS employees_company_id
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+FROM employees
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+WHERE %(param_1)s = employees.company_id
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {&#39;param_1&#39;: 1}
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>\- Magnus
+</span></span><span style="display:flex;"><span>\- John
+</span></span><span style="display:flex;"><span>\- Lisa
+</span></span></code></pre></div><p>As you can see, SQLAlchemy will do an additional trip to the DB when looking up the company employees. In fact, <code>company.employees</code> will only be loaded <strong>once per session</strong>.</p>
 <p>We can observe this by adding another employee after the first fetch employees is done:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    <span style="color:#998;font-style:italic"># Add an employee</span>
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has {len(company.employees)} employees&#34;</span>)
-
-    <span style="color:#998;font-style:italic"># Add another employee</span>
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has {len(company.employees)} employees&#34;</span>)
-</code></pre></div><p><strong>Output</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
-Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
-</code></pre></div><h4 id="example-2-eager-loading">Example 2: Eager loading</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add an employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add another employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
+</span></span><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
+</span></span></code></pre></div><h4 id="example-2-eager-loading">Example 2: Eager loading</h4>
 <p>We can run in to the same problem even earlier if we enable eager loading. Then SQL alchemy will load the relationship data directly when the parent is queried for, even if it is not used.
 This is typically done by the option lazy=&lsquo;joined&rsquo;.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">class Company(Base):
-    __tablename__ = &#39;companies&#39;
-    id = Column(Integer, primary_key=True)
-<span style="color:#000;background-color:#fdd">-    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
-</span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;, lazy=&#39;joined&#39;)
-</span></code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
-    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>) <span style="color:#998;font-style:italic"># Child data will be loaded here</span>
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has {len(company.employees)} employees&#34;</span>)
-
-    <span style="color:#998;font-style:italic"># Add another employee</span>
-    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
-    
-    <span style="color:#000;font-weight:bold">print</span>(f<span style="color:#d14">&#34;Company {company.id} has {len(company.employees)} employees&#34;</span>)
-</code></pre></div><p><strong>Output</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
-Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
-</code></pre></div><h3 id="so-what-can-we-do">So what can we do?</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>class Company(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ = &#39;companies&#39;
+</span></span><span style="display:flex;"><span>    id = Column(Integer, primary_key=True)
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">-    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;, lazy=&#39;joined&#39;)
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>) <span style="color:#998;font-style:italic"># Child data will be loaded here</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add another employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
+</span></span><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
+</span></span></code></pre></div><h3 id="so-what-can-we-do">So what can we do?</h3>
 <p>Both of these scenarios are unintuitive for me, and can certainly lead to bugs. SQLAlchemy has a few possible ways of handling proper back-propagation using <a href="https://docs.sqlalchemy.org/en/14/orm/backref.html">backref</a>. Exactly how <code>backref</code> works is also not intuitive, so I do not recommend using it without having a good understanding of SQLAlchemy.</p>
 <ul>
 <li>✅ Keep relationships as simple as possible</li>
@@ -613,6 +613,10 @@ Company <span style="color:#099">1</span> has <span style="color:#099">2</span> 
             </li>
           
           
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/" data-toggle="tooltip" data-placement="top" title="Excalidraw">Next Post &rarr;</a>
+            </li>
+          
         </ul>
       
 
@@ -679,7 +683,7 @@ Company <span style="color:#099">1</span> has <span style="color:#099">2</span> 
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

@@ -92,7 +92,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -343,94 +343,94 @@ if (!doNotTrack) {
 </div>
 
 <p>This code will only be called for API level 26 and above.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MainActivity</span> : AppCompatActivity() {
-
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">createNotificationChannel</span>() {
-        <span style="color:#000;font-weight:bold">if</span> (Build.VERSION.SDK_INT <span style="color:#000;font-weight:bold">&gt;=</span> Build.VERSION_CODES.O) {
-            <span style="color:#000;font-weight:bold">val</span> importance = NotificationManager.IMPORTANCE_HIGH
-            <span style="color:#000;font-weight:bold">val</span> channelID = <span style="color:#d14">&#34;Some channel ID&#34;</span>
-            <span style="color:#000;font-weight:bold">val</span> channelName = <span style="color:#d14">&#34;E-mail&#34;</span>
-            <span style="color:#000;font-weight:bold">val</span> channelDescription = <span style="color:#d14">&#34;Information about e-mail&#34;</span>
-            <span style="color:#000;font-weight:bold">val</span> channel = NotificationChannel(channelID, channelName, importance).apply {
-                description = channelDescription
-            }
-
-            <span style="color:#000;font-weight:bold">val</span> notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
-        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        createNotificationChannel()
-
-        <span style="color:#998;font-style:italic">// We will create the notification here next
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">..</span>.
-    }
-}
-</code></pre></div><p>More info here: <a href="https://developer.android.com/training/notify-user/channels">Android: notification channels</a>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MainActivity</span> : AppCompatActivity() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">createNotificationChannel</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">if</span> (Build.VERSION.SDK_INT <span style="color:#000;font-weight:bold">&gt;=</span> Build.VERSION_CODES.O) {
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> importance = NotificationManager.IMPORTANCE_HIGH
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> channelID = <span style="color:#d14">&#34;Some channel ID&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> channelName = <span style="color:#d14">&#34;E-mail&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> channelDescription = <span style="color:#d14">&#34;Information about e-mail&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> channel = NotificationChannel(channelID, channelName, importance).apply {
+</span></span><span style="display:flex;"><span>                description = channelDescription
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">val</span> notificationManager: NotificationManager =
+</span></span><span style="display:flex;"><span>                getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
+</span></span><span style="display:flex;"><span>            notificationManager.createNotificationChannel(channel)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
+</span></span><span style="display:flex;"><span>        setContentView(R.layout.activity_main)
+</span></span><span style="display:flex;"><span>        createNotificationChannel()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// We will create the notification here next
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">..</span>.
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>More info here: <a href="https://developer.android.com/training/notify-user/channels">Android: notification channels</a>.</p>
 <h3 id="creating-a-notification">Creating a notification</h3>
 <p>Now we can create a notification that is shown when the user opens the app</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
-        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        createNotificationChannel()
-
-        sendNotification()
-    }
-
-    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">sendNotification</span>() {
-        <span style="color:#998;font-style:italic">// Note: if Android API level is less than 26, the channelID will be ignored
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> notificationBuilder = NotificationCompat.Builder(<span style="color:#000;font-weight:bold">this</span>, channelID)
-            .setContentTitle(<span style="color:#d14">&#34;Hello Notification! </span><span style="color:#d14">\uD83D\uDC7B</span><span style="color:#d14">&#34;</span>)
-            .setContentText(<span style="color:#d14">&#34;This is the notification text </span><span style="color:#d14">\uD83D\uDC4F</span><span style="color:#d14">&#34;</span>)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-
-        <span style="color:#000;font-weight:bold">val</span> notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
-        notificationManager.notify(<span style="color:#099">1</span>, notificationBuilder.build())
-    }
-</code></pre></div><p>Now if we build the app:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
+</span></span><span style="display:flex;"><span>        setContentView(R.layout.activity_main)
+</span></span><span style="display:flex;"><span>        createNotificationChannel()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        sendNotification()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">sendNotification</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// Note: if Android API level is less than 26, the channelID will be ignored
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> notificationBuilder = NotificationCompat.Builder(<span style="color:#000;font-weight:bold">this</span>, channelID)
+</span></span><span style="display:flex;"><span>            .setContentTitle(<span style="color:#d14">&#34;Hello Notification! </span><span style="color:#d14">\uD83D\uDC7B</span><span style="color:#d14">&#34;</span>)
+</span></span><span style="display:flex;"><span>            .setContentText(<span style="color:#d14">&#34;This is the notification text </span><span style="color:#d14">\uD83D\uDC4F</span><span style="color:#d14">&#34;</span>)
+</span></span><span style="display:flex;"><span>            .setSmallIcon(R.drawable.ic_launcher_foreground)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">val</span> notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
+</span></span><span style="display:flex;"><span>        notificationManager.notify(<span style="color:#099">1</span>, notificationBuilder.build())
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Now if we build the app:</p>
 <p><img src="/img/push-notifications/2_notifications.jpg" alt="Successful push"></p>
 <h4 id="optional-add-a-button-that-will-trigger-the-notification">(Optional) Add a button that will trigger the notification</h4>
 <p><strong>activity_main.xml</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span>
-    <span style="color:#008080">xmlns:app=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
-    <span style="color:#008080">xmlns:tools=</span><span style="color:#d14">&#34;http://schemas.android.com/tools&#34;</span>
-    <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;match_parent&#34;</span>
-    <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;match_parent&#34;</span>
-    <span style="color:#008080">tools:context=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
-
-    <span style="color:#000080">&lt;TextView</span>
-        <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
-        <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
-        <span style="color:#008080">android:text=</span><span style="color:#d14">&#34;Hello World!&#34;</span>
-        <span style="color:#008080">app:layout_constraintBottom_toTopOf=</span><span style="color:#d14">&#34;@+id/notify_button&#34;</span>
-        <span style="color:#008080">app:layout_constraintLeft_toLeftOf=</span><span style="color:#d14">&#34;parent&#34;</span>
-        <span style="color:#008080">app:layout_constraintRight_toRightOf=</span><span style="color:#d14">&#34;parent&#34;</span>
-        <span style="color:#008080">app:layout_constraintTop_toTopOf=</span><span style="color:#d14">&#34;parent&#34;</span> <span style="color:#000080">/&gt;</span>
-
-    <span style="color:#998;font-style:italic">&lt;!-- Added --&gt;</span>
-    <span style="color:#000080">&lt;Button</span>
-        <span style="color:#008080">android:id=</span><span style="color:#d14">&#34;@+id/notify_button&#34;</span>
-        <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
-        <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
-        <span style="color:#008080">android:layout_marginBottom=</span><span style="color:#d14">&#34;280dp&#34;</span>
-        <span style="color:#008080">android:text=</span><span style="color:#d14">&#34;Notify!&#34;</span>
-        <span style="color:#008080">app:layout_constraintBottom_toBottomOf=</span><span style="color:#d14">&#34;parent&#34;</span>
-        <span style="color:#008080">app:layout_constraintEnd_toEndOf=</span><span style="color:#d14">&#34;parent&#34;</span>
-        <span style="color:#008080">app:layout_constraintStart_toStartOf=</span><span style="color:#d14">&#34;parent&#34;</span> <span style="color:#000080">/&gt;</span>
-
-<span style="color:#000080">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
-</code></pre></div><p><strong>ActivityMain.kt</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
-        <span style="color:#000;font-weight:bold">..</span>.
-        notify_button.setOnClickListener {
-            sendNotification()
-        }
-    }
-</code></pre></div><h3 id="code">Code</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;androidx.constraintlayout.widget.ConstraintLayout</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">xmlns:app=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">xmlns:tools=</span><span style="color:#d14">&#34;http://schemas.android.com/tools&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;match_parent&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">tools:context=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;TextView</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:text=</span><span style="color:#d14">&#34;Hello World!&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintBottom_toTopOf=</span><span style="color:#d14">&#34;@+id/notify_button&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintLeft_toLeftOf=</span><span style="color:#d14">&#34;parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintRight_toRightOf=</span><span style="color:#d14">&#34;parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintTop_toTopOf=</span><span style="color:#d14">&#34;parent&#34;</span> <span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">&lt;!-- Added --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;Button</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:id=</span><span style="color:#d14">&#34;@+id/notify_button&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:layout_width=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:layout_height=</span><span style="color:#d14">&#34;wrap_content&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:layout_marginBottom=</span><span style="color:#d14">&#34;280dp&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:text=</span><span style="color:#d14">&#34;Notify!&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintBottom_toBottomOf=</span><span style="color:#d14">&#34;parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintEnd_toEndOf=</span><span style="color:#d14">&#34;parent&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">app:layout_constraintStart_toStartOf=</span><span style="color:#d14">&#34;parent&#34;</span> <span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</span>
+</span></span></code></pre></div><p><strong>ActivityMain.kt</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">..</span>.
+</span></span><span style="display:flex;"><span>        notify_button.setOnClickListener {
+</span></span><span style="display:flex;"><span>            sendNotification()
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h3 id="code">Code</h3>
 <p><em>The code for the push notification is foreground mode is <a href="https://github.com/magnuswahlstrand/android-push-notifications/tree/foreground-mode">here</a>.</em></p>
 <h2 id="go-to-specific-view">Go to specific view</h2>
 <p>When the user clicks on a notification, the app will open with the main activity active. In many cases we want to go an activity that is related to the notification itself. For example, if we get a notification that our taxi has arrived, we could open a screen with that particular ride. We do this by passing an intent to the notification (more information <a href="https://developer.android.com/training/notify-user/build-notification.html#click">here</a>).</p>
@@ -438,23 +438,23 @@ if (!doNotTrack) {
 <li>Create a new Activity (<strong>File &gt; New &gt; Activity &gt; Empty Activity</strong>). For example, <strong>DetailsActivity</strong></li>
 <li>Create an <code>Intent</code> and add it to the notificationBuilder</li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">sendNotification</span>() {
-        <span style="color:#000;font-weight:bold">val</span> intent = Intent(<span style="color:#000;font-weight:bold">this</span>, DetailsActivity<span style="color:#000;font-weight:bold">::</span><span style="color:#000;font-weight:bold">class</span>.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        <span style="color:#000;font-weight:bold">val</span> pendingIntent: PendingIntent = PendingIntent.getActivity(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#099">0</span>, intent, <span style="color:#099">0</span>)
-
-
-        <span style="color:#998;font-style:italic">// Note: if Android API level is less than 26, the channelID will be ignored
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> notificationBuilder = NotificationCompat.Builder(<span style="color:#000;font-weight:bold">this</span>, channelID)
-            <span style="color:#000;font-weight:bold">..</span>.
-            .setContentIntent(pendingIntent)
-            .setAutoCancel(<span style="color:#000;font-weight:bold">true</span>)
-
-        <span style="color:#000;font-weight:bold">val</span> notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
-        notificationManager.notify(<span style="color:#099">1</span>, notificationBuilder.build())
-    }
-</code></pre></div><p>Set <code>setAutoCancel(true)</code> will make sure that the notification disappears when the user clicks it.
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">private</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">sendNotification</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">val</span> intent = Intent(<span style="color:#000;font-weight:bold">this</span>, DetailsActivity<span style="color:#000;font-weight:bold">::</span><span style="color:#000;font-weight:bold">class</span>.java).apply {
+</span></span><span style="display:flex;"><span>            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">val</span> pendingIntent: PendingIntent = PendingIntent.getActivity(<span style="color:#000;font-weight:bold">this</span>, <span style="color:#099">0</span>, intent, <span style="color:#099">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// Note: if Android API level is less than 26, the channelID will be ignored
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> notificationBuilder = NotificationCompat.Builder(<span style="color:#000;font-weight:bold">this</span>, channelID)
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">..</span>.
+</span></span><span style="display:flex;"><span>            .setContentIntent(pendingIntent)
+</span></span><span style="display:flex;"><span>            .setAutoCancel(<span style="color:#000;font-weight:bold">true</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">val</span> notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) <span style="color:#000;font-weight:bold">as</span> NotificationManager
+</span></span><span style="display:flex;"><span>        notificationManager.notify(<span style="color:#099">1</span>, notificationBuilder.build())
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>Set <code>setAutoCancel(true)</code> will make sure that the notification disappears when the user clicks it.
 Here is the result.</p>
 <p><img src="/img/push-notifications/2_specific_view.gif" alt="Go to specific view"></p>
 <h3 id="code-1">Code</h3>
@@ -631,7 +631,7 @@ Here is the result.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

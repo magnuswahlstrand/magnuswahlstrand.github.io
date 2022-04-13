@@ -95,7 +95,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -289,82 +289,82 @@ if (!doNotTrack) {
 </ul>
 <p>Then we can change the app icon by updating the AndroidManifest</p>
 <p><em><strong>AndroidManifest.xml</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;application</span>
-        <span style="color:#a61717;background-color:#e3d2d2">...</span>
-        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
-        <span style="color:#008080">android:roundIcon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
-        <span style="color:#a61717;background-color:#e3d2d2">...</span>
-        <span style="color:#000080">&gt;</span>
-    ...
-<span style="color:#000080">&lt;/application&gt;</span>
-</code></pre></div><p>And create the text for the shortcuts</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;application</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a61717;background-color:#e3d2d2">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:roundIcon=</span><span style="color:#d14">&#34;@drawable/ic_app_icon&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a61717;background-color:#e3d2d2">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/application&gt;</span>
+</span></span></code></pre></div><p>And create the text for the shortcuts</p>
 <p><em><strong>res/values/strings.xml</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;resources&gt;</span>
-    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;app_name&#34;</span><span style="color:#000080">&gt;</span>New App<span style="color:#000080">&lt;/string&gt;</span>
-    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>Charge<span style="color:#000080">&lt;/string&gt;</span>
-    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>Widgets<span style="color:#000080">&lt;/string&gt;</span>
-<span style="color:#000080">&lt;/resources&gt;</span>
-</code></pre></div><h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;resources&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;app_name&#34;</span><span style="color:#000080">&gt;</span>New App<span style="color:#000080">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>Charge<span style="color:#000080">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;string</span> <span style="color:#008080">name=</span><span style="color:#d14">&#34;widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>Widgets<span style="color:#000080">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/resources&gt;</span>
+</span></span></code></pre></div><h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
 <p>Once the setup is done, we can create the actual shortcuts. Add the following meta-data tag inside your <em><strong>AndroidManifest.xml</strong></em>, and create the corresponding <strong>res/xml/shortcuts.xml</strong> file.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">...
-<span style="color:#000080">&lt;activity</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
-    ...
-    <span style="color:#000080">&lt;meta-data</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;android.app.shortcuts&#34;</span>
-        <span style="color:#008080">android:resource=</span><span style="color:#d14">&#34;@xml/shortcuts&#34;</span> <span style="color:#000080">/&gt;</span>
-    ...
-<span style="color:#000080">&lt;/activity&gt;</span>
-</code></pre></div><p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;activity</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;.MainActivity&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;meta-data</span> <span style="color:#008080">android:name=</span><span style="color:#d14">&#34;android.app.shortcuts&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:resource=</span><span style="color:#d14">&#34;@xml/shortcuts&#34;</span> <span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/activity&gt;</span>
+</span></span></code></pre></div><p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
 <p><em><strong>res/xml/shortcuts.xml</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#000080">&lt;shortcuts</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#000080">&gt;</span>
-    <span style="color:#000080">&lt;shortcut</span>
-        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;show widgets&#34;</span>
-        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_widgets_shortcut&#34;</span>
-        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>
-        <span style="color:#000080">&lt;intent</span>
-            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
-            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
-            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
-            <span style="color:#000080">/&gt;</span>
-    <span style="color:#000080">&lt;/shortcut&gt;</span>
-
-    <span style="color:#000080">&lt;shortcut</span>
-        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;charge&#34;</span>
-        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_battery_shortcut&#34;</span>
-        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>
-        <span style="color:#000080">&lt;intent</span>
-            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
-            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
-            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
-            <span style="color:#000080">/&gt;</span>
-    <span style="color:#000080">&lt;/shortcut&gt;</span>
-<span style="color:#000080">&lt;/shortcuts&gt;</span>
-</code></pre></div><p>Finally, we update the text in the app based on which action was clicked:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#000080">&lt;shortcuts</span> <span style="color:#008080">xmlns:android=</span><span style="color:#d14">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;shortcut</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;show widgets&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_widgets_shortcut&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/widgets_shortcut&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000080">&lt;intent</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;/shortcut&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;shortcut</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:shortcutId=</span><span style="color:#d14">&#34;charge&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:icon=</span><span style="color:#d14">&#34;@drawable/ic_battery_shortcut&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">android:shortcutShortLabel=</span><span style="color:#d14">&#34;@string/charge_shortcut&#34;</span><span style="color:#000080">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000080">&lt;intent</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:action=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:targetPackage=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#008080">android:targetClass=</span><span style="color:#d14">&#34;cafe.gophers.myintenttutorial.MainActivity&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&lt;/shortcut&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000080">&lt;/shortcuts&gt;</span>
+</span></span></code></pre></div><p>Finally, we update the text in the app based on which action was clicked:</p>
 <p><em><strong>MainActivity.kt</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.myintenttutorial</span>
-
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">androidx.appcompat.app.AppCompatActivity</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">android.os.Bundle</span>
-<span style="color:#000;font-weight:bold">import</span> <span style="color:#555">kotlinx.android.synthetic.main.activity_main.*</span>
-
-<span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MainActivity</span> : AppCompatActivity() {
-
-    <span style="color:#000;font-weight:bold">val</span> CHARGE_BATTERY_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
-    <span style="color:#000;font-weight:bold">val</span> SHOW_WIDGETS_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
-
-    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
-        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        <span style="color:#998;font-style:italic">// Following code added
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> action: String? = intent<span style="color:#000;font-weight:bold">?.</span>action
-        text_view.text = <span style="color:#000;font-weight:bold">when</span> (action) {
-            CHARGE_BATTERY_ACTION <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Charging battery&#34;</span>
-            SHOW_WIDGETS_ACTION <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Showing some widgets&#34;</span>
-            <span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Main app&#34;</span>
-        }
-    }
-}
-</code></pre></div><p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data=&quot;content://cafe.gophers.myintenttutorial/?from=shortcut_charge&quot;</code></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> <span style="color:#555">cafe.gophers.myintenttutorial</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">androidx.appcompat.app.AppCompatActivity</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">android.os.Bundle</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#555">kotlinx.android.synthetic.main.activity_main.*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">MainActivity</span> : AppCompatActivity() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">val</span> CHARGE_BATTERY_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.Charge&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">val</span> SHOW_WIDGETS_ACTION = <span style="color:#d14">&#34;cafe.gophers.myintenttutorial.ShowWidgets&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">override</span> <span style="color:#000;font-weight:bold">fun</span> <span style="color:#900;font-weight:bold">onCreate</span>(savedInstanceState: Bundle?) {
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">super</span>.onCreate(savedInstanceState)
+</span></span><span style="display:flex;"><span>        setContentView(R.layout.activity_main)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#998;font-style:italic">// Following code added
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">val</span> action: String? = intent<span style="color:#000;font-weight:bold">?.</span>action
+</span></span><span style="display:flex;"><span>        text_view.text = <span style="color:#000;font-weight:bold">when</span> (action) {
+</span></span><span style="display:flex;"><span>            CHARGE_BATTERY_ACTION <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Charging battery&#34;</span>
+</span></span><span style="display:flex;"><span>            SHOW_WIDGETS_ACTION <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Showing some widgets&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">else</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#d14">&#34;Main app&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data=&quot;content://cafe.gophers.myintenttutorial/?from=shortcut_charge&quot;</code></em></p>
 <h2 id="end-result">End result</h2>
 <p>Here is the end result. By clicking on the app icon, we come to the main activity with the default text, and if we press and hold we can click one of the shortcuts we have defined.</p>
 <p><img src="/img/app-shortcuts/complete.gif" alt="End result"></p>
@@ -541,7 +541,7 @@ if (!doNotTrack) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

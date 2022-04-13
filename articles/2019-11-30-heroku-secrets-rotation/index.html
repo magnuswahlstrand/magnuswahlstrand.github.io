@@ -97,7 +97,7 @@ In this example, I have two services running on Heroku. The goal is that the API
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -281,51 +281,51 @@ if (!doNotTrack) {
 We will use the Heroku plugin <a href="https://elements.heroku.com/addons/securekey">securekey</a>.</p>
 <h2 id="creating-the-secret">Creating the secret</h2>
 <p>First, we need to add the <code>securekey</code> addon to our app.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#998;font-style:italic"># Add addon to app</span>
-&gt; heroku addons:create securekey:fortnightly -a service-1
-
-Creating securekey:fortnightly on ⬢ service-1... free
-Created securekey-solid-14332 as SECURE_KEY
-</code></pre></div><p>This does two things:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Add addon to app</span>
+</span></span><span style="display:flex;"><span>&gt; heroku addons:create securekey:fortnightly -a service-1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Creating securekey:fortnightly on ⬢ service-1... free
+</span></span><span style="display:flex;"><span>Created securekey-solid-14332 as SECURE_KEY
+</span></span></code></pre></div><p>This does two things:</p>
 <ol>
 <li>Add an instance of the <code>securekey</code> addon (named <code>securekey-solid-14332</code>)</li>
 <li>Create a config variable <code>SECRET_KEY</code>.</li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-<span style="color:#998;font-style:italic"># List secret in service #1</span>
-&gt; heroku config -a service-1 | grep SECURE_KEY
-
-SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
-</code></pre></div><h3 id="attaching-it-to-service-2">Attaching it to service #2</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># List secret in service #1</span>
+</span></span><span style="display:flex;"><span>&gt; heroku config -a service-1 | grep SECURE_KEY
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
+</span></span></code></pre></div><h3 id="attaching-it-to-service-2">Attaching it to service #2</h3>
 <p>We can attach this secret to <code>service-2</code> using the following command. Remember to use the addon instance name (in my case <code>securekey-solid-14332</code>). We can set the name of the variable using the flag  <code>--as SERVICE_ONE_SECURE</code>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; heroku addons:attach securekey-solid-14332 --as SERVICE_ONE_SECURE -a service-2
-
-Attaching securekey-solid-14332 as SERVICE_ONE_SECURE to ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>
-Setting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>, v3
-</code></pre></div><p>As you can see, both services now share the same key</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#998;font-style:italic"># List secret in service #2</span>
-&gt; heroku config -a service-2 | grep SERVICE_ONE_SECURE_KEY 
-
-SERVICE_ONE_SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
-</code></pre></div><h3 id="key-rotation">Key rotation</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; heroku addons:attach securekey-solid-14332 --as SERVICE_ONE_SECURE -a service-2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Attaching securekey-solid-14332 as SERVICE_ONE_SECURE to ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>Setting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>, v3
+</span></span></code></pre></div><p>As you can see, both services now share the same key</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># List secret in service #2</span>
+</span></span><span style="display:flex;"><span>&gt; heroku config -a service-2 | grep SERVICE_ONE_SECURE_KEY 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SERVICE_ONE_SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
+</span></span></code></pre></div><h3 id="key-rotation">Key rotation</h3>
 <p>In fact, key rotation is already enabled! <a href="https://elements.heroku.com/addons/securekey"><code>securekey</code></a> only has one plan, <em>Fortnightly</em>, so all we have to do is wait 2 weeks, and the key will be rotated for both services!</p>
 <h3 id="clean-up">Clean up</h3>
 <p>Clean up has to be done the reverse way.</p>
 <p>First in <code>service-2</code></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; heroku addons:remove securekey -a service-1 
-
-Detaching SERVICE_ONE_SECURE to securekey-solid-14332 from ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>
-Unsetting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>, v4
-</code></pre></div><p>Then in <code>service-1</code></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; heroku addons:detach securekey-solid-14332 -a service-2
- ▸    WARNING: Destructive Action
- ▸    This <span style="color:#0086b3">command</span> will affect the app service-1
- ▸    To proceed, <span style="color:#0086b3">type</span> service-1 or re-run this <span style="color:#0086b3">command</span> with
- ▸    --confirm service-1
-
-&gt; service-1
-Destroying securekey-solid-14332 on ⬢ service-1... <span style="color:#000;font-weight:bold">done</span>
-</code></pre></div><p><em><strong>Done!</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; heroku addons:remove securekey -a service-1 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Detaching SERVICE_ONE_SECURE to securekey-solid-14332 from ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>Unsetting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... <span style="color:#000;font-weight:bold">done</span>, v4
+</span></span></code></pre></div><p>Then in <code>service-1</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; heroku addons:detach securekey-solid-14332 -a service-2
+</span></span><span style="display:flex;"><span> ▸    WARNING: Destructive Action
+</span></span><span style="display:flex;"><span> ▸    This <span style="color:#0086b3">command</span> will affect the app service-1
+</span></span><span style="display:flex;"><span> ▸    To proceed, <span style="color:#0086b3">type</span> service-1 or re-run this <span style="color:#0086b3">command</span> with
+</span></span><span style="display:flex;"><span> ▸    --confirm service-1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; service-1
+</span></span><span style="display:flex;"><span>Destroying securekey-solid-14332 on ⬢ service-1... <span style="color:#000;font-weight:bold">done</span>
+</span></span></code></pre></div><p><em><strong>Done!</strong></em></p>
 <h2 id="bonus-graceful-key-rotation"><em>(Bonus) Graceful key rotation</em></h2>
 <p>They key generated above is actually two keys, separated by a comma.</p>
 <ul>
@@ -509,7 +509,7 @@ Destroying securekey-solid-14332 on ⬢ service-1... <span style="color:#000;fon
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

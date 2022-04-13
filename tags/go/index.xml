@@ -5,7 +5,22 @@
     <link>https://magnuswahlstrand.github.io/tags/go/</link>
     <description>Recent content in go on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 11 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tiny fullstack app</title>
+      <link>https://magnuswahlstrand.github.io/hidden/2022-04-11-react-fiber-mongo/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/hidden/2022-04-11-react-fiber-mongo/</guid>
+      <description>&lt;p&gt;In this post I will build a simple app using a combination of tools and libraries that I&amp;rsquo;m exploring.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;React&lt;/strong&gt; (&lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React-Query&lt;/a&gt;, &lt;a href=&#34;https://mantine.dev/&#34;&gt;Mantine&lt;/a&gt; for UI)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Go&lt;/strong&gt; (&lt;a href=&#34;https://github.com/gofiber/fiber&#34;&gt;Fiber&lt;/a&gt; for routing, &lt;a href=&#34;https://github.com/qiniu/qmgo&#34;&gt;Qmgo&lt;/a&gt; db-driver)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MongoDB&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The goal is to create a simple User List with basic filtering&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Running Google Pub/Sub locally</title>
       <link>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</link>

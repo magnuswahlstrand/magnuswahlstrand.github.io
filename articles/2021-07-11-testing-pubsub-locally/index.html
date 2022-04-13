@@ -94,7 +94,7 @@ Here is a quick guide how I set up my integration test locally using the Pub/Sub
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -277,84 +277,84 @@ if (!doNotTrack) {
 <p>Here is a quick guide how I set up my integration test locally using the <strong>Pub/Sub</strong> emulator. Code examples are written in Go.</p>
 <h2 id="starting-the-emulator">Starting the emulator</h2>
 <p>To run the emulator, you first need the <code>gcloud</code> cli (<a href="https://cloud.google.com/sdk/docs/install">setup instructions</a>). Next can we install the emulator.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gcloud components install pubsub-emulator
-gcloud components update
-</code></pre></div><p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">gcloud beta emulators pubsub start --project=test-project
-</code></pre></div><p>Output:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
-[pubsub] This is the Google Pub/Sub fake.
-[pubsub] Implementation may be incomplete or differ from the real system.
-....
-</code></pre></div><h2 id="code">Code</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>gcloud components install pubsub-emulator
+</span></span><span style="display:flex;"><span>gcloud components update
+</span></span></code></pre></div><p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>gcloud beta emulators pubsub start --project=test-project
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
+</span></span><span style="display:flex;"><span>[pubsub] This is the Google Pub/Sub fake.
+</span></span><span style="display:flex;"><span>[pubsub] Implementation may be incomplete or differ from the real system.
+</span></span><span style="display:flex;"><span>....
+</span></span></code></pre></div><h2 id="code">Code</h2>
 <p>We can use the Google Pub/Sub client to publish or subscribe on a topic.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">go get -u cloud.google.com/go/pubsub
-</code></pre></div><h4 id="setup-the-client">Setup the client</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>go get -u cloud.google.com/go/pubsub
+</span></span></code></pre></div><h4 id="setup-the-client">Setup the client</h4>
 <p>We need to point the <code>pubsub.Client</code> to our emulator. For this purpose, <code>pubsub.NewClient</code> uses a magic environment variable <code>PUBSUB_EMULATOR_HOST</code>.
 You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</code>. For our test code, we use <code>os.Setenv</code>.</p>
 <p><strong>Note</strong>: If we don&rsquo;t set <code>PUBSUB_EMULATOR_HOST</code>, the client will default to an actual Google project. Be careful :-).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// Initialize client
-</span><span style="color:#998;font-style:italic"></span>os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
-client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;test-project&#34;</span>)
-<span style="color:#000;font-weight:bold">...</span>
-
-<span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message 
-
-<span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message
-<span style="color:#998;font-style:italic">// Create topic
-</span><span style="color:#998;font-style:italic"></span>topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, <span style="color:#d14">&#34;some-topic&#34;</span>)
-<span style="color:#000;font-weight:bold">...</span>
-</code></pre></div><h4 id="receive-message">Receive message</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Initialize client
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;test-project&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Create topic
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, <span style="color:#d14">&#34;some-topic&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span></code></pre></div><h4 id="receive-message">Receive message</h4>
 <p>Now that we have a topic, we could publish a message. However, we don&rsquo;t have any subscriptions yet, and so the published message would be discared.</p>
 <ul>
 <li>Push - <strong>Pub/Sub</strong> is responsible for pushing any incoming messages on a topic to a specific endpoint in the service</li>
 <li>Pull - Service is responsible for setting up a connection to a <strong>Pub/Sub</strong> topic, and waits for incoming messages.</li>
 </ul>
 <h5 id="creating-a-pull-subscription">Creating a pull subscription</h5>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id&#34;</span>, pubsub.SubscriptionConfig{
-    Topic: topic,
-})
-
-<span style="color:#998;font-style:italic">// Wrap context for cancellation, and cancel the first
-</span><span style="color:#998;font-style:italic"></span>cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
-
-<span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
-</span><span style="color:#998;font-style:italic"></span>err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
-    m.<span style="color:#900;font-weight:bold">Ack</span>()
-    <span style="color:#900;font-weight:bold">cancel</span>() <span style="color:#998;font-style:italic">// for test purpose, shut down after first message 
-</span><span style="color:#998;font-style:italic"></span>})
-</code></pre></div><p><strong>Note</strong>: If we don&rsquo;t receive a message for some reason, the <code>Receive</code> call will be stuck forever. I will fix this in the full test code example.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id&#34;</span>, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>    Topic: topic,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Wrap context for cancellation, and cancel the first
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>    m.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">cancel</span>() <span style="color:#998;font-style:italic">// for test purpose, shut down after first message 
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>})
+</span></span></code></pre></div><p><strong>Note</strong>: If we don&rsquo;t receive a message for some reason, the <code>Receive</code> call will be stuck forever. I will fix this in the full test code example.</p>
 <h5 id="creating-a-push-subscription">Creating a push subscription</h5>
 <p>For the push example, we need a endpoint that can receive and decode the PubSub message.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">pubSubHandler</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
-	<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
-
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
-		<span style="color:#000;font-weight:bold">return</span>
-	}
-	<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
-
-	<span style="color:#998;font-style:italic">// Do something with event
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">// ...
-</span><span style="color:#998;font-style:italic"></span>}
-</code></pre></div><p>Then all we need to do is to add  <code>pubsub.PushConfig</code> with our endpoint, when we configure create a subscription.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id-2&#34;</span>, pubsub.SubscriptionConfig{
-    Topic: topic,
-    PushConfig: pubsub.PushConfig{
-        Endpoint: <span style="color:#d14">&#34;localhost:8080/pubsub/event&#34;</span>,
-    },
-})
-</code></pre></div><h4 id="publishing-a-message">Publishing a message</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">pubSubHandler</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Do something with event
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>}
+</span></span></code></pre></div><p>Then all we need to do is to add  <code>pubsub.PushConfig</code> with our endpoint, when we configure create a subscription.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id-2&#34;</span>, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>    Topic: topic,
+</span></span><span style="display:flex;"><span>    PushConfig: pubsub.PushConfig{
+</span></span><span style="display:flex;"><span>        Endpoint: <span style="color:#d14">&#34;localhost:8080/pubsub/event&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h4 id="publishing-a-message">Publishing a message</h4>
 <p>Finally, we can publish a message to <strong>Pub/Sub</strong>. Keep in mind that <code>Publish</code> is asynchronous, and you should use <code>res.Get</code> afterwards if the result is important.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
-    Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
-})
-
-<span style="color:#998;font-style:italic">// Wait for result, if you care about it :-) 
-</span><span style="color:#998;font-style:italic"></span>messageID, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
-<span style="color:#000;font-weight:bold">...</span>
-</code></pre></div><h2 id="summary">Summary</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>    Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Wait for result, if you care about it :-) 
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>messageID, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span></code></pre></div><h2 id="summary">Summary</h2>
 <p>In this guide I showed how to do the following:</p>
 <ol>
 <li>Start the <strong>Pub/Sub</strong> emulator</li>
@@ -365,119 +365,119 @@ client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span sty
 </ol>
 <p>If you are interested in the full code I have included two testcases below.</p>
 <h2 id="appendix-complete-test-code">Appendix: Complete test code</h2>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">package</span> main
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;cloud.google.com/go/pubsub&#34;</span>
-	<span style="color:#d14">&#34;context&#34;</span>
-	<span style="color:#d14">&#34;encoding/json&#34;</span>
-	<span style="color:#d14">&#34;github.com/google/uuid&#34;</span>
-	<span style="color:#d14">&#34;github.com/magnuswahlstrand/gcp-examples/pubsub/common&#34;</span>
-	<span style="color:#d14">&#34;github.com/stretchr/testify/require&#34;</span>
-	<span style="color:#d14">&#34;net/http&#34;</span>
-	<span style="color:#d14">&#34;net/http/httptest&#34;</span>
-	<span style="color:#d14">&#34;os&#34;</span>
-	<span style="color:#d14">&#34;testing&#34;</span>
-	<span style="color:#d14">&#34;time&#34;</span>
-)
-
-<span style="color:#998;font-style:italic">// Test 1: Pull subscription
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPull</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
-	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
-	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
-
-	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
-
-	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
-	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
-		Topic: topic,
-	})
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	<span style="color:#998;font-style:italic">// Act: publish message
-</span><span style="color:#998;font-style:italic"></span>	res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
-		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
-	})
-
-	_, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
-	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
-
-	<span style="color:#000;font-weight:bold">go</span> <span style="color:#000;font-weight:bold">func</span>() {
-		<span style="color:#998;font-style:italic">// Use a callback to receive messages via subscription.
-</span><span style="color:#998;font-style:italic"></span>		<span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
-</span><span style="color:#998;font-style:italic"></span>		err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
-			m.<span style="color:#900;font-weight:bold">Ack</span>()
-			okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(m.Data)
-			<span style="color:#900;font-weight:bold">cancel</span>()
-		})
-	}()
-
-	<span style="color:#000;font-weight:bold">select</span> {
-	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
-		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
-	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">300</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
-		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
-		<span style="color:#900;font-weight:bold">cancel</span>()
-	}
-}
-
-<span style="color:#998;font-style:italic">// Test 2: Push subscription
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPush</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
-	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
-	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
-
-	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
-	server <span style="color:#000;font-weight:bold">:=</span> httptest.<span style="color:#900;font-weight:bold">NewServer</span>(http.<span style="color:#900;font-weight:bold">HandlerFunc</span>(<span style="color:#000;font-weight:bold">func</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
-		<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
-
-		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-			w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
-			<span style="color:#000;font-weight:bold">return</span>
-		}
-		<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
-
-		okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(event.Message.Data)
-	}))
-
-	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
-
-	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
-	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
-		Topic: topic,
-		PushConfig: pubsub.PushConfig{
-			Endpoint: server.URL,
-		},
-	})
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	<span style="color:#998;font-style:italic">// Act: publish message
-</span><span style="color:#998;font-style:italic"></span>	_ = topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
-		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
-	})
-
-	<span style="color:#000;font-weight:bold">select</span> {
-	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
-		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
-	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">500</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
-		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
-	}
-}
-</code></pre></div><h2 id="resources">Resources</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;cloud.google.com/go/pubsub&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;encoding/json&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/google/uuid&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/magnuswahlstrand/gcp-examples/pubsub/common&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/stretchr/testify/require&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;net/http/httptest&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;testing&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Test 1: Pull subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPull</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
+</span></span><span style="display:flex;"><span>	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>		Topic: topic,
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Act: publish message
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	_, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
+</span></span><span style="display:flex;"><span>	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">go</span> <span style="color:#000;font-weight:bold">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#998;font-style:italic">// Use a callback to receive messages via subscription.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>		<span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>		err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>			m.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>			okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(m.Data)
+</span></span><span style="display:flex;"><span>			<span style="color:#900;font-weight:bold">cancel</span>()
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">select</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">300</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#900;font-weight:bold">cancel</span>()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Test 2: Push subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPush</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
+</span></span><span style="display:flex;"><span>	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
+</span></span><span style="display:flex;"><span>	server <span style="color:#000;font-weight:bold">:=</span> httptest.<span style="color:#900;font-weight:bold">NewServer</span>(http.<span style="color:#900;font-weight:bold">HandlerFunc</span>(<span style="color:#000;font-weight:bold">func</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(event.Message.Data)
+</span></span><span style="display:flex;"><span>	}))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>		Topic: topic,
+</span></span><span style="display:flex;"><span>		PushConfig: pubsub.PushConfig{
+</span></span><span style="display:flex;"><span>			Endpoint: server.URL,
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Act: publish message
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	_ = topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">select</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">500</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://cloud.google.com/sdk/docs/install">Installing Google Cloud SDK</a></li>
 <li><a href="https://cloud.google.com/pubsub/docs/emulator">Testing apps locally with the emulator</a></li>
@@ -562,6 +562,8 @@ client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span sty
                   <ul>
                 
                 
+                    <li><a href="/hidden/2022-04-11-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
                     <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
                 
                     <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
@@ -569,8 +571,6 @@ client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span sty
                     <li><a href="/fragments/2021-03-06-using-an-orm-with-go/">Using an ORM with Go</a></li>
                 
                     <li><a href="/articles/2019-10-19-heroku-websockets/">Websockets on Heroku</a></li>
-                
-                    <li><a href="/articles/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
                 
               </ul>
 
@@ -656,7 +656,7 @@ client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span sty
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

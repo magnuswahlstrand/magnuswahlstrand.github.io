@@ -97,7 +97,7 @@ In this article I cover how to set up a very useful application that insert anim
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -301,35 +301,35 @@ In this article I cover how to set up a very useful application that insert anim
 <h2 id="getting-started">Getting started</h2>
 <p>First we need to setup our local database. Add the following to <em><strong>schema.sql</strong></em>.</p>
 <p><em><strong>schema.sql</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgresql" data-lang="postgresql"><span style="color:#000;font-weight:bold">CREATE</span> <span style="color:#000;font-weight:bold">TABLE</span> animals (
-    id <span style="color:#0086b3">SERIAL</span> <span style="color:#000;font-weight:bold">PRIMARY</span> <span style="color:#000;font-weight:bold">KEY</span>,
-    <span style="color:#000;font-weight:bold">name</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
-    <span style="color:#000;font-weight:bold">type</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
-    created_at <span style="color:#0086b3">TIMESTAMP</span> <span style="color:#0086b3">WITH TIME ZONE</span> <span style="color:#000;font-weight:bold">DEFAULT</span> (NOW() <span style="color:#000;font-weight:bold">AT</span> <span style="color:#0086b3">TIME</span> <span style="color:#000;font-weight:bold">ZONE</span> <span style="color:#d14">&#39;UTC&#39;</span>)
-);
-</code></pre></div><p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">CREATE</span> <span style="color:#000;font-weight:bold">TABLE</span> animals (
+</span></span><span style="display:flex;"><span>    id <span style="color:#0086b3">SERIAL</span> <span style="color:#000;font-weight:bold">PRIMARY</span> <span style="color:#000;font-weight:bold">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">name</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">type</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
+</span></span><span style="display:flex;"><span>    created_at <span style="color:#0086b3">TIMESTAMP</span> <span style="color:#0086b3">WITH TIME ZONE</span> <span style="color:#000;font-weight:bold">DEFAULT</span> (NOW() <span style="color:#000;font-weight:bold">AT</span> <span style="color:#0086b3">TIME</span> <span style="color:#000;font-weight:bold">ZONE</span> <span style="color:#d14">&#39;UTC&#39;</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
 <p>Let&rsquo;s start our local PostgresSQL database.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -p 5432:5432 -it --rm postgres
-</code></pre></div><p>Next we connect to it using <code>psql</code> and run the commands in <em><strong>schema.sql</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres -c <span style="color:#d14">&#34;\i schema.sql&#34;</span>
-CREATE TABLE
-</code></pre></div><h3 id="queries">Queries</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 5432:5432 -it --rm postgres
+</span></span></code></pre></div><p>Next we connect to it using <code>psql</code> and run the commands in <em><strong>schema.sql</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres -c <span style="color:#d14">&#34;\i schema.sql&#34;</span>
+</span></span><span style="display:flex;"><span>CREATE TABLE
+</span></span></code></pre></div><h3 id="queries">Queries</h3>
 <p>Now that we have set up our table, we can run some queries. Open a psql shell</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgresql" data-lang="postgresql">postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Fido&#39;</span>, <span style="color:#d14">&#39;dog&#39;</span>);
-<span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
-postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Spot&#39;</span>, <span style="color:#d14">&#39;cat&#39;</span>);
-<span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
-postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Magnus&#39;</span>, <span style="color:#d14">&#39;racoon&#39;</span>);
-<span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
-postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
-postgres<span style="color:#000;font-weight:bold">-#</span> ;
- id <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">name</span>  <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">type</span>  <span style="color:#000;font-weight:bold">|</span>          created_at
-<span style="color:#998;font-style:italic">----+--------+--------+-------------------------------
-</span><span style="color:#998;font-style:italic"></span>  <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">|</span> Fido   <span style="color:#000;font-weight:bold">|</span> dog    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">22.641659</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
-  <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">|</span> Spot   <span style="color:#000;font-weight:bold">|</span> cat    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">32.089118</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
-  <span style="color:#099">3</span> <span style="color:#000;font-weight:bold">|</span> Magnus <span style="color:#000;font-weight:bold">|</span> racoon <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">41.17342</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
-</code></pre></div><p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Fido&#39;</span>, <span style="color:#d14">&#39;dog&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Spot&#39;</span>, <span style="color:#d14">&#39;cat&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Magnus&#39;</span>, <span style="color:#d14">&#39;racoon&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">-#</span> ;
+</span></span><span style="display:flex;"><span> id <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">name</span>  <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">type</span>  <span style="color:#000;font-weight:bold">|</span>          created_at
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">----+--------+--------+-------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>  <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">|</span> Fido   <span style="color:#000;font-weight:bold">|</span> dog    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">22.641659</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">|</span> Spot   <span style="color:#000;font-weight:bold">|</span> cat    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">32.089118</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#099">3</span> <span style="color:#000;font-weight:bold">|</span> Magnus <span style="color:#000;font-weight:bold">|</span> racoon <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">41.17342</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span></code></pre></div><p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
 <h3 id="setup-for-sqlc">Setup for <code>sqlc</code></h3>
 <p>We want to turn the queries and schema into code. <code>sqlc</code> needs a configuration file with the following things</p>
 <ol>
@@ -339,158 +339,158 @@ postgres<span style="color:#000;font-weight:bold">-#</span> ;
 <li>path of generated code - <code>data/</code></li>
 </ol>
 <p>Create the file <strong>sqlc.yaml</strong></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#000080">version</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;1&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb"></span><span style="color:#000080">packages</span>:<span style="color:#bbb">
-</span><span style="color:#bbb">  </span>- <span style="color:#000080">name</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000080">path</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000080">schema</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;schema.sql&#34;</span><span style="color:#bbb">
-</span><span style="color:#bbb">    </span><span style="color:#000080">queries</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;queries.sql&#34;</span><span style="color:#bbb">
-</span></code></pre></div><p>After this file, we need to create <code>queries.sql</code>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgresql" data-lang="postgresql"><span style="color:#998;font-style:italic">-- name: ListAnimals :many
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
-<span style="color:#000;font-weight:bold">ORDER</span> <span style="color:#000;font-weight:bold">BY</span> created_at;
-
-<span style="color:#998;font-style:italic">-- name: CreateAnimal :exec
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#008080">$1</span>, <span style="color:#008080">$2</span>)
-</code></pre></div><p>The comments are extra notation for <code>sqlc</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000080">version</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;1&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000080">packages</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#000080">name</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">path</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">schema</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;schema.sql&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">queries</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;queries.sql&#34;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>After this file, we need to create <code>queries.sql</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span><span style="color:#998;font-style:italic">-- name: ListAnimals :many
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">ORDER</span> <span style="color:#000;font-weight:bold">BY</span> created_at;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">-- name: CreateAnimal :exec
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#008080">$1</span>, <span style="color:#008080">$2</span>)
+</span></span></code></pre></div><p>The comments are extra notation for <code>sqlc</code>.</p>
 <ul>
 <li><code>name: ListAnimals :many</code> - Generate a method called <code>ListAnimals</code> that returns a slice of <code>Animal</code></li>
 <li><code>name: CreateAnimal :exec</code> - Generate a method called <code>CreateAnimal</code> that returns an error</li>
 </ul>
 <h4 id="generate-code">Generate code</h4>
 <p>Now we can run</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sqlc generate
-</code></pre></div><p>This generates the following two files of interest</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlc generate
+</span></span></code></pre></div><p>This generates the following two files of interest</p>
 <p><em><strong>data/models.go</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">package</span> data
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;time&#34;</span>
-)
-
-<span style="color:#000;font-weight:bold">type</span> Animal <span style="color:#000;font-weight:bold">struct</span> {
-	ID        <span style="color:#458;font-weight:bold">int32</span>
-	Name      <span style="color:#458;font-weight:bold">string</span>
-	Type      <span style="color:#458;font-weight:bold">string</span>
-	CreatedAt time.Time
-}
-</code></pre></div><p><em><strong>data/queries.sql.go</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">package</span> data
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;context&#34;</span>
-)
-
-<span style="color:#000;font-weight:bold">const</span> createAnimal = <span style="color:#d14">`-- name: CreateAnimal :exec
-</span><span style="color:#d14">INSERT INTO animals (name, type) VALUES ($1, $2)
-</span><span style="color:#d14">`</span>
-
-<span style="color:#000;font-weight:bold">type</span> CreateAnimalParams <span style="color:#000;font-weight:bold">struct</span> {
-	Name <span style="color:#458;font-weight:bold">string</span>
-	Type <span style="color:#458;font-weight:bold">string</span>
-}
-
-<span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">CreateAnimal</span>(ctx context.Context, arg CreateAnimalParams) <span style="color:#458;font-weight:bold">error</span> {
-	_, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">ExecContext</span>(ctx, createAnimal, arg.Name, arg.Type)
-	<span style="color:#000;font-weight:bold">return</span> err
-}
-
-<span style="color:#000;font-weight:bold">const</span> listAnimals = <span style="color:#d14">`-- name: ListAnimals :many
-</span><span style="color:#d14">SELECT id, name, type, created_at FROM animals
-</span><span style="color:#d14">ORDER BY created_at
-</span><span style="color:#d14">`</span>
-
-<span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">ListAnimals</span>(ctx context.Context) ([]Animal, <span style="color:#458;font-weight:bold">error</span>) {
-	rows, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">QueryContext</span>(ctx, listAnimals)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">defer</span> rows.<span style="color:#900;font-weight:bold">Close</span>()
-	<span style="color:#000;font-weight:bold">var</span> items []Animal
-	<span style="color:#000;font-weight:bold">for</span> rows.<span style="color:#900;font-weight:bold">Next</span>() {
-		<span style="color:#000;font-weight:bold">var</span> i Animal
-		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Scan</span>(
-			<span style="color:#000;font-weight:bold">&amp;</span>i.ID,
-			<span style="color:#000;font-weight:bold">&amp;</span>i.Name,
-			<span style="color:#000;font-weight:bold">&amp;</span>i.Type,
-			<span style="color:#000;font-weight:bold">&amp;</span>i.CreatedAt,
-		); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-		}
-		items = <span style="color:#0086b3">append</span>(items, i)
-	}
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Close</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Err</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">return</span> items, <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><h3 id="using-in-application">Using in application</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> Animal <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	ID        <span style="color:#458;font-weight:bold">int32</span>
+</span></span><span style="display:flex;"><span>	Name      <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	Type      <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><strong>data/queries.sql.go</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> createAnimal = <span style="color:#d14">`-- name: CreateAnimal :exec
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">INSERT INTO animals (name, type) VALUES ($1, $2)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> CreateAnimalParams <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	Name <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	Type <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">CreateAnimal</span>(ctx context.Context, arg CreateAnimalParams) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	_, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">ExecContext</span>(ctx, createAnimal, arg.Name, arg.Type)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> listAnimals = <span style="color:#d14">`-- name: ListAnimals :many
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">SELECT id, name, type, created_at FROM animals
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">ORDER BY created_at
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">ListAnimals</span>(ctx context.Context) ([]Animal, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>	rows, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">QueryContext</span>(ctx, listAnimals)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> rows.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">var</span> items []Animal
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> rows.<span style="color:#900;font-weight:bold">Next</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">var</span> i Animal
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Scan</span>(
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.ID,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.Name,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.Type,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.CreatedAt,
+</span></span><span style="display:flex;"><span>		); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		items = <span style="color:#0086b3">append</span>(items, i)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Close</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Err</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> items, <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="using-in-application">Using in application</h3>
 <p>Since we already have our Postgres instance up and running with database table defined. We can now use this generated code directly our application.</p>
 <p><em><strong>main.go</strong></em></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">package</span> main
-
-<span style="color:#000;font-weight:bold">import</span> (
-	<span style="color:#d14">&#34;context&#34;</span>
-	<span style="color:#d14">&#34;database/sql&#34;</span>
-	<span style="color:#d14">&#34;fmt&#34;</span>
-	_ <span style="color:#d14">&#34;github.com/lib/pq&#34;</span>
-	<span style="color:#d14">&#34;math/rand&#34;</span>
-	<span style="color:#d14">&#34;time&#34;</span>
-
-	<span style="color:#d14">&#34;github.com/magnuswahlstrand/sqlc-example/data&#34;</span>
-	<span style="color:#d14">&#34;log&#34;</span>
-)
-
-<span style="color:#000;font-weight:bold">const</span> (
-	host     = <span style="color:#d14">&#34;localhost&#34;</span>
-	port     = <span style="color:#099">5432</span>
-	user     = <span style="color:#d14">&#34;postgres&#34;</span>
-	password = <span style="color:#d14">&#34;&#34;</span>
-)
-
-<span style="color:#000;font-weight:bold">var</span> sourceName = fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;host=%s port=%d user=%s password=%s dbname=%s sslmode=disable&#34;</span>, host, port, user, password, <span style="color:#d14">&#34;&#34;</span>)
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-	<span style="color:#998;font-style:italic">// Seed randomizer
-</span><span style="color:#998;font-style:italic"></span>	rand.<span style="color:#900;font-weight:bold">Seed</span>(time.<span style="color:#900;font-weight:bold">Now</span>().<span style="color:#900;font-weight:bold">UTC</span>().<span style="color:#900;font-weight:bold">UnixNano</span>())
-
-	db, err <span style="color:#000;font-weight:bold">:=</span> sql.<span style="color:#900;font-weight:bold">Open</span>(<span style="color:#d14">&#34;postgres&#34;</span>, sourceName)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatalf</span>(<span style="color:#d14">&#34;failed to open connection to DB: %v&#34;</span>, err)
-	}
-	database <span style="color:#000;font-weight:bold">:=</span> data.<span style="color:#900;font-weight:bold">New</span>(db)
-
-	<span style="color:#998;font-style:italic">// Create animal
-</span><span style="color:#998;font-style:italic"></span>	err = database.<span style="color:#900;font-weight:bold">CreateAnimal</span>(context.<span style="color:#900;font-weight:bold">Background</span>(), data.CreateAnimalParams{
-		Name: <span style="color:#d14">&#34;Fido&#34;</span>,
-		Type: <span style="color:#d14">&#34;dog&#34;</span>,
-	})
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to create animal&#34;</span>, err)
-	}
-	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* new animal with created&#34;</span>)
-
-	<span style="color:#998;font-style:italic">// List animals
-</span><span style="color:#998;font-style:italic"></span>	animals, err <span style="color:#000;font-weight:bold">:=</span> database.<span style="color:#900;font-weight:bold">ListAnimals</span>(context.<span style="color:#900;font-weight:bold">Background</span>())
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to list animals&#34;</span>, err)
-	}
-
-	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* complete list of animals&#34;</span>)
-	<span style="color:#000;font-weight:bold">for</span> _, animal <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> animals {
-		fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;-- %d\t%s\t%s\n&#34;</span>, animal.ID, animal.Name, animal.Type)
-	}
-}
-</code></pre></div><p>Finally, if we run the application, we get the following output</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; go run main.go
-* new animal with created
-* <span style="color:#0086b3">complete</span> list of animals
--- 1	Fido	dog
--- 2	Fido	dog
-</code></pre></div><p>Success!</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;database/sql&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	_ <span style="color:#d14">&#34;github.com/lib/pq&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;math/rand&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/magnuswahlstrand/sqlc-example/data&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> (
+</span></span><span style="display:flex;"><span>	host     = <span style="color:#d14">&#34;localhost&#34;</span>
+</span></span><span style="display:flex;"><span>	port     = <span style="color:#099">5432</span>
+</span></span><span style="display:flex;"><span>	user     = <span style="color:#d14">&#34;postgres&#34;</span>
+</span></span><span style="display:flex;"><span>	password = <span style="color:#d14">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">var</span> sourceName = fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;host=%s port=%d user=%s password=%s dbname=%s sslmode=disable&#34;</span>, host, port, user, password, <span style="color:#d14">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Seed randomizer
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	rand.<span style="color:#900;font-weight:bold">Seed</span>(time.<span style="color:#900;font-weight:bold">Now</span>().<span style="color:#900;font-weight:bold">UTC</span>().<span style="color:#900;font-weight:bold">UnixNano</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	db, err <span style="color:#000;font-weight:bold">:=</span> sql.<span style="color:#900;font-weight:bold">Open</span>(<span style="color:#d14">&#34;postgres&#34;</span>, sourceName)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatalf</span>(<span style="color:#d14">&#34;failed to open connection to DB: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	database <span style="color:#000;font-weight:bold">:=</span> data.<span style="color:#900;font-weight:bold">New</span>(db)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Create animal
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	err = database.<span style="color:#900;font-weight:bold">CreateAnimal</span>(context.<span style="color:#900;font-weight:bold">Background</span>(), data.CreateAnimalParams{
+</span></span><span style="display:flex;"><span>		Name: <span style="color:#d14">&#34;Fido&#34;</span>,
+</span></span><span style="display:flex;"><span>		Type: <span style="color:#d14">&#34;dog&#34;</span>,
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to create animal&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* new animal with created&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// List animals
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	animals, err <span style="color:#000;font-weight:bold">:=</span> database.<span style="color:#900;font-weight:bold">ListAnimals</span>(context.<span style="color:#900;font-weight:bold">Background</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to list animals&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* complete list of animals&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> _, animal <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> animals {
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;-- %d\t%s\t%s\n&#34;</span>, animal.ID, animal.Name, animal.Type)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Finally, if we run the application, we get the following output</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; go run main.go
+</span></span><span style="display:flex;"><span>* new animal with created
+</span></span><span style="display:flex;"><span>* <span style="color:#0086b3">complete</span> list of animals
+</span></span><span style="display:flex;"><span>-- 1	Fido	dog
+</span></span><span style="display:flex;"><span>-- 2	Fido	dog
+</span></span></code></pre></div><p>Success!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p><code>sqlc</code> is a neat, easy to use tool, which makes working with Postgres in Go fun!</p>
 <p><em><strong>Some things I liked</strong></em></p>
@@ -589,6 +589,8 @@ postgres<span style="color:#000;font-weight:bold">-#</span> ;
                   <ul>
                 
                 
+                    <li><a href="/hidden/2022-04-11-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
                     <li><a href="/articles/2022-03-07-one-to-many/">SQLALchemy: One to many-relationships</a></li>
                 
                     <li><a href="/articles/2022-02-27-audit-logs-in-postgres/">Audit tables in Postgres</a></li>
@@ -596,8 +598,6 @@ postgres<span style="color:#000;font-weight:bold">-#</span> ;
                     <li><a href="/articles/2021-07-11-testing-pubsub-locally/">Running Google Pub/Sub locally</a></li>
                 
                     <li><a href="/articles/2021-03-12-acid-transactions/">ACID transactions</a></li>
-                
-                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
                 
               </ul>
 
@@ -683,7 +683,7 @@ postgres<span style="color:#000;font-weight:bold">-#</span> ;
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

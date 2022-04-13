@@ -92,7 +92,7 @@
   <meta name="twitter:site" content="@wahlstra" />
   <meta name="twitter:creator" content="@wahlstra" />
   <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.96.0" />
   <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -279,71 +279,71 @@ if (!doNotTrack) {
 <p><img src="/img/screenshake/shake.gif" alt="End result"></p>
 <h2 id="screen-shake">Screen shake?</h2>
 <p>First, let&rsquo;s cover the question: <em>what is screen shake?</em>. The typical screen shake is created by adding an offset for what is draw on the screen in on the horizontal(x) and vertical(y) axes. The amount of offset (amplitude) usually decreases over time, in the example below I use <a href="https://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a> (lerp) from 20 to 0.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#998;font-style:italic">// Simple offset
-</span><span style="color:#998;font-style:italic"></span>amplitude <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">20</span> <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
-dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-</code></pre></div><p>Let us use this code in full example.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Simple offset
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>amplitude <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">20</span> <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
+</span></span><span style="display:flex;"><span>dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span></code></pre></div><p>Let us use this code in full example.</p>
 <h2 id="simple-screen-shake">Simple screen shake</h2>
 <p>The trick is to first draw our content on a temporary image (canvas), and then draw that image to the screen, with an offset. <code>scene1</code> is an <code>*ebiten.Image</code> (see setup in my post about <a href="/post/2019-04-28-2d-transitions/#setup">2D transitions</a>).</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">simpleScreenShake</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) {
-   <span style="color:#998;font-style:italic">// Draw scene onto tmpScreen
-</span><span style="color:#998;font-style:italic"></span>   tmpScreen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-
-   <span style="color:#998;font-style:italic">// Draw tmpScreen on an offset (screen shake) applied, stop when t &gt; 0
-</span><span style="color:#998;font-style:italic"></span>   maxAmplitude <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">10.0</span>
-   op <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{}
-   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
-      amplitude <span style="color:#000;font-weight:bold">:=</span> maxAmplitude <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
-      dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-      dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-      op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(dx, dy)
-   }
-   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(tmpScreen, op)
-}
-</code></pre></div><p>This function is called from the main game loop.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
-   <span style="color:#900;font-weight:bold">simpleScreenShake</span>(screen, t)
-   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">60.0</span>
-   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><img src="/img/screenshake/shake.gif" alt="End result"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">simpleScreenShake</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) {
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw scene onto tmpScreen
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   tmpScreen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw tmpScreen on an offset (screen shake) applied, stop when t &gt; 0
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   maxAmplitude <span style="color:#000;font-weight:bold">:=</span> <span style="color:#099">10.0</span>
+</span></span><span style="display:flex;"><span>   op <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{}
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
+</span></span><span style="display:flex;"><span>      amplitude <span style="color:#000;font-weight:bold">:=</span> maxAmplitude <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
+</span></span><span style="display:flex;"><span>      dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>      dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>      op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(dx, dy)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(tmpScreen, op)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This function is called from the main game loop.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#900;font-weight:bold">simpleScreenShake</span>(screen, t)
+</span></span><span style="display:flex;"><span>   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">60.0</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/img/screenshake/shake.gif" alt="End result"></p>
 <p>Easy! Let&rsquo;s make it more complicated.
 <em>Code for the easy shake is <a href="https://github.com/magnuswahlstrand/animex/blob/basic-shake/screenshake/main.go">here</a></em>.</p>
 <h2 id="nicer-screen-shake">Nice(r) screen shake</h2>
 <p>As you see above, we get a black border around the image when we shake. While it is not terrible, we can do better! What we want to do is something like the image below, i.e. draw <strong>more</strong> to the temp image than we will draw to the screen. Then we can draw the content of the red rectangle onto the screen.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
-   <span style="color:#000;font-weight:bold">...</span>
-   <span style="color:#998;font-style:italic">// Create a screent hat is larger than our actual screen
-</span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen, err = ebiten.<span style="color:#900;font-weight:bold">NewImage</span>(screenWidth<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, screenHeight<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, ebiten.FilterDefault)
-   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
-   }
-   <span style="color:#000;font-weight:bold">...</span>
-}
-</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, t <span style="color:#458;font-weight:bold">float64</span>) {
-   <span style="color:#998;font-style:italic">// Draw scene onto tmpScreen
-</span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
-
-   <span style="color:#998;font-style:italic">// Draw tmpScreen on an offset (screen shake) applied
-</span><span style="color:#998;font-style:italic"></span>   op <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{}
-   op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>padding, <span style="color:#000;font-weight:bold">-</span>padding)
-   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
-      amplitude <span style="color:#000;font-weight:bold">:=</span> maxAmplitude <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
-      dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-      dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
-      op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>dx, <span style="color:#000;font-weight:bold">-</span>dy)
-   }
-
-   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(biggerTmpScreen, op)
-}
-</code></pre></div><p>This function is called from the main game loop.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
-   <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen, t) <span style="color:#998;font-style:italic">// Previously simpleScreenShake(screen, t)
-</span><span style="color:#998;font-style:italic"></span>   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">60.0</span>
-   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><img src="/img/screenshake/shake-rectangle.gif" alt="End result"></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Create a screent hat is larger than our actual screen
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen, err = ebiten.<span style="color:#900;font-weight:bold">NewImage</span>(screenWidth<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, screenHeight<span style="color:#000;font-weight:bold">+</span><span style="color:#099">40</span>, ebiten.FilterDefault)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>      log.<span style="color:#900;font-weight:bold">Fatal</span>(err)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image, t <span style="color:#458;font-weight:bold">float64</span>) {
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw scene onto tmpScreen
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   biggerTmpScreen.<span style="color:#900;font-weight:bold">DrawImage</span>(scene1, <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#998;font-style:italic">// Draw tmpScreen on an offset (screen shake) applied
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   op <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&amp;</span>ebiten.DrawImageOptions{}
+</span></span><span style="display:flex;"><span>   op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>padding, <span style="color:#000;font-weight:bold">-</span>padding)
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">if</span> t &lt; <span style="color:#099">1</span> {
+</span></span><span style="display:flex;"><span>      amplitude <span style="color:#000;font-weight:bold">:=</span> maxAmplitude <span style="color:#000;font-weight:bold">*</span> gfx.<span style="color:#900;font-weight:bold">Lerp</span>(<span style="color:#099">1</span>, <span style="color:#099">0</span>, t)
+</span></span><span style="display:flex;"><span>      dx <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>      dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="color:#000;font-weight:bold">*</span> (<span style="color:#099">2</span><span style="color:#000;font-weight:bold">*</span>rand.<span style="color:#900;font-weight:bold">Float64</span>() <span style="color:#000;font-weight:bold">-</span> <span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>      op.GeoM.<span style="color:#900;font-weight:bold">Translate</span>(<span style="color:#000;font-weight:bold">-</span>dx, <span style="color:#000;font-weight:bold">-</span>dy)
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   screen.<span style="color:#900;font-weight:bold">DrawImage</span>(biggerTmpScreen, op)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This function is called from the main game loop.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">update</span>(screen <span style="color:#000;font-weight:bold">*</span>ebiten.Image) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>   <span style="color:#900;font-weight:bold">nicerScreenShake</span>(screen, t) <span style="color:#998;font-style:italic">// Previously simpleScreenShake(screen, t)
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>   t <span style="color:#000;font-weight:bold">+=</span> <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">/</span> <span style="color:#099">60.0</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="/img/screenshake/shake-rectangle.gif" alt="End result"></p>
 <p><em>Code for the nicer shake is <a href="https://github.com/magnuswahlstrand/animex/blob/nicer-shake/screenshake/main.go">here</a></em>.</p>
 
         
@@ -429,6 +429,8 @@ dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="co
                   <ul>
                 
                 
+                    <li><a href="/hidden/2022-04-11-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
                     <li><a href="/articles/2021-07-11-testing-pubsub-locally/">Running Google Pub/Sub locally</a></li>
                 
                     <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
@@ -436,8 +438,6 @@ dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="co
                     <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
                 
                     <li><a href="/fragments/2021-03-06-using-an-orm-with-go/">Using an ORM with Go</a></li>
-                
-                    <li><a href="/articles/2019-10-19-heroku-websockets/">Websockets on Heroku</a></li>
                 
               </ul>
 
@@ -523,7 +523,7 @@ dy <span style="color:#000;font-weight:bold">:=</span> amplitude <span style="co
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

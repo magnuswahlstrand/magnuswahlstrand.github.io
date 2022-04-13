@@ -5,7 +5,22 @@
     <link>https://magnuswahlstrand.github.io/articles/</link>
     <description>Recent content in Articles on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Excalidraw</title>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</link>
+      <pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</guid>
+      <description>&lt;p&gt;Working in a &amp;ldquo;mostly remote&amp;rdquo; workplace, I find it important explore new tools that simplify collaboration and knowledge sharing online.&lt;/p&gt;
+&lt;p&gt;A tool that I have used and enjoyed the last few years is &lt;a href=&#34;https://excalidraw.com/&#34;&gt;Excalidraw&lt;/a&gt;. Description from their homepage:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Virtual whiteboard for sketching hand-drawn like diagrams.
+Collaborative and end-to-end encrypted.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this post I will go through a few of Exalidraw&amp;rsquo;s features that I think are useful and great.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>SQLALchemy: One to many-relationships</title>
       <link>https://magnuswahlstrand.github.io/articles/2022-03-07-one-to-many/</link>
