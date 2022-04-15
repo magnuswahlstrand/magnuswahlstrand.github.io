@@ -5,7 +5,52 @@
     <link>https://magnuswahlstrand.github.io/tags/</link>
     <description>Recent content in Tags on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fiber</title>
+      <link>https://magnuswahlstrand.github.io/tags/fiber/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/fiber/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://magnuswahlstrand.github.io/tags/go/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>https://magnuswahlstrand.github.io/tags/mongodb/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>https://magnuswahlstrand.github.io/tags/react/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react-query</title>
+      <link>https://magnuswahlstrand.github.io/tags/react-query/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/react-query/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>architecture</title>
       <link>https://magnuswahlstrand.github.io/tags/architecture/</link>
@@ -30,51 +75,6 @@
       <pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fiber</title>
-      <link>https://magnuswahlstrand.github.io/tags/fiber/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/fiber/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://magnuswahlstrand.github.io/tags/go/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mongodb</title>
-      <link>https://magnuswahlstrand.github.io/tags/mongodb/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/mongodb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>react</title>
-      <link>https://magnuswahlstrand.github.io/tags/react/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/react/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>react-query</title>
-      <link>https://magnuswahlstrand.github.io/tags/react-query/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/react-query/</guid>
       <description></description>
     </item>
     

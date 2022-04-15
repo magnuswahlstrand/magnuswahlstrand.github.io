@@ -60,7 +60,7 @@ Postgres is one of my favorite databases to work with in production (and probabl
   "headline": "Audit tables in Postgres",
   "description" : "A while back I watched this video (summary here) with Michael Bryzek (Flow.io, Gilt). He presented how they do Change Data Capture (CDC) with PostgreSQL and DynamoDB. One goal with CDC is that changes to databases rows and tables can be propagated to other parts of the system. In microservices systems, this can be used to build read-projections, or just keep local caches of data.\nPostgres is one of my favorite databases to work with in production (and probably the one I most experience with), but I have little or experience working features such as PostgreSQL triggers and stored procedures. In this blog post, I explore how to use triggers to create a simple audit table in Postgres.\n",
   "inLanguage" : "en",
-  "wordCount":  800 ,
+  "wordCount":  798 ,
   "datePublished" : "2022-02-27T00:00:00",
   "dateModified" : "2022-02-27T00:00:00",
   "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
@@ -302,8 +302,7 @@ was updated.</li>
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>);<span style="color:#bbb">
 </span></span></span></code></pre></div><p><em><strong>Note:</strong> Our <code>profile_audits</code> can contain any columns we want. I chose a single <code>row</code> column to store the full changed row because 1) it is easy 2) we don&rsquo;t have to worry about schema changes to the <code>profile</code> table.</em></p>
 <h3 id="linking-the-two-tables">Linking the two tables</h3>
-<p>The goal is to be able to store any changes in the <code>profile</code> table, and store them in the <code>profile_audit</code>. For this we
-need</p>
+<p>The goal is to be able to track changes to the <code>profile</code> table, and store them in <code>profile_audit</code>. For this we need</p>
 <ol>
 <li>A <a href="https://www.postgresql.org/docs/9.1/sql-createtrigger.html">postgres trigger</a> that listen to changes to
 the <code>profile</code> table. From the documentation:</li>

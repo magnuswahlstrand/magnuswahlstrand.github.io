@@ -5,35 +5,36 @@
     <link>https://magnuswahlstrand.github.io/</link>
     <description>Recent content on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 12 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Excalidraw</title>
-      <link>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</link>
-      <pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</guid>
-      <description>&lt;p&gt;Working in a &amp;ldquo;mostly remote&amp;rdquo; workplace, I find it important explore new tools that simplify collaboration and knowledge sharing online.&lt;/p&gt;
-&lt;p&gt;A tool that I have used and enjoyed the last few years is &lt;a href=&#34;https://excalidraw.com/&#34;&gt;Excalidraw&lt;/a&gt;. Description from their homepage:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Virtual whiteboard for sketching hand-drawn like diagrams.
-Collaborative and end-to-end encrypted.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In this post I will go through a few of Exalidraw&amp;rsquo;s features that I think are useful and great.&lt;/p&gt;</description>
-    </item>
-    
+    <lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tiny fullstack app</title>
-      <link>https://magnuswahlstrand.github.io/hidden/2022-04-11-react-fiber-mongo/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</link>
+      <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/hidden/2022-04-11-react-fiber-mongo/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</guid>
       <description>&lt;p&gt;In this post I will build a simple app using a combination of tools and libraries that I&amp;rsquo;m exploring.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;React&lt;/strong&gt; (&lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React-Query&lt;/a&gt;, &lt;a href=&#34;https://mantine.dev/&#34;&gt;Mantine&lt;/a&gt; for UI)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Go&lt;/strong&gt; (&lt;a href=&#34;https://github.com/gofiber/fiber&#34;&gt;Fiber&lt;/a&gt; for routing, &lt;a href=&#34;https://github.com/qiniu/qmgo&#34;&gt;Qmgo&lt;/a&gt; db-driver)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;MongoDB&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The goal is to create a simple User List with basic filtering&lt;/p&gt;</description>
+&lt;p&gt;The goal is to create a simple User List with basic filtering:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/react-fiber-mongo/search.gif&#34; alt=&#34;Search&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Excalidraw</title>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</link>
+      <pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/</guid>
+      <description>&lt;p&gt;Communication in a &amp;ldquo;mostly remote&amp;rdquo; workplace can be difficult. Lucky for us, there are new tools that can help us collaborate and share knowledge online!&lt;/p&gt;
+&lt;p&gt;A tool that I have used and enjoyed the last few years is &lt;a href=&#34;https://excalidraw.com/&#34;&gt;Excalidraw&lt;/a&gt;. Description from their homepage:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Virtual whiteboard for sketching hand-drawn like diagrams.
+Collaborative and end-to-end encrypted.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In this post I will go through a few of Exalidraw&amp;rsquo;s features that are useful and great.&lt;/p&gt;</description>
     </item>
     
     <item>
