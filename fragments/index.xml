@@ -22,7 +22,7 @@
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
-      <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
+      <description>&lt;p&gt;A while back, when reading &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
     </item>
     

@@ -5,7 +5,23 @@
     <link>https://magnuswahlstrand.github.io/tags/go/</link>
     <description>Recent content in go on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google Pub/Sub with dead letter queues</title>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</link>
+      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</guid>
+      <description>&lt;p&gt;Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous &lt;a href=&#34;https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern&#34;&gt;publisher-subscriber pattern&lt;/a&gt;. We will use Terraform for creating the infrastucture, and go for the application code. All code &lt;a href=&#34;https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;At the end of this post, you should know&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What is a topic?&lt;/li&gt;
+&lt;li&gt;What is a subscription?&lt;/li&gt;
+&lt;li&gt;Why do I need a dead letter queue?&lt;/li&gt;
+&lt;li&gt;How do I retry message from my dead letter queue?&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
     <item>
       <title>Tiny fullstack app</title>
       <link>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</link>
@@ -64,7 +80,7 @@ In this article I cover how to set up a very useful application that insert anim
       <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/fragments/2021-03-06-using-an-orm-with-go/</guid>
-      <description>&lt;p&gt;A while back &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
+      <description>&lt;p&gt;A while back, when reading &lt;a href=&#34;https://twitter.com/brandur&#34;&gt;@brandur&amp;rsquo;s&lt;/a&gt; article &lt;a href=&#34;https://brandur.org/http-transactions&#34;&gt;Using Atomic Transactions&lt;/a&gt;, I realised that I have actually never used an ORM (&lt;a href=&#34;https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping&#34;&gt;wiki&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;When I started web programming in Go, I quickly adopted the community notion (from forums, and presentations) that using large frameworks is frowned upon. Was I wrong?&lt;/p&gt;</description>
     </item>
     

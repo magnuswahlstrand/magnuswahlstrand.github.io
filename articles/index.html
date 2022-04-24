@@ -223,6 +223,66 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
+    <a href="https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/">
+        <h2 class="post-title">Google Pub/Sub with dead letter queues</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on April 23, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1243&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        <p>Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher-subscriber pattern</a>. We will use Terraform for creating the infrastucture, and go for the application code. All code <a href="https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq">here</a>.</p>
+<p>At the end of this post, you should know</p>
+<ul>
+<li>What is a topic?</li>
+<li>What is a subscription?</li>
+<li>Why do I need a dead letter queue?</li>
+<li>How do I retry message from my dead letter queue?</li>
+</ul>
+        <a href="https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://magnuswahlstrand.github.io/tags/go/">go</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/pubsub/">pubsub</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/gcp/">gcp</a>&nbsp;
+        
+        <a href="https://magnuswahlstrand.github.io/tags/dlq/">dlq</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
     <a href="https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/">
         <h2 class="post-title">Tiny fullstack app</h2>
         
@@ -717,57 +777,6 @@ In this article I cover how to set up a very useful application that insert anim
         <a href="https://magnuswahlstrand.github.io/tags/jquery/">jquery</a>&nbsp;
         
         <a href="https://magnuswahlstrand.github.io/tags/web/">web</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://magnuswahlstrand.github.io/articles/2019-11-30-heroku-secrets-rotation/">
-        <h2 class="post-title">Automatic key rotation on Heroku</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;Posted on November 29, 2019
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;496&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        <p>Automatic key rotation is a simple way of improving the security of an app.</p>
-<p>In this example, I have two services running on <a href="https://www.heroku.com/">Heroku</a>. The goal is that the API key in <code>service-1</code> one can be rotated smoothly (every 2 week), while <code>service-2</code> uses the rotating API keys to connect to <code>service-1</code>.
-We will use the Heroku plugin <a href="https://elements.heroku.com/addons/securekey">securekey</a>.</p>
-        <a href="https://magnuswahlstrand.github.io/articles/2019-11-30-heroku-secrets-rotation/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://magnuswahlstrand.github.io/tags/security/">security</a>&nbsp;
-        
-        <a href="https://magnuswahlstrand.github.io/tags/heroku/">heroku</a>&nbsp;
         
     </div>
     

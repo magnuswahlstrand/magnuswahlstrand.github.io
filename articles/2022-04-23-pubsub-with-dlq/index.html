@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Google Pub/Sub with dead letter queues - wahlstrand.dev</title>
+  <meta name="description" content="Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous publisher-subscriber pattern. We will use Terraform for creating the infrastucture, and go for the application code. All code here.
+At the end of this post, you should know
+
+What is a topic?
+What is a subscription?
+Why do I need a dead letter queue?
+How do I retry message from my dead letter queue?
+">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "wahlstrand.dev",
+    
+    "url": "https:\/\/magnuswahlstrand.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/magnuswahlstrand.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io\/articles\/2022-04-23-pubsub-with-dlq\/",
+          "name": "Google pub sub with dead letter queues"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "Google Pub\/Sub with dead letter queues",
+  "description" : "Today we will build a simple system with Google Pub\/Sub to explore the basic components needed for an asynchronous publisher-subscriber pattern. We will use Terraform for creating the infrastucture, and go for the application code. All code here.\nAt the end of this post, you should know\n What is a topic? What is a subscription? Why do I need a dead letter queue? How do I retry message from my dead letter queue? ",
+  "inLanguage" : "en",
+  "wordCount":  1243 ,
+  "datePublished" : "2022-04-23T00:00:00",
+  "dateModified" : "2022-04-23T00:00:00",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "go, pubsub, gcp, dlq" ],
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/articles\/2022-04-23-pubsub-with-dlq\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Google Pub/Sub with dead letter queues" />
+<meta property="og:description" content="Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous publisher-subscriber pattern. We will use Terraform for creating the infrastucture, and go for the application code. All code here.
+At the end of this post, you should know
+
+What is a topic?
+What is a subscription?
+Why do I need a dead letter queue?
+How do I retry message from my dead letter queue?
+">
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
+  <meta name="twitter:title" content="Google Pub/Sub with dead letter queues" />
+  <meta name="twitter:description" content="Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous publisher-subscriber pattern. We will use Terraform for creating the infrastucture, …">
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-190996420-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Articles" href="/articles">Articles</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Fragments" href="/fragments">Fragments</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="articles-heading">
+              
+                <h1>Google Pub/Sub with dead letter queues</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher-subscriber pattern</a>. We will use Terraform for creating the infrastucture, and go for the application code. All code <a href="https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq">here</a>.</p>
+<p>At the end of this post, you should know</p>
+<ul>
+<li>What is a topic?</li>
+<li>What is a subscription?</li>
+<li>Why do I need a dead letter queue?</li>
+<li>How do I retry message from my dead letter queue?</li>
+</ul>
+<h2 id="background">Background</h2>
+<p>Asynchronous communication and event driven systems are common in modern software development. Most cloud providers offer such messages services these use cases.</p>
+<ul>
+<li>Microsoft has <a href="https://docs.microsoft.com/sv-se/azure/service-bus-messaging/service-bus-messaging-overview">Azure Service Bus</a></li>
+<li>AWS has <a href="https://aws.amazon.com/sqs/">SQS</a> and <a href="https://aws.amazon.com/sns/">SNS</a></li>
+<li>Google has <a href="https://cloud.google.com/pubsub/docs/overview">Pub/Sub</a></li>
+</ul>
+<p>One common pattern is the <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher-subscriber pattern</a> where (usually) one publisher publishes message to a certain topic, and one or many subscribers listens for these events. The publisher does not know who is subscribing, and in fact, does not know if there are any subscribers at all. This can be used as glue between your own services and those of the cloud provider.</p>
+<h3 id="dead-letter-queues-dlq">Dead letter queues (DLQ)</h3>
+<p>A problem in messaging systems is &ldquo;what do you do with bad messages?&rdquo;. Let&rsquo;s say a bad producer publishes a message that the consumer can&rsquo;t parse, or the consumer has lost the connection to its datastore. We have at least two options:</p>
+<p><strong>Discard the messages</strong> - with this option, we risk losing data that is actually valid.</p>
+<p><strong>Retry forever</strong> - with this we might also ultimately lose data, if the messaging service fills up. This could also cause increase latency in the system.</p>
+<p>A third option is a <strong>dead letter queue (DLQ)</strong>. The main purpose of a dead letter queue is to handle messages that cannot be handled by the consumer. After a certain amount of time or retries, we can send messages &ldquo;somewhere else&rdquo;, where the problematic messages can be handled manually. For example, an operator can inspect and drop the messages, or resend them to the service after a bug-fix has been released.</p>
+<h3 id="pubsub-with-dlq-on-gcp">Pub/Sub with DLQ on GCP</h3>
+<p>In GCP, it works as follows:</p>
+<p><img src="/img/pubsub-with-dlq/gcp-overview.png" alt="img.png"></p>
+<ol>
+<li>An application publishes a message to a topic, e.g. <code>used-created</code></li>
+<li>The consuming application is subscribed to this topic via a subscription <code>myapp.user-created</code></li>
+<li>When the retry limit is reached, the message is moved over to the dead letter queue topic, <code>myapp.used-created.dlq</code>.</li>
+<li>The messages end up in the subscription <code>myapp.user-created.dlq</code>, where it can handled manually by an operator.</li>
+</ol>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>We use <a href="https://www.terraform.io/">Terraform</a> to set up the necessary infrastructure in GCP.</p>
+<p>Next we set up our main topic and subscription. There is a Terraform module that simplifies the setup, called <a href="https://registry.terraform.io/modules/terraform-google-modules/pubsub/google/latest">terraform-google-modules/pubsub/google</a>.</p>
+<p><em>Note: For this demo, we keep retries few, and short. Normally I would configure exponential back-off over a longer period.</em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span>terraform {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>locals {
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">topic_name</span>  = <span style="color:#d14">&#34;user-created&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">app_name</span>    = <span style="color:#d14">&#34;app&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">provider</span> <span style="color:#d14">&#34;google&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">project</span> = <span style="color:#0086b3">var</span>.project_id
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">
+</span></span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">module</span> <span style="color:#d14">&#34;pubsub-main&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">source</span>     = <span style="color:#d14">&#34;terraform-google-modules/pubsub/google&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">project_id</span> = <span style="color:#0086b3">var</span>.project_id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">topic</span>              = <span style="color:#d14">&#34;</span><span style="color:#d14">${</span>local.topic_name<span style="color:#d14">}</span><span style="color:#d14">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">pull_subscriptions</span> = [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">name</span>                  = <span style="color:#d14">&#34;</span><span style="color:#d14">${</span>local.app_name<span style="color:#d14">}</span><span style="color:#d14">.</span><span style="color:#d14">${</span>local.topic_name<span style="color:#d14">}</span><span style="color:#d14">&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">dead_letter_topic</span>     = <span style="color:#0086b3">module</span>.pubsub<span style="color:#000;font-weight:bold">-</span>dlq.id
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">service_account</span>       = google_service_account.pubsub_sa.email
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">max_delivery_attempts</span> = <span style="color:#099">5</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">maximum_backoff</span>       = <span style="color:#d14">&#34;10s&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">minimum_backoff</span>       = <span style="color:#d14">&#34;1s&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Above, we set <code>dead_letter_topic = module.pubsub-dlq.id</code>. This references this section where we set up our DLQ.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">module</span> <span style="color:#d14">&#34;pubsub-dlq&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">source</span>     = <span style="color:#d14">&#34;terraform-google-modules/pubsub/google&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">project_id</span> = <span style="color:#0086b3">var</span>.project_id
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">topic</span>              = <span style="color:#d14">&#34;</span><span style="color:#d14">${</span>local.app_name<span style="color:#d14">}</span><span style="color:#d14">.</span><span style="color:#d14">${</span>local.topic_name<span style="color:#d14">}</span><span style="color:#d14">.dlq&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">pull_subscriptions</span> = [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">name</span> = <span style="color:#d14">&#34;</span><span style="color:#d14">${</span>local.app_name<span style="color:#d14">}</span><span style="color:#d14">.</span><span style="color:#d14">${</span>local.topic_name<span style="color:#d14">}</span><span style="color:#d14">.dlq&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Then we run <code>terraform apply</code></p>
+
+    <script defer src="https://magnuswahlstrand.github.io/js/asciinema-player.min.437364317639e58c89d88f8854b21e88.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://magnuswahlstrand.github.io/css/asciinema-player.min.f5cd392f84cd7dc439349fdb0cf86482.css" />
+
+<asciinema-player
+    src="/casts/pubsub-with-dlq/terraform.cast"rows="12"autoplay="true"loop="true"poster="#ZgotmplZ"
+></asciinema-player>
+<noscript><blockquote><p>To run this asciicast without javascript, use <code>asciinema play https://magnuswahlstrand.github.io/casts/pubsub-with-dlq/terraform.cast</code> with <a href="https://asciinema.org/">Asciinema</a></p></blockquote></noscript>
+
+<h3 id="publish-messages">Publish messages</h3>
+<p>Now that we have our infrastructure in place, we can publish a couple of messages. The easiest way to publish messages to pub/sub is with the <code>gcloud</code>-cli.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcloud pubsub topics publish <span style="color:#d14">\
+</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>  projects/b32-demo-projects/topics/user-created  --message<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;alive&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcloud pubsub topics publish <span style="color:#d14">\
+</span></span></span><span style="display:flex;"><span><span style="color:#d14"></span>  projects/b32-demo-projects/topics/user-created  --message<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;dead&#34;</span>
+</span></span></code></pre></div><h2 id="consuming">Consuming</h2>
+<p>Next is consuming. Here is a small consumer written in Go that will pull messages from our subscription. It will <strong>Nack</strong> (negatively acknowledge) any message starting with &ldquo;dead&rdquo;. Any other messages are <strong>Ack</strong> (acknowledged).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">ProcessMessages</span>(ctx context.Context, projectID, subID <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, projectID)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> fmt.<span style="color:#900;font-weight:bold">Errorf</span>(<span style="color:#d14">&#34;pubsub.NewClient: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> client.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	subscription <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">Subscription</span>(subID)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> subscription.<span style="color:#900;font-weight:bold">Receive</span>(ctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, msg <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>		txt <span style="color:#000;font-weight:bold">:=</span> fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;Received message: %q (attempt %d)&#34;</span>, <span style="color:#0086b3">string</span>(msg.Data), <span style="color:#000;font-weight:bold">*</span>msg.DeliveryAttempt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> bytes.<span style="color:#900;font-weight:bold">HasPrefix</span>(msg.Data, []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;dead&#34;</span>)) {
+</span></span><span style="display:flex;"><span>			fmt.<span style="color:#900;font-weight:bold">Println</span>(txt, <span style="color:#d14">&#34; - NACK&#34;</span>)
+</span></span><span style="display:flex;"><span>			msg.<span style="color:#900;font-weight:bold">Nack</span>()
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#900;font-weight:bold">Println</span>(txt, <span style="color:#d14">&#34; - ACK&#34;</span>)
+</span></span><span style="display:flex;"><span>		msg.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><strong>Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub</em></p>
+<p>Now we can run our app.
+
+
+<asciinema-player
+    src="/casts/pubsub-with-dlq/process-messages.cast"rows="7"autoplay="true"loop="true"poster="#ZgotmplZ"
+></asciinema-player>
+<noscript><blockquote><p>To run this asciicast without javascript, use <code>asciinema play https://magnuswahlstrand.github.io/casts/pubsub-with-dlq/process-messages.cast</code> with <a href="https://asciinema.org/">Asciinema</a></p></blockquote></noscript>
+</p>
+<p>We can see that we receive the two messages we published earlier, <em>&ldquo;alive&rdquo;</em> and <em>&ldquo;dead&rdquo;</em>. The former is <code>Ack</code>:ed, while &ldquo;dead&rdquo; gets <code>Nack</code>:ed. After attempt 5, it disappears. Is it lost forever? No! It got automatically sent over to our DLQ! Success!</p>
+<h2 id="what-now">What now?</h2>
+<p>Before we wrap up, we need to cover two things.</p>
+<ol>
+<li>How do we know that something is stuck in the DLQ?</li>
+<li>What do we do when it is stuck there?</li>
+</ol>
+<h3 id="monitoring">Monitoring</h3>
+<p>The answer to the first question is &ldquo;monitoring&rdquo;, which GCP has good support for! The GCP app is surprisingly good for this purpose I think. I will not cover the details, but here is an additional Terraform-snippet I used to set up monitoring for our app. It checks if the <code>num_undelivered_messages</code> on the dlq-subscription is greater than 0.</p>
+<p>The notification_channel refers to the phone on my app. I set this up separately.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">resource</span> <span style="color:#d14">&#34;google_monitoring_alert_policy&#34;</span> <span style="color:#d14">&#34;alert_policy&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">display_name</span> = <span style="color:#d14">&#34;Messages on dead-letter queue (app: </span><span style="color:#d14">${</span>local.app_name<span style="color:#d14">}</span><span style="color:#d14">, topic: </span><span style="color:#d14">${</span>local.topic_name<span style="color:#d14">}</span><span style="color:#d14">)&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">combiner</span>     = <span style="color:#d14">&#34;OR&#34;</span>
+</span></span><span style="display:flex;"><span>  conditions {
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">display_name</span> = <span style="color:#d14">&#34;Cloud Pub/Sub Subscription - Unacked messages&#34;</span>
+</span></span><span style="display:flex;"><span>    condition_threshold {
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">filter</span>     = <span style="color:#d14">&#34;resource.type = </span><span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34;</span>pubsub_subscription<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34; AND resource.labels.subscription_id = </span><span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34;</span><span style="color:#a61717;background-color:#e3d2d2">$</span>{<span style="color:#0086b3">module</span>.pubsub<span style="color:#000;font-weight:bold">-</span>dlq.subscription_names.<span style="color:#099">0</span>}<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34; AND metric.type = </span><span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34;</span>pubsub.googleapis.com<span style="color:#000;font-weight:bold">/</span>subscription<span style="color:#000;font-weight:bold">/</span>num_undelivered_messages<span style="color:#a61717;background-color:#e3d2d2">\</span><span style="color:#d14">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">duration</span>   = <span style="color:#d14">&#34;120s&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#008080">comparison</span> = <span style="color:#d14">&#34;COMPARISON_GT&#34;</span>
+</span></span><span style="display:flex;"><span>      aggregations {
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">alignment_period</span>   = <span style="color:#d14">&#34;60s&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#008080">per_series_aligner</span> = <span style="color:#d14">&#34;ALIGN_MAX&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">notification_channels</span> = [
+</span></span><span style="display:flex;"><span>    <span style="color:#d14">&#34;projects/b32-demo-projects/notificationChannels/6746093406737316903&#34;</span>
+</span></span><span style="display:flex;"><span>  ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#008080">user_labels</span> = {
+</span></span><span style="display:flex;"><span>    app <span style="color:#000;font-weight:bold">:</span> local.app_name
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="handling-stuck-messages">Handling stuck messages</h3>
+<p>When an operator has received the alarm from the monitor, they manually inspect the messages in the DLQ. If the message is completely invalid, they can just pull and acknowledge that specific message in the cloud console.</p>
+<p>If the message ended up in the DLQ because of a bug in the application. We can republish it to the main topic with the following code.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">RepublishMessages</span>(ctx context.Context, projectID, dlqSubID, toTopicID <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, projectID)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> fmt.<span style="color:#900;font-weight:bold">Errorf</span>(<span style="color:#d14">&#34;pubsub.NewClient: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> client.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	subscription <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">Subscription</span>(dlqSubID)
+</span></span><span style="display:flex;"><span>	topic <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">Topic</span>(toTopicID)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> subscription.<span style="color:#900;font-weight:bold">Receive</span>(ctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, msg <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>		<span style="color:#998;font-style:italic">// Republish message
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>		result <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, msg)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> _, err <span style="color:#000;font-weight:bold">:=</span> result.<span style="color:#900;font-weight:bold">Get</span>(ctx); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			msg.<span style="color:#900;font-weight:bold">Nack</span>()
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;Republished message: %q\n&#34;</span>, <span style="color:#0086b3">string</span>(msg.Data))
+</span></span><span style="display:flex;"><span>		msg.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>A few caveats on this method.</p>
+<ol>
+<li>If the message still cannot be processed by the application, it will be sent to the DLQ again, meaning we can end up in an infinite loop <code>DLQ -&gt; main -&gt; DLQ -&gt; ...</code>.</li>
+<li>If there are more subscribers to the main topic <code>user-created</code>, they will also receive this message. This might not be what you intented. This can be solved in a few ways, one of them is by <a href="https://cloud.google.com/pubsub/docs/filtering">filtering messages</a>.</li>
+<li>In the case of missing data in the message, we could use the function above as a quick fix to add the missing data. In my experience, this gets messy quite quickly. I prefer one of the following
+<ol>
+<li>The publisher adds the missing data and resend the message</li>
+<li>The consumer supports missing data by adding defaults</li>
+</ol>
+</li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<p>That&rsquo;s all. Now we have a simple publisher-subscriber setup that we can use for our application. We even have a dead letter queue with monitoring if something goes wrong.</p>
+<p>Good luck!</p>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://magnuswahlstrand.github.io/tags/go/">go</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/pubsub/">pubsub</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/gcp/">gcp</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/dlq/">dlq</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f&amp;text=Google%20Pub%2fSub%20with%20dead%20letter%20queues&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f&amp;title=Google%20Pub%2fSub%20with%20dead%20letter%20queues" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f&amp;title=Google%20Pub%2fSub%20with%20dead%20letter%20queues" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f&amp;title=Google%20Pub%2fSub%20with%20dead%20letter%20queues" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-04-23-pubsub-with-dlq%2f&amp;description=Google%20Pub%2fSub%20with%20dead%20letter%20queues" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/articles/2022-04-15-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
+                    <li><a href="/articles/2021-07-11-testing-pubsub-locally/">Running Google Pub/Sub locally</a></li>
+                
+                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
+                
+                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
+                
+                    <li><a href="/fragments/2021-03-06-using-an-orm-with-go/">Using an ORM with Go</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/" data-toggle="tooltip" data-placement="top" title="Tiny fullstack app">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
