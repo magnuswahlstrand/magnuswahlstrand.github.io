@@ -3,7 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://magnuswahlstrand.github.io/articles/</loc>
-    <lastmod>2022-04-23T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/aws/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/cdk/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/serverless/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/sst/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/trpc/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/typescript/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/</loc>
+    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/dlq/</loc>
     <lastmod>2022-04-23T00:00:00+00:00</lastmod>
@@ -18,12 +45,6 @@
     <lastmod>2022-04-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/pubsub/</loc>
-    <lastmod>2022-04-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://magnuswahlstrand.github.io/tags/</loc>
-    <lastmod>2022-04-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://magnuswahlstrand.github.io/</loc>
     <lastmod>2022-04-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/fiber/</loc>

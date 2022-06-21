@@ -66,7 +66,7 @@ How do I retry message from my dead letter queue?
   "headline": "Google Pub\/Sub with dead letter queues",
   "description" : "Today we will build a simple system with Google Pub\/Sub to explore the basic components needed for an asynchronous publisher-subscriber pattern. We will use Terraform for creating the infrastucture, and go for the application code. All code here.\nAt the end of this post, you should know\n What is a topic? What is a subscription? Why do I need a dead letter queue? How do I retry message from my dead letter queue? ",
   "inLanguage" : "en",
-  "wordCount":  1243 ,
+  "wordCount":  1261 ,
   "datePublished" : "2022-04-23T00:00:00",
   "dateModified" : "2022-04-23T00:00:00",
   "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
@@ -268,9 +268,28 @@ if (!doNotTrack) {
                 <h1>Google Pub/Sub with dead letter queues</h1>
               
               
-                <hr class="small">
               
               
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on April 23, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1261&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
               
             </div>
           </div>
@@ -361,12 +380,15 @@ if (!doNotTrack) {
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Then we run <code>terraform apply</code></p>
 
-    <script defer src="https://magnuswahlstrand.github.io/js/asciinema-player.min.437364317639e58c89d88f8854b21e88.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://magnuswahlstrand.github.io/css/asciinema-player.min.f5cd392f84cd7dc439349fdb0cf86482.css" />
+    <script src="https://magnuswahlstrand.github.io/js/asciinema-player.min.ad5df285ba10c3f22e8e6c659e7ba5b3.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://magnuswahlstrand.github.io/css/asciinema-player.min.769c38c8638dc8c9915bb6e6ef523e8b.css" />
 
-<asciinema-player
-    src="/casts/pubsub-with-dlq/terraform.cast"rows="12"autoplay="true"loop="true"poster="#ZgotmplZ"
-></asciinema-player>
+<div id="demo1"></div>
+<script>
+AsciinemaPlayer.create("/casts/pubsub-with-dlq/terraform.cast", document.getElementById('demo1'), {
+"autoplay": "true","loop": "true","poster": "npt:0:04","rows": "12",
+});
+</script>
 <noscript><blockquote><p>To run this asciicast without javascript, use <code>asciinema play https://magnuswahlstrand.github.io/casts/pubsub-with-dlq/terraform.cast</code> with <a href="https://asciinema.org/">Asciinema</a></p></blockquote></noscript>
 
 <h3 id="publish-messages">Publish messages</h3>
@@ -402,9 +424,12 @@ if (!doNotTrack) {
 <p>Now we can run our app.
 
 
-<asciinema-player
-    src="/casts/pubsub-with-dlq/process-messages.cast"rows="7"autoplay="true"loop="true"poster="#ZgotmplZ"
-></asciinema-player>
+<div id="demo2"></div>
+<script>
+AsciinemaPlayer.create("/casts/pubsub-with-dlq/process-messages.cast", document.getElementById('demo2'), {
+"autoplay": "true","loop": "true","poster": "npt:0:04","rows": "7",
+});
+</script>
 <noscript><blockquote><p>To run this asciicast without javascript, use <code>asciinema play https://magnuswahlstrand.github.io/casts/pubsub-with-dlq/process-messages.cast</code> with <a href="https://asciinema.org/">Asciinema</a></p></blockquote></noscript>
 </p>
 <p>We can see that we receive the two messages we published earlier, <em>&ldquo;alive&rdquo;</em> and <em>&ldquo;dead&rdquo;</em>. The former is <code>Ack</code>:ed, while &ldquo;dead&rdquo; gets <code>Nack</code>:ed. After attempt 5, it disappears. Is it lost forever? No! It got automatically sent over to our DLQ! Success!</p>
@@ -584,6 +609,10 @@ if (!doNotTrack) {
               <a href="https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/" data-toggle="tooltip" data-placement="top" title="Tiny fullstack app">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/" data-toggle="tooltip" data-placement="top" title="Typesafe serverless API with tRPC">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
