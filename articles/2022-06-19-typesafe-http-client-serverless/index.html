@@ -71,7 +71,7 @@ Lambda in the backend using tRPC as the glue.
   "headline": "Typesafe serverless API with tRPC",
   "description" : "I have been using React and React Query for most of my hobby projects lately. I mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the typing right.\nYesterday, Dax Raad from the Serverless Stack team pointed me in the direction of the tRPC project. It is a framework creating typesafe client and server code in Typescript. tRPC is a great fit for me as it has\n great integration with React and React Query and an adapter for AWS Lambda and the AWS Gateway  In this post, I will show you how to set up a typesafe API in Typescript, with React in the frontend with AWS Lambda in the backend using tRPC as the glue.\n",
   "inLanguage" : "en",
-  "wordCount":  1497 ,
+  "wordCount":  1515 ,
   "datePublished" : "2022-06-19T00:00:00",
   "dateModified" : "2022-06-19T00:00:00",
   "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
@@ -290,7 +290,7 @@ if (!doNotTrack) {
     &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1497&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1515&nbsp;words
   
   
     
@@ -600,14 +600,18 @@ a <code>hello.data</code> which is of type <code>{message: string}</code>.</p>
 <h4 id="-cons">❌ Cons</h4>
 <ul>
 <li><strong>tRPC</strong> is not REST, which most developers are familiar with.</li>
-<li>With <strong>tRPC</strong>, the SST stack needs to know of the internals of the application code (as far as I can tell). The API Gateway endpoint <code>/hello</code> needs to match call made by <strong>tRPC</strong>, e.g. <code>/hello</code> in the case of our procedure <code>&quot;hello&quot;</code>.</li>
+<li><del>With <strong>tRPC</strong>, the SST stack needs to know of the internals of the application code (as far as I can tell). The API Gateway endpoint <code>/hello</code> needs to match call made by <strong>tRPC</strong>, e.g. <code>/hello</code> in the case of our procedure <code>&quot;hello&quot;</code>.</del>
+<ul>
+<li><strong>Update:</strong> <a href="https://twitter.com/thdxr">Dax Raad</a> informed me that I could use the catchall of <code>{proxy+}</code> instead of specifying <code>/hello</code> explicitly.</li>
+</ul>
+</li>
 </ul>
 <p>Overall, I had a good time. Hope you did too.</p>
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://serverless-stack.com/">Serverless Stack</a></li>
 <li><a href="https://serverless-stack.com/examples/how-to-create-a-reactjs-app-with-serverless.html">SST with React.js</a></li>
-<li><a href="https://trpc.io/docs/quickstart">tRPC Quickstart</a>.</li>
+<li><a href="https://trpc.io/docs/quickstart">tRPC Quickstart</a></li>
 </ul>
 
         
