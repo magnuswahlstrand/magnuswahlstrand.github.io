@@ -318,7 +318,7 @@ if (!doNotTrack) {
         <p>I have been using React and <a href="https://react-query.tanstack.com/">React Query</a> for most of my hobby projects lately. I
 mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
 typing right.</p>
-<p>Yesterday, <a href="https://twitter.com/thdxr">Dax Raad</a> from the <a href="https://serverless-stack.com/">Serverless Stack</a> team pointed
+<p>Yesterday, <a href="https://twitter.com/thdxr">Dax Raad</a> from the <a href="https://sst.dev/">Serverless Stack</a> team pointed
 me in the direction of the <a href="https://trpc.io/">tRPC</a> project. It is a framework creating typesafe client and server code
 in Typescript. <strong>tRPC</strong> is a great fit for me as it has</p>
 <ol>
@@ -395,7 +395,7 @@ Call</strong> (RPC)</a>. The latter simply means that a program call in one plac
 <h2 id="overview">Overview</h2>
 <p>Here is our target setup:</p>
 <p><img src="/img/typesafe-http-client-serverless/request.png" alt="setup"></p>
-<p>We will use <a href="https://serverless-stack.com/">Serverless Stack </a> to bootstrap and deploy our application. It is a neat little framework that is built on top of AWS Infrastructure as Code tool <a href="https://aws.amazon.com/cdk/">CDK</a>. It comes with a lot of useful features for rapid development, such as hot reload and setting breakpoints directly in lambda code, and has great CDK constructs for deploying static sites.</p>
+<p>We will use <a href="https://sst.dev/">Serverless Stack </a> to bootstrap and deploy our application. It is a neat little framework that is built on top of AWS Infrastructure as Code tool <a href="https://aws.amazon.com/cdk/">CDK</a>. It comes with a lot of useful features for rapid development, such as hot reload and setting breakpoints directly in lambda code, and has great CDK constructs for deploying static sites.</p>
 <h2 id="set-up">Set up</h2>
 <p>First we need to set up our project and install the dependencies.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Initialize the Serverless Stack based on the typescript-starter </span>
@@ -466,7 +466,7 @@ Call</strong> (RPC)</a>. The latter simply means that a program call in one plac
 </span></span><span style="display:flex;"><span> Starting Live Lambda <span style="color:#008080">Dev</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">==========================</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>SST Console: https://console.serverless-stack.com/typesafe-client-serverless/magnus/local
+</span></span><span style="display:flex;"><span>SST Console: https://console.sst.dev/typesafe-client-serverless/magnus/local
 </span></span></code></pre></div><h2 id="updating-the-stack">Updating the stack</h2>
 <p>We need to make some changes to our stack:</p>
 <ol>
@@ -609,8 +609,8 @@ a <code>hello.data</code> which is of type <code>{message: string}</code>.</p>
 <p>Overall, I had a good time. Hope you did too.</p>
 <h2 id="resources">Resources</h2>
 <ul>
-<li><a href="https://serverless-stack.com/">Serverless Stack</a></li>
-<li><a href="https://serverless-stack.com/examples/how-to-create-a-reactjs-app-with-serverless.html">SST with React.js</a></li>
+<li><a href="https://sst.dev/">Serverless Stack</a></li>
+<li><a href="https://sst.dev/examples/how-to-create-a-reactjs-app-with-serverless.html">SST with React.js</a></li>
 <li><a href="https://trpc.io/docs/quickstart">tRPC Quickstart</a></li>
 </ul>
 
@@ -691,6 +691,17 @@ a <code>hello.data</code> which is of type <code>{message: string}</code>.</p>
 
         
           
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/draft/2022-06-26-event-based-system-on-aws/">Event-based app with Go and EventBridge</a></li>
+                
+              </ul>
 
           
         

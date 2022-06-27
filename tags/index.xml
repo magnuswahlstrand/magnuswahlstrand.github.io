@@ -5,11 +5,11 @@
     <link>https://magnuswahlstrand.github.io/tags/</link>
     <description>Recent content in Tags on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aws</title>
       <link>https://magnuswahlstrand.github.io/tags/aws/</link>
-      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/aws/</guid>
       <description></description>
@@ -18,16 +18,52 @@
     <item>
       <title>cdk</title>
       <link>https://magnuswahlstrand.github.io/tags/cdk/</link>
-      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/cdk/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>event-based</title>
+      <link>https://magnuswahlstrand.github.io/tags/event-based/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/event-based/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eventbridge</title>
+      <link>https://magnuswahlstrand.github.io/tags/eventbridge/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/eventbridge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>https://magnuswahlstrand.github.io/tags/go/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lambda</title>
+      <link>https://magnuswahlstrand.github.io/tags/lambda/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/tags/lambda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>serverless</title>
       <link>https://magnuswahlstrand.github.io/tags/serverless/</link>
-      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/serverless/</guid>
       <description></description>
@@ -36,7 +72,7 @@
     <item>
       <title>sst</title>
       <link>https://magnuswahlstrand.github.io/tags/sst/</link>
-      <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/sst/</guid>
       <description></description>
@@ -75,15 +111,6 @@
       <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>https://magnuswahlstrand.github.io/tags/gcp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://magnuswahlstrand.github.io/tags/go/</link>
-      <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://magnuswahlstrand.github.io/tags/go/</guid>
       <description></description>
     </item>
     

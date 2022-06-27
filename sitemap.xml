@@ -2,22 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://magnuswahlstrand.github.io/articles/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/aws/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/cdk/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/draft/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/event-based/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/draft/2022-06-26-event-based-system-on-aws/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/eventbridge/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/go/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/tags/lambda/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/serverless/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/sst/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/</loc>
+    <lastmod>2022-06-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://magnuswahlstrand.github.io/articles/</loc>
     <lastmod>2022-06-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/trpc/</loc>
@@ -29,16 +50,10 @@
     <loc>https://magnuswahlstrand.github.io/tags/typescript/</loc>
     <lastmod>2022-06-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://magnuswahlstrand.github.io/</loc>
-    <lastmod>2022-06-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/dlq/</loc>
     <lastmod>2022-04-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/tags/gcp/</loc>
-    <lastmod>2022-04-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://magnuswahlstrand.github.io/tags/go/</loc>
     <lastmod>2022-04-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</loc>

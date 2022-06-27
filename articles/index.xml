@@ -15,7 +15,7 @@
       <description>&lt;p&gt;I have been using React and &lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React Query&lt;/a&gt; for most of my hobby projects lately. I
 mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
 typing right.&lt;/p&gt;
-&lt;p&gt;Yesterday, &lt;a href=&#34;https://twitter.com/thdxr&#34;&gt;Dax Raad&lt;/a&gt; from the &lt;a href=&#34;https://serverless-stack.com/&#34;&gt;Serverless Stack&lt;/a&gt; team pointed
+&lt;p&gt;Yesterday, &lt;a href=&#34;https://twitter.com/thdxr&#34;&gt;Dax Raad&lt;/a&gt; from the &lt;a href=&#34;https://sst.dev/&#34;&gt;Serverless Stack&lt;/a&gt; team pointed
 me in the direction of the &lt;a href=&#34;https://trpc.io/&#34;&gt;tRPC&lt;/a&gt; project. It is a framework creating typesafe client and server code
 in Typescript. &lt;strong&gt;tRPC&lt;/strong&gt; is a great fit for me as it has&lt;/p&gt;
 &lt;ol&gt;

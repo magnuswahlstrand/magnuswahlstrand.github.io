@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>eventbridge on wahlstrand.dev</title>
+    <link>https://magnuswahlstrand.github.io/tags/eventbridge/</link>
+    <description>Recent content in eventbridge on wahlstrand.dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/eventbridge/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event-based app with Go and EventBridge</title>
+      <link>https://magnuswahlstrand.github.io/draft/2022-06-26-event-based-system-on-aws/</link>
+      <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/draft/2022-06-26-event-based-system-on-aws/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
