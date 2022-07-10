@@ -8,10 +8,10 @@
     <lastBuildDate>Sat, 23 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/pubsub/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Google Pub/Sub with dead letter queues</title>
-      <link>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</link>
+      <link>https://magnuswahlstrand.github.io/post/2022-04-23-pubsub-with-dlq/</link>
       <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2022-04-23-pubsub-with-dlq/</guid>
       <description>&lt;p&gt;Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous &lt;a href=&#34;https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern&#34;&gt;publisher-subscriber pattern&lt;/a&gt;. We will use Terraform for creating the infrastucture, and go for the application code. All code &lt;a href=&#34;https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;At the end of this post, you should know&lt;/p&gt;
 &lt;ul&gt;
@@ -24,10 +24,10 @@
     
     <item>
       <title>Running Google Pub/Sub locally</title>
-      <link>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
+      <link>https://magnuswahlstrand.github.io/post/2021-07-11-testing-pubsub-locally/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2021-07-11-testing-pubsub-locally/</guid>
       <description>&lt;p&gt;I have recently started using Google&amp;rsquo;s event queue &amp;ldquo;&lt;a href=&#34;https://cloud.google.com/pubsub&#34;&gt;&lt;strong&gt;Cloud Pub/Sub&lt;/strong&gt;&lt;/a&gt;&amp;rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.&lt;/p&gt;
 &lt;p&gt;Here is a quick guide how I set up my integration test locally using the &lt;strong&gt;Pub/Sub&lt;/strong&gt; emulator. Code examples are written in Go.&lt;/p&gt;</description>
     </item>

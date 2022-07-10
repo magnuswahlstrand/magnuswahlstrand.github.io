@@ -8,10 +8,10 @@
     <lastBuildDate>Sat, 31 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/sqlc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>State machines in Go</title>
-      <link>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</link>
+      <link>https://magnuswahlstrand.github.io/post/2020-10-31-state-machines-in-go/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2020-10-31-state-machines-in-go/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s implement a simple state machine in Go that is:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;easy to understand&lt;/li&gt;
@@ -23,10 +23,10 @@
     
     <item>
       <title>Getting started with sqlc</title>
-      <link>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
+      <link>https://magnuswahlstrand.github.io/post/2020-10-25-getting-started-with-sqlc/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2020-10-25-getting-started-with-sqlc/</guid>
       <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
 In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>

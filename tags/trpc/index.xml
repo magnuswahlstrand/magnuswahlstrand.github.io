@@ -5,13 +5,37 @@
     <link>https://magnuswahlstrand.github.io/tags/trpc/</link>
     <description>Recent content in trpc on wahlstrand.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 19 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/trpc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/trpc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Even simpler way of calling your AWS backend</title>
+      <link>https://magnuswahlstrand.github.io/post/2022-07-09-trpc-with-lambda-function-urls-on-aws/</link>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://magnuswahlstrand.github.io/post/2022-07-09-trpc-with-lambda-function-urls-on-aws/</guid>
+      <description>&lt;p&gt;A few weeks I wrote a post about using &lt;a href=&#34;https://trpc.io/&#34;&gt;tRPC&lt;/a&gt; to get type safe requests between a web client and the
+server. It turns out that there is an &lt;em&gt;&lt;strong&gt;even simpler&lt;/strong&gt;&lt;/em&gt; way of calling your AWS backend (still using tRPC) 🤯!&lt;/p&gt;
+&lt;p&gt;In this post I will show you how to use tRPC and a Lambda function
+with &lt;a href=&#34;https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html&#34;&gt;Lambda Function URLs&lt;/a&gt; to create a ToDo-app for my
+terminal. The backend is deployed to AWS using the &lt;a href=&#34;https://sst.dev/&#34;&gt;Serverless Stack&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;script src=&#34;https://magnuswahlstrand.github.io/js/asciinema-player.min.ad5df285ba10c3f22e8e6c659e7ba5b3.js&#34;&gt;&lt;/script&gt;
+    &lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://magnuswahlstrand.github.io/css/asciinema-player.min.769c38c8638dc8c9915bb6e6ef523e8b.css&#34; /&gt;
+
+&lt;div id=&#34;demo1&#34;&gt;&lt;/div&gt;
+&lt;script&gt;
+AsciinemaPlayer.create(&#34;/casts/trpc-with-lambda-function-urls-on-aws/ts-prompt.cast&#34;, document.getElementById(&#39;demo1&#39;), {
+&#34;autoplay&#34;: &#34;true&#34;,&#34;cols&#34;: &#34;80&#34;,&#34;loop&#34;: &#34;true&#34;,&#34;poster&#34;: &#34;npt:0:04&#34;,&#34;rows&#34;: &#34;14&#34;,
+});
+&lt;/script&gt;
+&lt;noscript&gt;&lt;blockquote&gt;&lt;p&gt;To run this asciicast without javascript, use &lt;code&gt;asciinema play https://magnuswahlstrand.github.io/casts/trpc-with-lambda-function-urls-on-aws/ts-prompt.cast&lt;/code&gt; with &lt;a href=&#34;https://asciinema.org/&#34;&gt;Asciinema&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&lt;/noscript&gt;</description>
+    </item>
+    
     <item>
       <title>Typesafe serverless API with tRPC</title>
-      <link>https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/</link>
+      <link>https://magnuswahlstrand.github.io/post/2022-06-19-typesafe-http-client-serverless/</link>
       <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2022-06-19-typesafe-http-client-serverless/</guid>
       <description>&lt;p&gt;I have been using React and &lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React Query&lt;/a&gt; for most of my hobby projects lately. I
 mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
 typing right.&lt;/p&gt;

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Typesafe serverless API with tRPC - wahlstrand.dev</title>
+  <meta name="description" content="I have been using React and React Query for most of my hobby projects lately. I
+mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
+typing right.
+Yesterday, Dax Raad from the Serverless Stack team pointed
+me in the direction of the tRPC project. It is a framework creating typesafe client and server code
+in Typescript. tRPC is a great fit for me as it has
+
+great integration with React and React Query and
+an adapter for AWS Lambda and the AWS Gateway
+
+In this post, I will show you how to set up a typesafe API in Typescript, with React in the frontend with AWS
+Lambda in the backend using tRPC as the glue.
+">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "wahlstrand.dev",
+    
+    "url": "https:\/\/magnuswahlstrand.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/magnuswahlstrand.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io\/post\/2022-06-19-typesafe-http-client-serverless\/",
+          "name": "Typesafe serverless API with t rpc"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "Typesafe serverless API with tRPC",
+  "description" : "I have been using React and React Query for most of my hobby projects lately. I mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the typing right.\nYesterday, Dax Raad from the Serverless Stack team pointed me in the direction of the tRPC project. It is a framework creating typesafe client and server code in Typescript. tRPC is a great fit for me as it has\n great integration with React and React Query and an adapter for AWS Lambda and the AWS Gateway  In this post, I will show you how to set up a typesafe API in Typescript, with React in the frontend with AWS Lambda in the backend using tRPC as the glue.\n",
+  "inLanguage" : "en",
+  "wordCount":  1515 ,
+  "datePublished" : "2022-06-19T00:00:00",
+  "dateModified" : "2022-06-19T00:00:00",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "aws, serverless, sst, typescript, cdk, trpc" ],
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/post\/2022-06-19-typesafe-http-client-serverless\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Typesafe serverless API with tRPC" />
+<meta property="og:description" content="I have been using React and React Query for most of my hobby projects lately. I
+mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
+typing right.
+Yesterday, Dax Raad from the Serverless Stack team pointed
+me in the direction of the tRPC project. It is a framework creating typesafe client and server code
+in Typescript. tRPC is a great fit for me as it has
+
+great integration with React and React Query and
+an adapter for AWS Lambda and the AWS Gateway
+
+In this post, I will show you how to set up a typesafe API in Typescript, with React in the frontend with AWS
+Lambda in the backend using tRPC as the glue.
+">
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/post/2022-06-19-typesafe-http-client-serverless/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
+  <meta name="twitter:title" content="Typesafe serverless API with tRPC" />
+  <meta name="twitter:description" content="I have been using React and React Query for most of my hobby projects lately. I
+mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the …">
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-190996420-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Fragments" href="/fragments">Fragments</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Typesafe serverless API with tRPC</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on June 19, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1515&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>I have been using React and <a href="https://react-query.tanstack.com/">React Query</a> for most of my hobby projects lately. I
+mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
+typing right.</p>
+<p>Yesterday, <a href="https://twitter.com/thdxr">Dax Raad</a> from the <a href="https://sst.dev/">Serverless Stack</a> team pointed
+me in the direction of the <a href="https://trpc.io/">tRPC</a> project. It is a framework creating typesafe client and server code
+in Typescript. <strong>tRPC</strong> is a great fit for me as it has</p>
+<ol>
+<li>great integration with <a href="https://trpc.io/docs/react">React and React Query</a> and</li>
+<li>an adapter for <a href="https://trpc.io/docs/aws-lambda">AWS Lambda and the AWS Gateway</a></li>
+</ol>
+<p>In this post, I will show you how to set up a typesafe API in <strong>Typescript</strong>, with <strong>React</strong> in the frontend with <strong>AWS
+Lambda</strong> in the backend using <strong>tRPC</strong> as the glue.</p>
+<p><img src="/img/typesafe-http-client-serverless/setup.png" alt="setup"></p>
+<h2 id="intro-to-trpc">Intro to tRPC</h2>
+<p>Before we start building anything, let us do a quick intro to <strong>tRPC</strong>. The goal of the package as state in the
+documentation:</p>
+<blockquote>
+<p>tRPC allows you to easily build &amp; consume fully typesafe APIs, without schemas or code generation.</p>
+</blockquote>
+<p>The name comes from <strong>Typescript</strong> + <a href="https://en.wikipedia.org/wiki/Remote_procedure_call"><strong>Remote Procedure
+Call</strong> (RPC)</a>. The latter simply means that a program call in one place (e.g. in the browser) is executed somewhere else (e.g. on a server).</p>
+<p>In our case, it can look like this. We have a procedure called <code>&quot;hello&quot;</code> that takes an object of type <code>{name: string}</code> and returns an object of the type <code>{message: string}</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">function</span> Hello() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> hello <span style="color:#000;font-weight:bold">=</span> trpc.useQuery([<span style="color:#d14">&#39;hello&#39;</span>, {name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;Magnus&#34;</span>}]);
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>hello.data) <span style="color:#000;font-weight:bold">return</span> &lt;<span style="color:#000080">div</span>&gt;Loading...&lt;/<span style="color:#000080">div</span>&gt;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> (
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#000080">div</span>&gt;{hello.data.message}&lt;/<span style="color:#000080">div</span>&gt;
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>What happens behind the scenes is that <strong>tRPC</strong> will convert the client call to an HTTP request, send it to the server, where it is converted back to typescript.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">as</span> trpc <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;@trpc/server&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {z} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;zod&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {awsLambdaRequestHandler} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;@trpc/server/adapters/aws-lambda&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> appRouter <span style="color:#000;font-weight:bold">=</span> trpc.router()
+</span></span><span style="display:flex;"><span>    .query(<span style="color:#d14">&#39;hello&#39;</span>, {
+</span></span><span style="display:flex;"><span>        input: <span style="color:#458;font-weight:bold">z.object</span>({
+</span></span><span style="display:flex;"><span>            name: <span style="color:#458;font-weight:bold">z.string</span>()
+</span></span><span style="display:flex;"><span>        }),
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">async</span> resolve(req) {
+</span></span><span style="display:flex;"><span>            <span style="color:#000;font-weight:bold">return</span> {message<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">`Hello, </span><span style="color:#d14">${</span>req.input.name<span style="color:#d14">}</span><span style="color:#d14">!`</span>};
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    });
+</span></span></code></pre></div><p>First it is validated (and type narrowed to <code>{name: string}</code>), and then we can use the typed object as <code>req</code> in our application code in the <code>resolve</code>-function.</p>
+<p>There are two variants or RPCs in <strong>tRPC</strong>: query (read) and mutation (write). This table shows the mapping to HTTP requests.</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Method</th>
+<th>Mapping</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>.query()</code></td>
+<td>Input JSON-stringified in query param. e.g. <code>myQuery?input=${encodeURIComponent(JSON.stringify(input))</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>.mutation()</code></td>
+<td>Input as POST body.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<div style="color:gray; text-align: center; font-style: italic">
+    <small>
+        from <a href="https://trpc.io/docs/rpc">trpc.io: HTTP RPC specification</a>
+    </small>
+</div>
+
+<div style="height:1em;"></div>
+</p>
+<p>Those are the basics of <strong>tRPC</strong>. Let&rsquo;s start building things!</p>
+<h2 id="overview">Overview</h2>
+<p>Here is our target setup:</p>
+<p><img src="/img/typesafe-http-client-serverless/request.png" alt="setup"></p>
+<p>We will use <a href="https://sst.dev/">Serverless Stack </a> to bootstrap and deploy our application. It is a neat little framework that is built on top of AWS Infrastructure as Code tool <a href="https://aws.amazon.com/cdk/">CDK</a>. It comes with a lot of useful features for rapid development, such as hot reload and setting breakpoints directly in lambda code, and has great CDK constructs for deploying static sites.</p>
+<h2 id="set-up">Set up</h2>
+<p>First we need to set up our project and install the dependencies.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Initialize the Serverless Stack based on the typescript-starter </span>
+</span></span><span style="display:flex;"><span>npm init sst typescript-starter typesafe-client-serverless
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Install the tRPC server package in the root of the project</span>
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">cd</span> typesafe-client-serverless
+</span></span><span style="display:flex;"><span>npm install @trpc/server
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Create a React app in ./frontend, with the Typescript template.  </span>
+</span></span><span style="display:flex;"><span>npx create-react-app frontend --template typescript --use-npm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Install the tRPC react and client packages and react-query </span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># in the ./frontend directory</span>
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">cd</span> frontend
+</span></span><span style="display:flex;"><span>npm install @trpc/client @trpc/react react-query
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># We also need static-site-env from serverless stack </span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># to the API URL into our React app</span>
+</span></span><span style="display:flex;"><span>npm install @serverless-stack/static-site-env --save-dev
+</span></span></code></pre></div><p>Finally, we go into <code>./frontend/package.json</code> and replace the start command</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>&#34;scripts&#34;: {
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">-   &#34;start&#34;: &#34;react-scripts start&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+   &#34;start&#34;: &#34;sst-env -- react-scripts start&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>    &#34;build&#34;: &#34;react-scripts build&#34;,
+</span></span><span style="display:flex;"><span>    &#34;test&#34;: &#34;react-scripts test&#34;,
+</span></span><span style="display:flex;"><span>    &#34;eject&#34;: &#34;react-scripts eject&#34;
+</span></span><span style="display:flex;"><span>},
+</span></span></code></pre></div><p><strong>Note:</strong> if you have <a href="https://stedolan.github.io/jq/">jq</a> installed, you can use</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>jq <span style="color:#d14">&#39;.scripts.start=&#34;sst-env -- react-scripts start&#34;&#39;</span> package.json &gt; package.json
+</span></span></code></pre></div><h2 id="inspecting-the-stack">Inspecting the stack</h2>
+<p>If we look inside <code>./stack/MyStack.ts</code>, we see the stack created by <code>sst init</code>. Does three things:</p>
+<ol>
+<li>Create an API Gateway with a route to <code>GET /</code></li>
+<li>Point that route to the serverless function defined in <code>handler</code> with code at <code>functions/lambda.ts</code></li>
+<li>Output the API Gateway URL</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {StackContext, Api} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#34;@serverless-stack/resources&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">function</span> MyStack({stack}<span style="color:#000;font-weight:bold">:</span> StackContext) {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> api <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> Api(stack, <span style="color:#d14">&#34;api&#34;</span>, {
+</span></span><span style="display:flex;"><span>        routes<span style="color:#000;font-weight:bold">:</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#d14">&#34;GET /&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;functions/lambda.handler&#34;</span>,
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    stack.addOutputs({
+</span></span><span style="display:flex;"><span>        ApiEndpoint: <span style="color:#458;font-weight:bold">api.url</span>
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We can now deploy the stack to AWS. SST makes this easy for us.</p>
+<p><strong>Note:</strong> The first time you deploy, it will ask you for an environment. I will use the default <code>magnus</code> here.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>npm start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; typesafe-client-serverless@0.0.0 start
+</span></span><span style="display:flex;"><span>&gt; sst start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>✅  magnus-typesafe-client-serverless-MyStack
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Stack magnus-typesafe-client-serverless-MyStack
+</span></span><span style="display:flex;"><span>  Status: deployed
+</span></span><span style="display:flex;"><span>  Outputs:
+</span></span><span style="display:flex;"><span>    ApiEndpoint: https://lbm0pu9312.execute-api.us-east-1.amazonaws.com
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">==========================</span>
+</span></span><span style="display:flex;"><span> Starting Live Lambda <span style="color:#008080">Dev</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">==========================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>SST Console: https://console.sst.dev/typesafe-client-serverless/magnus/local
+</span></span></code></pre></div><h2 id="updating-the-stack">Updating the stack</h2>
+<p>We need to make some changes to our stack:</p>
+<ol>
+<li>Enable CORS for the API Gateway</li>
+<li>Add <code>ReactStaticSite</code> pointing to our <code>frontend</code> directory.</li>
+<li>(optional) add the <code>site.url</code> to the stack outputs</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">-import {Api, StackContext} from &#34;@serverless-stack/resources&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+import {Api, ReactStaticSite, StackContext} from &#34;@serverless-stack/resources&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>export function MyStack({stack}: StackContext) {
+</span></span><span style="display:flex;"><span>  const api = new Api(stack, &#34;Api&#34;, {
+</span></span><span style="display:flex;"><span>    routes: {
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">-     &#34;GET /&#34;: &#34;functions/lambda.handler&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+     &#34;GET /hello&#34;: &#34;functions/lambda.handler&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>    },
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+   cors: true,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>  });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+ const site = new ReactStaticSite(stack, &#34;ReactSite&#34;, {
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+   path: &#34;frontend&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+   environment: {
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+     REACT_APP_API_URL: api.url,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+   }
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+ })
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>
+</span></span><span style="display:flex;"><span>  stack.addOutputs({
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+   SiteUrl: site.url,
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>    ApiEndpoint: api.url,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If we go to our terminal, SST has detected the changes and asks us if we want to redeploy.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Stacks: There are new infrastructure changes. Press ENTER to redeploy.
+</span></span></code></pre></div><p>Press <em>Enter</em> and it will deploy our changes.</p>
+<h2 id="building-our-api">Building our API</h2>
+<p>Now, let&rsquo;s get into the code. This guide is loosely based on the <a href="https://trpc.io/docs/quickstart">tRPC Quickstart</a>.</p>
+<p><strong>The handler</strong> (api/functions/lambda.ts) is what will receive our request. This is our backend. In this tutorial we return a simple and friendly &ldquo;Hello, {name}!&rdquo; where the name is taken from the request input.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">as</span> trpc <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;@trpc/server&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {z} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;zod&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {awsLambdaRequestHandler} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;@trpc/server/adapters/aws-lambda&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 1. Define the tRPC Router
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> appRouter <span style="color:#000;font-weight:bold">=</span> trpc.router()
+</span></span><span style="display:flex;"><span>    .query(<span style="color:#d14">&#39;hello&#39;</span>, {          <span style="color:#998;font-style:italic">// i.   Define query
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>        input: <span style="color:#458;font-weight:bold">z.object</span>({      <span style="color:#998;font-style:italic">// ii.  Input validation and type narrowing
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>            name: <span style="color:#458;font-weight:bold">z.string</span>()
+</span></span><span style="display:flex;"><span>        }),
+</span></span><span style="display:flex;"><span>        <span style="color:#000;font-weight:bold">async</span> resolve(req) {   <span style="color:#998;font-style:italic">// iii. Application logic
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>            <span style="color:#000;font-weight:bold">return</span> {message<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">`Hello, </span><span style="color:#d14">${</span>req.input.name<span style="color:#d14">}</span><span style="color:#d14">!`</span>};
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 2. Define the AppRouter type, needed on the client side
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">type</span> AppRouter <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">typeof</span> appRouter;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 3. Export the handler.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">const</span> handler <span style="color:#000;font-weight:bold">=</span> awsLambdaRequestHandler({
+</span></span><span style="display:flex;"><span>    router: <span style="color:#458;font-weight:bold">appRouter</span>,
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>Let&rsquo;s see what we have done</p>
+<ol>
+<li><strong>Define the tRPC router</strong>
+<ol>
+<li>Here we define that we have a remote procedure call (RPC) that is a <code>query</code>. The
+procedure is called &ldquo;hello&rdquo;.</li>
+<li>We use <a href="https://github.com/colinhacks/zod">Zod</a> to define the input types, in this case an object of
+type <code>{name: string}</code>. It does type narrowing for us!</li>
+<li>Application logic, e.g. make database requests.</li>
+</ol>
+</li>
+<li><strong>Define the AppRouter type</strong>. This is needed on the client side</li>
+<li><strong>Export the handler</strong>. The receiver of <code>GET /hello</code></li>
+</ol>
+<h4 id="the-client-frontendsrcutilstrpcts">The client (frontend/src/utils/trpc.ts)</h4>
+<p>Next we create a new file in <code>frontend/src</code> called <code>utils/trpc.ts</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {createReactQueryHooks} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;@trpc/react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">type</span> {AppRouter} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;../../../api/functions/lambda&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">const</span> trpc <span style="color:#000;font-weight:bold">=</span> createReactQueryHooks&lt;<span style="color:#000080">AppRouter</span>&gt;();
+</span></span></code></pre></div><h4 id="the-app-frontendsrcapptsx">The app (frontend/src/App.tsx)</h4>
+<p>We set up our <strong>tRPC</strong> client and <strong>React Query</strong> client, and wrap our main application <code>&lt;Hello/&gt;</code> in it. We configure
+the <strong>tRPC</strong> client with the URL from the <code>REACT_APP_API_URL</code> that we propagated in the stack.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> React, {useState} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;react&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {QueryClient, QueryClientProvider} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;react-query&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> {trpc} <span style="color:#000;font-weight:bold">from</span> <span style="color:#d14">&#39;./utils/trpc&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> apiUrl <span style="color:#000;font-weight:bold">=</span> process.env.REACT_APP_API_URL <span style="color:#000;font-weight:bold">??</span> <span style="color:#d14">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">function</span> App() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> [queryClient] <span style="color:#000;font-weight:bold">=</span> useState(() <span style="color:#000;font-weight:bold">=&gt;</span> <span style="color:#000;font-weight:bold">new</span> QueryClient());
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> [trpcClient] <span style="color:#000;font-weight:bold">=</span> useState(() <span style="color:#000;font-weight:bold">=&gt;</span>
+</span></span><span style="display:flex;"><span>        trpc.createClient({
+</span></span><span style="display:flex;"><span>            url<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">`</span><span style="color:#d14">${</span>apiUrl<span style="color:#d14">}</span><span style="color:#d14">`</span>,
+</span></span><span style="display:flex;"><span>        }),
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> (
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#000080">trpc.Provider</span> <span style="color:#008080">client</span><span style="color:#000;font-weight:bold">=</span>{trpcClient} <span style="color:#008080">queryClient</span><span style="color:#000;font-weight:bold">=</span>{queryClient}&gt;
+</span></span><span style="display:flex;"><span>            &lt;<span style="color:#000080">QueryClientProvider</span> <span style="color:#008080">client</span><span style="color:#000;font-weight:bold">=</span>{queryClient}&gt;
+</span></span><span style="display:flex;"><span>                &lt;<span style="color:#000080">Hello</span>/&gt;
+</span></span><span style="display:flex;"><span>            &lt;/<span style="color:#000080">QueryClientProvider</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#000080">trpc.Provider</span>&gt;
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Our <code>&lt;Hello/&gt;</code> component is defined in the same file, and we get the pay off for all our hard work. We finally get to
+use our typesafe client 🎉!</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">function</span> Hello() {
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">const</span> hello <span style="color:#000;font-weight:bold">=</span> trpc.useQuery([<span style="color:#d14">&#39;hello&#39;</span>, {name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;Magnus&#34;</span>}]);
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">if</span> (<span style="color:#000;font-weight:bold">!</span>hello.data) <span style="color:#000;font-weight:bold">return</span> &lt;<span style="color:#000080">div</span>&gt;Loading...&lt;/<span style="color:#000080">div</span>&gt;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">return</span> &lt;<span style="color:#000080">div</span>&gt;{hello.data.message}&lt;/<span style="color:#000080">div</span>&gt;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We call our procedure <code>hello</code> with the (typesafe) argument <code>{name: &quot;Magnus&quot;}</code>. If loading is successful, we get back
+a <code>hello.data</code> which is of type <code>{message: string}</code>.</p>
+<h3 id="testing-our-app">Testing our app</h3>
+<p>Now, with everything deployed, we can start our React app and go to <a href="http://localhost:3000/">localhost:3000</a>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>cd frontend
+</span></span><span style="display:flex;"><span>npm start
+</span></span></code></pre></div><p>If everything is configured correctly, you should see the following (perhaps with a different name).</p>
+<p><img src="/img/typesafe-http-client-serverless/hellomagnus.gif" alt="setup"></p>
+<h2 id="summary">Summary</h2>
+<p>We have built a simple <code>Hello, &lt;Name&gt;!</code>-app using Typescript, React, SST and <strong>tRPC</strong>. I think that the code was simple, while getting all the infrastructure up and running more complicated. The upside to all the work we have done is that would have a solid starting point if we want to add more things like databases or messages queues to our app, or publish our site to a custom domain.</p>
+<p>Some takeaways for <strong>tRPC</strong>:</p>
+<h4 id="-pros">✅ Pros</h4>
+<ul>
+<li>Typesafe HTTP requests 🎉</li>
+<li>Good documentation</li>
+<li>Good integration with React and AWS Lambda</li>
+</ul>
+<h4 id="-cons">❌ Cons</h4>
+<ul>
+<li><strong>tRPC</strong> is not REST, which most developers are familiar with.</li>
+<li><del>With <strong>tRPC</strong>, the SST stack needs to know of the internals of the application code (as far as I can tell). The API Gateway endpoint <code>/hello</code> needs to match call made by <strong>tRPC</strong>, e.g. <code>/hello</code> in the case of our procedure <code>&quot;hello&quot;</code>.</del>
+<ul>
+<li><strong>Update:</strong> <a href="https://twitter.com/thdxr">Dax Raad</a> informed me that I could use the catchall of <code>{proxy+}</code> instead of specifying <code>/hello</code> explicitly.</li>
+</ul>
+</li>
+</ul>
+<p>Overall, I had a good time. Hope you did too.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://sst.dev/">Serverless Stack</a></li>
+<li><a href="https://sst.dev/examples/how-to-create-a-reactjs-app-with-serverless.html">SST with React.js</a></li>
+<li><a href="https://trpc.io/docs/quickstart">tRPC Quickstart</a></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://magnuswahlstrand.github.io/tags/aws/">aws</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/serverless/">serverless</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/sst/">sst</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/typescript/">typescript</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/cdk/">cdk</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/trpc/">trpc</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f&amp;text=Typesafe%20serverless%20API%20with%20tRPC&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f&amp;title=Typesafe%20serverless%20API%20with%20tRPC" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f&amp;title=Typesafe%20serverless%20API%20with%20tRPC" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f&amp;title=Typesafe%20serverless%20API%20with%20tRPC" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2022-06-19-typesafe-http-client-serverless%2f&amp;description=Typesafe%20serverless%20API%20with%20tRPC" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/2022-07-09-trpc-with-lambda-function-urls-on-aws/">Even simpler way of calling your AWS backend</a></li>
+                
+                    <li><a href="/post/2022-06-26-event-based-system-on-aws/">Event-based apps with Go and EventBridge</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://magnuswahlstrand.github.io/post/2022-04-23-pubsub-with-dlq/" data-toggle="tooltip" data-placement="top" title="Google Pub/Sub with dead letter queues">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/" data-toggle="tooltip" data-placement="top" title="Event-based apps with Go and EventBridge">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

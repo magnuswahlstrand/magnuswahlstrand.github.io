@@ -8,10 +8,10 @@
     <lastBuildDate>Fri, 15 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tiny fullstack app</title>
-      <link>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</link>
+      <link>https://magnuswahlstrand.github.io/post/2022-04-15-react-fiber-mongo/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</guid>
+      <guid>https://magnuswahlstrand.github.io/post/2022-04-15-react-fiber-mongo/</guid>
       <description>&lt;p&gt;In this post I will build a simple app using a combination of tools and libraries that I&amp;rsquo;m exploring.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;React&lt;/strong&gt; (&lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React-Query&lt;/a&gt;, &lt;a href=&#34;https://mantine.dev/&#34;&gt;Mantine&lt;/a&gt; for UI)&lt;/li&gt;

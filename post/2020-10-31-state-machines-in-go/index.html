@@ -7,24 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>State machines in Go - Develop me</title>
-  <meta property="og:title" content="State machines in Go" />
-  <meta name="twitter:title" content="State machines in Go" />
+  <title>State machines in Go - wahlstrand.dev</title>
   <meta name="description" content="Let&rsquo;s implement a simple state machine in Go that is:
-
-easy to understand
-easy to extend
-easy to test
-
-The full code is available in the repo.">
-  <meta property="og:description" content="Let&rsquo;s implement a simple state machine in Go that is:
-
-easy to understand
-easy to extend
-easy to test
-
-The full code is available in the repo.">
-  <meta name="twitter:description" content="Let&rsquo;s implement a simple state machine in Go that is:
 
 easy to understand
 easy to extend
@@ -35,16 +19,16 @@ The full code is available in the repo.">
 {
     "@context": "http://schema.org",
     "@type": "WebSite",
-    "name": "Develop me",
+    "name": "wahlstrand.dev",
     
-    "url": "https:\/\/kyeett.github.io"
+    "url": "https:\/\/magnuswahlstrand.github.io"
 }
 </script><script type="application/ld+json">
 {
   "@context": "http://schema.org",
   "@type": "Organization",
   "name": "",
-  "url": "https:\/\/kyeett.github.io"
+  "url": "https:\/\/magnuswahlstrand.github.io"
   
   
   
@@ -59,14 +43,14 @@ The full code is available in the repo.">
         "@type": "ListItem",
         "position": 1,
         "item": {
-          "@id": "https:\/\/kyeett.github.io",
+          "@id": "https:\/\/magnuswahlstrand.github.io",
           "name": "home"
         }
     },{
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/kyeett.github.io\/post\/2020-10-31-state-machines-in-go\/",
+          "@id": "https:\/\/magnuswahlstrand.github.io\/post\/2020-10-31-state-machines-in-go\/",
           "name": "State machines in go"
         }
     }]
@@ -79,20 +63,20 @@ The full code is available in the repo.">
     "name" : "Magnus Wahlstrand"
   },
   "headline": "State machines in Go",
-  "description" : "Let\x26rsquo;s implement a simple state machine in Go that is:\n easy to understand easy to extend easy to test  The full code is available in the repo.\n",
+  "description" : "Let\u0026rsquo;s implement a simple state machine in Go that is:\n easy to understand easy to extend easy to test  The full code is available in the repo.\n",
   "inLanguage" : "en",
   "wordCount":  1147 ,
   "datePublished" : "2020-10-31T00:00:00",
   "dateModified" : "2020-10-31T00:00:00",
-  "image" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
   "keywords" : [ "go, sqlc" ],
-  "mainEntityOfPage" : "https:\/\/kyeett.github.io\/post\/2020-10-31-state-machines-in-go\/",
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/post\/2020-10-31-state-machines-in-go\/",
   "publisher" : {
     "@type": "Organization",
-    "name" : "https:\/\/kyeett.github.io",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
     "logo" : {
         "@type" : "ImageObject",
-        "url" : "https:\/\/kyeett.github.io\/img\/avatar-icon.png",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
         "height" :  60 ,
         "width" :  60
     }
@@ -108,10 +92,11 @@ easy to extend
 easy to test
 
 The full code is available in the repo.">
-<meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-<meta property="og:url" content="https://kyeett.github.io/post/2020-10-31-state-machines-in-go/" />
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/post/2020-10-31-state-machines-in-go/" />
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Develop me" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
   <meta name="twitter:title" content="State machines in Go" />
   <meta name="twitter:description" content="Let&rsquo;s implement a simple state machine in Go that is:
 
@@ -120,26 +105,17 @@ easy to extend
 easy to test
 
 The full code is available in the repo.">
-  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@Wahlstra" />
-  <meta name="twitter:creator" content="@Wahlstra" />
-  <link href='https://kyeett.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:image" content="https://kyeett.github.io/img/avatar-icon.png" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@Wahlstra" />
-  <meta name="twitter:creator" content="@Wahlstra" />
-  <meta property="og:url" content="https://kyeett.github.io/post/2020-10-31-state-machines-in-go/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Develop me" />
-
-  <meta name="generator" content="Hugo 0.69.2" />
-  <link rel="alternate" href="https://kyeett.github.io/index.xml" type="application/rss+xml" title="Develop me"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://kyeett.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="https://kyeett.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://kyeett.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
 
 
@@ -167,7 +143,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="https://kyeett.github.io">Develop me</a>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -175,25 +151,25 @@ if (!doNotTrack) {
         
           
             <li>
-              <a title="Blog" href="/">Blog</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="Samples" href="/">Samples</a>
-            </li>
-          
-        
-          
-            <li>
-              <a title="About" href="/page/about/">About</a>
+              <a title="Fragments" href="/fragments">Fragments</a>
             </li>
           
         
           
             <li>
               <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
             </li>
           
         
@@ -207,8 +183,8 @@ if (!doNotTrack) {
     
       <div class="avatar-container">
         <div class="avatar-img-border">
-          <a title="Develop me" href="https://kyeett.github.io">
-            <img class="avatar-img" src="https://kyeett.github.io/img/avatar-icon.png" alt="Develop me" />
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
           </a>
         </div>
       </div>
@@ -304,7 +280,9 @@ if (!doNotTrack) {
     &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1147&nbsp;words
   
   
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
   
   
 </span>
@@ -330,7 +308,7 @@ if (!doNotTrack) {
 <li>easy to extend</li>
 <li>easy to test</li>
 </ol>
-<p>The full code is available in the <a href="https://github.com/kyeett/state-machines-in-go">repo</a>.</p>
+<p>The full code is available in the <a href="https://github.com/magnuswahlstrand/state-machines-in-go">repo</a>.</p>
 <h4 id="dependencies">Dependencies</h4>
 <ul>
 <li><a href="https://github.com/kyleconroy/sqlc">kylenconroy/sqlc</a> - generate code from sql queries</li>
@@ -350,63 +328,63 @@ Our state machine will contain the following (main) states:</p>
 <h4 id="data-layer">Data layer</h4>
 <p>Our data model is very straightforward. Each order has an ID and a state. The state will be used for the state machine.
 It was generated by <a href="https://github.com/kyleconroy/sqlc">sqlc</a>, but could of course be written by manually.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> Order <span style="color:#000;font-weight:bold">struct</span> {
-	ID    <span style="color:#458;font-weight:bold">int64</span>
-	State <span style="color:#458;font-weight:bold">string</span>
-}
-</code></pre></div><p>If we include configuration <code>emit_interface: true</code> into our sqlc.yaml we will get an interface that we can use for database mocking, which makes testing a lot easier.
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> Order <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	ID    <span style="color:#458;font-weight:bold">int64</span>
+</span></span><span style="display:flex;"><span>	State <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If we include configuration <code>emit_interface: true</code> into our sqlc.yaml we will get an interface that we can use for database mocking, which makes testing a lot easier.
 It looks like this:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> Querier <span style="color:#000;font-weight:bold">interface</span> {
-	<span style="color:#900;font-weight:bold">CreateOrder</span>(ctx context.Context, state <span style="color:#458;font-weight:bold">string</span>) (Order, <span style="color:#458;font-weight:bold">error</span>)
-	<span style="color:#900;font-weight:bold">GetOrder</span>(ctx context.Context, id <span style="color:#458;font-weight:bold">int64</span>) (Order, <span style="color:#458;font-weight:bold">error</span>)
-	<span style="color:#900;font-weight:bold">UpdateOrderState</span>(ctx context.Context, arg UpdateOrderStateParams) <span style="color:#458;font-weight:bold">error</span>
-}
-</code></pre></div><h4 id="application-layer">Application layer</h4>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> orderProcessor <span style="color:#000;font-weight:bold">struct</span> {
-	database data.Querier
-}
-</code></pre></div><p>Our <code>orderProcessor</code> struct contains the <code>Querier</code> generated by <code>sqlc</code>, based on the the data layer. The <code>orderProcessor</code> has the following main methods:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> Querier <span style="color:#000;font-weight:bold">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#900;font-weight:bold">CreateOrder</span>(ctx context.Context, state <span style="color:#458;font-weight:bold">string</span>) (Order, <span style="color:#458;font-weight:bold">error</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#900;font-weight:bold">GetOrder</span>(ctx context.Context, id <span style="color:#458;font-weight:bold">int64</span>) (Order, <span style="color:#458;font-weight:bold">error</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#900;font-weight:bold">UpdateOrderState</span>(ctx context.Context, arg UpdateOrderStateParams) <span style="color:#458;font-weight:bold">error</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="application-layer">Application layer</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> orderProcessor <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	database data.Querier
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Our <code>orderProcessor</code> struct contains the <code>Querier</code> generated by <code>sqlc</code>, based on the the data layer. The <code>orderProcessor</code> has the following main methods:</p>
 <p><strong>CreateNewOrder</strong> - creates a new order with the initial state &ldquo;created&rdquo;.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">CreateNewOrder</span>(ctx context.Context) (<span style="color:#000;font-weight:bold">*</span>data.Order, <span style="color:#458;font-weight:bold">error</span>) {
-	order, err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">CreateOrder</span>(ctx, stateCreated)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
-	}
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">&amp;</span>order, <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p><strong>StartProcessOrder</strong> - takes an orderID, and iterates through each step of the state machine until the end state is reached, or an error has occurred.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">StartProcessOrder</span>(ctx context.Context, orderID <span style="color:#458;font-weight:bold">int64</span>) <span style="color:#458;font-weight:bold">error</span> {
-	<span style="color:#000;font-weight:bold">for</span> {
-		<span style="color:#000;font-weight:bold">var</span> isEndState <span style="color:#458;font-weight:bold">bool</span>
-		isEndState, err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">process</span>(ctx, orderID)
-		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-			<span style="color:#000;font-weight:bold">return</span> err
-		}
-
-		<span style="color:#000;font-weight:bold">if</span> isEndState {
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-		}
-	}
-}
-</code></pre></div><p><strong>process</strong> - performs an action based on the current state of the order and takes the order to the next step in the state machine.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">process</span>(ctx context.Context, orderID <span style="color:#458;font-weight:bold">int64</span>) (<span style="color:#458;font-weight:bold">bool</span>, <span style="color:#458;font-weight:bold">error</span>) {
-	order, err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">GetOrder</span>(ctx, orderID)
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, err
-	}
-	
-	<span style="color:#000;font-weight:bold">switch</span> order.State {
-	<span style="color:#000;font-weight:bold">case</span> stateCreated:  
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, p.<span style="color:#900;font-weight:bold">validateOrder</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
-	<span style="color:#000;font-weight:bold">case</span> stateValidated:
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, p.<span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
-	<span style="color:#000;font-weight:bold">case</span> stateBroadcastToOtherServices:
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>, p.<span style="color:#900;font-weight:bold">finalizeOrder</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
-	<span style="color:#000;font-weight:bold">default</span>:
-		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, fmt.<span style="color:#900;font-weight:bold">Errorf</span>(<span style="color:#d14">&#34;unexpected state: %q&#34;</span>, order.State)
-	}
-}
-</code></pre></div><ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">CreateNewOrder</span>(ctx context.Context) (<span style="color:#000;font-weight:bold">*</span>data.Order, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>	order, err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">CreateOrder</span>(ctx, stateCreated)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">&amp;</span>order, <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>StartProcessOrder</strong> - takes an orderID, and iterates through each step of the state machine until the end state is reached, or an error has occurred.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">StartProcessOrder</span>(ctx context.Context, orderID <span style="color:#458;font-weight:bold">int64</span>) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">var</span> isEndState <span style="color:#458;font-weight:bold">bool</span>
+</span></span><span style="display:flex;"><span>		isEndState, err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">process</span>(ctx, orderID)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> isEndState {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>process</strong> - performs an action based on the current state of the order and takes the order to the next step in the state machine.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">process</span>(ctx context.Context, orderID <span style="color:#458;font-weight:bold">int64</span>) (<span style="color:#458;font-weight:bold">bool</span>, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>	order, err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">GetOrder</span>(ctx, orderID)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">switch</span> order.State {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> stateCreated:  
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, p.<span style="color:#900;font-weight:bold">validateOrder</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> stateValidated:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, p.<span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> stateBroadcastToOtherServices:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">true</span>, p.<span style="color:#900;font-weight:bold">finalizeOrder</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>order)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">default</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">false</span>, fmt.<span style="color:#900;font-weight:bold">Errorf</span>(<span style="color:#d14">&#34;unexpected state: %q&#34;</span>, order.State)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
 <li>Get the order from the database</li>
 <li>Based on the state, choose an action -</li>
 <li>Perform action</li>
@@ -422,93 +400,93 @@ It looks like this:</p>
 </ol>
 </li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">validateOrder</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order) <span style="color:#458;font-weight:bold">error</span> {
-	
-	<span style="color:#998;font-style:italic">// ... Code to validate order here 
-</span><span style="color:#998;font-style:italic"></span>
-	<span style="color:#998;font-style:italic">// Update state
-</span><span style="color:#998;font-style:italic"></span>	update <span style="color:#000;font-weight:bold">:=</span> data.UpdateOrderStateParams{stateValidated, order.ID}
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">UpdateOrderState</span>(ctx, update); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-}
-</code></pre></div><p>That&rsquo;s it!</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">validateOrder</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// ... Code to validate order here 
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Update state
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	update <span style="color:#000;font-weight:bold">:=</span> data.UpdateOrderStateParams{stateValidated, order.ID}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.database.<span style="color:#900;font-weight:bold">UpdateOrderState</span>(ctx, update); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>That&rsquo;s it!</p>
 <h2 id="improvements">Improvements</h2>
 <h3 id="1-extending-the-state-machine">1. Extending the state machine</h3>
 <p>To add an additional step after order validation, we just add an additional action, after <code>stateValidated</code> and an add the corresponding state <code>addressFound</code>.</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">	...	
- 	case stateCreated:
- 		return false, p.validateOrder(ctx, &amp;order)
- 	case stateValidated:
-<span style="color:#000;background-color:#dfd">+		return false, p.lookupAddress(ctx, &amp;order)
-</span><span style="color:#000;background-color:#dfd">+	case stateAddressFound:
-</span><span style="color:#000;background-color:#dfd"></span> 		return false, p.updateOtherServices(ctx, &amp;order)
- 	case stateBroadcastToOtherServices:
- 		return true, p.finalizeOrder(ctx, &amp;order)
-	...	
-</code></pre></div><h3 id="2-testing-with-a-moq-mock">2. Testing with a <code>moq</code> mock</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>	...	
+</span></span><span style="display:flex;"><span> 	case stateCreated:
+</span></span><span style="display:flex;"><span> 		return false, p.validateOrder(ctx, &amp;order)
+</span></span><span style="display:flex;"><span> 	case stateValidated:
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+		return false, p.lookupAddress(ctx, &amp;order)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+	case stateAddressFound:
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span> 		return false, p.updateOtherServices(ctx, &amp;order)
+</span></span><span style="display:flex;"><span> 	case stateBroadcastToOtherServices:
+</span></span><span style="display:flex;"><span> 		return true, p.finalizeOrder(ctx, &amp;order)
+</span></span><span style="display:flex;"><span>	...	
+</span></span></code></pre></div><h3 id="2-testing-with-a-moq-mock">2. Testing with a <code>moq</code> mock</h3>
 <p>To test the database layer in unit tests, we generate a mock using <a href="https://https://github.com/matryer/moq">moq</a>:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">moq -out data/query_mock.go data Querier
-</code></pre></div><p>And create setup a simple database mock that handles a single order</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">type</span> singleOrderDB <span style="color:#000;font-weight:bold">struct</span> {
-	order data.Order
-	<span style="color:#000;font-weight:bold">*</span>data.QuerierMock
-}
-
-<span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">CreateTestDatabase</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) singleOrderDB {
-	db <span style="color:#000;font-weight:bold">:=</span> singleOrderDB{}
-
-	<span style="color:#998;font-style:italic">// Setup mock
-</span><span style="color:#998;font-style:italic"></span>	db.QuerierMock = <span style="color:#000;font-weight:bold">&amp;</span>data.QuerierMock{
-		CreateOrderFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, state <span style="color:#458;font-weight:bold">string</span>) (data.Order, <span style="color:#458;font-weight:bold">error</span>) {
-			db.order.State = state
-			<span style="color:#000;font-weight:bold">return</span> db.order, <span style="color:#000;font-weight:bold">nil</span>
-		},
-		GetOrderFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, id <span style="color:#458;font-weight:bold">int64</span>) (data.Order, <span style="color:#458;font-weight:bold">error</span>) {
-			<span style="color:#000;font-weight:bold">return</span> db.order, <span style="color:#000;font-weight:bold">nil</span>
-		},
-		UpdateOrderStateFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, arg data.UpdateOrderStateParams) <span style="color:#458;font-weight:bold">error</span> {
-			<span style="color:#000;font-weight:bold">switch</span> db.order.State {
-			<span style="color:#000;font-weight:bold">case</span> stateCreated:
-				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateValidated, arg.State)
-			<span style="color:#000;font-weight:bold">case</span> stateValidated:
-				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateBroadcastToOtherServices, arg.State)
-			<span style="color:#000;font-weight:bold">case</span> stateBroadcastToOtherServices:
-				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateCompleted, arg.State)
-			}
-			db.order.State = arg.State
-			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
-		},
-	}
-
-	<span style="color:#000;font-weight:bold">return</span> db
-}
-</code></pre></div><p>Next we can write our test that</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>moq -out data/query_mock.go data Querier
+</span></span></code></pre></div><p>And create setup a simple database mock that handles a single order</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> singleOrderDB <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	order data.Order
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">*</span>data.QuerierMock
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">CreateTestDatabase</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) singleOrderDB {
+</span></span><span style="display:flex;"><span>	db <span style="color:#000;font-weight:bold">:=</span> singleOrderDB{}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Setup mock
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	db.QuerierMock = <span style="color:#000;font-weight:bold">&amp;</span>data.QuerierMock{
+</span></span><span style="display:flex;"><span>		CreateOrderFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, state <span style="color:#458;font-weight:bold">string</span>) (data.Order, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>			db.order.State = state
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> db.order, <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		GetOrderFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, id <span style="color:#458;font-weight:bold">int64</span>) (data.Order, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> db.order, <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>		UpdateOrderStateFunc: <span style="color:#000;font-weight:bold">func</span>(ctx context.Context, arg data.UpdateOrderStateParams) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">switch</span> db.order.State {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">case</span> stateCreated:
+</span></span><span style="display:flex;"><span>				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateValidated, arg.State)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">case</span> stateValidated:
+</span></span><span style="display:flex;"><span>				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateBroadcastToOtherServices, arg.State)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">case</span> stateBroadcastToOtherServices:
+</span></span><span style="display:flex;"><span>				require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateCompleted, arg.State)
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			db.order.State = arg.State
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> db
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Next we can write our test that</p>
 <ol>
 <li>Creates an order</li>
 <li>Validates that the order ends up in <code>completed</code></li>
 </ol>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestStateMachine</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
-	testDB <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">CreateTestDatabase</span>(t)
-	processor <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">NewProcessor</span>(testDB)
-	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
-
-	<span style="color:#998;font-style:italic">// Arrange
-</span><span style="color:#998;font-style:italic"></span>	order, err <span style="color:#000;font-weight:bold">:=</span> processor.<span style="color:#900;font-weight:bold">CreateNewOrder</span>(ctx)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	<span style="color:#998;font-style:italic">// Act
-</span><span style="color:#998;font-style:italic"></span>	err = processor.<span style="color:#900;font-weight:bold">StartProcessOrder</span>(ctx, order.ID)
-
-	<span style="color:#998;font-style:italic">// Assert
-</span><span style="color:#998;font-style:italic"></span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-
-	state, err <span style="color:#000;font-weight:bold">:=</span> processor.<span style="color:#900;font-weight:bold">GetOrderState</span>(ctx, order.ID)
-	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
-	require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateCompleted, state)
-}
-</code></pre></div><h3 id="3-intermittent-states">3. Intermittent states</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestStateMachine</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>	testDB <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">CreateTestDatabase</span>(t)
+</span></span><span style="display:flex;"><span>	processor <span style="color:#000;font-weight:bold">:=</span> <span style="color:#900;font-weight:bold">NewProcessor</span>(testDB)
+</span></span><span style="display:flex;"><span>	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Arrange
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	order, err <span style="color:#000;font-weight:bold">:=</span> processor.<span style="color:#900;font-weight:bold">CreateNewOrder</span>(ctx)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Act
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	err = processor.<span style="color:#900;font-weight:bold">StartProcessOrder</span>(ctx, order.ID)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Assert
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	state, err <span style="color:#000;font-weight:bold">:=</span> processor.<span style="color:#900;font-weight:bold">GetOrderState</span>(ctx, order.ID)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">Equal</span>(t, stateCompleted, state)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="3-intermittent-states">3. Intermittent states</h3>
 <p>One limitation of our state machine is that if an order step failed, we have no way of knowning if we 1) tried to processed the order but failed, or 2) never tried to process the order.
 We can improve the robustness of our system by introducing temporary states, which represent the transitions between states. Something like this:</p>
 <ol>
@@ -520,30 +498,30 @@ We can improve the robustness of our system by introducing temporary states, whi
 <li><strong>complete</strong></li>
 </ol>
 <p><code>updateOtherServices</code> will now look something like this</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order) <span style="color:#458;font-weight:bold">error</span> {
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastStarted); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	<span style="color:#998;font-style:italic">// Update other services
-</span><span style="color:#998;font-style:italic"></span>
-	<span style="color:#998;font-style:italic">// Update state
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">return</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastComplete)
-}
-</code></pre></div><p>If the actual call to update other services fails, we will know it, but the order being in <code>broadcast_started</code>. Depending on the operation, we can introduce automatic recovery for such events. Either by moving the order back to state <code>validated_complete</code> or maybe check if order has been broadcast before failure, and then move it to <code>broadcast_complete</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastStarted); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Update other services
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Update state
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">return</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastComplete)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If the actual call to update other services fails, we will know it, but the order being in <code>broadcast_started</code>. Depending on the operation, we can introduce automatic recovery for such events. Either by moving the order back to state <code>validated_complete</code> or maybe check if order has been broadcast before failure, and then move it to <code>broadcast_complete</code>.</p>
 <h3 id="4-locking-orders">4. &ldquo;Locking&rdquo; orders</h3>
 <p>A secondary benefit of these temporary states is that they can serve as a sort of lock. This is useful  if we want to run multiple processing processes at the same time. For example, a cron job that finds orders that has not been processed, and processes them.  While an order is in an transition state <code>validation_started</code>,<code>broadcast_started</code>, they should not be selected for processing.</p>
 <p>To avoid race conditions, we also need to check that the order is in the expected state, when we move to being processed.</p>
 <p>The final form of <code>updateOtherServices</code></p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order, expectedState <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
-	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastStarted, expectedState); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
-		<span style="color:#000;font-weight:bold">return</span> err
-	}
-	<span style="color:#998;font-style:italic">// Update other services
-</span><span style="color:#998;font-style:italic"></span>
-	<span style="color:#998;font-style:italic">// Update state
-</span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">return</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastComplete, stateBroadcastStarted)
-}
-</code></pre></div><h2 id="wrap-up">Wrap up</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (p <span style="color:#000;font-weight:bold">*</span>orderProcessor) <span style="color:#900;font-weight:bold">updateOtherServices</span>(ctx context.Context, order <span style="color:#000;font-weight:bold">*</span>data.Order, expectedState <span style="color:#458;font-weight:bold">string</span>) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastStarted, expectedState); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Update other services
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Update state
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#000;font-weight:bold">return</span> p.<span style="color:#900;font-weight:bold">updateOrderState</span>(ctx, order, stateBroadcastComplete, stateBroadcastStarted)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="wrap-up">Wrap up</h2>
 <p>State machines are straight forward, and fun to implement and can increase the robustness of your application. They are useful for asynchronous processes, and when we need to recover gracefully from failures.</p>
 <p>We covered how to implement a one way, one path state machine. Other topics that might be worth covering:</p>
 <ul>
@@ -558,9 +536,9 @@ We can improve the robustness of our system by introducing temporary states, whi
         
           <div class="blog-tags">
             
-              <a href="https://kyeett.github.io/tags/go/">go</a>&nbsp;
+              <a href="https://magnuswahlstrand.github.io/tags/go/">go</a>&nbsp;
             
-              <a href="https://kyeett.github.io/tags/sqlc/">sqlc</a>&nbsp;
+              <a href="https://magnuswahlstrand.github.io/tags/sqlc/">sqlc</a>&nbsp;
             
           </div>
         
@@ -575,72 +553,75 @@ We can improve the robustness of our system by introducing temporary states, whi
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;text=State%20machines%20in%20Go&amp;via=Wahlstra" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;text=State%20machines%20in%20Go&amp;via=wahlstra" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f" target="_blank" title="Share on Google Plus">
-          <i class="fab fa-google-plus"></i>
-        </a>
-      </li>
-  
-      
-      <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;title=State%20machines%20in%20Go" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fkyeett.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;description=State%20machines%20in%20Go" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2fpost%2f2020-10-31-state-machines-in-go%2f&amp;description=State%20machines%20in%20Go" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
     </ul>
   </div>
   
+
               </div>
             </section>
         
 
         
           
+            
           
-          <h4 class="see-also">See also</h4>
-          <ul>
+
           
-            <li><a href="/post/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
-          
-            <li><a href="/post/2019-04-29-screen-shake/">2D animation: Screen shake</a></li>
-          
-            <li><a href="/post/2019-04-28-2d-transitions/">2D animation: Transitions</a></li>
-          
-          </ul>
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/post/2022-06-26-event-based-system-on-aws/">Event-based apps with Go and EventBridge</a></li>
+                
+                    <li><a href="/post/2022-04-23-pubsub-with-dlq/">Google Pub/Sub with dead letter queues</a></li>
+                
+                    <li><a href="/post/2022-04-15-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
+                    <li><a href="/post/2021-07-11-testing-pubsub-locally/">Running Google Pub/Sub locally</a></li>
+                
+                    <li><a href="/post/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
+                
+              </ul>
+
           
         
       </article>
@@ -649,9 +630,13 @@ We can improve the robustness of our system by introducing temporary states, whi
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://kyeett.github.io/post/2020-10-25-getting-started-with-sqlc/" data-toggle="tooltip" data-placement="top" title="Getting started with sqlc">&larr; Previous Post</a>
+              <a href="https://magnuswahlstrand.github.io/post/2020-10-25-getting-started-with-sqlc/" data-toggle="tooltip" data-placement="top" title="Getting started with sqlc">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/post/2021-03-12-acid-transactions/" data-toggle="tooltip" data-placement="top" title="ACID transactions">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
@@ -666,14 +651,15 @@ We can improve the robustness of our system by introducing temporary states, whi
   </div>
 </div>
 
-    <footer>
+      
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
               <li>
-                <a href="https://github.com/kyeett" title="GitHub">
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
                   <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
                     <i class="fab fa-github fa-stack-1x fa-inverse"></i>
@@ -681,7 +667,7 @@ We can improve the robustness of our system by introducing temporary states, whi
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/Wahlstra" title="Twitter">
+                <a href="https://twitter.com/wahlstra" title="Twitter">
                   <span class="fa-stack fa-lg">
                     <i class="fas fa-circle fa-stack-2x"></i>
                     <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
@@ -690,9 +676,7 @@ We can improve the robustness of our system by introducing temporary states, whi
               </li>
           
           <li>
-            
-            <a href="https://kyeett.github.io/index.xml" title="RSS">
-            
+            <a href="" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
@@ -710,17 +694,17 @@ We can improve the robustness of our system by introducing temporary states, whi
 
           &nbsp;&bull;&nbsp;&copy;
           
-            2020
+            2022
           
 
           
             &nbsp;&bull;&nbsp;
-            <a href="https://kyeett.github.io">Develop me</a>
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
           
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.69.2</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
@@ -731,11 +715,11 @@ We can improve the robustness of our system by introducing temporary states, whi
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="https://kyeett.github.io/js/main.js"></script>
-<script src="https://kyeett.github.io/js/highlight.min.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
 <script> hljs.initHighlightingOnLoad(); </script>
 <script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://kyeett.github.io/js/load-photoswipe.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
 
 
 
@@ -745,6 +729,7 @@ We can improve the robustness of our system by introducing temporary states, whi
 
 
 
+    
   </body>
 </html>
 
