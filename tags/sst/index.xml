@@ -8,10 +8,10 @@
     <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/sst/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Even simpler way of calling your AWS backend</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-07-09-trpc-with-lambda-function-urls-on-aws/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-07-09-trpc-with-lambda-function-urls-on-aws/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-07-09-trpc-with-lambda-function-urls-on-aws/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-07-09-trpc-with-lambda-function-urls-on-aws/</guid>
       <description>&lt;p&gt;A few weeks I wrote a post about using &lt;a href=&#34;https://trpc.io/&#34;&gt;tRPC&lt;/a&gt; to get type safe requests between a web client and the
 server. It turns out that there is an &lt;em&gt;&lt;strong&gt;even simpler&lt;/strong&gt;&lt;/em&gt; way of calling your AWS backend (still using tRPC) 🤯!&lt;/p&gt;
 &lt;p&gt;In this post I will show you how to use tRPC and a Lambda function
@@ -32,10 +32,10 @@ AsciinemaPlayer.create(&#34;/casts/trpc-with-lambda-function-urls-on-aws/ts-prom
     
     <item>
       <title>Event-based apps with Go and EventBridge</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</link>
       <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</guid>
       <description>&lt;p&gt;In this post I will build a small &lt;a href=&#34;https://en.wikipedia.org/wiki/Event-driven_architecture&#34;&gt;event-driven system&lt;/a&gt; with Go. It will be serverless app with an API Gateway in front. I will use &lt;a href=&#34;https://aws.amazon.com/eventbridge/&#34;&gt;AWS EventBridge&lt;/a&gt; as message bus that serves as glue between our components and the app will be deployed using &lt;a href=&#34;https://sst.dev/&#34;&gt;Serverless Stack &lt;/a&gt;.&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 
@@ -54,10 +54,10 @@ AsciinemaPlayer.create(&#34;/casts/trpc-with-lambda-function-urls-on-aws/ts-prom
     
     <item>
       <title>Typesafe serverless API with tRPC</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-06-19-typesafe-http-client-serverless/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/</link>
       <pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-06-19-typesafe-http-client-serverless/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-06-19-typesafe-http-client-serverless/</guid>
       <description>&lt;p&gt;I have been using React and &lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React Query&lt;/a&gt; for most of my hobby projects lately. I
 mainly use Typescript, and one of main pain points for me with React Query is the amount of work needed to get the
 typing right.&lt;/p&gt;

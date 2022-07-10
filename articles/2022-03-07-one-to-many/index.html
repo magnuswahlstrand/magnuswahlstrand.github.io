@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>SQLALchemy: One to many-relationships - wahlstrand.dev</title>
+  <meta name="description" content="When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage.
+For Python, the most commonly used SQL library is SQLAlchemy. It is usually used as an Object–relational mapping (ORM). While I have used Python in the past, I haven&rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "wahlstrand.dev",
+    
+    "url": "https:\/\/magnuswahlstrand.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/magnuswahlstrand.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io\/articles\/2022-03-07-one-to-many\/",
+          "name": "SQL alchemy one to many relationships"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "SQLALchemy: One to many-relationships",
+  "description" : "When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage. For Python, the most commonly used SQL library is SQLAlchemy. It is usually used as an Object–relational mapping (ORM). While I have used Python in the past, I haven\u0026rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.\n",
+  "inLanguage" : "en",
+  "wordCount":  1244 ,
+  "datePublished" : "2022-03-07T00:00:00",
+  "dateModified" : "2022-03-07T00:00:00",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "python, sqlalchemy, psql, postgres" ],
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/articles\/2022-03-07-one-to-many\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="SQLALchemy: One to many-relationships" />
+<meta property="og:description" content="When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage.
+For Python, the most commonly used SQL library is SQLAlchemy. It is usually used as an Object–relational mapping (ORM). While I have used Python in the past, I haven&rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.">
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/articles/2022-03-07-one-to-many/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
+  <meta name="twitter:title" content="SQLALchemy: One to many-relationships" />
+  <meta name="twitter:description" content="When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL …">
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-190996420-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Fragments" href="/fragments">Fragments</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>SQLALchemy: One to many-relationships</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on March 7, 2022
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1244&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage.
+For Python, the most commonly used SQL library is <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. It is usually used as an Object–relational mapping (<a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">ORM</a>). While I have used Python in the past, I haven&rsquo;t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.</p>
+<p><em><strong>Note</strong>: Much of what I will cover is already covered by the SQLAlchemy documentation on <a href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-one">basic relationships</a>. Post is mainly for my own understanding.</em></p>
+<h3 id="one-to-many">One to many</h3>
+<p>A one to many-relationship in SQL means that a row in one table is linked to zero or more rows in another table. For example:
+<em>One company (in the <strong>companies</strong> table) could have three employees (in the <strong>employees</strong> table)</em>.</p>
+<p>Some things I expect from a one to many-relationship.</p>
+<ul>
+<li>A parent object can be created without any children.</li>
+<li>A parent object can be created WITH children (in the same transaction).</li>
+<li>Child objects can be added independently of the parent, but can be linked to the parent when it is retrieved.</li>
+<li>If the parent object is deleted, the child objects could also be removed.</li>
+</ul>
+<p>Let&rsquo;s get started.</p>
+<h4 id="tables">Tables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy</span> <span style="color:#000;font-weight:bold">import</span> Column, Integer, String, ForeignKey
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">from</span> <span style="color:#555">sqlalchemy.orm</span> <span style="color:#000;font-weight:bold">import</span> declarative_base, relationship
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Base <span style="color:#000;font-weight:bold">=</span> declarative_base()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Company</span>(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;companies&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    employees <span style="color:#000;font-weight:bold">=</span> relationship(<span style="color:#d14">&#34;Employee&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">class</span> <span style="color:#458;font-weight:bold">Employee</span>(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">&#39;employees&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">id</span> <span style="color:#000;font-weight:bold">=</span> Column(Integer, primary_key<span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">True</span>)
+</span></span><span style="display:flex;"><span>    name <span style="color:#000;font-weight:bold">=</span> Column(String)
+</span></span><span style="display:flex;"><span>    company_id <span style="color:#000;font-weight:bold">=</span> Column(Integer, ForeignKey(<span style="color:#d14">&#39;companies.id&#39;</span>))
+</span></span></code></pre></div><p>We have two models <code>Company</code> and <code>Employee</code>. They have a one to many-relationship.</p>
+<p>The following code inserts a company with two employees. The <code>relationship(&quot;Employee&quot;)</code> on the <code>Company</code> model ensure that the <strong>employee</strong>-table will be updated as well.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> Company()
+</span></span><span style="display:flex;"><span>    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> [
+</span></span><span style="display:flex;"><span>        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Magnus&#39;</span>),
+</span></span><span style="display:flex;"><span>        Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;John&#39;</span>)
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(company)
+</span></span></code></pre></div><h4 id="result">Result</h4>
+<p><strong>company</strong>-table</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>employees</strong>-table</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">company_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">Magnus</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cascading-deletes">Cascading deletes</h3>
+<p>If we are a ruthless manager, we can also do updates like firing all our employees (managers are stored in a separate table).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    company<span style="color:#000;font-weight:bold">.</span>employees <span style="color:#000;font-weight:bold">=</span> []
+</span></span></code></pre></div><p>Unfortunately, the ruthless manager&rsquo;s upper management can still see the traces of the employees in the dabase.</p>
+<p><strong>employees</strong>-table</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">company_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">Magnus</td>
+<td style="text-align:left">NULL</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">NULL</td>
+</tr>
+</tbody>
+</table>
+<p>If we want that these entries should be removed from that table when they are removed from the parent table, we need to change the <code>relationship()</code></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>  class Company(Base):
+</span></span><span style="display:flex;"><span>      __tablename__ = &#39;companies&#39;
+</span></span><span style="display:flex;"><span>      id = Column(Integer, primary_key=True)
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">--    employees = relationship(&#34;Employee&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">++    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
+</span></span></span></code></pre></div><p>Now, if we run our code again, everything looks nice and clean.</p>
+<p><strong>employees</strong>-table</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">id</th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">company_id</th>
+</tr>
+</thead>
+</table>
+<p><em><strong>Note:</strong> The employees will be deleted any time the association between them and a company is lost, i.e. also if the company row itself is deleted.</em></p>
+<h3 id="back-propagation">Back propagation</h3>
+<p>The last requirement from the list is back propagation. If a child entity is added to its table, will it be visible when the parent is queried?</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has the following employees:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees:
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has the following employees:
+</span></span><span style="display:flex;"><span>- Magnus
+</span></span><span style="display:flex;"><span>- John
+</span></span><span style="display:flex;"><span>- Lisa
+</span></span></code></pre></div><h3 id="relationship-loading-techniques">Relationship loading techniques</h3>
+<p>In SQLAlchemy there are a few gotchas around how relationships are loaded. While I think in many scenarios should avoid complicated relationship updating technique (and if needed, should be covered by tests), it is worth knowing some things about it.</p>
+<h4 id="example-1-lazy-loading-default">Example 1: Lazy loading (default)</h4>
+<p>In the scope of a single session, we can perform both the insert, and the listing of employees. This will work, because the <code>company.employees</code> is actually loaded lazily when it is first used.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has the following employees:&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">for</span> e <span style="color:#000;font-weight:bold">in</span> company<span style="color:#000;font-weight:bold">.</span>employees: <span style="color:#998;font-style:italic"># </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0086b3">print</span>(<span style="color:#d14">&#34;-&#34;</span>, e<span style="color:#000;font-weight:bold">.</span>name)
+</span></span></code></pre></div><p>This can be observed by setting <code>echo=True</code> on the engine, like so <code>engine = create_engine(url, echo=True)</code>, and running the script again.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>Company 1 has the following employees:
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine SELECT employees.id AS employees_id, employees.name AS employees_name, employees.company_id AS employees_company_id
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+FROM employees
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+WHERE %(param_1)s = employees.company_id
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd">+2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {&#39;param_1&#39;: 1}
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#dfd"></span>\- Magnus
+</span></span><span style="display:flex;"><span>\- John
+</span></span><span style="display:flex;"><span>\- Lisa
+</span></span></code></pre></div><p>As you can see, SQLAlchemy will do an additional trip to the DB when looking up the company employees. In fact, <code>company.employees</code> will only be loaded <strong>once per session</strong>.</p>
+<p>We can observe this by adding another employee after the first fetch employees is done:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add an employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add another employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
+</span></span><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">3</span> employees
+</span></span></code></pre></div><h4 id="example-2-eager-loading">Example 2: Eager loading</h4>
+<p>We can run in to the same problem even earlier if we enable eager loading. Then SQL alchemy will load the relationship data directly when the parent is queried for, even if it is not used.
+This is typically done by the option lazy=&lsquo;joined&rsquo;.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>class Company(Base):
+</span></span><span style="display:flex;"><span>    __tablename__ = &#39;companies&#39;
+</span></span><span style="display:flex;"><span>    id = Column(Integer, primary_key=True)
+</span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd">-    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+    employees = relationship(&#34;Employee&#34;, cascade=&#34;all, delete-orphan&#34;, lazy=&#39;joined&#39;)
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">with</span> Session<span style="color:#000;font-weight:bold">.</span>begin() <span style="color:#000;font-weight:bold">as</span> session:
+</span></span><span style="display:flex;"><span>    company <span style="color:#000;font-weight:bold">=</span> session<span style="color:#000;font-weight:bold">.</span>query(Company)<span style="color:#000;font-weight:bold">.</span>get(<span style="color:#099">1</span>) <span style="color:#998;font-style:italic"># Child data will be loaded here</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic"># Add another employee</span>
+</span></span><span style="display:flex;"><span>    session<span style="color:#000;font-weight:bold">.</span>add(Employee(name<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;Lisa</span><span style="color:#d14">\&#39;</span><span style="color:#d14">s friend&#39;</span>, company_id<span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0086b3">print</span>(<span style="color:#d14">f</span><span style="color:#d14">&#34;Company </span><span style="color:#d14">{</span>company<span style="color:#000;font-weight:bold">.</span>id<span style="color:#d14">}</span><span style="color:#d14"> has </span><span style="color:#d14">{</span><span style="color:#0086b3">len</span>(company<span style="color:#000;font-weight:bold">.</span>employees)<span style="color:#d14">}</span><span style="color:#d14"> employees&#34;</span>)
+</span></span></code></pre></div><p><strong>Output</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
+</span></span><span style="display:flex;"><span>Company <span style="color:#099">1</span> has <span style="color:#099">2</span> employees
+</span></span></code></pre></div><h3 id="so-what-can-we-do">So what can we do?</h3>
+<p>Both of these scenarios are unintuitive for me, and can certainly lead to bugs. SQLAlchemy has a few possible ways of handling proper back-propagation using <a href="https://docs.sqlalchemy.org/en/14/orm/backref.html">backref</a>. Exactly how <code>backref</code> works is also not intuitive, so I do not recommend using it without having a good understanding of SQLAlchemy.</p>
+<ul>
+<li>✅ Keep relationships as simple as possible</li>
+<li>✅ Trying to stay away from mutating state of many entities at the same time, if possible.</li>
+<li>✅ Write good database or integration tests</li>
+</ul>
+<p>Good luck 🙃!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We have fulfilled our initial expectations for the one-to-many relationships.</p>
+<ul>
+<li><del>A parent object can be created without any children.</del></li>
+<li><del>A parent object can be created WITH children (in the same transaction).</del></li>
+<li><del>Child objects can be added independently of the parent, but can be linked to the parent when it is retrieved.</del></li>
+<li><del>If the parent object is deleted, the child objects could also be removed.</del></li>
+</ul>
+<p>Working with SQLAlchemy is initially quite straightforward, and fun. The library is very powerful and versatile. You can pretty much do anything you want, and there are many things that can be fined tuned. The post above is just a tiny, tiny fraction of what can be done.</p>
+<h3 id="-pros">✅ Pros</h3>
+<ul>
+<li><strong>Easy to get started with</strong></li>
+<li><strong>Highly configurable</strong> - The post above is just a tiny, tiny fraction of what can be done.</li>
+<li><strong><a href="https://docs.sqlalchemy.org/en/14/">Excellent documentation</a></strong></li>
+</ul>
+<h3 id="-cons">❌ Cons</h3>
+<ul>
+<li><strong>Highly configurable</strong> - If you plan to introduce SQLAlchemy in your organisation, you should think about knowledge sharing, and creating some common practices that can be used across the engineering organisation.</li>
+<li><strong>Steep learning curve</strong> - Related to the point above</li>
+</ul>
+<h3 id="-both">〰️ Both</h3>
+<ul>
+<li><strong>You don&rsquo;t need to understand SQL to use an ORM</strong> - This means that you can build some very advanced entity relationships, without understanding the finer details of how the databases work internally. This can (in my experience) lead to both performance problems, and some really weird bugs due to complexity 😀</li>
+</ul>
+<h3 id="possible-next-steps">Possible next steps</h3>
+<ul>
+<li>Many to many-relationships</li>
+<li>More details on the SQLAlchemy session</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://docs.sqlalchemy.org/en/14/orm/backref.html">SQLAlchemy: backref</a></li>
+<li><a href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-one">SQLAlchemy: basic relationship patterns</a> -</li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://magnuswahlstrand.github.io/tags/python/">python</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/sqlalchemy/">sqlalchemy</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/psql/">psql</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/postgres/">postgres</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f&amp;text=SQLALchemy%3a%20One%20to%20many-relationships&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f&amp;title=SQLALchemy%3a%20One%20to%20many-relationships" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f&amp;title=SQLALchemy%3a%20One%20to%20many-relationships" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f&amp;title=SQLALchemy%3a%20One%20to%20many-relationships" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2022-03-07-one-to-many%2f&amp;description=SQLALchemy%3a%20One%20to%20many-relationships" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/articles/2022-02-27-audit-logs-in-postgres/">Audit tables in Postgres</a></li>
+                
+                    <li><a href="/articles/2021-03-12-acid-transactions/">ACID transactions</a></li>
+                
+                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-02-27-audit-logs-in-postgres/" data-toggle="tooltip" data-placement="top" title="Audit tables in Postgres">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-04-12-excalidraw-tips-andtricks/" data-toggle="tooltip" data-placement="top" title="Excalidraw">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

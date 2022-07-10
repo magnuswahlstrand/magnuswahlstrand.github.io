@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Running Google Pub/Sub locally - wahlstrand.dev</title>
+  <meta name="description" content="I have recently started using Google&rsquo;s event queue &ldquo;Cloud Pub/Sub&rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.
+Here is a quick guide how I set up my integration test locally using the Pub/Sub emulator. Code examples are written in Go.">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "wahlstrand.dev",
+    
+    "url": "https:\/\/magnuswahlstrand.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/magnuswahlstrand.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io\/articles\/2021-07-11-testing-pubsub-locally\/",
+          "name": "Running google pub sub locally"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "Running Google Pub\/Sub locally",
+  "description" : "I have recently started using Google\u0026rsquo;s event queue \u0026ldquo;Cloud Pub\/Sub\u0026rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production. Their documentation is usually great, but often misses how to tie everything for your local environment.\nHere is a quick guide how I set up my integration test locally using the Pub\/Sub emulator. Code examples are written in Go.\n",
+  "inLanguage" : "en",
+  "wordCount":  864 ,
+  "datePublished" : "2021-07-11T00:00:00",
+  "dateModified" : "2021-07-11T00:00:00",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "gcp, pubsub, go" ],
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/articles\/2021-07-11-testing-pubsub-locally\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Running Google Pub/Sub locally" />
+<meta property="og:description" content="I have recently started using Google&rsquo;s event queue &ldquo;Cloud Pub/Sub&rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.
+Here is a quick guide how I set up my integration test locally using the Pub/Sub emulator. Code examples are written in Go.">
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
+  <meta name="twitter:title" content="Running Google Pub/Sub locally" />
+  <meta name="twitter:description" content="I have recently started using Google&rsquo;s event queue &ldquo;Cloud Pub/Sub&rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their …">
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-190996420-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Fragments" href="/fragments">Fragments</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Running Google Pub/Sub locally</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on July 11, 2021
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;864&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>I have recently started using Google&rsquo;s event queue &ldquo;<a href="https://cloud.google.com/pubsub"><strong>Cloud Pub/Sub</strong></a>&rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.</p>
+<p>Here is a quick guide how I set up my integration test locally using the <strong>Pub/Sub</strong> emulator. Code examples are written in Go.</p>
+<h2 id="starting-the-emulator">Starting the emulator</h2>
+<p>To run the emulator, you first need the <code>gcloud</code> cli (<a href="https://cloud.google.com/sdk/docs/install">setup instructions</a>). Next can we install the emulator.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>gcloud components install pubsub-emulator
+</span></span><span style="display:flex;"><span>gcloud components update
+</span></span></code></pre></div><p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>gcloud beta emulators pubsub start --project=test-project
+</span></span></code></pre></div><p>Output:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
+</span></span><span style="display:flex;"><span>[pubsub] This is the Google Pub/Sub fake.
+</span></span><span style="display:flex;"><span>[pubsub] Implementation may be incomplete or differ from the real system.
+</span></span><span style="display:flex;"><span>....
+</span></span></code></pre></div><h2 id="code">Code</h2>
+<p>We can use the Google Pub/Sub client to publish or subscribe on a topic.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>go get -u cloud.google.com/go/pubsub
+</span></span></code></pre></div><h4 id="setup-the-client">Setup the client</h4>
+<p>We need to point the <code>pubsub.Client</code> to our emulator. For this purpose, <code>pubsub.NewClient</code> uses a magic environment variable <code>PUBSUB_EMULATOR_HOST</code>.
+You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</code>. For our test code, we use <code>os.Setenv</code>.</p>
+<p><strong>Note</strong>: If we don&rsquo;t set <code>PUBSUB_EMULATOR_HOST</code>, the client will default to an actual Google project. Be careful :-).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Initialize client
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;test-project&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">####</span> Receive message
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Create topic
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, <span style="color:#d14">&#34;some-topic&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span></code></pre></div><h4 id="receive-message">Receive message</h4>
+<p>Now that we have a topic, we could publish a message. However, we don&rsquo;t have any subscriptions yet, and so the published message would be discared.</p>
+<ul>
+<li>Push - <strong>Pub/Sub</strong> is responsible for pushing any incoming messages on a topic to a specific endpoint in the service</li>
+<li>Pull - Service is responsible for setting up a connection to a <strong>Pub/Sub</strong> topic, and waits for incoming messages.</li>
+</ul>
+<h5 id="creating-a-pull-subscription">Creating a pull subscription</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id&#34;</span>, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>    Topic: topic,
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Wrap context for cancellation, and cancel the first
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>    m.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#900;font-weight:bold">cancel</span>() <span style="color:#998;font-style:italic">// for test purpose, shut down after first message 
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>})
+</span></span></code></pre></div><p><strong>Note</strong>: If we don&rsquo;t receive a message for some reason, the <code>Receive</code> call will be stuck forever. I will fix this in the full test code example.</p>
+<h5 id="creating-a-push-subscription">Creating a push subscription</h5>
+<p>For the push example, we need a endpoint that can receive and decode the PubSub message.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">pubSubHandler</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Do something with event
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	<span style="color:#998;font-style:italic">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>}
+</span></span></code></pre></div><p>Then all we need to do is to add  <code>pubsub.PushConfig</code> with our endpoint, when we configure create a subscription.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, <span style="color:#d14">&#34;some-subscription-id-2&#34;</span>, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>    Topic: topic,
+</span></span><span style="display:flex;"><span>    PushConfig: pubsub.PushConfig{
+</span></span><span style="display:flex;"><span>        Endpoint: <span style="color:#d14">&#34;localhost:8080/pubsub/event&#34;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h4 id="publishing-a-message">Publishing a message</h4>
+<p>Finally, we can publish a message to <strong>Pub/Sub</strong>. Keep in mind that <code>Publish</code> is asynchronous, and you should use <code>res.Get</code> afterwards if the result is important.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>    Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Wait for result, if you care about it :-) 
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>messageID, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">...</span>
+</span></span></code></pre></div><h2 id="summary">Summary</h2>
+<p>In this guide I showed how to do the following:</p>
+<ol>
+<li>Start the <strong>Pub/Sub</strong> emulator</li>
+<li>Configure the Go client</li>
+<li>Create topics</li>
+<li>Create <em>pull</em> and <em>push</em> subscriptions</li>
+<li>Publish and receive events</li>
+</ol>
+<p>If you are interested in the full code I have included two testcases below.</p>
+<h2 id="appendix-complete-test-code">Appendix: Complete test code</h2>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;cloud.google.com/go/pubsub&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;encoding/json&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/google/uuid&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/magnuswahlstrand/gcp-examples/pubsub/common&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/stretchr/testify/require&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;net/http/httptest&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;os&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;testing&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Test 1: Pull subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPull</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
+</span></span><span style="display:flex;"><span>	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	sub, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>		Topic: topic,
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Act: publish message
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	res <span style="color:#000;font-weight:bold">:=</span> topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	_, err = res.<span style="color:#900;font-weight:bold">Get</span>(ctx)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	cctx, cancel <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">WithCancel</span>(ctx)
+</span></span><span style="display:flex;"><span>	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">go</span> <span style="color:#000;font-weight:bold">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#998;font-style:italic">// Use a callback to receive messages via subscription.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>		<span style="color:#998;font-style:italic">// Receive will block until the context is cancelled, or we get a non-recoverable error
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>		err = sub.<span style="color:#900;font-weight:bold">Receive</span>(cctx, <span style="color:#000;font-weight:bold">func</span>(_ context.Context, m <span style="color:#000;font-weight:bold">*</span>pubsub.Message) {
+</span></span><span style="display:flex;"><span>			m.<span style="color:#900;font-weight:bold">Ack</span>()
+</span></span><span style="display:flex;"><span>			okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(m.Data)
+</span></span><span style="display:flex;"><span>			<span style="color:#900;font-weight:bold">cancel</span>()
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">select</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">300</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#900;font-weight:bold">cancel</span>()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// Test 2: Push subscription
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">TestSendWithPush</span>(t <span style="color:#000;font-weight:bold">*</span>testing.T) {
+</span></span><span style="display:flex;"><span>	topicID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;topic-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
+</span></span><span style="display:flex;"><span>	subscriptionID <span style="color:#000;font-weight:bold">:=</span> <span style="color:#d14">&#34;sub-&#34;</span> <span style="color:#000;font-weight:bold">+</span> uuid.<span style="color:#900;font-weight:bold">New</span>().<span style="color:#900;font-weight:bold">String</span>()[<span style="color:#099">0</span>:<span style="color:#099">8</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	okCh <span style="color:#000;font-weight:bold">:=</span> <span style="color:#0086b3">make</span>(<span style="color:#000;font-weight:bold">chan</span> <span style="color:#458;font-weight:bold">string</span>)
+</span></span><span style="display:flex;"><span>	server <span style="color:#000;font-weight:bold">:=</span> httptest.<span style="color:#900;font-weight:bold">NewServer</span>(http.<span style="color:#900;font-weight:bold">HandlerFunc</span>(<span style="color:#000;font-weight:bold">func</span>(w http.ResponseWriter, r <span style="color:#000;font-weight:bold">*</span>http.Request) {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">var</span> event pubSubMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> json.<span style="color:#900;font-weight:bold">NewDecoder</span>(r.Body).<span style="color:#900;font-weight:bold">Decode</span>(<span style="color:#000;font-weight:bold">&amp;</span>event); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			w.<span style="color:#900;font-weight:bold">WriteHeader</span>(http.StatusBadRequest)
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">defer</span> r.Body.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		okCh <span style="color:#000;font-weight:bold">&lt;-</span> <span style="color:#0086b3">string</span>(event.Message.Data)
+</span></span><span style="display:flex;"><span>	}))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ctx <span style="color:#000;font-weight:bold">:=</span> context.<span style="color:#900;font-weight:bold">Background</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	os.<span style="color:#900;font-weight:bold">Setenv</span>(<span style="color:#d14">&#34;PUBSUB_EMULATOR_HOST&#34;</span>, <span style="color:#d14">&#34;localhost:8085&#34;</span>)
+</span></span><span style="display:flex;"><span>	client, err <span style="color:#000;font-weight:bold">:=</span> pubsub.<span style="color:#900;font-weight:bold">NewClient</span>(ctx, <span style="color:#d14">&#34;fake-project&#34;</span>)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	topic, err <span style="color:#000;font-weight:bold">:=</span> client.<span style="color:#900;font-weight:bold">CreateTopic</span>(ctx, topicID)
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	_, err = client.<span style="color:#900;font-weight:bold">CreateSubscription</span>(ctx, subscriptionID, pubsub.SubscriptionConfig{
+</span></span><span style="display:flex;"><span>		Topic: topic,
+</span></span><span style="display:flex;"><span>		PushConfig: pubsub.PushConfig{
+</span></span><span style="display:flex;"><span>			Endpoint: server.URL,
+</span></span><span style="display:flex;"><span>		},
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	require.<span style="color:#900;font-weight:bold">NoError</span>(t, err)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Act: publish message
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	_ = topic.<span style="color:#900;font-weight:bold">Publish</span>(ctx, <span style="color:#000;font-weight:bold">&amp;</span>pubsub.Message{
+</span></span><span style="display:flex;"><span>		Data: []<span style="color:#0086b3">byte</span>(<span style="color:#d14">&#34;hello test&#34;</span>),
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">select</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> msg <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;-</span>okCh:
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Equal</span>(t, <span style="color:#d14">&#34;hello test&#34;</span>, msg)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">case</span> <span style="color:#000;font-weight:bold">&lt;-</span>time.<span style="color:#900;font-weight:bold">After</span>(<span style="color:#099">500</span> <span style="color:#000;font-weight:bold">*</span> time.Millisecond):
+</span></span><span style="display:flex;"><span>		require.<span style="color:#900;font-weight:bold">Fail</span>(t, <span style="color:#d14">&#34;did not receive message within deadline&#34;</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://cloud.google.com/sdk/docs/install">Installing Google Cloud SDK</a></li>
+<li><a href="https://cloud.google.com/pubsub/docs/emulator">Testing apps locally with the emulator</a></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://magnuswahlstrand.github.io/tags/gcp/">gcp</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/pubsub/">pubsub</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/go/">go</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f&amp;text=Running%20Google%20Pub%2fSub%20locally&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f&amp;title=Running%20Google%20Pub%2fSub%20locally" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f&amp;title=Running%20Google%20Pub%2fSub%20locally" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f&amp;title=Running%20Google%20Pub%2fSub%20locally" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2021-07-11-testing-pubsub-locally%2f&amp;description=Running%20Google%20Pub%2fSub%20locally" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/articles/2022-06-26-event-based-system-on-aws/">Event-based apps with Go and EventBridge</a></li>
+                
+                    <li><a href="/articles/2022-04-23-pubsub-with-dlq/">Google Pub/Sub with dead letter queues</a></li>
+                
+                    <li><a href="/articles/2022-04-15-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
+                    <li><a href="/articles/2020-10-31-state-machines-in-go/">State machines in Go</a></li>
+                
+                    <li><a href="/articles/2020-10-25-getting-started-with-sqlc/">Getting started with sqlc</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://magnuswahlstrand.github.io/articles/2021-03-12-acid-transactions/" data-toggle="tooltip" data-placement="top" title="ACID transactions">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/articles/2022-02-27-audit-logs-in-postgres/" data-toggle="tooltip" data-placement="top" title="Audit tables in Postgres">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

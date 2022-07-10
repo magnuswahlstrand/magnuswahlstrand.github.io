@@ -8,10 +8,10 @@
     <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/event-based/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Event-based apps with Go and EventBridge</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</link>
       <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</guid>
       <description>&lt;p&gt;In this post I will build a small &lt;a href=&#34;https://en.wikipedia.org/wiki/Event-driven_architecture&#34;&gt;event-driven system&lt;/a&gt; with Go. It will be serverless app with an API Gateway in front. I will use &lt;a href=&#34;https://aws.amazon.com/eventbridge/&#34;&gt;AWS EventBridge&lt;/a&gt; as message bus that serves as glue between our components and the app will be deployed using &lt;a href=&#34;https://sst.dev/&#34;&gt;Serverless Stack &lt;/a&gt;.&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 

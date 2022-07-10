@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Getting started with sqlc - wahlstrand.dev</title>
+  <meta name="description" content="sqlc is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!
+">
+  <meta name="author" content="Magnus Wahlstrand"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "wahlstrand.dev",
+    
+    "url": "https:\/\/magnuswahlstrand.github.io"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/magnuswahlstrand.github.io"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/magnuswahlstrand.github.io\/articles\/2020-10-25-getting-started-with-sqlc\/",
+          "name": "Getting started with sqlc"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Magnus Wahlstrand"
+  },
+  "headline": "Getting started with sqlc",
+  "description" : "sqlc is a command line tool to generate type-safe Go code, based on SQL queries and schemas. In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!\n",
+  "inLanguage" : "en",
+  "wordCount":  929 ,
+  "datePublished" : "2020-10-25T00:00:00",
+  "dateModified" : "2020-10-25T00:00:00",
+  "image" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+  "keywords" : [ "go, postgres, database, sqlc" ],
+  "mainEntityOfPage" : "https:\/\/magnuswahlstrand.github.io\/articles\/2020-10-25-getting-started-with-sqlc\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/magnuswahlstrand.github.io",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/magnuswahlstrand.github.io\/img\/avatar-icon.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Getting started with sqlc" />
+<meta property="og:description" content="sqlc is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!
+">
+<meta property="og:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+<meta property="og:url" content="https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="wahlstrand.dev" />
+
+  <meta name="twitter:title" content="Getting started with sqlc" />
+  <meta name="twitter:description" content="sqlc is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not …">
+  <meta name="twitter:image" content="https://magnuswahlstrand.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@wahlstra" />
+  <meta name="twitter:creator" content="@wahlstra" />
+  <link href='https://magnuswahlstrand.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.96.0" />
+  <link rel="alternate" href="https://magnuswahlstrand.github.io/index.xml" type="application/rss+xml" title="wahlstrand.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://magnuswahlstrand.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-190996420-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Fragments" href="/fragments">Fragments</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Now" href="/page/now">Now</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="wahlstrand.dev" href="https://magnuswahlstrand.github.io">
+            <img class="avatar-img" src="https://magnuswahlstrand.github.io/img/avatar-icon.png" alt="wahlstrand.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>Getting started with sqlc</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on October 25, 2020
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;929&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Magnus Wahlstrand
+    
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><code>sqlc</code> is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!</p>
+<p><img src="/img/getting-started-with-sqlc/dogs.jpeg" alt="Click bait dogs. Photo by Chevanon Photography"></p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>For this article, I use the following tools</p>
+<ol>
+<li>Install <code>sqlc</code>
+<ol>
+<li><code>brew install kyleconroy/sqlc/sqlc</code></li>
+</ol>
+</li>
+<li>Install <code>docker</code> - used to run local PostgresSQL instance
+<ol>
+<li><a href="https://docs.docker.com/docker-for-mac/">https://docs.docker.com/docker-for-mac/</a></li>
+</ol>
+</li>
+<li>Install <code>psql</code> - used to connect to the local PostgresSQL database
+<ol>
+<li><code>brew install postgresql</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="getting-started">Getting started</h2>
+<p>First we need to setup our local database. Add the following to <em><strong>schema.sql</strong></em>.</p>
+<p><em><strong>schema.sql</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">CREATE</span> <span style="color:#000;font-weight:bold">TABLE</span> animals (
+</span></span><span style="display:flex;"><span>    id <span style="color:#0086b3">SERIAL</span> <span style="color:#000;font-weight:bold">PRIMARY</span> <span style="color:#000;font-weight:bold">KEY</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">name</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">type</span> <span style="color:#0086b3">TEXT</span> <span style="color:#000;font-weight:bold">NOT</span> <span style="color:#000;font-weight:bold">NULL</span>,
+</span></span><span style="display:flex;"><span>    created_at <span style="color:#0086b3">TIMESTAMP</span> <span style="color:#0086b3">WITH TIME ZONE</span> <span style="color:#000;font-weight:bold">DEFAULT</span> (NOW() <span style="color:#000;font-weight:bold">AT</span> <span style="color:#0086b3">TIME</span> <span style="color:#000;font-weight:bold">ZONE</span> <span style="color:#d14">&#39;UTC&#39;</span>)
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
+<p>Let&rsquo;s start our local PostgresSQL database.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker run -p 5432:5432 -it --rm postgres
+</span></span></code></pre></div><p>Next we connect to it using <code>psql</code> and run the commands in <em><strong>schema.sql</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres -c <span style="color:#d14">&#34;\i schema.sql&#34;</span>
+</span></span><span style="display:flex;"><span>CREATE TABLE
+</span></span></code></pre></div><h3 id="queries">Queries</h3>
+<p>Now that we have set up our table, we can run some queries. Open a psql shell</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>psql -h localhost --username<span style="color:#000;font-weight:bold">=</span>postgres
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Fido&#39;</span>, <span style="color:#d14">&#39;dog&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Spot&#39;</span>, <span style="color:#d14">&#39;cat&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#d14">&#39;Magnus&#39;</span>, <span style="color:#d14">&#39;racoon&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#099">0</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">=#</span> <span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
+</span></span><span style="display:flex;"><span>postgres<span style="color:#000;font-weight:bold">-#</span> ;
+</span></span><span style="display:flex;"><span> id <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">name</span>  <span style="color:#000;font-weight:bold">|</span>  <span style="color:#000;font-weight:bold">type</span>  <span style="color:#000;font-weight:bold">|</span>          created_at
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">----+--------+--------+-------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>  <span style="color:#099">1</span> <span style="color:#000;font-weight:bold">|</span> Fido   <span style="color:#000;font-weight:bold">|</span> dog    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">22.641659</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#099">2</span> <span style="color:#000;font-weight:bold">|</span> Spot   <span style="color:#000;font-weight:bold">|</span> cat    <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">32.089118</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#099">3</span> <span style="color:#000;font-weight:bold">|</span> Magnus <span style="color:#000;font-weight:bold">|</span> racoon <span style="color:#000;font-weight:bold">|</span> <span style="color:#099">2020</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">10</span><span style="color:#000;font-weight:bold">-</span><span style="color:#099">25</span> <span style="color:#099">16</span>:<span style="color:#099">17</span>:<span style="color:#099">41.17342</span><span style="color:#000;font-weight:bold">+</span><span style="color:#099">00</span>
+</span></span></code></pre></div><p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
+<h3 id="setup-for-sqlc">Setup for <code>sqlc</code></h3>
+<p>We want to turn the queries and schema into code. <code>sqlc</code> needs a configuration file with the following things</p>
+<ol>
+<li>location of database schema - <code>schema.sql</code></li>
+<li>location of queries schema - <code>queries.sql</code></li>
+<li>package name for generated code - <code>data</code></li>
+<li>path of generated code - <code>data/</code></li>
+</ol>
+<p>Create the file <strong>sqlc.yaml</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#000080">version</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;1&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#000080">packages</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- <span style="color:#000080">name</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">path</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;data&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">schema</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;schema.sql&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#000080">queries</span>:<span style="color:#bbb"> </span><span style="color:#d14">&#34;queries.sql&#34;</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>After this file, we need to create <code>queries.sql</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-postgresql" data-lang="postgresql"><span style="display:flex;"><span><span style="color:#998;font-style:italic">-- name: ListAnimals :many
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">SELECT</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">FROM</span> animals
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">ORDER</span> <span style="color:#000;font-weight:bold">BY</span> created_at;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">-- name: CreateAnimal :exec
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">INSERT</span> <span style="color:#000;font-weight:bold">INTO</span> animals (<span style="color:#000;font-weight:bold">name</span>, <span style="color:#000;font-weight:bold">type</span>) <span style="color:#000;font-weight:bold">VALUES</span> (<span style="color:#008080">$1</span>, <span style="color:#008080">$2</span>)
+</span></span></code></pre></div><p>The comments are extra notation for <code>sqlc</code>.</p>
+<ul>
+<li><code>name: ListAnimals :many</code> - Generate a method called <code>ListAnimals</code> that returns a slice of <code>Animal</code></li>
+<li><code>name: CreateAnimal :exec</code> - Generate a method called <code>CreateAnimal</code> that returns an error</li>
+</ul>
+<h4 id="generate-code">Generate code</h4>
+<p>Now we can run</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sqlc generate
+</span></span></code></pre></div><p>This generates the following two files of interest</p>
+<p><em><strong>data/models.go</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> Animal <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	ID        <span style="color:#458;font-weight:bold">int32</span>
+</span></span><span style="display:flex;"><span>	Name      <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	Type      <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	CreatedAt time.Time
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em><strong>data/queries.sql.go</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> createAnimal = <span style="color:#d14">`-- name: CreateAnimal :exec
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">INSERT INTO animals (name, type) VALUES ($1, $2)
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">type</span> CreateAnimalParams <span style="color:#000;font-weight:bold">struct</span> {
+</span></span><span style="display:flex;"><span>	Name <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>	Type <span style="color:#458;font-weight:bold">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">CreateAnimal</span>(ctx context.Context, arg CreateAnimalParams) <span style="color:#458;font-weight:bold">error</span> {
+</span></span><span style="display:flex;"><span>	_, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">ExecContext</span>(ctx, createAnimal, arg.Name, arg.Type)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> err
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> listAnimals = <span style="color:#d14">`-- name: ListAnimals :many
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">SELECT id, name, type, created_at FROM animals
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">ORDER BY created_at
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> (q <span style="color:#000;font-weight:bold">*</span>Queries) <span style="color:#900;font-weight:bold">ListAnimals</span>(ctx context.Context) ([]Animal, <span style="color:#458;font-weight:bold">error</span>) {
+</span></span><span style="display:flex;"><span>	rows, err <span style="color:#000;font-weight:bold">:=</span> q.db.<span style="color:#900;font-weight:bold">QueryContext</span>(ctx, listAnimals)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">defer</span> rows.<span style="color:#900;font-weight:bold">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">var</span> items []Animal
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> rows.<span style="color:#900;font-weight:bold">Next</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">var</span> i Animal
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Scan</span>(
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.ID,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.Name,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.Type,
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">&amp;</span>i.CreatedAt,
+</span></span><span style="display:flex;"><span>		); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		items = <span style="color:#0086b3">append</span>(items, i)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Close</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">:=</span> rows.<span style="color:#900;font-weight:bold">Err</span>(); err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#000;font-weight:bold">return</span> <span style="color:#000;font-weight:bold">nil</span>, err
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">return</span> items, <span style="color:#000;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="using-in-application">Using in application</h3>
+<p>Since we already have our Postgres instance up and running with database table defined. We can now use this generated code directly our application.</p>
+<p><em><strong>main.go</strong></em></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">package</span> main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;database/sql&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	_ <span style="color:#d14">&#34;github.com/lib/pq&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;math/rand&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;github.com/magnuswahlstrand/sqlc-example/data&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#d14">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> (
+</span></span><span style="display:flex;"><span>	host     = <span style="color:#d14">&#34;localhost&#34;</span>
+</span></span><span style="display:flex;"><span>	port     = <span style="color:#099">5432</span>
+</span></span><span style="display:flex;"><span>	user     = <span style="color:#d14">&#34;postgres&#34;</span>
+</span></span><span style="display:flex;"><span>	password = <span style="color:#d14">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">var</span> sourceName = fmt.<span style="color:#900;font-weight:bold">Sprintf</span>(<span style="color:#d14">&#34;host=%s port=%d user=%s password=%s dbname=%s sslmode=disable&#34;</span>, host, port, user, password, <span style="color:#d14">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">func</span> <span style="color:#900;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Seed randomizer
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	rand.<span style="color:#900;font-weight:bold">Seed</span>(time.<span style="color:#900;font-weight:bold">Now</span>().<span style="color:#900;font-weight:bold">UTC</span>().<span style="color:#900;font-weight:bold">UnixNano</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	db, err <span style="color:#000;font-weight:bold">:=</span> sql.<span style="color:#900;font-weight:bold">Open</span>(<span style="color:#d14">&#34;postgres&#34;</span>, sourceName)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatalf</span>(<span style="color:#d14">&#34;failed to open connection to DB: %v&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	database <span style="color:#000;font-weight:bold">:=</span> data.<span style="color:#900;font-weight:bold">New</span>(db)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// Create animal
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	err = database.<span style="color:#900;font-weight:bold">CreateAnimal</span>(context.<span style="color:#900;font-weight:bold">Background</span>(), data.CreateAnimalParams{
+</span></span><span style="display:flex;"><span>		Name: <span style="color:#d14">&#34;Fido&#34;</span>,
+</span></span><span style="display:flex;"><span>		Type: <span style="color:#d14">&#34;dog&#34;</span>,
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to create animal&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* new animal with created&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#998;font-style:italic">// List animals
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>	animals, err <span style="color:#000;font-weight:bold">:=</span> database.<span style="color:#900;font-weight:bold">ListAnimals</span>(context.<span style="color:#900;font-weight:bold">Background</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">if</span> err <span style="color:#000;font-weight:bold">!=</span> <span style="color:#000;font-weight:bold">nil</span> {
+</span></span><span style="display:flex;"><span>		log.<span style="color:#900;font-weight:bold">Fatal</span>(<span style="color:#d14">&#34;failed to list animals&#34;</span>, err)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	fmt.<span style="color:#900;font-weight:bold">Println</span>(<span style="color:#d14">&#34;* complete list of animals&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#000;font-weight:bold">for</span> _, animal <span style="color:#000;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">range</span> animals {
+</span></span><span style="display:flex;"><span>		fmt.<span style="color:#900;font-weight:bold">Printf</span>(<span style="color:#d14">&#34;-- %d\t%s\t%s\n&#34;</span>, animal.ID, animal.Name, animal.Type)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Finally, if we run the application, we get the following output</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>&gt; go run main.go
+</span></span><span style="display:flex;"><span>* new animal with created
+</span></span><span style="display:flex;"><span>* <span style="color:#0086b3">complete</span> list of animals
+</span></span><span style="display:flex;"><span>-- 1	Fido	dog
+</span></span><span style="display:flex;"><span>-- 2	Fido	dog
+</span></span></code></pre></div><p>Success!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><code>sqlc</code> is a neat, easy to use tool, which makes working with Postgres in Go fun!</p>
+<p><em><strong>Some things I liked</strong></em></p>
+<ol>
+<li>Easy to set up and use. Very straight forward syntax</li>
+<li>Changes to the database layer tracked easily by changes to <code>schema.sql</code> and <code>queries.sql</code></li>
+<li>It forces you to focus on the SQL queries; what do you need to insert and read from the database? When that is decided, the models in the code can be generated, not vice-versa.</li>
+</ol>
+<p>A few other topics that would be worth covering in the future:</p>
+<ul>
+<li>Delete and get methods</li>
+<li>Returning a single inserted model using <code>:one</code> and <code>RETURNING *</code></li>
+<li>Using transactions with <code>sqlc</code></li>
+<li>Handling migrations</li>
+<li>Handling custom types, such as <code>github.com/google/uuid</code></li>
+</ul>
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://magnuswahlstrand.github.io/tags/go/">go</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/postgres/">postgres</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/database/">database</a>&nbsp;
+            
+              <a href="https://magnuswahlstrand.github.io/tags/sqlc/">sqlc</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f&amp;text=Getting%20started%20with%20sqlc&amp;via=wahlstra" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f&amp;title=Getting%20started%20with%20sqlc" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f&amp;title=Getting%20started%20with%20sqlc" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f&amp;title=Getting%20started%20with%20sqlc" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fmagnuswahlstrand.github.io%2farticles%2f2020-10-25-getting-started-with-sqlc%2f&amp;description=Getting%20started%20with%20sqlc" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/articles/2022-06-26-event-based-system-on-aws/">Event-based apps with Go and EventBridge</a></li>
+                
+                    <li><a href="/articles/2022-04-23-pubsub-with-dlq/">Google Pub/Sub with dead letter queues</a></li>
+                
+                    <li><a href="/articles/2022-04-15-react-fiber-mongo/">Tiny fullstack app</a></li>
+                
+                    <li><a href="/articles/2022-03-07-one-to-many/">SQLALchemy: One to many-relationships</a></li>
+                
+                    <li><a href="/articles/2022-02-27-audit-logs-in-postgres/">Audit tables in Postgres</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://magnuswahlstrand.github.io/articles/2020-01-12-search-bar-overlay/" data-toggle="tooltip" data-placement="top" title="Slack: Search bar">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/" data-toggle="tooltip" data-placement="top" title="State machines in Go">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/magnuswahlstrand" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/wahlstra" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              Magnus Wahlstrand
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2022
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://magnuswahlstrand.github.io">wahlstrand.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.96.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://magnuswahlstrand.github.io/js/main.js"></script>
+<script src="https://magnuswahlstrand.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://magnuswahlstrand.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+

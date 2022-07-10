@@ -8,11 +8,11 @@
     <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/notifications/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Push Notifications pt.2</title>
-      <link>https://magnuswahlstrand.github.io/post/2019-10-06-notifications/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-10-06-notifications/</link>
       <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2019-10-06-notifications/</guid>
-      <description>&lt;p&gt;In &lt;a href=&#34;https://magnuswahlstrand.github.io/post/2019-10-05-push-notifications/&#34;&gt;Part 1&lt;/a&gt; we learned how to send push notifications from &lt;a href=&#34;https://console.firebase.google.com&#34;&gt;Firebase Cloud Messaging console&lt;/a&gt;. There are a number of improvements we can make:&lt;/p&gt;
+      <guid>https://magnuswahlstrand.github.io/articles/2019-10-06-notifications/</guid>
+      <description>&lt;p&gt;In &lt;a href=&#34;https://magnuswahlstrand.github.io/articles/2019-10-05-push-notifications/&#34;&gt;Part 1&lt;/a&gt; we learned how to send push notifications from &lt;a href=&#34;https://console.firebase.google.com&#34;&gt;Firebase Cloud Messaging console&lt;/a&gt;. There are a number of improvements we can make:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#show-notification-in-foregrounded-app&#34;&gt;Show notification when the app in in the foreground&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#go-to-specific-view&#34;&gt;Go to a specific view in the app when clicked&lt;/a&gt;&lt;/li&gt;

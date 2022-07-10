@@ -8,10 +8,10 @@
     <lastBuildDate>Sun, 26 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Event-based apps with Go and EventBridge</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</link>
       <pubDate>Sun, 26 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-06-26-event-based-system-on-aws/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-06-26-event-based-system-on-aws/</guid>
       <description>&lt;p&gt;In this post I will build a small &lt;a href=&#34;https://en.wikipedia.org/wiki/Event-driven_architecture&#34;&gt;event-driven system&lt;/a&gt; with Go. It will be serverless app with an API Gateway in front. I will use &lt;a href=&#34;https://aws.amazon.com/eventbridge/&#34;&gt;AWS EventBridge&lt;/a&gt; as message bus that serves as glue between our components and the app will be deployed using &lt;a href=&#34;https://sst.dev/&#34;&gt;Serverless Stack &lt;/a&gt;.&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 
@@ -30,10 +30,10 @@
     
     <item>
       <title>Google Pub/Sub with dead letter queues</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-04-23-pubsub-with-dlq/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</link>
       <pubDate>Sat, 23 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-04-23-pubsub-with-dlq/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-23-pubsub-with-dlq/</guid>
       <description>&lt;p&gt;Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous &lt;a href=&#34;https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern&#34;&gt;publisher-subscriber pattern&lt;/a&gt;. We will use Terraform for creating the infrastucture, and go for the application code. All code &lt;a href=&#34;https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;At the end of this post, you should know&lt;/p&gt;
 &lt;ul&gt;
@@ -46,10 +46,10 @@
     
     <item>
       <title>Tiny fullstack app</title>
-      <link>https://magnuswahlstrand.github.io/post/2022-04-15-react-fiber-mongo/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</link>
       <pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2022-04-15-react-fiber-mongo/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2022-04-15-react-fiber-mongo/</guid>
       <description>&lt;p&gt;In this post I will build a simple app using a combination of tools and libraries that I&amp;rsquo;m exploring.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;React&lt;/strong&gt; (&lt;a href=&#34;https://react-query.tanstack.com/&#34;&gt;React-Query&lt;/a&gt;, &lt;a href=&#34;https://mantine.dev/&#34;&gt;Mantine&lt;/a&gt; for UI)&lt;/li&gt;
@@ -62,20 +62,20 @@
     
     <item>
       <title>Running Google Pub/Sub locally</title>
-      <link>https://magnuswahlstrand.github.io/post/2021-07-11-testing-pubsub-locally/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</link>
       <pubDate>Sun, 11 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2021-07-11-testing-pubsub-locally/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2021-07-11-testing-pubsub-locally/</guid>
       <description>&lt;p&gt;I have recently started using Google&amp;rsquo;s event queue &amp;ldquo;&lt;a href=&#34;https://cloud.google.com/pubsub&#34;&gt;&lt;strong&gt;Cloud Pub/Sub&lt;/strong&gt;&lt;/a&gt;&amp;rdquo; for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.&lt;/p&gt;
 &lt;p&gt;Here is a quick guide how I set up my integration test locally using the &lt;strong&gt;Pub/Sub&lt;/strong&gt; emulator. Code examples are written in Go.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>State machines in Go</title>
-      <link>https://magnuswahlstrand.github.io/post/2020-10-31-state-machines-in-go/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</link>
       <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2020-10-31-state-machines-in-go/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2020-10-31-state-machines-in-go/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s implement a simple state machine in Go that is:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;easy to understand&lt;/li&gt;
@@ -87,10 +87,10 @@
     
     <item>
       <title>Getting started with sqlc</title>
-      <link>https://magnuswahlstrand.github.io/post/2020-10-25-getting-started-with-sqlc/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</link>
       <pubDate>Sun, 25 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2020-10-25-getting-started-with-sqlc/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2020-10-25-getting-started-with-sqlc/</guid>
       <description>&lt;p&gt;&lt;code&gt;sqlc&lt;/code&gt; is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
 In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/getting-started-with-sqlc/dogs.jpeg&#34; alt=&#34;Click bait dogs. Photo by Chevanon Photography&#34;&gt;&lt;/p&gt;</description>
@@ -108,29 +108,29 @@ In this article I cover how to set up a very useful application that insert anim
     
     <item>
       <title>Websockets on Heroku</title>
-      <link>https://magnuswahlstrand.github.io/post/2019-10-19-heroku-websockets/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2019-10-19-heroku-websockets/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2D animation: Screen shake</title>
-      <link>https://magnuswahlstrand.github.io/post/2019-04-29-screen-shake/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-04-29-screen-shake/</link>
       <pubDate>Mon, 29 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2019-04-29-screen-shake/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-04-29-screen-shake/</guid>
       <description>&lt;p&gt;A good way of improving the feel of a game is to add screen shake, when a player gets hit or when something heavy lands on the ground. I have implemented two ways of doing this, one &lt;em&gt;simple&lt;/em&gt; and one &lt;em&gt;nice&lt;/em&gt;. The end result will look something like this&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/screenshake/shake.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>2D animation: Transitions</title>
-      <link>https://magnuswahlstrand.github.io/post/2019-04-28-2d-transitions/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-04-28-2d-transitions/</link>
       <pubDate>Sun, 28 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2019-04-28-2d-transitions/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-04-28-2d-transitions/</guid>
       <description>&lt;p&gt;The other day, I watched a a playthrough of the 2D platformer &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt;. It has a couple of nice screen transitions that I wanted to recreate using Go and the 2D game library &lt;a href=&#34;https://ebiten.org/&#34;&gt;Ebiten&lt;/a&gt;. Here is the end result:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://magnuswahlstrand.github.io/img/2d-transitions/final.gif&#34; alt=&#34;End result&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: I have borrowed the background images and scoreboard in the from &lt;a href=&#34;https://yachtclubgames.com/shovel-knight/&#34;&gt;Shovel Knight&lt;/a&gt; itself.&lt;/em&gt;&lt;/p&gt;</description>

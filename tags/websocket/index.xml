@@ -8,10 +8,10 @@
     <lastBuildDate>Sat, 19 Oct 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://magnuswahlstrand.github.io/tags/websocket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Websockets on Heroku</title>
-      <link>https://magnuswahlstrand.github.io/post/2019-10-19-heroku-websockets/</link>
+      <link>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</link>
       <pubDate>Sat, 19 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://magnuswahlstrand.github.io/post/2019-10-19-heroku-websockets/</guid>
+      <guid>https://magnuswahlstrand.github.io/articles/2019-10-19-heroku-websockets/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s create a simple web server that runs on &lt;a href=&#34;https://www.heroku.com&#34;&gt;Heroku&lt;/a&gt; and accepts websockets connections.&lt;/p&gt;</description>
     </item>
     
