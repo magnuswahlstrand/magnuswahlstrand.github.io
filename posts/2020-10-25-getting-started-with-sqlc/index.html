@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2020-10-25-getting-started-with-sqlc/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Getting started with sqlc</title>
+    <meta name="title" content="Getting started with sqlc">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Getting started with sqlc">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2020-10-25-getting-started-with-sqlc/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2020-10-25-getting-started-with-sqlc/">
+    <meta property="twitter:title" content="Getting started with sqlc">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Getting started with sqlc</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">October 25, 2020</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p><code>sqlc</code> is a command line tool to generate type-safe Go code, based on SQL queries and schemas.
+In this article I cover how to set up a very useful application that insert animals (data about them not actual animals) to a database, and keeps a list of them forever!</p>
+<p><img src="/img/getting-started-with-sqlc/dogs.jpeg" alt="Click bait dogs. Photo by Chevanon Photography"></p>
+<!--more-->
+<h3 id="prerequisites">Prerequisites</h3>
+<p>For this article, I use the following tools</p>
+<ol>
+<li>Install <code>sqlc</code>
+<ol>
+<li><code>brew install kyleconroy/sqlc/sqlc</code></li>
+</ol>
+</li>
+<li>Install <code>docker</code> - used to run local PostgresSQL instance
+<ol>
+<li><a href="https://docs.docker.com/docker-for-mac/">https://docs.docker.com/docker-for-mac/</a></li>
+</ol>
+</li>
+<li>Install <code>psql</code> - used to connect to the local PostgresSQL database
+<ol>
+<li><code>brew install postgresql</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="getting-started">Getting started</h2>
+<p>First we need to setup our local database. Add the following to <em><strong>schema.sql</strong></em>.</p>
+<p><em><strong>schema.sql</strong></em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">CREATE TABLE animals (</span></span>
+<span class="line"><span style="color: #abb2bf">    id SERIAL PRIMARY KEY,</span></span>
+<span class="line"><span style="color: #abb2bf">    name TEXT NOT NULL,</span></span>
+<span class="line"><span style="color: #abb2bf">    type TEXT NOT NULL,</span></span>
+<span class="line"><span style="color: #abb2bf">    created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'UTC')</span></span>
+<span class="line"><span style="color: #abb2bf">);</span></span></code></pre>
+<p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
+<p>Let’s start our local PostgresSQL database.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">docker run -p 5432:5432 -it --rm postgres</span></span></code></pre>
+<p>Next we connect to it using <code>psql</code> and run the commands in <em><strong>schema.sql</strong></em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">> psql -h localhost --username=postgres -c </span><span style="color: #98C379">"\i schema.sql"</span></span>
+<span class="line"><span style="color: #ABB2BF">CREATE TABLE</span></span></code></pre>
+<h3 id="queries">Queries</h3>
+<p>Now that we have set up our table, we can run some queries. Open a psql shell</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">psql -h localhost --username=postgres</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Fido', 'dog');</span></span>
+<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
+<span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Spot', 'cat');</span></span>
+<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
+<span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Magnus', 'racoon');</span></span>
+<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
+<span class="line"><span style="color: #abb2bf">postgres=# SELECT * FROM animals</span></span>
+<span class="line"><span style="color: #abb2bf">postgres-# ;</span></span>
+<span class="line"><span style="color: #abb2bf"> id |  name  |  type  |          created_at</span></span>
+<span class="line"><span style="color: #abb2bf">----+--------+--------+-------------------------------</span></span>
+<span class="line"><span style="color: #abb2bf">  1 | Fido   | dog    | 2020-10-25 16:17:22.641659+00</span></span>
+<span class="line"><span style="color: #abb2bf">  2 | Spot   | cat    | 2020-10-25 16:17:32.089118+00</span></span>
+<span class="line"><span style="color: #abb2bf">  3 | Magnus | racoon | 2020-10-25 16:17:41.17342+00</span></span></code></pre>
+<p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
+<h3 id="setup-for-sqlc">Setup for <code>sqlc</code></h3>
+<p>We want to turn the queries and schema into code. <code>sqlc</code> needs a configuration file with the following things</p>
+<ol>
+<li>location of database schema - <code>schema.sql</code></li>
+<li>location of queries schema - <code>queries.sql</code></li>
+<li>package name for generated code - <code>data</code></li>
+<li>path of generated code - <code>data/</code></li>
+</ol>
+<p>Create the file <strong>sqlc.yaml</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">version</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"1"</span></span>
+<span class="line"><span style="color: #E06C75">packages</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">  - </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"data"</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">path</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"data"</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">schema</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"schema.sql"</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">queries</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"queries.sql"</span></span></code></pre>
+<p>After this file, we need to create <code>queries.sql</code>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">-- name: ListAnimals :many</span></span>
+<span class="line"><span style="color: #abb2bf">SELECT * FROM animals</span></span>
+<span class="line"><span style="color: #abb2bf">ORDER BY created_at;</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">-- name: CreateAnimal :exec</span></span>
+<span class="line"><span style="color: #abb2bf">INSERT INTO animals (name, type) VALUES ($1, $2)</span></span></code></pre>
+<p>The comments are extra notation for <code>sqlc</code>.</p>
+<ul>
+<li><code>name: ListAnimals :many</code> - Generate a method called <code>ListAnimals</code> that returns a slice of <code>Animal</code></li>
+<li><code>name: CreateAnimal :exec</code> - Generate a method called <code>CreateAnimal</code> that returns an error</li>
+</ul>
+<h4 id="generate-code">Generate code</h4>
+<p>Now we can run</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">sqlc generate</span></span></code></pre>
+<p>This generates the following two files of interest</p>
+<p><em><strong>data/models.go</strong></em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">data</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"time"</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Animal</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	ID        </span><span style="color: #C678DD">int32</span></span>
+<span class="line"><span style="color: #ABB2BF">	Name      </span><span style="color: #C678DD">string</span></span>
+<span class="line"><span style="color: #ABB2BF">	Type      </span><span style="color: #C678DD">string</span></span>
+<span class="line"><span style="color: #ABB2BF">	CreatedAt time.Time</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><em><strong>data/queries.sql.go</strong></em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">data</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"context"</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">createAnimal</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`-- name: CreateAnimal :exec</span></span>
+<span class="line"><span style="color: #98C379">INSERT INTO animals (name, type) VALUES ($1, $2)</span></span>
+<span class="line"><span style="color: #98C379">`</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">CreateAnimalParams</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	Name </span><span style="color: #C678DD">string</span></span>
+<span class="line"><span style="color: #ABB2BF">	Type </span><span style="color: #C678DD">string</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (q </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Queries) </span><span style="color: #61AFEF">CreateAnimal</span><span style="color: #ABB2BF">(ctx context.Context, arg CreateAnimalParams) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">_</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> q.db.</span><span style="color: #56B6C2">ExecContext</span><span style="color: #ABB2BF">(ctx, createAnimal, arg.Name, arg.Type)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> err</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">listAnimals</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">`-- name: ListAnimals :many</span></span>
+<span class="line"><span style="color: #98C379">SELECT id, name, type, created_at FROM animals</span></span>
+<span class="line"><span style="color: #98C379">ORDER BY created_at</span></span>
+<span class="line"><span style="color: #98C379">`</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (q </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Queries) </span><span style="color: #61AFEF">ListAnimals</span><span style="color: #ABB2BF">(ctx context.Context) ([]Animal, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">rows</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> q.db.</span><span style="color: #56B6C2">QueryContext</span><span style="color: #ABB2BF">(ctx, listAnimals)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">defer</span><span style="color: #ABB2BF"> rows.</span><span style="color: #56B6C2">Close</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">items</span><span style="color: #ABB2BF"> []Animal</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> rows.</span><span style="color: #56B6C2">Next</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">i</span><span style="color: #ABB2BF"> Animal</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> rows.</span><span style="color: #56B6C2">Scan</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">i.ID,</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">i.Name,</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">i.Type,</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">i.CreatedAt,</span></span>
+<span class="line"><span style="color: #ABB2BF">		); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">		}</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #E06C75">items</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">append</span><span style="color: #ABB2BF">(items, i)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> rows.</span><span style="color: #56B6C2">Close</span><span style="color: #ABB2BF">(); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> rows.</span><span style="color: #56B6C2">Err</span><span style="color: #ABB2BF">(); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> items, </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="using-in-application">Using in application</h3>
+<p>Since we already have our Postgres instance up and running with database table defined. We can now use this generated code directly our application.</p>
+<p><em><strong>main.go</strong></em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"context"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"database/sql"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"fmt"</span></span>
+<span class="line"><span style="color: #ABB2BF">	_ </span><span style="color: #98C379">"github.com/lib/pq"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"math/rand"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"time"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"github.com/magnuswahlstrand/sqlc-example/data"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"log"</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">host</span><span style="color: #ABB2BF">     </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"localhost"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">port</span><span style="color: #ABB2BF">     </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">5432</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">user</span><span style="color: #ABB2BF">     </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"postgres"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">password</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">""</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">sourceName</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> fmt.</span><span style="color: #56B6C2">Sprintf</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"host=</span><span style="color: #D19A66">%s</span><span style="color: #98C379"> port=</span><span style="color: #D19A66">%d</span><span style="color: #98C379"> user=</span><span style="color: #D19A66">%s</span><span style="color: #98C379"> password=</span><span style="color: #D19A66">%s</span><span style="color: #98C379"> dbname=</span><span style="color: #D19A66">%s</span><span style="color: #98C379"> sslmode=disable"</span><span style="color: #ABB2BF">, host, port, user, password, </span><span style="color: #98C379">""</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">main</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Seed randomizer</span></span>
+<span class="line"><span style="color: #ABB2BF">	rand.</span><span style="color: #56B6C2">Seed</span><span style="color: #ABB2BF">(time.</span><span style="color: #56B6C2">Now</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">UTC</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">UnixNano</span><span style="color: #ABB2BF">())</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">db</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> sql.</span><span style="color: #56B6C2">Open</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"postgres"</span><span style="color: #ABB2BF">, sourceName)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		log.</span><span style="color: #56B6C2">Fatalf</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"failed to open connection to DB: </span><span style="color: #D19A66">%v</span><span style="color: #98C379">"</span><span style="color: #ABB2BF">, err)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">database</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> data.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">(db)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Create animal</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> database.</span><span style="color: #56B6C2">CreateAnimal</span><span style="color: #ABB2BF">(context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">(), data.CreateAnimalParams{</span></span>
+<span class="line"><span style="color: #ABB2BF">		Name: </span><span style="color: #98C379">"Fido"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">		Type: </span><span style="color: #98C379">"dog"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	})</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"failed to create animal"</span><span style="color: #ABB2BF">, err)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	fmt.</span><span style="color: #56B6C2">Println</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"* new animal with created"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// List animals</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">animals</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> database.</span><span style="color: #56B6C2">ListAnimals</span><span style="color: #ABB2BF">(context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">())</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"failed to list animals"</span><span style="color: #ABB2BF">, err)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	fmt.</span><span style="color: #56B6C2">Println</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"* complete list of animals"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">_</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">animal</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">range</span><span style="color: #ABB2BF"> animals {</span></span>
+<span class="line"><span style="color: #ABB2BF">		fmt.</span><span style="color: #56B6C2">Printf</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"-- </span><span style="color: #D19A66">%d</span><span style="color: #56B6C2">\t</span><span style="color: #D19A66">%s</span><span style="color: #56B6C2">\t</span><span style="color: #D19A66">%s</span><span style="color: #56B6C2">\n</span><span style="color: #98C379">"</span><span style="color: #ABB2BF">, animal.ID, animal.Name, animal.Type)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Finally, if we run the application, we get the following output</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">> go run main.go</span></span>
+<span class="line"><span style="color: #ABB2BF">* new animal with created</span></span>
+<span class="line"><span style="color: #ABB2BF">* </span><span style="color: #56B6C2">complete</span><span style="color: #ABB2BF"> list of animals</span></span>
+<span class="line"><span style="color: #ABB2BF">-- 1	Fido	dog</span></span>
+<span class="line"><span style="color: #ABB2BF">-- 2	Fido	dog</span></span></code></pre>
+<p>Success!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p><code>sqlc</code> is a neat, easy to use tool, which makes working with Postgres in Go fun!</p>
+<p><em><strong>Some things I liked</strong></em></p>
+<ol>
+<li>Easy to set up and use. Very straight forward syntax</li>
+<li>Changes to the database layer tracked easily by changes to <code>schema.sql</code> and <code>queries.sql</code></li>
+<li>It forces you to focus on the SQL queries; what do you need to insert and read from the database? When that is decided, the models in the code can be generated, not vice-versa.</li>
+</ol>
+<p>A few other topics that would be worth covering in the future:</p>
+<ul>
+<li>Delete and get methods</li>
+<li>Returning a single inserted model using <code>:one</code> and <code>RETURNING *</code></li>
+<li>Using transactions with <code>sqlc</code></li>
+<li>Handling migrations</li>
+<li>Handling custom types, such as <code>github.com/google/uuid</code></li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/postgres" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">postgres</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/database" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">database</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/sqlc" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">sqlc</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2021-03-12-acid-transactions/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>ACID transactions</title>
+    <meta name="title" content="ACID transactions">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="ACID transactions">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2021-03-12-acid-transactions/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2021-03-12-acid-transactions/">
+    <meta property="twitter:title" content="ACID transactions">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">ACID transactions</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">March 12, 2021</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>The last few days, I’ve been down the rabbit hole of learning more about Postgres and databases in general. Here are a few things I have explored, along with useful resources. Let’s start with the basics.</p>
+<!--more-->
+<h2 id="acid-transactions">ACID transactions</h2>
+<p><strong>ACID</strong> stands for <strong>atomicity</strong>, <strong>consistency</strong>, <strong>isolation</strong> and <strong>durability</strong>. In my experience <strong>atomicity</strong> and <strong>isolation</strong> are the most interesting for modern application development, but let’s cover all of them.</p>
+<h3 id="atomicity">Atomicity</h3>
+<p><a href="https://en.wikipedia.org/wiki/Atomicity_(database_systems)">Atomicity</a> means that transactions consisting of multiple statements should succeed or fail completely. Martin Kleppman (<a href="https://www.youtube.com/watch?v=5ZjhNTM8XU8">YouTube</a>) suggested the alternative term “Abortability”, that I think is a bit more clear.</p>
+<p>Take an example in Postgres, where <strong>atomicity</strong> is typically achieved using <code>BEGIN TRANSACTIONS</code> and <code>COMMIT TRANSACTIONS</code>. Let’s say we have two tables, one with users and one with user related events. We want to guarantee that both rows are inserted, or none of them.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> users(id </span><span style="color: #C678DD">INT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">UNIQUE</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> users_events(</span><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TEXT</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">BEGIN</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">-- Begin transaction</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> users_events </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'user 1 created'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> users </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">COMMIT</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">-- Commit both statements to the database</span></span></code></pre>
+<p>Now, if we get an error half way (maybe the database connection timed out, or in the case below there is already a user with the same ID). We use <code>ROLLBACK</code> to abort the transaction.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">BEGIN</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">-- Begin transaction</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> users_events </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'user 1 created again'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> users </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">); </span><span style="color: #7F848E">-- ERROR: duplicate key value violates unique constraint "users_id_key"</span></span>
+<span class="line"><span style="color: #C678DD">ROLLBACK</span><span style="color: #ABB2BF">; </span><span style="color: #7F848E">-- Abort the transaction and both statements</span></span></code></pre>
+<p>And so we have an atomic transaction!</p>
+<h3 id="consistency">Consistency</h3>
+<p><a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">Consistency</a> means that the database should be in a valid state, before and after a transaction. What does valid mean? It means that it is <em>consistent</em> to whatever rules have been defined.
+Good examples includes constraints for table rows, such as <code>UNIQUE</code> and <code>NOT NULL</code> in Postgres.</p>
+<p>For example:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">CREATE TABLE customers(</span></span>
+<span class="line"><span style="color: #abb2bf">    ID bigint UNIQUE,</span></span>
+<span class="line"><span style="color: #abb2bf">    email TEXT NOT NULL</span></span>
+<span class="line"><span style="color: #abb2bf">);</span></span></code></pre>
+<p>Given the following table definition, our database would be <em>inconsistent</em> if we found the following database rows:</p>
+<p><em>Violation the UNIQUE constraint</em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">SELECT * FROM customers;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF"> id |      email</span></span>
+<span class="line"><span style="color: #ABB2BF">----+-----------------</span></span>
+<span class="line"><span style="color: #ABB2BF">  1 | hedvor@mail.com</span></span>
+<span class="line"><span style="color: #ABB2BF">  1 | john@mail.com</span></span></code></pre>
+<p><em>Violation of the NOT NULL constraint</em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">SELECT * FROM customers;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF"> id |      email</span></span>
+<span class="line"><span style="color: #ABB2BF">----+-----------------</span></span>
+<span class="line"><span style="color: #ABB2BF">  1 | hedvor@mail.com</span></span>
+<span class="line"><span style="color: #ABB2BF">  2 |</span></span></code></pre>
+<p>In my experience, keeping your database consistent isn’t really a problem for the application developer, but for the database itself. The responsibility split is as follows</p>
+<ol>
+<li><strong>Developer:</strong> Defining the rules (uniqueness, <a href="https://www.postgresql.org/docs/9.2/plpgsql-trigger.html">postgres triggers</a>, …)</li>
+<li><strong>Database:</strong> Ensuring database consistency, according to those rules (consistency).</li>
+</ol>
+<p>Most modern databases handle consistency well. In Postgres, for example, uniqueness violations will be rejected with: <code>[23505] ERROR: duplicate key value violates unique constraint</code>.</p>
+<h3 id="isolation">Isolation</h3>
+<p>Transactions are often run in parallel. <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)">Isolation</a> means that even though transactions are run in parallel, the end result should be same as if the transaction run in series.</p>
+<p>Using full serialization in a database comes with a performance cost, and most transactions do not need full serialization. Instead it is common to be able to choose isolation level when performing a transaction.</p>
+<p>Here are three common isolation levels:</p>
+<ul>
+<li><strong>Serializable</strong> - This is the highest level of isolation, it means that parts of parallel transactions that could interfer with each other will run in series. The <em>could</em> be achieved by just locking the whole database, but typically the database is smart enough just lock the rows that are being read or written to by other ongoing transactions.</li>
+<li><strong>Read commited</strong> - The default (and lowest) isolation level for Postgres databases. Read commited means that if there are parallel transactions, the data written will not be visible until the transaction is commited.</li>
+<li><strong>Read uncommited</strong> - Even if a transaction is not commit yet, other transactions can read it. This problem is called a <a href="https://en.wikipedia.org/wiki/Isolation_(database_systems)#Dirty_reads">dirty read</a>. This isolation level is not available in Postgres.</li>
+</ul>
+<p><a href="https://pgdash.io/blog/postgres-transactions.html">This article</a> by pgDash is very good at explaining these concepts.</p>
+<h3 id="durability">Durability</h3>
+<p>The last concept in the quartet is <a href="https://en.wikipedia.org/wiki/Durability_(database_systems)">durability</a>. This means that once the database reports a transaction as successful, the transaction is guaranteed not to be lost, even in the case of a hardware fault, or a crash in the database. Guaranteeing durability is also a problem to be solved by the database, not by the application developer. One common approach by databases to solve this is to use <a href="https://en.wikipedia.org/wiki/Write-ahead_logging">write-head logging</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>In my experience, <strong>atomicity</strong> and <strong>isolation</strong> are the two concepts you usually have to worry about as an application developer, while <strong>consistency</strong> and <strong>durability</strong> usually working out of the box.</li>
+<li>The concept of <strong>ACID</strong> transactions is useful, not only when working with databases, but also when designing systems, especially distributed systems.</li>
+</ul>
+<h3 id="resources">Resources</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=5ZjhNTM8XU8">YouTube: Transactions: myths, surprises and opportunities</a> by Martin Kleppmann</li>
+<li><a href="https://pgdash.io/blog/postgres-transactions.html">Transaction Isolation</a> at pgDash</li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/db" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">db</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/postgres" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">postgres</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/theory" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">theory</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2021-07-11-testing-pubsub-locally/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Running Google Pub/Sub locally</title>
+    <meta name="title" content="Running Google Pub/Sub locally">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Running Google Pub/Sub locally">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2021-07-11-testing-pubsub-locally/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2021-07-11-testing-pubsub-locally/">
+    <meta property="twitter:title" content="Running Google Pub/Sub locally">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Running Google Pub/Sub locally</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">July 11, 2021</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>I have recently started using Google’s event queue ”<a href="https://cloud.google.com/pubsub"><strong>Cloud Pub/Sub</strong></a>” for a few projects at work, and I enjoyed how straightforward it is to configure and use in production.  Their documentation is usually great, but often misses how to tie everything for your local environment.</p>
+<p>Here is a quick guide how I set up my integration test locally using the <strong>Pub/Sub</strong> emulator. Code examples are written in Go.</p>
+<!--more-->
+<h2 id="starting-the-emulator">Starting the emulator</h2>
+<p>To run the emulator, you first need the <code>gcloud</code> cli (<a href="https://cloud.google.com/sdk/docs/install">setup instructions</a>). Next can we install the emulator.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">gcloud components install pubsub-emulator</span></span>
+<span class="line"><span style="color: #abb2bf">gcloud components update</span></span></code></pre>
+<p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">gcloud beta emulators pubsub start --project=test-project</span></span></code></pre>
+<p>Output:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085</span></span>
+<span class="line"><span style="color: #abb2bf">[pubsub] This is the Google Pub/Sub fake.</span></span>
+<span class="line"><span style="color: #abb2bf">[pubsub] Implementation may be incomplete or differ from the real system.</span></span>
+<span class="line"><span style="color: #abb2bf">....</span></span></code></pre>
+<h2 id="code">Code</h2>
+<p>We can use the Google Pub/Sub client to publish or subscribe on a topic.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">go get -u cloud.google.com/go/pubsub</span></span></code></pre>
+<h4 id="setup-the-client">Setup the client</h4>
+<p>We need to point the <code>pubsub.Client</code> to our emulator. For this purpose, <code>pubsub.NewClient</code> uses a magic environment variable <code>PUBSUB_EMULATOR_HOST</code>.
+You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</code>. For our test code, we use <code>os.Setenv</code>.</p>
+<p><strong>Note</strong>: If we don’t set <code>PUBSUB_EMULATOR_HOST</code>, the client will default to an actual Google project. Be careful :-).</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// Initialize client</span></span>
+<span class="line"><span style="color: #ABB2BF">os.</span><span style="color: #56B6C2">Setenv</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"PUBSUB_EMULATOR_HOST"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"localhost:8085"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #E06C75">client</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> pubsub.</span><span style="color: #56B6C2">NewClient</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"test-project"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">#### Receive message </span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">#### Receive message</span></span>
+<span class="line"><span style="color: #7F848E">// Create topic</span></span>
+<span class="line"><span style="color: #E06C75">topic</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateTopic</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"some-topic"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">...</span></span></code></pre>
+<h4 id="receive-message">Receive message</h4>
+<p>Now that we have a topic, we could publish a message. However, we don’t have any subscriptions yet, and so the published message would be discared.</p>
+<ul>
+<li>Push - <strong>Pub/Sub</strong> is responsible for pushing any incoming messages on a topic to a specific endpoint in the service</li>
+<li>Pull - Service is responsible for setting up a connection to a <strong>Pub/Sub</strong> topic, and waits for incoming messages.</li>
+</ul>
+<h5 id="creating-a-pull-subscription">Creating a pull subscription</h5>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">sub</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateSubscription</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"some-subscription-id"</span><span style="color: #ABB2BF">, pubsub.SubscriptionConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">    Topic: topic,</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// Wrap context for cancellation, and cancel the first</span></span>
+<span class="line"><span style="color: #E06C75">cctx</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">cancel</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> context.</span><span style="color: #56B6C2">WithCancel</span><span style="color: #ABB2BF">(ctx)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// Receive will block until the context is cancelled, or we get a non-recoverable error</span></span>
+<span class="line"><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> sub.</span><span style="color: #56B6C2">Receive</span><span style="color: #ABB2BF">(cctx, </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(_ context.Context, m </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">pubsub.Message) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    m.</span><span style="color: #56B6C2">Ack</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">cancel</span><span style="color: #ABB2BF">() </span><span style="color: #7F848E">// for test purpose, shut down after first message </span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span></code></pre>
+<p><strong>Note</strong>: If we don’t receive a message for some reason, the <code>Receive</code> call will be stuck forever. I will fix this in the full test code example.</p>
+<h5 id="creating-a-push-subscription">Creating a push subscription</h5>
+<p>For the push example, we need a endpoint that can receive and decode the PubSub message.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">pubSubHandler</span><span style="color: #ABB2BF">(w http.ResponseWriter, r </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">http.Request) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">event</span><span style="color: #ABB2BF"> pubSubMessage</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> json.</span><span style="color: #56B6C2">NewDecoder</span><span style="color: #ABB2BF">(r.Body).</span><span style="color: #56B6C2">Decode</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">event); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		w.</span><span style="color: #56B6C2">WriteHeader</span><span style="color: #ABB2BF">(http.StatusBadRequest)</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">defer</span><span style="color: #ABB2BF"> r.Body.</span><span style="color: #56B6C2">Close</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Do something with event</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// ...</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Then all we need to do is to add  <code>pubsub.PushConfig</code> with our endpoint, when we configure create a subscription.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">_</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateSubscription</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"some-subscription-id-2"</span><span style="color: #ABB2BF">, pubsub.SubscriptionConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">    Topic: topic,</span></span>
+<span class="line"><span style="color: #ABB2BF">    PushConfig: pubsub.PushConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">        Endpoint: </span><span style="color: #98C379">"localhost:8080/pubsub/event"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    },</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span></code></pre>
+<h4 id="publishing-a-message">Publishing a message</h4>
+<p>Finally, we can publish a message to <strong>Pub/Sub</strong>. Keep in mind that <code>Publish</code> is asynchronous, and you should use <code>res.Get</code> afterwards if the result is important.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #E06C75">res</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> topic.</span><span style="color: #56B6C2">Publish</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">pubsub.Message{</span></span>
+<span class="line"><span style="color: #ABB2BF">    Data: []</span><span style="color: #56B6C2">byte</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"hello test"</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// Wait for result, if you care about it :-) </span></span>
+<span class="line"><span style="color: #E06C75">messageID</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> res.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(ctx)</span></span>
+<span class="line"><span style="color: #ABB2BF">...</span></span></code></pre>
+<h2 id="summary">Summary</h2>
+<p>In this guide I showed how to do the following:</p>
+<ol>
+<li>Start the <strong>Pub/Sub</strong> emulator</li>
+<li>Configure the Go client</li>
+<li>Create topics</li>
+<li>Create <em>pull</em> and <em>push</em> subscriptions</li>
+<li>Publish and receive events</li>
+</ol>
+<p>If you are interested in the full code I have included two testcases below.</p>
+<h2 id="appendix-complete-test-code">Appendix: Complete test code</h2>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"cloud.google.com/go/pubsub"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"context"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"encoding/json"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"github.com/google/uuid"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"github.com/magnuswahlstrand/gcp-examples/pubsub/common"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"github.com/stretchr/testify/require"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"net/http"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"net/http/httptest"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"os"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"testing"</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #98C379">"time"</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// Test 1: Pull subscription</span></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">TestSendWithPull</span><span style="color: #ABB2BF">(t </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">testing.T) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">topicID</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"topic-"</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">+</span><span style="color: #ABB2BF"> uuid.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">String</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">subscriptionID</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"sub-"</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">+</span><span style="color: #ABB2BF"> uuid.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">String</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">ctx</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	os.</span><span style="color: #56B6C2">Setenv</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"PUBSUB_EMULATOR_HOST"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"localhost:8085"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">client</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> pubsub.</span><span style="color: #56B6C2">NewClient</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"fake-project"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">topic</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateTopic</span><span style="color: #ABB2BF">(ctx, topicID)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">sub</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateSubscription</span><span style="color: #ABB2BF">(ctx, subscriptionID, pubsub.SubscriptionConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">		Topic: topic,</span></span>
+<span class="line"><span style="color: #ABB2BF">	})</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Act: publish message</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">res</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> topic.</span><span style="color: #56B6C2">Publish</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">pubsub.Message{</span></span>
+<span class="line"><span style="color: #ABB2BF">		Data: []</span><span style="color: #56B6C2">byte</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"hello test"</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">_</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> res.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(ctx)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">cctx</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">cancel</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> context.</span><span style="color: #56B6C2">WithCancel</span><span style="color: #ABB2BF">(ctx)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">okCh</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">make</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">chan</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">go</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #7F848E">// Use a callback to receive messages via subscription.</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #7F848E">// Receive will block until the context is cancelled, or we get a non-recoverable error</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> sub.</span><span style="color: #56B6C2">Receive</span><span style="color: #ABB2BF">(cctx, </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(_ context.Context, m </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">pubsub.Message) {</span></span>
+<span class="line"><span style="color: #ABB2BF">			m.</span><span style="color: #56B6C2">Ack</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">			okCh </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">string</span><span style="color: #ABB2BF">(m.Data)</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #56B6C2">cancel</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">		})</span></span>
+<span class="line"><span style="color: #ABB2BF">	}()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">select</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">msg</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF">okCh:</span></span>
+<span class="line"><span style="color: #ABB2BF">		require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, </span><span style="color: #98C379">"hello test"</span><span style="color: #ABB2BF">, msg)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF">time.</span><span style="color: #56B6C2">After</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">300</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF"> time.Millisecond):</span></span>
+<span class="line"><span style="color: #ABB2BF">		require.</span><span style="color: #56B6C2">Fail</span><span style="color: #ABB2BF">(t, </span><span style="color: #98C379">"did not receive message within deadline"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #56B6C2">cancel</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// Test 2: Push subscription</span></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">TestSendWithPush</span><span style="color: #ABB2BF">(t </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">testing.T) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">topicID</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"topic-"</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">+</span><span style="color: #ABB2BF"> uuid.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">String</span><span style="color: #ABB2BF">()[</span><span style="color: #D19A66">0</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">8</span><span style="color: #ABB2BF">]</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">subscriptionID</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"sub-"</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">+</span><span style="color: #ABB2BF"> uuid.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">().</span><span style="color: #56B6C2">String</span><span style="color: #ABB2BF">()[</span><span style="color: #D19A66">0</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">8</span><span style="color: #ABB2BF">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">okCh</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">make</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">chan</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">server</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> httptest.</span><span style="color: #56B6C2">NewServer</span><span style="color: #ABB2BF">(http.</span><span style="color: #56B6C2">HandlerFunc</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(w http.ResponseWriter, r </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">http.Request) {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">event</span><span style="color: #ABB2BF"> pubSubMessage</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> json.</span><span style="color: #56B6C2">NewDecoder</span><span style="color: #ABB2BF">(r.Body).</span><span style="color: #56B6C2">Decode</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">event); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">			w.</span><span style="color: #56B6C2">WriteHeader</span><span style="color: #ABB2BF">(http.StatusBadRequest)</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span></span>
+<span class="line"><span style="color: #ABB2BF">		}</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">defer</span><span style="color: #ABB2BF"> r.Body.</span><span style="color: #56B6C2">Close</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">		okCh </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">string</span><span style="color: #ABB2BF">(event.Message.Data)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">ctx</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	os.</span><span style="color: #56B6C2">Setenv</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"PUBSUB_EMULATOR_HOST"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"localhost:8085"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">client</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> pubsub.</span><span style="color: #56B6C2">NewClient</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #98C379">"fake-project"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">topic</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateTopic</span><span style="color: #ABB2BF">(ctx, topicID)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">_</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> client.</span><span style="color: #56B6C2">CreateSubscription</span><span style="color: #ABB2BF">(ctx, subscriptionID, pubsub.SubscriptionConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">		Topic: topic,</span></span>
+<span class="line"><span style="color: #ABB2BF">		PushConfig: pubsub.PushConfig{</span></span>
+<span class="line"><span style="color: #ABB2BF">			Endpoint: server.URL,</span></span>
+<span class="line"><span style="color: #ABB2BF">		},</span></span>
+<span class="line"><span style="color: #ABB2BF">	})</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Act: publish message</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">_</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> topic.</span><span style="color: #56B6C2">Publish</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">pubsub.Message{</span></span>
+<span class="line"><span style="color: #ABB2BF">		Data: []</span><span style="color: #56B6C2">byte</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"hello test"</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	})</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">select</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">msg</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF">okCh:</span></span>
+<span class="line"><span style="color: #ABB2BF">		require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, </span><span style="color: #98C379">"hello test"</span><span style="color: #ABB2BF">, msg)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;-</span><span style="color: #ABB2BF">time.</span><span style="color: #56B6C2">After</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">500</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF"> time.Millisecond):</span></span>
+<span class="line"><span style="color: #ABB2BF">		require.</span><span style="color: #56B6C2">Fail</span><span style="color: #ABB2BF">(t, </span><span style="color: #98C379">"did not receive message within deadline"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://cloud.google.com/sdk/docs/install">Installing Google Cloud SDK</a></li>
+<li><a href="https://cloud.google.com/pubsub/docs/emulator">Testing apps locally with the emulator</a></li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/gcp" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">gcp</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/pubsub" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">pubsub</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2022-04-23-pubsub-with-dlq/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Google Pub/Sub with dead letter queues</title>
+    <meta name="title" content="Google Pub/Sub with dead letter queues">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Google Pub/Sub with dead letter queues">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2022-04-23-pubsub-with-dlq/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2022-04-23-pubsub-with-dlq/">
+    <meta property="twitter:title" content="Google Pub/Sub with dead letter queues">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Google Pub/Sub with dead letter queues</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">April 23, 2022</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>Today we will build a simple system with Google Pub/Sub to explore the basic components needed for an asynchronous <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher-subscriber pattern</a>. We will use Terraform for creating the infrastucture, and go for the application code. All code <a href="https://github.com/magnuswahlstrand/blog-code/tree/main/gcp-pubsub-with-dlq">here</a>.</p>
+<p>At the end of this post, you should know</p>
+<ul>
+<li>What is a topic?</li>
+<li>What is a subscription?</li>
+<li>Why do I need a dead letter queue?</li>
+<li>How do I retry message from my dead letter queue?</li>
+</ul>
+<h2 id="background">Background</h2>
+<p>Asynchronous communication and event driven systems are common in modern software development. Most cloud providers offer such messages services these use cases.</p>
+<ul>
+<li>Microsoft has <a href="https://docs.microsoft.com/sv-se/azure/service-bus-messaging/service-bus-messaging-overview">Azure Service Bus</a></li>
+<li>AWS has <a href="https://aws.amazon.com/sqs/">SQS</a> and <a href="https://aws.amazon.com/sns/">SNS</a></li>
+<li>Google has <a href="https://cloud.google.com/pubsub/docs/overview">Pub/Sub</a></li>
+</ul>
+<p>One common pattern is the <a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern">publisher-subscriber pattern</a> where (usually) one publisher publishes message to a certain topic, and one or many subscribers listens for these events. The publisher does not know who is subscribing, and in fact, does not know if there are any subscribers at all. This can be used as glue between your own services and those of the cloud provider.</p>
+<h3 id="dead-letter-queues-dlq">Dead letter queues (DLQ)</h3>
+<p>A problem in messaging systems is “what do you do with bad messages?“. Let’s say a bad producer publishes a message that the consumer can’t parse, or the consumer has lost the connection to its datastore. We have at least two options:</p>
+<p><strong>Discard the messages</strong> - with this option, we risk losing data that is actually valid.</p>
+<p><strong>Retry forever</strong> - with this we might also ultimately lose data, if the messaging service fills up. This could also cause increase latency in the system.</p>
+<p>A third option is a <strong>dead letter queue (DLQ)</strong>. The main purpose of a dead letter queue is to handle messages that cannot be handled by the consumer. After a certain amount of time or retries, we can send messages “somewhere else”, where the problematic messages can be handled manually. For example, an operator can inspect and drop the messages, or resend them to the service after a bug-fix has been released.</p>
+<h3 id="pubsub-with-dlq-on-gcp">Pub/Sub with DLQ on GCP</h3>
+<p>In GCP, it works as follows:</p>
+<p><img src="/img/pubsub-with-dlq/gcp-overview.png" alt="img.png"/></p>
+<ol>
+<li>An application publishes a message to a topic, e.g. <code>used-created</code></li>
+<li>The consuming application is subscribed to this topic via a subscription <code>myapp.user-created</code></li>
+<li>When the retry limit is reached, the message is moved over to the dead letter queue topic, <code>myapp.used-created.dlq</code>.</li>
+<li>The messages end up in the subscription <code>myapp.user-created.dlq</code>, where it can handled manually by an operator.</li>
+</ol>
+<h2 id="infrastructure">Infrastructure</h2>
+<p>We use <a href="https://www.terraform.io/">Terraform</a> to set up the necessary infrastructure in GCP.</p>
+<p>Next we set up our main topic and subscription. There is a Terraform module that simplifies the setup, called <a href="https://registry.terraform.io/modules/terraform-google-modules/pubsub/google/latest">terraform-google-modules/pubsub/google</a>.</p>
+<p><em>Note: For this demo, we keep retries few, and short. Normally I would configure exponential back-off over a longer period.</em></p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">terraform {</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">locals {</span></span>
+<span class="line"><span style="color:#abb2bf">  topic_name  = &quot;user-created&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  app_name    = &quot;app&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">provider &quot;google&quot; {</span></span>
+<span class="line"><span style="color:#abb2bf">  project = var.project_id</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">module &quot;pubsub-main&quot; {</span></span>
+<span class="line"><span style="color:#abb2bf">  source     = &quot;terraform-google-modules/pubsub/google&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  project_id = var.project_id</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">  topic              = &quot;${local.topic_name}&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  pull_subscriptions = [</span></span>
+<span class="line"><span style="color:#abb2bf">    {</span></span>
+<span class="line"><span style="color:#abb2bf">      name                  = &quot;${local.app_name}.${local.topic_name}&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      dead_letter_topic     = module.pubsub-dlq.id</span></span>
+<span class="line"><span style="color:#abb2bf">      service_account       = google_service_account.pubsub_sa.email</span></span>
+<span class="line"><span style="color:#abb2bf">      max_delivery_attempts = 5</span></span>
+<span class="line"><span style="color:#abb2bf">      maximum_backoff       = &quot;10s&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      minimum_backoff       = &quot;1s&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">    }</span></span>
+<span class="line"><span style="color:#abb2bf">  ]</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<p>Above, we set <code>dead_letter_topic = module.pubsub-dlq.id</code>. This references this section where we set up our DLQ.</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">module &quot;pubsub-dlq&quot; {</span></span>
+<span class="line"><span style="color:#abb2bf">  source     = &quot;terraform-google-modules/pubsub/google&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  project_id = var.project_id</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">  topic              = &quot;${local.app_name}.${local.topic_name}.dlq&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  pull_subscriptions = [</span></span>
+<span class="line"><span style="color:#abb2bf">    {</span></span>
+<span class="line"><span style="color:#abb2bf">      name = &quot;${local.app_name}.${local.topic_name}.dlq&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">    }</span></span>
+<span class="line"><span style="color:#abb2bf">  ]</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<p>Then we run <code>terraform apply</code></p>
+<div class="astro-CZA65E6M" data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/terraform.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
+
+
+
+
+<h3 id="publish-messages">Publish messages</h3>
+<p>Now that we have our infrastructure in place, we can publish a couple of messages. The easiest way to publish messages to pub/sub is with the <code>gcloud</code>-cli.</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#ABB2BF">gcloud pubsub topics publish \</span></span>
+<span class="line"><span style="color:#ABB2BF">  projects/b32-demo-projects/topics/user-created  --message=</span><span style="color:#98C379">&quot;alive&quot;</span></span></code></pre>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#ABB2BF">gcloud pubsub topics publish \</span></span>
+<span class="line"><span style="color:#ABB2BF">  projects/b32-demo-projects/topics/user-created  --message=</span><span style="color:#98C379">&quot;dead&quot;</span></span></code></pre>
+<h2 id="consuming">Consuming</h2>
+<p>Next is consuming. Here is a small consumer written in Go that will pull messages from our subscription. It will <strong>Nack</strong> (negatively acknowledge) any message starting with “dead”. Any other messages are <strong>Ack</strong> (acknowledged).</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">ProcessMessages</span><span style="color:#ABB2BF">(ctx context.Context, projectID, subID </span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">client</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> pubsub.</span><span style="color:#56B6C2">NewClient</span><span style="color:#ABB2BF">(ctx, projectID)</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> fmt.</span><span style="color:#56B6C2">Errorf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;pubsub.NewClient: </span><span style="color:#D19A66">%v</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, err)</span></span>
+<span class="line"><span style="color:#ABB2BF">	}</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">defer</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">Close</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">subscription</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">Subscription</span><span style="color:#ABB2BF">(subID)</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> subscription.</span><span style="color:#56B6C2">Receive</span><span style="color:#ABB2BF">(ctx, </span><span style="color:#C678DD">func</span><span style="color:#ABB2BF">(_ context.Context, msg </span><span style="color:#C678DD">*</span><span style="color:#ABB2BF">pubsub.Message) {</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#E06C75">txt</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> fmt.</span><span style="color:#56B6C2">Sprintf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;Received message: </span><span style="color:#D19A66">%q</span><span style="color:#98C379"> (attempt </span><span style="color:#D19A66">%d</span><span style="color:#98C379">)&quot;</span><span style="color:#ABB2BF">, </span><span style="color:#56B6C2">string</span><span style="color:#ABB2BF">(msg.Data), </span><span style="color:#C678DD">*</span><span style="color:#ABB2BF">msg.DeliveryAttempt)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> bytes.</span><span style="color:#56B6C2">HasPrefix</span><span style="color:#ABB2BF">(msg.Data, []</span><span style="color:#56B6C2">byte</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;dead&quot;</span><span style="color:#ABB2BF">)) {</span></span>
+<span class="line"><span style="color:#ABB2BF">			fmt.</span><span style="color:#56B6C2">Println</span><span style="color:#ABB2BF">(txt, </span><span style="color:#98C379">&quot; - NACK&quot;</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">			msg.</span><span style="color:#56B6C2">Nack</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">			</span><span style="color:#C678DD">return</span></span>
+<span class="line"><span style="color:#ABB2BF">		}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">		fmt.</span><span style="color:#56B6C2">Println</span><span style="color:#ABB2BF">(txt, </span><span style="color:#98C379">&quot; - ACK&quot;</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">		msg.</span><span style="color:#56B6C2">Ack</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">	})</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<p><em><strong>Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub</em></p>
+<p>Now we can run our app.</p>
+<div class="astro-CZA65E6M" data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/process-messages.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
+
+
+
+
+<p>We can see that we receive the two messages we published earlier, <em>“alive”</em> and <em>“dead”</em>. The former is <code>Ack</code>:ed, while “dead” gets <code>Nack</code>:ed. After attempt 5, it disappears. Is it lost forever? No! It got automatically sent over to our DLQ! Success!</p>
+<h2 id="what-now">What now?</h2>
+<p>Before we wrap up, we need to cover two things.</p>
+<ol>
+<li>How do we know that something is stuck in the DLQ?</li>
+<li>What do we do when it is stuck there?</li>
+</ol>
+<h3 id="monitoring">Monitoring</h3>
+<p>The answer to the first question is “monitoring”, which GCP has good support for! The GCP app is surprisingly good for this purpose I think. I will not cover the details, but here is an additional Terraform-snippet I used to set up monitoring for our app. It checks if the <code>num_undelivered_messages</code> on the dlq-subscription is greater than 0.</p>
+<p>The notification_channel refers to the phone on my app. I set this up separately.</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">resource &quot;google_monitoring_alert_policy&quot; &quot;alert_policy&quot; {</span></span>
+<span class="line"><span style="color:#abb2bf">  display_name = &quot;Messages on dead-letter queue (app: ${local.app_name}, topic: ${local.topic_name})&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  combiner     = &quot;OR&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  conditions {</span></span>
+<span class="line"><span style="color:#abb2bf">    display_name = &quot;Cloud Pub/Sub Subscription - Unacked messages&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">    condition_threshold {</span></span>
+<span class="line"><span style="color:#abb2bf">      filter     = &quot;resource.type = \&quot;pubsub_subscription\&quot; AND resource.labels.subscription_id = \&quot;${module.pubsub-dlq.subscription_names.0}\&quot; AND metric.type = \&quot;pubsub.googleapis.com/subscription/num_undelivered_messages\&quot;&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      duration   = &quot;120s&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      comparison = &quot;COMPARISON_GT&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      aggregations {</span></span>
+<span class="line"><span style="color:#abb2bf">        alignment_period   = &quot;60s&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">        per_series_aligner = &quot;ALIGN_MAX&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">      }</span></span>
+<span class="line"><span style="color:#abb2bf">    }</span></span>
+<span class="line"><span style="color:#abb2bf">  }</span></span>
+<span class="line"><span style="color:#abb2bf">  notification_channels = [</span></span>
+<span class="line"><span style="color:#abb2bf">    &quot;projects/b32-demo-projects/notificationChannels/6746093406737316903&quot;</span></span>
+<span class="line"><span style="color:#abb2bf">  ]</span></span>
+<span class="line"><span style="color:#abb2bf"></span></span>
+<span class="line"><span style="color:#abb2bf">  user_labels = {</span></span>
+<span class="line"><span style="color:#abb2bf">    app : local.app_name</span></span>
+<span class="line"><span style="color:#abb2bf">  }</span></span>
+<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<h3 id="handling-stuck-messages">Handling stuck messages</h3>
+<p>When an operator has received the alarm from the monitor, they manually inspect the messages in the DLQ. If the message is completely invalid, they can just pull and acknowledge that specific message in the cloud console.</p>
+<p>If the message ended up in the DLQ because of a bug in the application. We can republish it to the main topic with the following code.</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">RepublishMessages</span><span style="color:#ABB2BF">(ctx context.Context, projectID, dlqSubID, toTopicID </span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">client</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> pubsub.</span><span style="color:#56B6C2">NewClient</span><span style="color:#ABB2BF">(ctx, projectID)</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> fmt.</span><span style="color:#56B6C2">Errorf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;pubsub.NewClient: </span><span style="color:#D19A66">%v</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, err)</span></span>
+<span class="line"><span style="color:#ABB2BF">	}</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">defer</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">Close</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">subscription</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">Subscription</span><span style="color:#ABB2BF">(dlqSubID)</span></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">topic</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">Topic</span><span style="color:#ABB2BF">(toTopicID)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> subscription.</span><span style="color:#56B6C2">Receive</span><span style="color:#ABB2BF">(ctx, </span><span style="color:#C678DD">func</span><span style="color:#ABB2BF">(_ context.Context, msg </span><span style="color:#C678DD">*</span><span style="color:#ABB2BF">pubsub.Message) {</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#7F848E">// Republish message</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#E06C75">result</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> topic.</span><span style="color:#56B6C2">Publish</span><span style="color:#ABB2BF">(ctx, msg)</span></span>
+<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">_</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> result.</span><span style="color:#56B6C2">Get</span><span style="color:#ABB2BF">(ctx); err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">			msg.</span><span style="color:#56B6C2">Nack</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">			</span><span style="color:#C678DD">return</span></span>
+<span class="line"><span style="color:#ABB2BF">		}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">		fmt.</span><span style="color:#56B6C2">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;Republished message: </span><span style="color:#D19A66">%q</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, </span><span style="color:#56B6C2">string</span><span style="color:#ABB2BF">(msg.Data))</span></span>
+<span class="line"><span style="color:#ABB2BF">		msg.</span><span style="color:#56B6C2">Ack</span><span style="color:#ABB2BF">()</span></span>
+<span class="line"><span style="color:#ABB2BF">	})</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<p>A few caveats on this method.</p>
+<ol>
+<li>If the message still cannot be processed by the application, it will be sent to the DLQ again, meaning we can end up in an infinite loop <code>DLQ -&gt; main -&gt; DLQ -&gt; ...</code>.</li>
+<li>If there are more subscribers to the main topic <code>user-created</code>, they will also receive this message. This might not be what you intented. This can be solved in a few ways, one of them is by <a href="https://cloud.google.com/pubsub/docs/filtering">filtering messages</a>.</li>
+<li>In the case of missing data in the message, we could use the function above as a quick fix to add the missing data. In my experience, this gets messy quite quickly. I prefer one of the following
+<ol>
+<li>The publisher adds the missing data and resend the message</li>
+<li>The consumer supports missing data by adding defaults</li>
+</ol>
+</li>
+</ol>
+<h1 id="conclusion">Conclusion</h1>
+<p>That’s all. Now we have a simple publisher-subscriber setup that we can use for our application. We even have a dead letter queue with monitoring if something goes wrong.</p>
+<p>Good luck!</p>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/pubsub" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">pubsub</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/gcp" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">gcp</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/dlq" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">dlq</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

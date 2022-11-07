@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2022-05-29-aws-cognito-and-react/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>User sign-up and sign-in</title>
+    <meta name="title" content="User sign-up and sign-in">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="User sign-up and sign-in">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2022-05-29-aws-cognito-and-react/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2022-05-29-aws-cognito-and-react/">
+    <meta property="twitter:title" content="User sign-up and sign-in">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">User sign-up and sign-in</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">May 29, 2022</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>A couple of weeks back I visited the <a href="https://aws.amazon.com/events/summits/stockholm/">AWS Summit in Stockholm</a>. This
+was my third year visiting, and I always enjoy it. It is great for meeting up with old colleagues and get some fresh perspectives. This year’s visit rekindled my interest in AWS’s <a href="https://en.wikipedia.org/wiki/Serverless_computing">serverless</a> offering (Lambda, SQS, Eventbridge…), something I plan to work more with in the future.</p>
+<p>In this post, I use <strong>AWS Cognito</strong> (also serverless) to implement <em>user sign-up</em>, and <em>user sign-in</em> for a simple <strong>React</strong> app. We will configure Cognito using <strong>AWS Cloud Development Kit (CDK)</strong>. The end result will look as follows:</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<h2 id="overview">Overview</h2>
+<p>Before we start, let’s cover the tools we will be using.</p>
+<p><a href="https://aws.amazon.com/cognito/">Amazon Cognito</a> is service that lets you add user sign-up and sign-in to
+your web and mobile applications. It scales automatically, and you don’t have to provision any resources explicitly.
+Perfect for serverless use cases. It is billed by number of active users, with a generous 50.000 free active monthly
+users.</p>
+<p>To configure Cognito, I use <a href="https://aws.amazon.com/cdk/">AWS Cloud Development Kit</a> (CDK). CDK is an Infrastructure as Code (IaC) tool, with a
+similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2019, and AWS seems to be putting a lot of focus on it. One example is last year’s <a href="https://youtu.be/8_Xs8Ik0h1w?t=4529">AWS re:Invent</a> where the AWS CTO Werner Vogels talks about it.</p>
+<div class="relative left-10" style="top: 1px">
+    <h3 class="border-2 border-b-0 border-gray-700 bg-gray-800 inline py-2 px-4">Sidenote</h3>
+</div>
+
+
+<div class="bg-gray-800 mt-0 border-2 border-gray-700 px-6 rounded">
+    <p>The big difference between CDK and other common tools that it is <a href="https://dev.to/ruizb/declarative-vs-imperative-4a7l">imperative rather than declarative</a>, and uses programming languages like Typescript, Python, instead of YAML.</p><p><em>Comparison with other infrastructure tools:</em></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Language</th></tr></thead><tbody><tr><td><a href="https://www.terraform.io/">Terraform</a></td><td>Declarative</td><td>HCL</td></tr><tr><td><a href="https://aws.amazon.com/cloudformation/">AWS CloudFormation</a></td><td>Declarative</td><td>YAML</td></tr><tr><td><a href="https://docs.aws.amazon.com/serverless-application-model/index.html">AWS SAM</a></td><td>Declarative</td><td>YAML</td></tr><tr><td><a href="https://aws.amazon.com/cdk/">AWS CDK</a></td><td>Imperative</td><td>Typescript, Python, Go, …</td></tr></tbody></table>
+<p>To build our web app, we use <a href="https://reactjs.org/">React</a> + pre-made <a href="https://ui.docs.amplify.aws/">Amplify UI components</a> for sign-up and sign-in. <a href="https://aws.amazon.com/amplify/">AWS Amplify</a> is really a whole framework for building full stack apps, but the SDK and UI components can be used separately.</p>
+<h2 id="the-infrastructure">The infrastructure</h2>
+<p>Let’s start with out infrastructure.</p>
+<p>.</p>
+<p>How can we use  the JWT?</p>
+<p>.</p>
+<p>.</p>
+<p>.
+.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<h2 id="the-frontend">The frontend</h2>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>Next, we set up our React app. I use <a href="https://vitejs.dev/guide/">Vite</a> to bootstrap my app, but you can write it from scratch or use something like <a href="https://create-react-app.dev/">Create React App</a>.</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">&gt; yarn create vite</span></span></code></pre>
+<p>output</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">✔ Project name: &gt; frontend</span></span>
+<span class="line"><span style="color:#abb2bf">✔ Select a framework: › react</span></span>
+<span class="line"><span style="color:#abb2bf">✔ Select a variant: › react-ts</span></span></code></pre>
+<p>Install the <code>aws-amplify</code> and its UI components:</p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">yarn add aws-amplify @aws-amplify/ui-react</span></span></code></pre>
+<p>The source code is kept in <code>./src</code>, and we can remove everything expect <code>App.tsx</code> and <code>main.tsx</code>.</p>
+<p><code>src/main.tsx</code></p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">React</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;react&#39;</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">ReactDOM</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;react-dom/client&#39;</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">App</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;./App&#39;</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> { </span><span style="color:#E06C75">Amplify</span><span style="color:#ABB2BF"> } </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;aws-amplify&#39;</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">awsExports</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;./aws-exports&#39;</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#E5C07B">Amplify</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">configure</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">awsExports</span><span style="color:#ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E5C07B">ReactDOM</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">createRoot</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">document</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">getElementById</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&#39;root&#39;</span><span style="color:#ABB2BF">)</span><span style="color:#56B6C2">!</span><span style="color:#ABB2BF">).</span><span style="color:#61AFEF">render</span><span style="color:#ABB2BF">(</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#56B6C2">&lt;</span><span style="color:#E5C07B">React</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">StrictMode</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#56B6C2">&lt;</span><span style="color:#E06C75">App</span><span style="color:#ABB2BF"> </span><span style="color:#56B6C2">/&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#56B6C2">&lt;/</span><span style="color:#E5C07B">React</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">StrictMode</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">)</span></span>
+<span class="line"></span></code></pre>
+<p><code>src/App.tsx</code></p>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> {</span><span style="color:#E06C75">Authenticator</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">Button</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">Card</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">Heading</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">Text</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">View</span><span style="color:#ABB2BF">} </span><span style="color:#C678DD">from</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;@aws-amplify/ui-react&#39;</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&#39;@aws-amplify/ui-react/styles.css&#39;</span><span style="color:#ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">export</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">default</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">function</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">App</span><span style="color:#ABB2BF">() {</span></span>
+<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> (</span></span>
+<span class="line"><span style="color:#ABB2BF">        </span><span style="color:#56B6C2">&lt;&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">            &lt;</span><span style="color:#E5C07B">Authenticator</span><span style="color:#ABB2BF">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                {({</span><span style="color:#E06C75">signOut</span><span style="color:#ABB2BF"> </span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF"> (() </span><span style="color:#C678DD">=&gt;</span><span style="color:#ABB2BF"> {}), </span><span style="color:#E06C75">user</span><span style="color:#ABB2BF">}) </span><span style="color:#56B6C2">=&gt;</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">                    </span><span style="color:#61AFEF">return</span><span style="color:#ABB2BF"> (</span></span>
+<span class="line"><span style="color:#ABB2BF">                        &lt;</span><span style="color:#E06C75">View</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">width</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;40rem&quot;</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">textAlign</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;center&quot;</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                            &lt;</span><span style="color:#E06C75">Card</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">variation</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;elevated&quot;</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                                &lt;</span><span style="color:#E06C75">Heading</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">level</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">{</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">}</span><span style="color:#56B6C2">&gt;</span><span style="color:#E06C75">Welcome</span><span style="color:#56B6C2">!&lt;/</span><span style="color:#E06C75">Heading</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                                &lt;</span><span style="color:#E06C75">Text</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">margin</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;2em&quot;</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                                    </span><span style="color:#E06C75">You</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">are</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">logged</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">in</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">as</span><span style="color:#ABB2BF"> &lt;</span><span style="color:#E06C75">b</span><span style="color:#ABB2BF">&gt;{</span><span style="color:#E06C75">user</span><span style="color:#ABB2BF">?.</span><span style="color:#E06C75">attributes</span><span style="color:#ABB2BF">?.</span><span style="color:#E06C75">email</span><span style="color:#ABB2BF">}&lt;/</span><span style="color:#E06C75">b</span><span style="color:#ABB2BF">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                                &lt;/</span><span style="color:#E06C75">Text</span><span style="color:#ABB2BF">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                                &lt;</span><span style="color:#E06C75">Button</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">variation</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;primary&quot;</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">onClick</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">{() =&gt; </span><span style="color:#61AFEF">signOut</span><span style="color:#ABB2BF">()}</span><span style="color:#56B6C2">&gt;</span><span style="color:#E06C75">Log</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">out</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">now</span><span style="color:#56B6C2">!&lt;/</span><span style="color:#E06C75">Button</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                            &lt;/</span><span style="color:#E06C75">Card</span><span style="color:#ABB2BF">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                        &lt;/</span><span style="color:#E06C75">View</span><span style="color:#ABB2BF">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">                    )</span></span>
+<span class="line"><span style="color:#ABB2BF">                }}</span></span>
+<span class="line"><span style="color:#ABB2BF">            </span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">Authenticator</span><span style="color:#56B6C2">&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">        </span><span style="color:#56B6C2">&lt;/&gt;</span></span>
+<span class="line"><span style="color:#ABB2BF">    );</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
+<h2 id="how-to-extend-this">How to extend this?</h2>
+<p>Frontend + Cogninto</p>
+<p>Could connect something like this</p>
+<p>API Gateway Cognito authorization +   + Lambda</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<h2 id="summary">Summary</h2>
+<p>Created a</p>
+<p>Infrastructure overview</p>
+<p>.</p>
+<p>How can we use  the JWT?</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<p>.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://resource.html">some</a></li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/aws" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">aws</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/cognito" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">cognito</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/auth" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">auth</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/serverless" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">serverless</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/cdk" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">cdk</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

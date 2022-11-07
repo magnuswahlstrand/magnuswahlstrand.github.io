@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2020-10-31-state-machines-in-go/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>State machines in Go</title>
+    <meta name="title" content="State machines in Go">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="State machines in Go">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2020-10-31-state-machines-in-go/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2020-10-31-state-machines-in-go/">
+    <meta property="twitter:title" content="State machines in Go">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">State machines in Go</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">October 31, 2020</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>Let’s implement a simple state machine in Go that is:</p>
+<ol>
+<li>easy to understand</li>
+<li>easy to extend</li>
+<li>easy to test</li>
+</ol>
+<p>The full code is available in the <a href="https://github.com/magnuswahlstrand/state-machines-in-go">repo</a>.</p>
+<!--more-->
+<h4 id="dependencies">Dependencies</h4>
+<ul>
+<li><a href="https://github.com/kyleconroy/sqlc">kylenconroy/sqlc</a> - generate code from sql queries</li>
+<li><a href="https://https://github.com/matryer/moq">matryer/moq</a> - mock database layer for testing</li>
+</ul>
+<h2 id="the-state-machine">The State Machine</h2>
+<p>We will implement a simple <strong>order processor</strong>. An order can be pretty much anything!
+Our state machine will contain the following (main) states:</p>
+<ol>
+<li><strong>created</strong> - when order has been created, but not processed</li>
+<li><strong>validated</strong> - the order has been validated somehow</li>
+<li><strong>broadcasted</strong> - some data about the order has been broadcasted to other services</li>
+<li><strong>complete</strong> - all steps have been completed. This is the end state of our state machine</li>
+</ol>
+<p>Exactly what happens in each individual step is not important here, as we will focus on building our state machine.</p>
+<h3 id="code">Code</h3>
+<h4 id="data-layer">Data layer</h4>
+<p>Our data model is very straightforward. Each order has an ID and a state. The state will be used for the state machine.
+It was generated by <a href="https://github.com/kyleconroy/sqlc">sqlc</a>, but could of course be written by manually.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Order</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	ID    </span><span style="color: #C678DD">int64</span></span>
+<span class="line"><span style="color: #ABB2BF">	State </span><span style="color: #C678DD">string</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>If we include configuration <code>emit_interface: true</code> into our sqlc.yaml we will get an interface that we can use for database mocking, which makes testing a lot easier.
+It looks like this:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Querier</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">interface</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #56B6C2">CreateOrder</span><span style="color: #ABB2BF">(ctx context.Context, state </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">) (Order, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #56B6C2">GetOrder</span><span style="color: #ABB2BF">(ctx context.Context, id </span><span style="color: #C678DD">int64</span><span style="color: #ABB2BF">) (Order, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #56B6C2">UpdateOrderState</span><span style="color: #ABB2BF">(ctx context.Context, arg UpdateOrderStateParams) </span><span style="color: #C678DD">error</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h4 id="application-layer">Application layer</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">orderProcessor</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	database data.Querier</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Our <code>orderProcessor</code> struct contains the <code>Querier</code> generated by <code>sqlc</code>, based on the the data layer. The <code>orderProcessor</code> has the following main methods:</p>
+<p><strong>CreateNewOrder</strong> - creates a new order with the initial state “created”.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">CreateNewOrder</span><span style="color: #ABB2BF">(ctx context.Context) (</span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">data.Order, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">order</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.database.</span><span style="color: #56B6C2">CreateOrder</span><span style="color: #ABB2BF">(ctx, stateCreated)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">order, </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>StartProcessOrder</strong> - takes an orderID, and iterates through each step of the state machine until the end state is reached, or an error has occurred.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">StartProcessOrder</span><span style="color: #ABB2BF">(ctx context.Context, orderID </span><span style="color: #C678DD">int64</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">isEndState</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">bool</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #E06C75">isEndState</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.</span><span style="color: #56B6C2">process</span><span style="color: #ABB2BF">(ctx, orderID)</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> err</span></span>
+<span class="line"><span style="color: #ABB2BF">		}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> isEndState {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">		}</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>process</strong> - performs an action based on the current state of the order and takes the order to the next step in the state machine.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">process</span><span style="color: #ABB2BF">(ctx context.Context, orderID </span><span style="color: #C678DD">int64</span><span style="color: #ABB2BF">) (</span><span style="color: #C678DD">bool</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">order</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.database.</span><span style="color: #56B6C2">GetOrder</span><span style="color: #ABB2BF">(ctx, orderID)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">switch</span><span style="color: #ABB2BF"> order.State {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateCreated:  </span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">, p.</span><span style="color: #56B6C2">validateOrder</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">order)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateValidated:</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">, p.</span><span style="color: #56B6C2">updateOtherServices</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">order)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateBroadcastToOtherServices:</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">, p.</span><span style="color: #56B6C2">finalizeOrder</span><span style="color: #ABB2BF">(ctx, </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">order)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">default</span><span style="color: #ABB2BF">:</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">, fmt.</span><span style="color: #56B6C2">Errorf</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"unexpected state: </span><span style="color: #D19A66">%q</span><span style="color: #98C379">"</span><span style="color: #ABB2BF">, order.State)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<ol>
+<li>Get the order from the database</li>
+<li>Based on the state, choose an action -</li>
+<li>Perform action</li>
+</ol>
+<p>Example</p>
+<ol>
+<li>Get order <code>123</code></li>
+<li>It has state <code>created</code>, the next action is <code>validateOrder</code>.</li>
+<li><code>validateOrder</code> will in turn do two things:
+<ol>
+<li>Validate order</li>
+<li>If successful, move order to state <code>validated</code> (or maybe <code>failed</code>)</li>
+</ol>
+</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">validateOrder</span><span style="color: #ABB2BF">(ctx context.Context, order </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">data.Order) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// ... Code to validate order here </span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Update state</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">update</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> data.UpdateOrderStateParams{stateValidated, order.ID}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.database.</span><span style="color: #56B6C2">UpdateOrderState</span><span style="color: #ABB2BF">(ctx, update); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>That’s it!</p>
+<h2 id="improvements">Improvements</h2>
+<h3 id="1-extending-the-state-machine">1. Extending the state machine</h3>
+<p>To add an additional step after order validation, we just add an additional action, after <code>stateValidated</code> and an add the corresponding state <code>addressFound</code>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">	...	</span></span>
+<span class="line"><span style="color: #ABB2BF"> 	case stateCreated:</span></span>
+<span class="line"><span style="color: #ABB2BF"> 		return false, p.validateOrder(ctx, &#x26;order)</span></span>
+<span class="line"><span style="color: #ABB2BF"> 	case stateValidated:</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>		return false, p.lookupAddress(ctx, &#x26;order)</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>	case stateAddressFound:</span></span>
+<span class="line"><span style="color: #ABB2BF"> 		return false, p.updateOtherServices(ctx, &#x26;order)</span></span>
+<span class="line"><span style="color: #ABB2BF"> 	case stateBroadcastToOtherServices:</span></span>
+<span class="line"><span style="color: #ABB2BF"> 		return true, p.finalizeOrder(ctx, &#x26;order)</span></span>
+<span class="line"><span style="color: #ABB2BF">	...	</span></span></code></pre>
+<h3 id="2-testing-with-a-moq-mock">2. Testing with a <code>moq</code> mock</h3>
+<p>To test the database layer in unit tests, we generate a mock using <a href="https://https://github.com/matryer/moq">moq</a>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">moq -out data/query_mock.go data Querier</span></span></code></pre>
+<p>And create setup a simple database mock that handles a single order</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">singleOrderDB</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	order data.Order</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">data.QuerierMock</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">CreateTestDatabase</span><span style="color: #ABB2BF">(t </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">testing.T) singleOrderDB {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">db</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> singleOrderDB{}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Setup mock</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">db.QuerierMock</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">data.QuerierMock{</span></span>
+<span class="line"><span style="color: #ABB2BF">		CreateOrderFunc: </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(ctx context.Context, state </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">) (data.Order, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #E06C75">db.order.State</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> state</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> db.order, </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">		},</span></span>
+<span class="line"><span style="color: #ABB2BF">		GetOrderFunc: </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(ctx context.Context, id </span><span style="color: #C678DD">int64</span><span style="color: #ABB2BF">) (data.Order, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> db.order, </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">		},</span></span>
+<span class="line"><span style="color: #ABB2BF">		UpdateOrderStateFunc: </span><span style="color: #C678DD">func</span><span style="color: #ABB2BF">(ctx context.Context, arg data.UpdateOrderStateParams) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">switch</span><span style="color: #ABB2BF"> db.order.State {</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateCreated:</span></span>
+<span class="line"><span style="color: #ABB2BF">				require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, stateValidated, arg.State)</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateValidated:</span></span>
+<span class="line"><span style="color: #ABB2BF">				require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, stateBroadcastToOtherServices, arg.State)</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">case</span><span style="color: #ABB2BF"> stateBroadcastToOtherServices:</span></span>
+<span class="line"><span style="color: #ABB2BF">				require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, stateCompleted, arg.State)</span></span>
+<span class="line"><span style="color: #ABB2BF">			}</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #E06C75">db.order.State</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> arg.State</span></span>
+<span class="line"><span style="color: #ABB2BF">			</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">		},</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> db</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Next we can write our test that</p>
+<ol>
+<li>Creates an order</li>
+<li>Validates that the order ends up in <code>completed</code></li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">TestStateMachine</span><span style="color: #ABB2BF">(t </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">testing.T) {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">testDB</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">CreateTestDatabase</span><span style="color: #ABB2BF">(t)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">processor</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">NewProcessor</span><span style="color: #ABB2BF">(testDB)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">ctx</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Arrange</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">order</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> processor.</span><span style="color: #56B6C2">CreateNewOrder</span><span style="color: #ABB2BF">(ctx)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Act</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> processor.</span><span style="color: #56B6C2">StartProcessOrder</span><span style="color: #ABB2BF">(ctx, order.ID)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Assert</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">state</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> processor.</span><span style="color: #56B6C2">GetOrderState</span><span style="color: #ABB2BF">(ctx, order.ID)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">NoError</span><span style="color: #ABB2BF">(t, err)</span></span>
+<span class="line"><span style="color: #ABB2BF">	require.</span><span style="color: #56B6C2">Equal</span><span style="color: #ABB2BF">(t, stateCompleted, state)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="3-intermittent-states">3. Intermittent states</h3>
+<p>One limitation of our state machine is that if an order step failed, we have no way of knowning if we 1) tried to processed the order but failed, or 2) never tried to process the order.
+We can improve the robustness of our system by introducing temporary states, which represent the transitions between states. Something like this:</p>
+<ol>
+<li><strong>created</strong></li>
+<li><em><strong>validation_started</strong></em></li>
+<li><strong>validation_complete</strong></li>
+<li><em><strong>broadcast_started</strong></em></li>
+<li><strong>broadcast_complete</strong></li>
+<li><strong>complete</strong></li>
+</ol>
+<p><code>updateOtherServices</code> will now look something like this</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">updateOtherServices</span><span style="color: #ABB2BF">(ctx context.Context, order </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">data.Order) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.</span><span style="color: #56B6C2">updateOrderState</span><span style="color: #ABB2BF">(ctx, order, stateBroadcastStarted); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Update other services</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Update state</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> p.</span><span style="color: #56B6C2">updateOrderState</span><span style="color: #ABB2BF">(ctx, order, stateBroadcastComplete)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>If the actual call to update other services fails, we will know it, but the order being in <code>broadcast_started</code>. Depending on the operation, we can introduce automatic recovery for such events. Either by moving the order back to state <code>validated_complete</code> or maybe check if order has been broadcast before failure, and then move it to <code>broadcast_complete</code>.</p>
+<h3 id="4-locking-orders">4. “Locking” orders</h3>
+<p>A secondary benefit of these temporary states is that they can serve as a sort of lock. This is useful  if we want to run multiple processing processes at the same time. For example, a cron job that finds orders that has not been processed, and processes them.  While an order is in an transition state <code>validation_started</code>,<code>broadcast_started</code>, they should not be selected for processing.</p>
+<p>To avoid race conditions, we also need to check that the order is in the expected state, when we move to being processed.</p>
+<p>The final form of <code>updateOtherServices</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (p </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">orderProcessor) </span><span style="color: #61AFEF">updateOtherServices</span><span style="color: #ABB2BF">(ctx context.Context, order </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">data.Order, expectedState </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> p.</span><span style="color: #56B6C2">updateOrderState</span><span style="color: #ABB2BF">(ctx, order, stateBroadcastStarted, expectedState); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> err</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Update other services</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #7F848E">// Update state</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> p.</span><span style="color: #56B6C2">updateOrderState</span><span style="color: #ABB2BF">(ctx, order, stateBroadcastComplete, stateBroadcastStarted)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="wrap-up">Wrap up</h2>
+<p>State machines are straight forward, and fun to implement and can increase the robustness of your application. They are useful for asynchronous processes, and when we need to recover gracefully from failures.</p>
+<p>We covered how to implement a one way, one path state machine. Other topics that might be worth covering:</p>
+<ul>
+<li>Multiple paths</li>
+<li>Possibility to move back to visited states</li>
+<li>Failure states</li>
+<li>Trigger state transitions from events from other systems</li>
+<li>Wait for manual approval (similar to above)</li>
+<li>…</li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/sqlc" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">sqlc</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

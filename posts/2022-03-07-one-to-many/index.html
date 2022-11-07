@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2022-03-07-one-to-many/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>SQLALchemy: One to many-relationships</title>
+    <meta name="title" content="SQLALchemy: One to many-relationships">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="SQLALchemy: One to many-relationships">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2022-03-07-one-to-many/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2022-03-07-one-to-many/">
+    <meta property="twitter:title" content="SQLALchemy: One to many-relationships">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">SQLALchemy: One to many-relationships</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">March 7, 2022</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>When learning a new tech stack, the database layer is usually one of the harder and the most fun activities. In my current project, our services are written in Python, and most of them use PostgreSQL for storage.
+For Python, the most commonly used SQL library is <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. It is usually used as an Object–relational mapping (<a href="https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping">ORM</a>). While I have used Python in the past, I haven’t used either SQLAlchemy or ORMs very much in production. In this article, I will explore how to model relationships in SQLAlchemy.</p>
+<!--more-->
+<p><em><strong>Note</strong>: Much of what I will cover is already covered by the SQLAlchemy documentation on <a href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-one">basic relationships</a>. Post is mainly for my own understanding.</em></p>
+<h3 id="one-to-many">One to many</h3>
+<p>A one to many-relationship in SQL means that a row in one table is linked to zero or more rows in another table. For example:
+<em>One company (in the <strong>companies</strong> table) could have three employees (in the <strong>employees</strong> table)</em>.</p>
+<p>Some things I expect from a one to many-relationship.</p>
+<ul>
+<li>A parent object can be created without any children.</li>
+<li>A parent object can be created WITH children (in the same transaction).</li>
+<li>Child objects can be added independently of the parent, but can be linked to the parent when it is retrieved.</li>
+<li>If the parent object is deleted, the child objects could also be removed.</li>
+</ul>
+<p>Let’s get started.</p>
+<h4 id="tables">Tables</h4>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> sqlalchemy </span><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> Column, Integer, String, ForeignKey</span></span>
+<span class="line"><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> sqlalchemy.orm </span><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> declarative_base, relationship</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">Base </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">declarative_base</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">class</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Company</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">Base</span><span style="color: #ABB2BF">):</span></span>
+<span class="line"><span style="color: #ABB2BF">    __tablename__ </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'companies'</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">id</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Column</span><span style="color: #ABB2BF">(Integer, </span><span style="color: #E06C75">primary_key</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">True</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    employees </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">relationship</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Employee"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">class</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">Base</span><span style="color: #ABB2BF">):</span></span>
+<span class="line"><span style="color: #ABB2BF">    __tablename__ </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'employees'</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">id</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Column</span><span style="color: #ABB2BF">(Integer, </span><span style="color: #E06C75">primary_key</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">True</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    name </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Column</span><span style="color: #ABB2BF">(String)</span></span>
+<span class="line"><span style="color: #ABB2BF">    company_id </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Column</span><span style="color: #ABB2BF">(Integer, </span><span style="color: #61AFEF">ForeignKey</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">'companies.id'</span><span style="color: #ABB2BF">))</span></span></code></pre>
+<p>We have two models <code>Company</code> and <code>Employee</code>. They have a one to many-relationship.</p>
+<p>The following code inserts a company with two employees. The <code>relationship("Employee")</code> on the <code>Company</code> model ensure that the <strong>employee</strong>-table will be updated as well.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Company</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">    company.employees </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> [</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Magnus'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'John'</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    ]</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(company)</span></span></code></pre>
+<h4 id="result">Result</h4>
+<p><strong>company</strong>-table</p>
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">id</th></tr></thead><tbody><tr><td align="left">1</td></tr></tbody></table>
+<p><strong>employees</strong>-table</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">id</th><th align="left">name</th><th align="left">company_id</th></tr></thead><tbody><tr><td align="left">1</td><td align="left">Magnus</td><td align="left">1</td></tr><tr><td align="left">2</td><td align="left">John</td><td align="left">1</td></tr></tbody></table>
+<h3 id="cascading-deletes">Cascading deletes</h3>
+<p>If we are a ruthless manager, we can also do updates like firing all our employees (managers are stored in a separate table).</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    company.employees </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> []</span></span></code></pre>
+<p>Unfortunately, the ruthless manager’s upper management can still see the traces of the employees in the dabase.</p>
+<p><strong>employees</strong>-table</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">id</th><th align="left">name</th><th align="left">company_id</th></tr></thead><tbody><tr><td align="left">1</td><td align="left">Magnus</td><td align="left">NULL</td></tr><tr><td align="left">2</td><td align="left">John</td><td align="left">NULL</td></tr></tbody></table>
+<p>If we want that these entries should be removed from that table when they are removed from the parent table, we need to change the <code>relationship()</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">  class Company(Base):</span></span>
+<span class="line"><span style="color: #ABB2BF">      __tablename__ = 'companies'</span></span>
+<span class="line"><span style="color: #ABB2BF">      id = Column(Integer, primary_key=True)</span></span>
+<span class="line"><span style="color: #E06C75"><span style="user-select: none;">-</span>-    employees = relationship("Employee")</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>+    employees = relationship("Employee", cascade="all, delete-orphan")</span></span></code></pre>
+<p>Now, if we run our code again, everything looks nice and clean.</p>
+<p><strong>employees</strong>-table</p>
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">id</th><th align="left">name</th><th align="left">company_id</th></tr></thead></table>
+<p><em><strong>Note:</strong> The employees will be deleted any time the association between them and a company is lost, i.e. also if the company row itself is deleted.</em></p>
+<h3 id="back-propagation">Back propagation</h3>
+<p>The last requirement from the list is back propagation. If a child entity is added to its table, will it be visible when the parent is queried?</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span></span>
+<span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has the following employees:"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> e </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> company.employees:</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"-"</span><span style="color: #ABB2BF">, e.name)</span></span></code></pre>
+<p><strong>Output</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">Company 1 has the following employees:</span></span>
+<span class="line"><span style="color: #ABB2BF">- Magnus</span></span>
+<span class="line"><span style="color: #ABB2BF">- John</span></span>
+<span class="line"><span style="color: #ABB2BF">- Lisa</span></span></code></pre>
+<h3 id="relationship-loading-techniques">Relationship loading techniques</h3>
+<p>In SQLAlchemy there are a few gotchas around how relationships are loaded. While I think in many scenarios should avoid complicated relationship updating technique (and if needed, should be covered by tests), it is worth knowing some things about it.</p>
+<h4 id="example-1-lazy-loading-default">Example 1: Lazy loading (default)</h4>
+<p>In the scope of a single session, we can perform both the insert, and the listing of employees. This will work, because the <code>company.employees</code> is actually loaded lazily when it is first used.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has the following employees:"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">for</span><span style="color: #ABB2BF"> e </span><span style="color: #C678DD">in</span><span style="color: #ABB2BF"> company.employees: </span><span style="color: #7F848E"># </span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"-"</span><span style="color: #ABB2BF">, e.name)</span></span></code></pre>
+<p>This can be observed by setting <code>echo=True</code> on the engine, like so <code>engine = create_engine(url, echo=True)</code>, and running the script again.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">Company 1 has the following employees:</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine SELECT employees.id AS employees_id, employees.name AS employees_name, employees.company_id AS employees_company_id</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>FROM employees</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>WHERE %(param_1)s = employees.company_id</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>2022-04-03 15:35:45,680 INFO sqlalchemy.engine.Engine [generated in 0.00021s] {'param_1': 1}</span></span>
+<span class="line"><span style="color: #ABB2BF">\- Magnus</span></span>
+<span class="line"><span style="color: #ABB2BF">\- John</span></span>
+<span class="line"><span style="color: #ABB2BF">\- Lisa</span></span></code></pre>
+<p>As you can see, SQLAlchemy will do an additional trip to the DB when looking up the company employees. In fact, <code>company.employees</code> will only be loaded <strong>once per session</strong>.</p>
+<p>We can observe this by adding another employee after the first fetch employees is done:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E"># Add an employee</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has </span><span style="color: #D19A66">{</span><span style="color: #56B6C2">len</span><span style="color: #ABB2BF">(company.employees)</span><span style="color: #D19A66">}</span><span style="color: #98C379"> employees"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E"># Add another employee</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa</span><span style="color: #56B6C2">\'</span><span style="color: #98C379">s friend'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has </span><span style="color: #D19A66">{</span><span style="color: #56B6C2">len</span><span style="color: #ABB2BF">(company.employees)</span><span style="color: #D19A66">}</span><span style="color: #98C379"> employees"</span><span style="color: #ABB2BF">)</span></span></code></pre>
+<p><strong>Output</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">Company 1 has 3 employees</span></span>
+<span class="line"><span style="color: #ABB2BF">Company 1 has 3 employees</span></span></code></pre>
+<h4 id="example-2-eager-loading">Example 2: Eager loading</h4>
+<p>We can run in to the same problem even earlier if we enable eager loading. Then SQL alchemy will load the relationship data directly when the parent is queried for, even if it is not used.
+This is typically done by the option lazy=‘joined’.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">class Company(Base):</span></span>
+<span class="line"><span style="color: #ABB2BF">    __tablename__ = 'companies'</span></span>
+<span class="line"><span style="color: #ABB2BF">    id = Column(Integer, primary_key=True)</span></span>
+<span class="line"><span style="color: #E06C75"><span style="user-select: none;">-</span>    employees = relationship("Employee", cascade="all, delete-orphan")</span></span>
+<span class="line"><span style="color: #98C379"><span style="user-select: none;">+</span>    employees = relationship("Employee", cascade="all, delete-orphan", lazy='joined')</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">with</span><span style="color: #ABB2BF"> Session.</span><span style="color: #61AFEF">begin</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">as</span><span style="color: #ABB2BF"> session:</span></span>
+<span class="line"><span style="color: #ABB2BF">    company </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> session.</span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF">(Company).</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">) </span><span style="color: #7F848E"># Child data will be loaded here</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has </span><span style="color: #D19A66">{</span><span style="color: #56B6C2">len</span><span style="color: #ABB2BF">(company.employees)</span><span style="color: #D19A66">}</span><span style="color: #98C379"> employees"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E"># Add another employee</span></span>
+<span class="line"><span style="color: #ABB2BF">    session.</span><span style="color: #61AFEF">add</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">Employee</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #56B6C2">=</span><span style="color: #98C379">'Lisa</span><span style="color: #56B6C2">\'</span><span style="color: #98C379">s friend'</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">company_id</span><span style="color: #56B6C2">=</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">print</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">f</span><span style="color: #98C379">"Company </span><span style="color: #D19A66">{</span><span style="color: #ABB2BF">company.id</span><span style="color: #D19A66">}</span><span style="color: #98C379"> has </span><span style="color: #D19A66">{</span><span style="color: #56B6C2">len</span><span style="color: #ABB2BF">(company.employees)</span><span style="color: #D19A66">}</span><span style="color: #98C379"> employees"</span><span style="color: #ABB2BF">)</span></span></code></pre>
+<p><strong>Output</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">Company 1 has 2 employees</span></span>
+<span class="line"><span style="color: #ABB2BF">Company 1 has 2 employees</span></span></code></pre>
+<h3 id="so-what-can-we-do">So what can we do?</h3>
+<p>Both of these scenarios are unintuitive for me, and can certainly lead to bugs. SQLAlchemy has a few possible ways of handling proper back-propagation using <a href="https://docs.sqlalchemy.org/en/14/orm/backref.html">backref</a>. Exactly how <code>backref</code> works is also not intuitive, so I do not recommend using it without having a good understanding of SQLAlchemy.</p>
+<ul>
+<li>✅ Keep relationships as simple as possible</li>
+<li>✅ Trying to stay away from mutating state of many entities at the same time, if possible.</li>
+<li>✅ Write good database or integration tests</li>
+</ul>
+<p>Good luck 🙃!</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We have fulfilled our initial expectations for the one-to-many relationships.</p>
+<ul>
+<li>
+<p><del>A parent object can be created without any children.</del></p>
+</li>
+<li>
+<p><del>A parent object can be created WITH children (in the same transaction).</del></p>
+</li>
+<li>
+<p><del>Child objects can be added independently of the parent, but can be linked to the parent when it is retrieved.</del></p>
+</li>
+<li>
+<p><del>If the parent object is deleted, the child objects could also be removed.</del></p>
+</li>
+</ul>
+<p>Working with SQLAlchemy is initially quite straightforward, and fun. The library is very powerful and versatile. You can pretty much do anything you want, and there are many things that can be fined tuned. The post above is just a tiny, tiny fraction of what can be done.</p>
+<h3 id="-pros">✅ Pros</h3>
+<ul>
+<li><strong>Easy to get started with</strong></li>
+<li><strong>Highly configurable</strong> - The post above is just a tiny, tiny fraction of what can be done.</li>
+<li><strong><a href="https://docs.sqlalchemy.org/en/14/">Excellent documentation</a></strong></li>
+</ul>
+<h3 id="-cons">❌ Cons</h3>
+<ul>
+<li><strong>Highly configurable</strong> - If you plan to introduce SQLAlchemy in your organisation, you should think about knowledge sharing, and creating some common practices that can be used across the engineering organisation.</li>
+<li><strong>Steep learning curve</strong> - Related to the point above</li>
+</ul>
+<h3 id="️-both">〰️ Both</h3>
+<ul>
+<li><strong>You don’t need to understand SQL to use an ORM</strong> - This means that you can build some very advanced entity relationships, without understanding the finer details of how the databases work internally. This can (in my experience) lead to both performance problems, and some really weird bugs due to complexity 😀</li>
+</ul>
+<h3 id="possible-next-steps">Possible next steps</h3>
+<ul>
+<li>Many to many-relationships</li>
+<li>More details on the SQLAlchemy session</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://docs.sqlalchemy.org/en/14/orm/backref.html">SQLAlchemy: backref</a></li>
+<li><a href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-one">SQLAlchemy: basic relationship patterns</a> -</li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/python" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">python</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/sqlalchemy" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">sqlalchemy</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/postgres" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">postgres</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

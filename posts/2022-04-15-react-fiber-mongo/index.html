@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2022-04-15-react-fiber-mongo/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Tiny fullstack app</title>
+    <meta name="title" content="Tiny fullstack app">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Tiny fullstack app">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2022-04-15-react-fiber-mongo/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2022-04-15-react-fiber-mongo/">
+    <meta property="twitter:title" content="Tiny fullstack app">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Tiny fullstack app</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">April 15, 2022</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>In this post I will build a simple app using a combination of tools and libraries that I’m exploring.</p>
+<ul>
+<li><strong>React</strong> (<a href="https://react-query.tanstack.com/">React-Query</a>, <a href="https://mantine.dev/">Mantine</a> for UI)</li>
+<li><strong>Go</strong> (<a href="https://github.com/gofiber/fiber">Fiber</a> for routing, <a href="https://github.com/qiniu/qmgo">Qmgo</a> db-driver)</li>
+<li><strong>MongoDB</strong></li>
+</ul>
+<p>The goal is to create a simple User List with basic filtering:</p>
+<p><img src="/img/react-fiber-mongo/search.gif" alt="Search"></p>
+<!--more-->
+<p><br><br></p>
+<h2 id="overview">Overview</h2>
+<p>Here is the setup we are after, a simple Reac t app, that calls a Go-app that reads from our MongoDB.
+<img src="/img/react-fiber-mongo/fullstack.png" alt="Search"></p>
+<h2 id="backend">Backend</h2>
+<p>I am using <a href="https://github.com/gofiber/fiber">Fiber</a> for routing. It is web framework for Go, inspired by Express and designed for fast development.</p>
+<p>We have two endpoints in this app</p>
+<ul>
+<li><strong>GET /users?q=TEXT</strong> - list all users
+<ul>
+<li><em>use query parameter <strong>q</strong> to search any field (only full words)</em></li>
+</ul>
+</li>
+<li><strong>POST /users</strong> - create a new user</li>
+</ul>
+<h3 id="the-basics---maingo">The basics - main.go</h3>
+<p>The <strong>Service</strong> exposes two HTTP-handlers <code>ListUsers</code> and <code>AddUsers</code>, and wraps the <code>mongo</code>-client for easy access in the DB-methods.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Service</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    mongo </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">qmgo.QmgoClient</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>We set up our <code>mongo</code>-client to talk to MongoDB on localhost.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">mongoConfig</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">qmgo.Config{</span></span>
+<span class="line"><span style="color: #ABB2BF">	Uri:      </span><span style="color: #98C379">"mongodb://localhost:27017"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	Database: </span><span style="color: #98C379">"user-db"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	Coll:     </span><span style="color: #98C379">"users"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">mongoClient</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">qmgo.QmgoClient {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">mongo</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> qmgo.</span><span style="color: #56B6C2">Open</span><span style="color: #ABB2BF">(context.</span><span style="color: #56B6C2">Background</span><span style="color: #ABB2BF">(), mongoConfig)</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">		log.</span><span style="color: #56B6C2">Fatalln</span><span style="color: #ABB2BF">(mongo)</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> mongo</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>We create the <code>mongo</code> client, and create a new Fiber-router. The router has a CORS-middleware and our two handlers, and listens on port <code>:8080</code>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">main</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">mongo</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">mongoClient</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">s</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> Service{</span></span>
+<span class="line"><span style="color: #ABB2BF">		mongo: mongo,</span></span>
+<span class="line"><span style="color: #ABB2BF">	}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	</span><span style="color: #E06C75">app</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> fiber.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">	app.</span><span style="color: #56B6C2">Use</span><span style="color: #ABB2BF">(cors.</span><span style="color: #56B6C2">New</span><span style="color: #ABB2BF">(cors.Config{AllowOrigins: </span><span style="color: #98C379">"http://localhost:3000"</span><span style="color: #ABB2BF">}))</span></span>
+<span class="line"><span style="color: #ABB2BF">	app.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/users"</span><span style="color: #ABB2BF">, s.ListUsers)</span></span>
+<span class="line"><span style="color: #ABB2BF">	app.</span><span style="color: #56B6C2">Post</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/users"</span><span style="color: #ABB2BF">, s.AddUser)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">	log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(app.</span><span style="color: #56B6C2">Listen</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">":8080"</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="the-handlers">The handlers</h3>
+<p><strong>List users handler</strong> - A very slim handler. Either returns a list of users, or an error.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">ListUsersResponse</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    Users []User </span><span style="color: #98C379">`json:"users"`</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (s </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Service) </span><span style="color: #61AFEF">ListUsers</span><span style="color: #ABB2BF">(c </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">fiber.Ctx) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">query</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">Query</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"q"</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">""</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">users</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> s.</span><span style="color: #56B6C2">listDBUsers</span><span style="color: #ABB2BF">(c.</span><span style="color: #56B6C2">Context</span><span style="color: #ABB2BF">(), query)</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">	  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">Status</span><span style="color: #ABB2BF">(fiber.StatusInternalServerError).</span><span style="color: #56B6C2">JSON</span><span style="color: #ABB2BF">(fiber.Map{</span><span style="color: #98C379">"message"</span><span style="color: #ABB2BF">: err.</span><span style="color: #56B6C2">Error</span><span style="color: #ABB2BF">()})</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">JSON</span><span style="color: #ABB2BF">(ListUsersResponse{users})</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>Add user handler</strong> - Parses the user request calls the database layer for insertion.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (s </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Service) </span><span style="color: #61AFEF">AddUser</span><span style="color: #ABB2BF">(c </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">fiber.Ctx) </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">user</span><span style="color: #ABB2BF"> User</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">BodyParser</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">user); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">Status</span><span style="color: #ABB2BF">(fiber.StatusInternalServerError).</span><span style="color: #56B6C2">JSON</span><span style="color: #ABB2BF">(fiber.Map{</span><span style="color: #98C379">"message"</span><span style="color: #ABB2BF">: err.</span><span style="color: #56B6C2">Error</span><span style="color: #ABB2BF">()})</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">ID</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> s.</span><span style="color: #56B6C2">insertDBUser</span><span style="color: #ABB2BF">(c.</span><span style="color: #56B6C2">Context</span><span style="color: #ABB2BF">(), user)</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">Status</span><span style="color: #ABB2BF">(fiber.StatusInternalServerError).</span><span style="color: #56B6C2">JSON</span><span style="color: #ABB2BF">(fiber.Map{</span><span style="color: #98C379">"message"</span><span style="color: #ABB2BF">: err.</span><span style="color: #56B6C2">Error</span><span style="color: #ABB2BF">()})</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">user.ID</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> ID</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> c.</span><span style="color: #56B6C2">JSON</span><span style="color: #ABB2BF">(user)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><em><strong>Note</strong>: Fiber supports request validation (required fields, min length, etc.), but I skipped it here for brevity.</em></p>
+<h3 id="the-db-layer">The DB layer</h3>
+<p><strong>List users</strong> - To list users, we call use the basic <code>find()</code> of Mongo. If query is empty, we will list all users, and if query is <em>not</em> empty we will perform a full text search on all fields. For this, we use a <a href="https://www.mongodb.com/docs/manual/core/index-text/#wildcard-text-indexes">Mongo text index</a>. It matches only complete words.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (s </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Service) </span><span style="color: #61AFEF">listDBUsers</span><span style="color: #ABB2BF">(ctx context.Context, query </span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">) ([]User, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">filter</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> bson.M{}</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> query </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">""</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">filter</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">=</span><span style="color: #ABB2BF"> bson.M{</span><span style="color: #98C379">"$text"</span><span style="color: #ABB2BF">: bson.M{</span><span style="color: #98C379">"$search"</span><span style="color: #ABB2BF">: query}}</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">users</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> []User{}</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> s.mongo.</span><span style="color: #56B6C2">Find</span><span style="color: #ABB2BF">(ctx, filter).</span><span style="color: #56B6C2">All</span><span style="color: #ABB2BF">(</span><span style="color: #C678DD">&#x26;</span><span style="color: #ABB2BF">users); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> users, </span><span style="color: #D19A66">nil</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>Add a user</strong> - We insert name, email and phone number of a user. MongoDB adds an ID automatically.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (s </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">Service) </span><span style="color: #61AFEF">insertDBUser</span><span style="color: #ABB2BF">(ctx context.Context, u User) (</span><span style="color: #C678DD">string</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">error</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> s.mongo.</span><span style="color: #56B6C2">InsertOne</span><span style="color: #ABB2BF">(ctx, bson.M{</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #98C379">"name"</span><span style="color: #ABB2BF">:  u.Name,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #98C379">"email"</span><span style="color: #ABB2BF">: u.Email,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #98C379">"phone"</span><span style="color: #ABB2BF">: u.Phone,</span></span>
+<span class="line"><span style="color: #ABB2BF">  })</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">""</span><span style="color: #ABB2BF">, err</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> res.InsertedID.(primitive.ObjectID).</span><span style="color: #56B6C2">String</span><span style="color: #ABB2BF">(), err</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><em><strong>Note</strong>: We could also add uniqueness checks on email and phone number, by adding <a href="https://www.mongodb.com/docs/manual/core/index-unique">unique indexes</a></em></p>
+<h2 id="frontend">Frontend</h2>
+<p>The frontend is bootstrapped using <a href="https://create-react-app.dev/">Create React App (CRA)</a>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">npx create-react-app frontend --template typescript</span></span></code></pre>
+<p>We install our dependencies:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">npm install @mantine/hooks @mantine/core react-query axios tabler-icons-react</span></span></code></pre>
+<ul>
+<li><a href="https://react-query.tanstack.com/">React-Query</a> to handle async HTTP requests with the <code>useQuery</code> hook</li>
+<li><a href="https://axios-http.com/docs/intro">Axios</a> HTTP client</li>
+<li><a href="https://mantine.dev/">Mantine</a> for UI</li>
+<li><a href="tabler-icons-react">Tabler-Icons-React</a> for our search icon</li>
+</ul>
+<h3 id="the-components">The Components</h3>
+<p><strong>App.tsx</strong> - Uses the Mantine <code>Container</code> element for layout. React-Query’s <code>QueryClientProvider</code> gives the child elements access to the useQuery hook.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">React</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'react'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'./App.css'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">Container</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'@mantine/core'</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">UserTable</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"./components/UserTable"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">QueryClient</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">QueryClientProvider</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"react-query"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">queryClient</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">QueryClient</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">App</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">Container</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">size</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"xs"</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">px</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"xs"</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">QueryClientProvider</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">client</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">queryClient</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">                </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">UserTable</span><span style="color: #56B6C2">/></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">QueryClientProvider</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">Container</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">    )</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">App</span><span style="color: #ABB2BF">;</span></span></code></pre>
+<p><strong>hooks/useUsers.ts</strong> - We have a simple custom React hook. It controls the search value in the search field, and returns <code>data</code> if we have gotten any from the backend. For now, we ignore error handling, and showing a different view during initial fetch.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useUsers</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> [</span><span style="color: #E5C07B">searchValue</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">setSearchValue</span><span style="color: #ABB2BF">] </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useState</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">''</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Only search if term is more than 3 characters</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">cappedSearchValue</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">searchValue</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">length</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">>=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">?</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">searchValue</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">:</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">null</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">query</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">url</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"http://localhost:8080/users"</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">params</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">cappedSearchValue</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">?</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">params</span><span style="color: #ABB2BF">: {</span><span style="color: #E06C75">q</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">searchValue</span><span style="color: #ABB2BF">}} </span><span style="color: #C678DD">:</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">params</span><span style="color: #ABB2BF">: {}}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> {</span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">} </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">axios</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">get</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">url</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">params</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">users</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> {</span><span style="color: #E5C07B">isLoading</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">error</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">data</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">isFetching</span><span style="color: #ABB2BF">} </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useQuery</span><span style="color: #ABB2BF">([</span><span style="color: #98C379">"user data"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">cappedSearchValue</span><span style="color: #ABB2BF">], </span><span style="color: #E06C75">query</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">users</span><span style="color: #ABB2BF">: </span><span style="color: #E06C75">data</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">?</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">data</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">:</span><span style="color: #ABB2BF"> [], </span><span style="color: #E06C75">searchValue</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">setSearchValue</span><span style="color: #ABB2BF">};</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>components/UserSearch.tsx</strong> - A simple input field, used for setting the <code>q</code>-parameter in requests to the backend.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">SearchProps</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">setValue</span><span style="color: #ABB2BF">: (</span><span style="color: #E06C75">s</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">void</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">UserSearch</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> ({</span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">setValue</span><span style="color: #ABB2BF">}: </span><span style="color: #E5C07B">SearchProps</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">TextInput</span></span>
+<span class="line"><span style="color: #ABB2BF">                  </span><span style="color: #E06C75">value</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #ABB2BF">                  </span><span style="color: #E06C75">placeholder</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"ID, E-mail or Phone"</span></span>
+<span class="line"><span style="color: #ABB2BF">                  </span><span style="color: #E06C75">icon</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{&#x3C;Search </span><span style="color: #E06C75">size</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #D19A66">14</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">/></span><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #ABB2BF">                  </span><span style="color: #E06C75">onChange</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{(event) => </span><span style="color: #61AFEF">setValue</span><span style="color: #ABB2BF">(event.currentTarget.value)}</span></span>
+<span class="line"><span style="color: #ABB2BF">                  </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">SearchStyle</span><span style="color: #ABB2BF">}</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #56B6C2">/></span></span>
+<span class="line"><span style="color: #ABB2BF">  )</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>components/UserTable.tsx</strong> - Consists of two parts, a <code>UserSearch</code>-component and a simple table to show the results.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">UserTable</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> {</span><span style="color: #E5C07B">users</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">searchValue</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">setSearchValue</span><span style="color: #ABB2BF">} </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useUsers</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">rows</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">users</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">map</span><span style="color: #ABB2BF">((</span><span style="color: #E06C75">user</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">User</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">tr</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">key</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{user.</span><span style="color: #E06C75">id</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">td</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{{ </span><span style="color: #E06C75">whiteSpace</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'nowrap'</span><span style="color: #ABB2BF"> }}</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF">{user.id.slice(-</span><span style="color: #D19A66">6</span><span style="color: #E06C75">)</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">td</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">td</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{{ </span><span style="color: #E06C75">whiteSpace</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'nowrap'</span><span style="color: #ABB2BF"> }}</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF">{user.</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">td</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">td</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{{ </span><span style="color: #E06C75">whiteSpace</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'nowrap'</span><span style="color: #ABB2BF"> }}</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF">{user.</span><span style="color: #E06C75">phone</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">td</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">td</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{{ </span><span style="color: #E06C75">whiteSpace</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">'nowrap'</span><span style="color: #ABB2BF"> }}</span><span style="color: #56B6C2">></span><span style="color: #ABB2BF">{user.</span><span style="color: #E06C75">email</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">td</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">tr</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">  ));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">&#x3C;></span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">UserSearch</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">value</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">searchValue</span><span style="color: #ABB2BF">} </span><span style="color: #E06C75">setValue</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">setSearchValue</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">/></span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #E06C75">Table</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">highlightOnHover</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">striped</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">style</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF">{</span><span style="color: #E06C75">TableStyle</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">thead</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">tr</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">          &#x3C;</span><span style="color: #E5C07B">th</span><span style="color: #ABB2BF">></span><span style="color: #E06C75">Short</span><span style="color: #56B6C2">&#x26;</span><span style="color: #E06C75">nbsp</span><span style="color: #ABB2BF">;</span><span style="color: #E5C07B">ID</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">th</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">          &#x3C;</span><span style="color: #E5C07B">th</span><span style="color: #ABB2BF">></span><span style="color: #E06C75">Name</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">th</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">          &#x3C;</span><span style="color: #E5C07B">th</span><span style="color: #ABB2BF">></span><span style="color: #E06C75">Phone</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">th</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">          &#x3C;</span><span style="color: #E5C07B">th</span><span style="color: #ABB2BF">></span><span style="color: #E5C07B">E</span><span style="color: #56B6C2">-</span><span style="color: #E06C75">mail</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">th</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">tr</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">thead</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">tbody</span><span style="color: #ABB2BF">>{</span><span style="color: #E06C75">rows</span><span style="color: #ABB2BF">}</span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">tbody</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #56B6C2">&#x3C;/</span><span style="color: #E06C75">Table</span><span style="color: #56B6C2">></span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #56B6C2">&#x3C;/></span></span>
+<span class="line"><span style="color: #ABB2BF">  );</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="the-result">The result</h2>
+<p>Now that we have everything in place, we can start all our applications:</p>
+<p><strong>MongoDB</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">docker run --name some-mongo -p 27017:27017 mongo</span></span></code></pre>
+<p><strong>Generate fake data</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">(cd backend; go </span><span style="color: #56B6C2">test</span><span style="color: #ABB2BF"> -v -run Test_GenerateFakeData)</span></span></code></pre>
+<p><strong>Start backend</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">(cd backend; go run .)</span></span></code></pre>
+<p><strong>Start frontend (separate terminal)</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">(cd frontend; npm start)</span></span></code></pre>
+<p>Go to <a href="http://localhost:3000">localhost:3000</a> and you should see the following:</p>
+<p><img src="/img/react-fiber-mongo/search.gif" alt="Search"></p>
+<h2 id="takeaways">Takeaways</h2>
+<p>We have written a simple fullstack app in React and Go, with MongoDB as storage. All parts of this app was really fun to work with.</p>
+<p><strong>react-query</strong> is a neat library for handling asynchronous data loading.</p>
+<p><strong>fiber</strong> is a convenient web framework for Go, that is a good replacement for <a href="https://github.com/go-chi/chi">go-chi</a> that I normally use.</p>
+<p><strong>qmgo</strong> is slightly easier to use than the official <a href="https://github.com/mongodb/mongo-go-driver">mongo driver</a>. It seems to be somewhat limited in what it can do though. I didn’t find a way of setting up a <code>text</code> index using <code>qmgo</code>, for example.</p>
+<p><strong>MongoDB</strong> - a very convenient document database that might become my go to DB for smaller projects.</p>
+<h3 id="possible-improvements">Possible improvements</h3>
+<ul>
+<li><strong>Add pagination</strong> to the user list.</li>
+<li><strong>Input validation</strong> - Fiber has good supports for <a href="https://docs.gofiber.io/guide/validation">input validation</a>.</li>
+<li>Proper <strong>shutdown procedure</strong> of Mongo client and the Fiber router</li>
+<li><strong>Uniqueness checks</strong> on e-mail, phone…</li>
+<li><strong>Debounce the search field queries</strong> - We should until the user input has stopped, and then another few 100 ms before issuing the query.</li>
+</ul>
+<p><br><br></p>
+<h2 id="over-and-out">Over and out!</h2>
+<br>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/react" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">react</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/react-query" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">react-query</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/mongodb" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">mongodb</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/fiber" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">fiber</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+

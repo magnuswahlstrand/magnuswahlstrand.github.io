@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://magnuswahlstrand.github.io/posts/2019-10-19-heroku-websockets/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Websockets on Heroku</title>
+    <meta name="title" content="Websockets on Heroku">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Websockets on Heroku">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://magnuswahlstrand.github.io/posts/2019-10-19-heroku-websockets/">
+    <meta property="og:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnuswahlstrand.github.io/posts/2019-10-19-heroku-websockets/">
+    <meta property="twitter:title" content="Websockets on Heroku">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://magnuswahlstrand.github.io/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.0b8ec504.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Websockets on Heroku</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">October 19, 2019</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>Let’s create a simple web server that runs on <a href="https://www.heroku.com">Heroku</a> and accepts websockets connections.</p>
+<!--more-->
+<h2 id="setup-web-server">Setup web server</h2>
+<p>Before we do anything else, let’s set up a simple webserver using the http router <a href="https://github.com/go-chi/chi"><code>go-chi</code></a>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">main</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #98C379">"fmt"</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #98C379">"log"</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #98C379">"net/http"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #98C379">"github.com/go-chi/chi"</span></span>
+<span class="line"><span style="color: #ABB2BF">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">homeHandler</span><span style="color: #ABB2BF">(w http.ResponseWriter, r </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">http.Request) {</span></span>
+<span class="line"><span style="color: #ABB2BF">   fmt.</span><span style="color: #56B6C2">Fprintf</span><span style="color: #ABB2BF">(w, </span><span style="color: #98C379">"Welcome home!"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">wsHandler</span><span style="color: #ABB2BF">(w http.ResponseWriter, r </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">http.Request) {</span></span>
+<span class="line"><span style="color: #ABB2BF">   fmt.</span><span style="color: #56B6C2">Fprintf</span><span style="color: #ABB2BF">(w, </span><span style="color: #98C379">"Welcome, sock!"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">main</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #E06C75">r</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> chi.</span><span style="color: #56B6C2">NewRouter</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">   r.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/"</span><span style="color: #ABB2BF">, homeHandler)</span></span>
+<span class="line"><span style="color: #ABB2BF">   r.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/ws"</span><span style="color: #ABB2BF">, wsHandler)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> http.</span><span style="color: #56B6C2">ListenAndServe</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">":8080"</span><span style="color: #ABB2BF">, r); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(err)</span></span>
+<span class="line"><span style="color: #ABB2BF">   }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Start the server using <code>go run main.go</code> and go to <a href="http://localhost:8080">http://localhost:8080</a> and you should see</p>
+<blockquote>
+<p>Welcome, home!</p>
+</blockquote>
+<p>You can also go to <a href="http://localhost:8080/ws">http://localhost:8080/ws</a></p>
+<blockquote>
+<p>Welcome, sock!</p>
+</blockquote>
+<h3 id="code">Code</h3>
+<p><em>The code for the base serveris <a href="https://github.com/magnuswahlstrand/websockets-server/tree/pt1-simple-webserver">here</a>.</em></p>
+<h2 id="upgrading-to-websockets">Upgrading to Websockets</h2>
+<p>Now we can turn one of the endpoints into a websocket endpoint. One of the most commonly used websocket implementations in Go is <a href="https://github.com/gorilla/websocket">gorilla/websocket</a>. Some examples
+<em><a href="https://github.com/gorilla/websocket/tree/master/examples/echo">here</a>.</em></p>
+<p><strong>Step 1</strong>: Create a wrapper for the <code>websocket.Upgrader</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">server</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">struct</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">   websocket.Upgrader</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p><strong>Step 2:</strong> Turn <code>wsHandler</code> into <code>func (s *server) wsHandler</code></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> (s </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">server) </span><span style="color: #61AFEF">wsHandler</span><span style="color: #ABB2BF">(w http.ResponseWriter, r </span><span style="color: #C678DD">*</span><span style="color: #ABB2BF">http.Request) {</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #E06C75">ws</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> s.Upgrader.</span><span style="color: #56B6C2">Upgrade</span><span style="color: #ABB2BF">(w, r, </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      http.</span><span style="color: #56B6C2">Error</span><span style="color: #ABB2BF">(w, err.</span><span style="color: #56B6C2">Error</span><span style="color: #ABB2BF">(), http.StatusInternalServerError)</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">return</span></span>
+<span class="line"><span style="color: #ABB2BF">   }</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #C678DD">defer</span><span style="color: #ABB2BF"> ws.</span><span style="color: #56B6C2">Close</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">   ws.</span><span style="color: #56B6C2">WriteMessage</span><span style="color: #ABB2BF">(websocket.TextMessage, []</span><span style="color: #56B6C2">byte</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"Welcome, sock"</span><span style="color: #ABB2BF">))</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>The code above upgrades HTTP connection to use the websocket protocol, handles errors if any and sends a message to the client.</p>
+<p><strong>Step 3:</strong> Finally, instantiate a <code>server</code> object in the main and use its handlers in the router.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">main</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">var</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">s</span><span style="color: #ABB2BF"> server</span></span>
+<span class="line"><span style="color: #ABB2BF">    ...</span></span>
+<span class="line"><span style="color: #ABB2BF">    r.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/"</span><span style="color: #ABB2BF">, s.homeHandler)</span></span>
+<span class="line"><span style="color: #ABB2BF">    r.</span><span style="color: #56B6C2">Get</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/ws"</span><span style="color: #ABB2BF">, s.wsHandler)</span></span>
+<span class="line"><span style="color: #ABB2BF">    ...</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="testing-the-connection">Testing the connection</h3>
+<p>To test the websockets, we cannot use the browser directly, or we get the error:</p>
+<blockquote>
+<p>Bad Request websocket: the client is not using the websocket protocol: ‘upgrade’ token not found in ‘Connection’ header</p>
+</blockquote>
+<p>Instead, we can use a command line tool to connect to the server, for example <a href="https://github.com/hashrocket/ws">hashrocket/ws</a>.</p>
+<p>Start the server again <code>go run main.go</code> and then make a request using <code>ws</code>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">> ws ws://localhost:8080/ws</span></span>
+<span class="line"><span style="color: #ABB2BF">Welcome, sock</span></span>
+<span class="line"><span style="color: #ABB2BF">websocket: close 1006 (abnormal closure): unexpected EOF</span></span></code></pre>
+<p>As you see we successfully received the response <code>"Welcome, sock"</code>, and then the server closes the connection. Success!</p>
+<h3 id="code-1">Code</h3>
+<p><em>The code for the websocket server is <a href="https://github.com/magnuswahlstrand/websockets-server/tree/pt2-websocket-endpoint">here</a>.</em></p>
+<h2 id="deploy-to-heroku">Deploy to Heroku</h2>
+<p>Next step is to deploy the server to Heroku, so that everyone can enjoy our websocket server.</p>
+<p><strong>Note:</strong> this assumes that you have a Heroku account and that you have the <a href="https://devcenter.heroku.com/articles/heroku-cli"><code>heroku-cli</code></a> installed.</p>
+<h3 id="set-variable-port">Set variable PORT</h3>
+<p>The Heroku dynos give can give you a new port every time it is deployed. This means that we cannot use the hardcoded <code>:8080</code> anymore. Use the environment variable <code>PORT</code> instead.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">func</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">main</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #E06C75">port</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">exists</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> os.</span><span style="color: #56B6C2">LookupEnv</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"PORT"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">!</span><span style="color: #ABB2BF">exists {</span></span>
+<span class="line"><span style="color: #ABB2BF">      log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"PORT not set"</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">   }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">   ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">   </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">err</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">:=</span><span style="color: #ABB2BF"> http.</span><span style="color: #56B6C2">ListenAndServe</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">":"</span><span style="color: #C678DD">+</span><span style="color: #ABB2BF">port, r); err </span><span style="color: #56B6C2">!=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">nil</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      log.</span><span style="color: #56B6C2">Fatal</span><span style="color: #ABB2BF">(err)</span></span>
+<span class="line"><span style="color: #ABB2BF">   }</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="add-app-dependencies">Add app dependencies</h3>
+<p>Heroku supports multiple dependency managers, but I normally use <a href="https://github.com/golang/dep"><code>dep</code></a>. Initialize it:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">dep init</span></span></code></pre>
+<p>This creates the <code>Gopkg.toml</code> and <code>Gopkg.lock</code> and a <code>vendor</code>folder with our dependencies like so</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">Gopkg.toml</span></span>
+<span class="line"><span style="color: #ABB2BF">Gopkg.lock</span></span>
+<span class="line"><span style="color: #ABB2BF">vendor/</span></span>
+<span class="line"><span style="color: #ABB2BF">   github.com/</span></span>
+<span class="line"><span style="color: #ABB2BF">      go-chi/</span></span>
+<span class="line"><span style="color: #ABB2BF">      gorilla/</span></span></code></pre>
+<p>More details <a href="https://devcenter.heroku.com/categories/managing-go-dependencies">here</a>.</p>
+<h3 id="heroku-configuration">Heroku configuration</h3>
+<p>In the <code>Gopkg.toml</code> we add some metadata that Heroku will read</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">[</span><span style="color: #61AFEF">metadata</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">heroku</span><span style="color: #ABB2BF">]</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">root-package</span><span style="color: #ABB2BF"> = </span><span style="color: #98C379">"github.com/magnuswahlstrand/websockets"</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">go-version</span><span style="color: #ABB2BF"> = </span><span style="color: #98C379">"go1.12"</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">install</span><span style="color: #ABB2BF"> = [</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #98C379">"."</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  ]</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">ensure</span><span style="color: #ABB2BF"> = </span><span style="color: #98C379">"false"</span></span></code></pre>
+<p><strong>root-package</strong>: the name here affects the binary time. In my case this will cause the installed binary to be called <code>websockets</code>.</p>
+<p><strong>install:</strong>
+<code>.</code> is default installation path. If you have a <code>cmd</code> directory you can use something like <code>./cmd/...</code>.</p>
+<p>More details <a href="https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-go">here</a>.</p>
+<p>We also need a <code>Procfile</code> in the base of the repo that tell Heroku that we want to run a web server, and where the binary is found</p>
+<p><strong>Procfile</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">web: bin/websockets</span></span></code></pre>
+<h3 id="create-heroku-app">Create Heroku App</h3>
+<p>Create the Heroku app from the command line.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">heroku apps:create some-websockets-server --region eu --buildpack heroku/go</span></span></code></pre>
+<p>This configures it to run on the EU server (US default), and tells it to download the <code>go</code> buildpack.</p>
+<p>Next we make sure we link our git repo to heroku, and then we can push the current master to the heroku remote.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">heroku git:remote some-websockets-server</span></span></code></pre>
+<p><em><strong>Note:</strong> make sure to commit everything before pushing.</em></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">git push heroku master</span></span></code></pre>
+<h3 id="testing-the-connection-again">Testing the connection again</h3>
+<p>Finally, we can test the connection again, but this time with the url we got from <code>heroku apps:create</code> command.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">> ws ws://some-websockets-server.herokuapp.com/ws</span></span>
+<span class="line"><span style="color: #ABB2BF">Welcome, sock</span></span>
+<span class="line"><span style="color: #ABB2BF">websocket: close 1006 (abnormal closure): unexpected EOF</span></span></code></pre>
+<p>Great! Everything works as expected. If something went wrong, and you need to monitor your deployed app, you can use the following command.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">heroku logs --tail -a some-websockets-server</span></span></code></pre>
+<h3 id="code-2">Code</h3>
+<p><em>The code for the Heroku app is <a href="https://github.com/magnuswahlstrand/websockets-server/tree/pt3-deploy-to-heroku">here</a>.</em></p>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/websocket" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">websocket</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/go" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">go</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/heroku" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">heroku</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+
