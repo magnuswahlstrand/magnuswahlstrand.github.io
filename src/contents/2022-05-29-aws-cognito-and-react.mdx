@@ -1,0 +1,207 @@
+---
+title: "User sign-up and sign-in"
+subtitle: "with AWS Cognito and React"
+slug: 2022-05-29-aws-cognito-and-react
+datetime: 2022-05-29
+tags: ["aws","cognito", "auth","serverless", "cdk"]
+draft: true
+---
+import Sidenote from '../components/Sidenote.astro';
+
+A couple of weeks back I visited the [AWS Summit in Stockholm](https://aws.amazon.com/events/summits/stockholm/). This
+was my third year visiting, and I always enjoy it. It is great for meeting up with old colleagues and get some fresh perspectives. This year's visit rekindled my interest in AWS's [serverless](https://en.wikipedia.org/wiki/Serverless_computing) offering (Lambda, SQS, Eventbridge...), something I plan to work more with in the future.
+
+In this post, I use **AWS Cognito** (also serverless) to implement _user sign-up_, and _user sign-in_ for a simple **React** app. We will configure Cognito using **AWS Cloud Development Kit (CDK)**. The end result will look as follows:
+
+
+
+.
+
+.
+
+
+.
+
+.
+
+
+
+
+## Overview
+Before we start, let's cover the tools we will be using.
+
+[Amazon Cognito](https://aws.amazon.com/cognito/) is service that lets you add user sign-up and sign-in to
+your web and mobile applications. It scales automatically, and you don't have to provision any resources explicitly.
+Perfect for serverless use cases. It is billed by number of active users, with a generous 50.000 free active monthly
+users.
+
+To configure Cognito, I use [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) (CDK). CDK is an Infrastructure as Code (IaC) tool, with a
+similar purpose as Terraform or AWS's own CloudFormation. It was launched in 2019, and AWS seems to be putting a lot of focus on it. One example is last year's [AWS re:Invent](https://youtu.be/8_Xs8Ik0h1w?t=4529) where the AWS CTO Werner Vogels talks about it.
+
+<Sidenote title="Sidenote" >
+
+The big difference between CDK and other common tools that it is [imperative rather than declarative](https://dev.to/ruizb/declarative-vs-imperative-4a7l), and uses programming languages like Typescript, Python, instead of YAML.
+
+_Comparison with other infrastructure tools:_
+</Sidenote>
+
+| Name                                                                           | Type        | Language                    |
+|--------------------------------------------------------------------------------|-------------|-----------------------------|
+| [Terraform](https://www.terraform.io/)                                         | Declarative | HCL                         |
+| [AWS CloudFormation](https://aws.amazon.com/cloudformation/)                   | Declarative | YAML                        |
+| [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/index.html) | Declarative | YAML                        |
+| [AWS CDK](https://aws.amazon.com/cdk/)                                         | Imperative  | Typescript, Python, Go, ... |
+
+
+
+To build our web app, we use [React](https://reactjs.org/) + pre-made [Amplify UI components](https://ui.docs.amplify.aws/) for sign-up and sign-in. [AWS Amplify](https://aws.amazon.com/amplify/) is really a whole framework for building full stack apps, but the SDK and UI components can be used separately.
+
+
+
+## The infrastructure
+
+Let's start with out infrastructure.
+
+
+.
+
+How can we use  the JWT?
+
+.
+
+.
+
+
+.
+.
+
+.
+
+.
+
+
+.
+
+## The frontend
+
+.
+
+.
+
+.
+
+
+.
+
+Next, we set up our React app. I use [Vite](https://vitejs.dev/guide/) to bootstrap my app, but you can write it from scratch or use something like [Create React App](https://create-react-app.dev/).
+
+```
+> yarn create vite
+```
+output
+```
+✔ Project name: > frontend
+✔ Select a framework: › react
+✔ Select a variant: › react-ts
+```
+
+Install the `aws-amplify` and its UI components:
+```
+yarn add aws-amplify @aws-amplify/ui-react
+```
+
+The source code is kept in `./src`, and we can remove everything expect `App.tsx` and `main.tsx`.
+
+`src/main.tsx`
+```typescript jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+
+```
+`src/App.tsx`
+```typescript jsx
+import {Authenticator, Button, Card, Heading, Text, View} from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
+export default function App() {
+    return (
+        <>
+            <Authenticator>
+                {({signOut = (() => {}), user}) => {
+                    return (
+                        <View width="40rem" textAlign="center">
+                            <Card variation="elevated">
+                                <Heading level={1}>Welcome!</Heading>
+                                <Text margin="2em">
+                                    You are logged in as <b>{user?.attributes?.email}</b>
+                                </Text>
+                                <Button variation="primary" onClick={() => signOut()}>Log out now!</Button>
+                            </Card>
+                        </View>
+                    )
+                }}
+            </Authenticator>
+        </>
+    );
+}
+
+```
+
+## How to extend this?
+
+Frontend + Cogninto
+
+Could connect something like this
+
+API Gateway Cognito authorization +   + Lambda
+
+
+.
+
+.
+
+
+.
+
+.
+
+
+
+## Summary
+
+Created a
+
+Infrastructure overview
+
+
+
+.
+
+How can we use  the JWT?
+
+.
+
+.
+
+
+.
+
+.
+
+
+
+
+
+## Resources
+
+* [some](https://resource.html)

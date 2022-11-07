@@ -1,0 +1,35 @@
+---
+import type { MarkdownInstance } from "astro";
+import type { Frontmatter } from "src/types";
+import slugify from "@utils/slugify";
+
+export interface Props {
+  post: MarkdownInstance<Frontmatter>;
+}
+
+type PostResult = {
+  params: {
+    slug: string | number;
+  };
+}[];
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob<Frontmatter>("../../contents/**/*.{md,mdx}");
+
+  let postResult: PostResult = posts.map(post => {
+    return {
+      params: {
+        slug: slugify(post.frontmatter),
+      },
+      props: {},
+    };
+  });
+
+  return [...postResult];
+}
+
+const { slug } = Astro.params;
+const content = `0; url=/posts/${slug}`
+---
+
+<head><meta http-equiv="refresh" content={content} /></head

@@ -1,0 +1,16 @@
+---
+import { TerminalPlayer } from 'astro-terminal-player';
+const { src } = Astro.props;
+---
+
+<TerminalPlayer
+        src={'/assets/casts/' + src}
+        settings={{
+        loop: true,
+        speed: 1.7,
+        rows: 14,
+        cols: 80,
+        theme: "solarized-dark",
+        terminalFontSize: 'big',
+    }}
+/>

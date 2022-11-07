@@ -1,0 +1,160 @@
+---
+title: 'Blog posts with dynamic content using MDX'
+datetime: 2022-08-26
+tags: ["mdx","markdown"]
+---
+
+import {Chart} from '../components/mdx-post/Chart';
+import {Poll} from '../components/mdx-post/Poll';
+import MDXResult from '../components/mdx-post/MDXResult.astro';
+
+One of my favorite sites on the internet is [Red Blog Games](https://www.redblobgames.com/) by Amit Patel. It contains a ton of visual explanations of math and algorithms, often related to computer games. Best part is that it is interactive!
+
+I have been using [Hugo](https://gohugo.io/) to generate my blog posts, for a few years now. The posts are written in [Markdown](https://en.wikipedia.org/wiki/Markdown) and then automatically turned into HTML. This has worked really well, but is not great for interactive content. A few weeks back, someone introduced me to **MDX**! This post covers some of what I have learnt.
+
+### What is MDX?
+[MDX](https://mdxjs.com/) is a way to use JSX component (used by React, SolidJS) inside your Markdown. This means that we can combine use the power of Markdown (ease of writing and formatting texts) with the power of javascript (ease of writing and formatting code), where it is needed.
+
+### Why MDX?
+
+Before we go deeper, why would you want to use MDX rather than plain Markdown?
+
+- **Interactivity** - This is probably the most important reason for me. Markdown output is usually static. What if we want to add interactivity? With MDX we can show an alert, or even make HTTP requests.
+- **Customize elements** - MDX allows us to replace elements, for example we could have a component that adds pagination, and then replace all tables: `{table: PaginatedTable})`
+- **Encapsulate components** - While Markdown supports HTML, writing it inside .md files becomes messy. MDX allows us to encapsulate components, and then use them in Markdown.
+
+
+### Installing MDX
+
+MDX is supported by many of the modern JS runtimes. The MDX website has a good [quick start](https://mdxjs.com/docs/getting-started/#quick-start) for most of them. Here is a selection:
+* [MDX with Next.js](https://nextjs.org/docs/advanced-features/using-mdx)
+* [MDX with Astro](https://docs.astro.build/en/guides/integrations-guide/mdx/)
+* [MDX with Vite](https://mdxjs.com/docs/getting-started/#vite)
+
+In my case, I use [Astro](astro.build) to generate this site. Enabling MDX support is as easy as running:
+```
+npm run astro add mdx
+```
+
+Then we can just create a new file called `src/pages/post.mdx`.
+
+### MDX Syntax
+Now that our MDX setup is working, let's look at the syntax. I think the easiest way to understand it is to look at the examples.
+
+**Input:**
+```javascript
+// We can define variables...
+export const frameworkName = 'MDX';
+
+// And use them as so.
+<h3>Hello, {frameworkName}!</h3>
+
+// Regular Markdown works as well
+This is a paragraph of regular Markdown with **bold**,
+__italic__ and ~~strikethrough~~. This works as expected.
+
+// We can import components from other files
+import Example from '../components/Example.tsx';
+
+<Example initialValue={2} />
+```
+<MDXResult>
+export const frameworkName = 'MDX';
+
+    <h3>Hello, {frameworkName}!</h3>
+
+    This is a paragraph of regular Markdown with **bold**,
+    __italic__ and ~~strikethrough~~. This works as expected.
+
+
+import Example from '../components/mdx-post/Example.tsx';
+
+<Example initialValue={2} client:load />
+</MDXResult>
+
+That's pretty neat!
+
+### MDX Gotchas
+
+Before we continue, here are a few gotchas that I ran into.
+
+**1)** When **importing a component** you need an extra line break after them. More info here: [Stack Overflow](https://stackoverflow.com/questions/31284169/parse-error-adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag). I think this generally applies when mixing javascript statements and MDX elements.
+
+```js
+// ❌ Not good
+import Example from '../components/Example.tsx';
+
+<Example initialValue={2} />
+
+// ✅ Good!
+import Example from '../components/Example.tsx';
+
+<Example initialValue={2} />
+```
+
+**2)** **Variables need to be exported**, otherwise they are not accessible to the templates.
+
+```js
+// ❌ --> "frameworkName is not defined"
+const frameworkName = 'MDX';
+<h3>Hello, {frameworkName}!</h3>
+
+// ✅ Good!
+export const frameworkName = 'MDX';
+<h3>Hello, {frameworkName}!</h3>
+```
+
+**3)** I am using MDX inside the static site generator [Astro](astro.build) for this blog. By default it doesn't ship any javascript to the frontend, meaning the counter will not work. We can add the client directive `client:load` to fix that. More about it here: [astro.build#client-directives](https://docs.astro.build/en/reference/directives-reference/#client-directives).
+```jsx
+<Example initialValue={2} client:load />
+```
+
+## More MDX examples!
+
+Let's look at some more examples. Since this is not a tutorial on React or Tailwind CSS (which I use for layout), I focus on how the code looks in the MDX file.
+
+
+### Example 1 - Interactive Chart
+Component code is available [here](https://github.com/magnuswahlstrand/demo/blob/main/src/components/mdx-post/Chart.tsx).
+
+```js
+// Import component
+import {Chart} from './components/Chart';
+
+// Pass props
+<Chart initialYear={2022} />
+```
+
+<Chart client:load initialYear={2022} />
+
+
+### Example 2 - User poll
+Component code is available [here](https://github.com/magnuswahlstrand/demo/blob/main/src/components/mdx-post/Poll.tsx).
+
+```js
+// Import component
+import {Poll} from './components/Poll';
+
+// Pass props
+<Poll question="What is MDX?"/>
+```
+
+<Poll question="What is MDX?"
+      answers={[
+          "A rapper",
+          "Framework for writing interactive content with Markdown and JSX",
+          "An extension to XML"
+      ]}
+      correctIndex={1}
+      client:load
+/>
+
+
+# Conclusion
+Working with MDX is pretty easy, and fun. It can make your content interactive and potentially more understandable. It has good support with other modern web technologies like Next.js, Astro and Vite. Two potential downsides are
+* One of the strengths of Markdown is very simple and easy to read. MDX is a step back from this, and can easily get cluttered.
+* It is easy to get distracted from writing content, and go down the rabbit hole of perfecting your JSX component 😬.
+
+Overall MDX looks very promising, and I hope to get to use it more in the future. Hope you enjoyed this post.
+
+Please send any feedback or comments to [@wahlstra](https://twitter.com/wahlstra).

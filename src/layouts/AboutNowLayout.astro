@@ -1,0 +1,31 @@
+---
+import { SITE } from "src/config";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import Layout from "./Layout.astro";
+
+export interface Props {
+frontmatter: {
+title: string;
+navName: string;
+description?: string;
+};
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+    <Header activeNav={frontmatter.navName}/>
+<!--    <Breadcrumbs/>-->
+    <main id="main-content">
+        <section id="about" class="mt-16 mb-28 prose max-w-3xl prose-img:border-0">
+            <!--      <h1 class="text-2xl sm:text-3xl tracking-wider">{frontmatter.title}</h1>-->
+            <h1 class="text-4xl sm:text-6xl tracking-wider text-center">{frontmatter.title}</h1>
+            <hr class="w-48 mx-auto border-2 text-center rounded">
+            <slot/>
+        </section>
+    </main>
+    <Footer/>
+</Layout>
