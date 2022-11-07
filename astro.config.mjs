@@ -8,7 +8,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://wahlstrand.dev/",
+  site: "https://magnuswahlstrand.github.io",
   vite: { optimizeDeps: { include: ["asciinema-player"] } },
   integrations: [
     tailwind({
