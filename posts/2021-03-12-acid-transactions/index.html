@@ -158,10 +158,10 @@
 <p><a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">Consistency</a> means that the database should be in a valid state, before and after a transaction. What does valid mean? It means that it is <em>consistent</em> to whatever rules have been defined.
 Good examples includes constraints for table rows, such as <code>UNIQUE</code> and <code>NOT NULL</code> in Postgres.</p>
 <p>For example:</p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">CREATE TABLE customers(</span></span>
-<span class="line"><span style="color: #abb2bf">    ID bigint UNIQUE,</span></span>
-<span class="line"><span style="color: #abb2bf">    email TEXT NOT NULL</span></span>
-<span class="line"><span style="color: #abb2bf">);</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> customers(</span></span>
+<span class="line"><span style="color: #ABB2BF">    ID </span><span style="color: #C678DD">bigint</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">UNIQUE</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    email </span><span style="color: #C678DD">TEXT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span></span>
+<span class="line"><span style="color: #ABB2BF">);</span></span></code></pre>
 <p>Given the following table definition, our database would be <em>inconsistent</em> if we found the following database rows:</p>
 <p><em>Violation the UNIQUE constraint</em></p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">SELECT * FROM customers;</span></span>
@@ -287,7 +287,7 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
 
 
     <div class="copyright-wrapper astro-FAGJKM3J">
-      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="astro-FAGJKM3J">Copyright &#169; 2023</span>
       <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
       <span class="astro-FAGJKM3J">All rights reserved.</span>
     </div>

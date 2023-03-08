@@ -158,36 +158,36 @@ In this article I cover how to set up a very useful application that insert anim
 </li>
 </ol>
 <h2 id="getting-started">Getting started</h2>
-<p>First we need to setup our local database. Add the following to <em><strong>schema.sql</strong></em>.</p>
-<p><em><strong>schema.sql</strong></em></p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">CREATE TABLE animals (</span></span>
-<span class="line"><span style="color: #abb2bf">    id SERIAL PRIMARY KEY,</span></span>
-<span class="line"><span style="color: #abb2bf">    name TEXT NOT NULL,</span></span>
-<span class="line"><span style="color: #abb2bf">    type TEXT NOT NULL,</span></span>
-<span class="line"><span style="color: #abb2bf">    created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE 'UTC')</span></span>
-<span class="line"><span style="color: #abb2bf">);</span></span></code></pre>
+<p>First we need to setup our local database. Add the following to <strong><em>schema.sql</em></strong>.</p>
+<p><strong><em>schema.sql</em></strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> animals (</span></span>
+<span class="line"><span style="color: #ABB2BF">    id </span><span style="color: #C678DD">SERIAL</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">PRIMARY</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">KEY</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">name</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TEXT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TEXT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    created_at </span><span style="color: #C678DD">TIMESTAMP</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">WITH</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TIME</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">ZONE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">DEFAULT</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">NOW</span><span style="color: #ABB2BF">() </span><span style="color: #C678DD">AT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TIME</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">ZONE</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'UTC'</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">);</span></span></code></pre>
 <p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
 <p>Let’s start our local PostgresSQL database.</p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">docker run -p 5432:5432 -it --rm postgres</span></span></code></pre>
-<p>Next we connect to it using <code>psql</code> and run the commands in <em><strong>schema.sql</strong></em></p>
+<p>Next we connect to it using <code>psql</code> and run the commands in <strong><em>schema.sql</em></strong></p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">> psql -h localhost --username=postgres -c </span><span style="color: #98C379">"\i schema.sql"</span></span>
 <span class="line"><span style="color: #ABB2BF">CREATE TABLE</span></span></code></pre>
 <h3 id="queries">Queries</h3>
 <p>Now that we have set up our table, we can run some queries. Open a psql shell</p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">psql -h localhost --username=postgres</span></span></code></pre>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Fido', 'dog');</span></span>
-<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
-<span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Spot', 'cat');</span></span>
-<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
-<span class="line"><span style="color: #abb2bf">postgres=# INSERT INTO animals (name, type) VALUES ('Magnus', 'racoon');</span></span>
-<span class="line"><span style="color: #abb2bf">INSERT 0 1</span></span>
-<span class="line"><span style="color: #abb2bf">postgres=# SELECT * FROM animals</span></span>
-<span class="line"><span style="color: #abb2bf">postgres-# ;</span></span>
-<span class="line"><span style="color: #abb2bf"> id |  name  |  type  |          created_at</span></span>
-<span class="line"><span style="color: #abb2bf">----+--------+--------+-------------------------------</span></span>
-<span class="line"><span style="color: #abb2bf">  1 | Fido   | dog    | 2020-10-25 16:17:22.641659+00</span></span>
-<span class="line"><span style="color: #abb2bf">  2 | Spot   | cat    | 2020-10-25 16:17:32.089118+00</span></span>
-<span class="line"><span style="color: #abb2bf">  3 | Magnus | racoon | 2020-10-25 16:17:41.17342+00</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">postgres</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"># </span><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> animals (</span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'Fido'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'dog'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span></span>
+<span class="line"><span style="color: #ABB2BF">postgres</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"># </span><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> animals (</span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'Spot'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'cat'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span></span>
+<span class="line"><span style="color: #ABB2BF">postgres</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"># </span><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> animals (</span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'Magnus'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'racoon'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">0</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span></span>
+<span class="line"><span style="color: #ABB2BF">postgres</span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"># </span><span style="color: #C678DD">SELECT</span><span style="color: #ABB2BF"> * </span><span style="color: #C678DD">FROM</span><span style="color: #ABB2BF"> animals</span></span>
+<span class="line"><span style="color: #ABB2BF">postgres-# ;</span></span>
+<span class="line"><span style="color: #ABB2BF"> id |  </span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">  |  </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF">  |          created_at</span></span>
+<span class="line"><span style="color: #7F848E">----+--------+--------+-------------------------------</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">1</span><span style="color: #ABB2BF"> | Fido   | dog    | </span><span style="color: #D19A66">2020</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">10</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">25</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">16</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">17</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">22</span><span style="color: #ABB2BF">.</span><span style="color: #D19A66">641659</span><span style="color: #ABB2BF">+</span><span style="color: #D19A66">00</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">2</span><span style="color: #ABB2BF"> | Spot   | cat    | </span><span style="color: #D19A66">2020</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">10</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">25</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">16</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">17</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">32</span><span style="color: #ABB2BF">.</span><span style="color: #D19A66">089118</span><span style="color: #ABB2BF">+</span><span style="color: #D19A66">00</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #D19A66">3</span><span style="color: #ABB2BF"> | Magnus | racoon | </span><span style="color: #D19A66">2020</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">10</span><span style="color: #ABB2BF">-</span><span style="color: #D19A66">25</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">16</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">17</span><span style="color: #ABB2BF">:</span><span style="color: #D19A66">41</span><span style="color: #ABB2BF">.</span><span style="color: #D19A66">17342</span><span style="color: #ABB2BF">+</span><span style="color: #D19A66">00</span></span></code></pre>
 <p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
 <h3 id="setup-for-sqlc">Setup for <code>sqlc</code></h3>
 <p>We want to turn the queries and schema into code. <code>sqlc</code> needs a configuration file with the following things</p>
@@ -205,12 +205,12 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">schema</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"schema.sql"</span></span>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">queries</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"queries.sql"</span></span></code></pre>
 <p>After this file, we need to create <code>queries.sql</code>.</p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">-- name: ListAnimals :many</span></span>
-<span class="line"><span style="color: #abb2bf">SELECT * FROM animals</span></span>
-<span class="line"><span style="color: #abb2bf">ORDER BY created_at;</span></span>
-<span class="line"><span style="color: #abb2bf"></span></span>
-<span class="line"><span style="color: #abb2bf">-- name: CreateAnimal :exec</span></span>
-<span class="line"><span style="color: #abb2bf">INSERT INTO animals (name, type) VALUES ($1, $2)</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">-- name: ListAnimals :many</span></span>
+<span class="line"><span style="color: #C678DD">SELECT</span><span style="color: #ABB2BF"> * </span><span style="color: #C678DD">FROM</span><span style="color: #ABB2BF"> animals</span></span>
+<span class="line"><span style="color: #C678DD">ORDER BY</span><span style="color: #ABB2BF"> created_at;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">-- name: CreateAnimal :exec</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> animals (</span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">, </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> ($</span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">, $</span><span style="color: #D19A66">2</span><span style="color: #ABB2BF">)</span></span></code></pre>
 <p>The comments are extra notation for <code>sqlc</code>.</p>
 <ul>
 <li><code>name: ListAnimals :many</code> - Generate a method called <code>ListAnimals</code> that returns a slice of <code>Animal</code></li>
@@ -220,7 +220,7 @@ In this article I cover how to set up a very useful application that insert anim
 <p>Now we can run</p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">sqlc generate</span></span></code></pre>
 <p>This generates the following two files of interest</p>
-<p><em><strong>data/models.go</strong></em></p>
+<p><strong><em>data/models.go</em></strong></p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">data</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
@@ -233,7 +233,7 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span style="color: #ABB2BF">	Type      </span><span style="color: #C678DD">string</span></span>
 <span class="line"><span style="color: #ABB2BF">	CreatedAt time.Time</span></span>
 <span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
-<p><em><strong>data/queries.sql.go</strong></em></p>
+<p><strong><em>data/queries.sql.go</em></strong></p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">data</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
@@ -288,7 +288,7 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
 <h3 id="using-in-application">Using in application</h3>
 <p>Since we already have our Postgres instance up and running with database table defined. We can now use this generated code directly our application.</p>
-<p><em><strong>main.go</strong></em></p>
+<p><strong><em>main.go</em></strong></p>
 <pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">package</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> (</span></span>
@@ -352,7 +352,7 @@ In this article I cover how to set up a very useful application that insert anim
 <p>Success!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p><code>sqlc</code> is a neat, easy to use tool, which makes working with Postgres in Go fun!</p>
-<p><em><strong>Some things I liked</strong></em></p>
+<p><strong><em>Some things I liked</em></strong></p>
 <ol>
 <li>Easy to set up and use. Very straight forward syntax</li>
 <li>Changes to the database layer tracked easily by changes to <code>schema.sql</code> and <code>queries.sql</code></li>
@@ -456,7 +456,7 @@ In this article I cover how to set up a very useful application that insert anim
 
 
     <div class="copyright-wrapper astro-FAGJKM3J">
-      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="astro-FAGJKM3J">Copyright &#169; 2023</span>
       <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
       <span class="astro-FAGJKM3J">All rights reserved.</span>
     </div>

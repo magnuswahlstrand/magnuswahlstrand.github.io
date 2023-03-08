@@ -168,46 +168,46 @@
 <p>We use <a href="https://www.terraform.io/">Terraform</a> to set up the necessary infrastructure in GCP.</p>
 <p>Next we set up our main topic and subscription. There is a Terraform module that simplifies the setup, called <a href="https://registry.terraform.io/modules/terraform-google-modules/pubsub/google/latest">terraform-google-modules/pubsub/google</a>.</p>
 <p><em>Note: For this demo, we keep retries few, and short. Normally I would configure exponential back-off over a longer period.</em></p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">terraform {</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">locals {</span></span>
-<span class="line"><span style="color:#abb2bf">  topic_name  = &quot;user-created&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  app_name    = &quot;app&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">provider &quot;google&quot; {</span></span>
-<span class="line"><span style="color:#abb2bf">  project = var.project_id</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">module &quot;pubsub-main&quot; {</span></span>
-<span class="line"><span style="color:#abb2bf">  source     = &quot;terraform-google-modules/pubsub/google&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  project_id = var.project_id</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">  topic              = &quot;${local.topic_name}&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  pull_subscriptions = [</span></span>
-<span class="line"><span style="color:#abb2bf">    {</span></span>
-<span class="line"><span style="color:#abb2bf">      name                  = &quot;${local.app_name}.${local.topic_name}&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      dead_letter_topic     = module.pubsub-dlq.id</span></span>
-<span class="line"><span style="color:#abb2bf">      service_account       = google_service_account.pubsub_sa.email</span></span>
-<span class="line"><span style="color:#abb2bf">      max_delivery_attempts = 5</span></span>
-<span class="line"><span style="color:#abb2bf">      maximum_backoff       = &quot;10s&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      minimum_backoff       = &quot;1s&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">    }</span></span>
-<span class="line"><span style="color:#abb2bf">  ]</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">terraform</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">locals</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">topic_name</span><span style="color:#ABB2BF">  = </span><span style="color:#98C379">&quot;user-created&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">app_name</span><span style="color:#ABB2BF">    = </span><span style="color:#98C379">&quot;app&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">provider</span><span style="color:#98C379"> &quot;google&quot;</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">project</span><span style="color:#ABB2BF"> = var</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">project_id</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#C678DD">module</span><span style="color:#98C379"> &quot;pubsub-main&quot;</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">source</span><span style="color:#ABB2BF">     = </span><span style="color:#98C379">&quot;terraform-google-modules/pubsub/google&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">project_id</span><span style="color:#ABB2BF"> = var</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">project_id</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">topic</span><span style="color:#ABB2BF">              = </span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.topic_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">pull_subscriptions</span><span style="color:#ABB2BF"> = [</span></span>
+<span class="line"><span style="color:#ABB2BF">    {</span></span>
+<span class="line"><span style="color:#ABB2BF">      name                  = </span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.app_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">.</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.topic_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      dead_letter_topic     = module</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">pubsub-dlq</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">id</span></span>
+<span class="line"><span style="color:#ABB2BF">      service_account       = google_service_account</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">pubsub_sa</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">email</span></span>
+<span class="line"><span style="color:#ABB2BF">      max_delivery_attempts = </span><span style="color:#D19A66">5</span></span>
+<span class="line"><span style="color:#ABB2BF">      maximum_backoff       = </span><span style="color:#98C379">&quot;10s&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      minimum_backoff       = </span><span style="color:#98C379">&quot;1s&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#ABB2BF">  ]</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
 <p>Above, we set <code>dead_letter_topic = module.pubsub-dlq.id</code>. This references this section where we set up our DLQ.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">module &quot;pubsub-dlq&quot; {</span></span>
-<span class="line"><span style="color:#abb2bf">  source     = &quot;terraform-google-modules/pubsub/google&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  project_id = var.project_id</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">  topic              = &quot;${local.app_name}.${local.topic_name}.dlq&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  pull_subscriptions = [</span></span>
-<span class="line"><span style="color:#abb2bf">    {</span></span>
-<span class="line"><span style="color:#abb2bf">      name = &quot;${local.app_name}.${local.topic_name}.dlq&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">    }</span></span>
-<span class="line"><span style="color:#abb2bf">  ]</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">module</span><span style="color:#98C379"> &quot;pubsub-dlq&quot;</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">source</span><span style="color:#ABB2BF">     = </span><span style="color:#98C379">&quot;terraform-google-modules/pubsub/google&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">project_id</span><span style="color:#ABB2BF"> = var</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">project_id</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">topic</span><span style="color:#ABB2BF">              = </span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.app_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">.</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.topic_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">.dlq&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">pull_subscriptions</span><span style="color:#ABB2BF"> = [</span></span>
+<span class="line"><span style="color:#ABB2BF">    {</span></span>
+<span class="line"><span style="color:#ABB2BF">      name = </span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.app_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">.</span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.topic_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">.dlq&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#ABB2BF">  ]</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
 <p>Then we run <code>terraform apply</code></p>
 <div class="astro-CZA65E6M" data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/terraform.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
 
@@ -243,7 +243,7 @@
 <span class="line"><span style="color:#ABB2BF">		msg.</span><span style="color:#56B6C2">Ack</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span style="color:#ABB2BF">	})</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
-<p><em><strong>Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub</em></p>
+<p><strong>*Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub*</p>
 <p>Now we can run our app.</p>
 <div class="astro-CZA65E6M" data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/process-messages.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
 
@@ -260,29 +260,29 @@
 <h3 id="monitoring">Monitoring</h3>
 <p>The answer to the first question is “monitoring”, which GCP has good support for! The GCP app is surprisingly good for this purpose I think. I will not cover the details, but here is an additional Terraform-snippet I used to set up monitoring for our app. It checks if the <code>num_undelivered_messages</code> on the dlq-subscription is greater than 0.</p>
 <p>The notification_channel refers to the phone on my app. I set this up separately.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">resource &quot;google_monitoring_alert_policy&quot; &quot;alert_policy&quot; {</span></span>
-<span class="line"><span style="color:#abb2bf">  display_name = &quot;Messages on dead-letter queue (app: ${local.app_name}, topic: ${local.topic_name})&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  combiner     = &quot;OR&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  conditions {</span></span>
-<span class="line"><span style="color:#abb2bf">    display_name = &quot;Cloud Pub/Sub Subscription - Unacked messages&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">    condition_threshold {</span></span>
-<span class="line"><span style="color:#abb2bf">      filter     = &quot;resource.type = \&quot;pubsub_subscription\&quot; AND resource.labels.subscription_id = \&quot;${module.pubsub-dlq.subscription_names.0}\&quot; AND metric.type = \&quot;pubsub.googleapis.com/subscription/num_undelivered_messages\&quot;&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      duration   = &quot;120s&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      comparison = &quot;COMPARISON_GT&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      aggregations {</span></span>
-<span class="line"><span style="color:#abb2bf">        alignment_period   = &quot;60s&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">        per_series_aligner = &quot;ALIGN_MAX&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">      }</span></span>
-<span class="line"><span style="color:#abb2bf">    }</span></span>
-<span class="line"><span style="color:#abb2bf">  }</span></span>
-<span class="line"><span style="color:#abb2bf">  notification_channels = [</span></span>
-<span class="line"><span style="color:#abb2bf">    &quot;projects/b32-demo-projects/notificationChannels/6746093406737316903&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">  ]</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">  user_labels = {</span></span>
-<span class="line"><span style="color:#abb2bf">    app : local.app_name</span></span>
-<span class="line"><span style="color:#abb2bf">  }</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">resource</span><span style="color:#98C379"> &quot;google_monitoring_alert_policy&quot; &quot;alert_policy&quot;</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">display_name</span><span style="color:#ABB2BF"> = </span><span style="color:#98C379">&quot;Messages on dead-letter queue (app: </span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.app_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">, topic: </span><span style="color:#ABB2BF">${</span><span style="color:#C678DD">local</span><span style="color:#E5C07B">.topic_name</span><span style="color:#ABB2BF">}</span><span style="color:#98C379">)&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">combiner</span><span style="color:#ABB2BF">     = </span><span style="color:#98C379">&quot;OR&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#C678DD">conditions</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#E06C75">display_name</span><span style="color:#ABB2BF"> = </span><span style="color:#98C379">&quot;Cloud Pub/Sub Subscription - Unacked messages&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#C678DD">condition_threshold</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">      </span><span style="color:#E06C75">filter</span><span style="color:#ABB2BF">     = </span><span style="color:#98C379">&quot;resource.type = \&quot;</span><span style="color:#ABB2BF">pubsub_subscription\</span><span style="color:#98C379">&quot; AND resource.labels.subscription_id = \&quot;</span><span style="color:#ABB2BF">${module.pubsub-dlq.subscription_names.0}\</span><span style="color:#98C379">&quot; AND metric.type = \&quot;</span><span style="color:#ABB2BF">pubsub</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">googleapis</span><span style="color:#D19A66">.</span><span style="color:#ABB2BF">com/subscription/num_undelivered_messages\</span><span style="color:#98C379">&quot;&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      </span><span style="color:#E06C75">duration</span><span style="color:#ABB2BF">   = </span><span style="color:#98C379">&quot;120s&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      </span><span style="color:#E06C75">comparison</span><span style="color:#ABB2BF"> = </span><span style="color:#98C379">&quot;COMPARISON_GT&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      </span><span style="color:#C678DD">aggregations</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#ABB2BF">        </span><span style="color:#E06C75">alignment_period</span><span style="color:#ABB2BF">   = </span><span style="color:#98C379">&quot;60s&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">        </span><span style="color:#E06C75">per_series_aligner</span><span style="color:#ABB2BF"> = </span><span style="color:#98C379">&quot;ALIGN_MAX&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">      }</span></span>
+<span class="line"><span style="color:#ABB2BF">    }</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">notification_channels</span><span style="color:#ABB2BF"> = [</span></span>
+<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#98C379">&quot;projects/b32-demo-projects/notificationChannels/6746093406737316903&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">  ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">user_labels</span><span style="color:#ABB2BF"> = {</span></span>
+<span class="line"><span style="color:#ABB2BF">    app : local.app_name</span></span>
+<span class="line"><span style="color:#ABB2BF">  }</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
 <h3 id="handling-stuck-messages">Handling stuck messages</h3>
 <p>When an operator has received the alarm from the monitor, they manually inspect the messages in the DLQ. If the message is completely invalid, they can just pull and acknowledge that specific message in the cloud console.</p>
 <p>If the message ended up in the DLQ because of a bug in the application. We can republish it to the main topic with the following code.</p>
@@ -412,7 +412,7 @@
 
 
     <div class="copyright-wrapper astro-FAGJKM3J">
-      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="astro-FAGJKM3J">Copyright &#169; 2023</span>
       <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
       <span class="astro-FAGJKM3J">All rights reserved.</span>
     </div>

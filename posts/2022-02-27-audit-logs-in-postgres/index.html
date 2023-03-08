@@ -162,7 +162,7 @@ was updated.</li>
 <span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">row</span><span style="color: #ABB2BF">        jsonb        </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span><span style="color: #ABB2BF">,</span></span>
 <span class="line"><span style="color: #ABB2BF">    changed_on </span><span style="color: #C678DD">TIMESTAMP</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">6</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span></span>
 <span class="line"><span style="color: #ABB2BF">);</span></span></code></pre>
-<p><em><strong>Note:</strong> Our <code>profile_audits</code> can contain any columns we want. I chose a single <code>row</code> column to store the full changed row because 1) it is easy 2) we don’t have to worry about schema changes to the <code>profile</code> table.</em></p>
+<p><strong>*Note:</strong> Our <code>profile_audits</code> can contain any columns we want. I chose a single <code>row</code> column to store the full changed row because 1) it is easy 2) we don’t have to worry about schema changes to the <code>profile</code> table.*</p>
 <h3 id="linking-the-two-tables">Linking the two tables</h3>
 <p>The goal is to be able to track changes to the <code>profile</code> table, and store them in <code>profile_audit</code>. For this we need</p>
 <ol>
@@ -173,7 +173,7 @@ the <code>profile</code> table. From the documentation:</li>
 <p>CREATE TRIGGER creates a new trigger. The trigger will be associated with the specified table or view and will execute the specified function function_name when certain events occur.</p>
 </blockquote>
 <ol start="2">
-<li>We also need a  <a href="https://www.postgresql.org/docs/9.5/sql-createfunction.html">postgres function</a> to called by the
+<li>We also need a <a href="https://www.postgresql.org/docs/9.5/sql-createfunction.html">postgres function</a> to called by the
 trigger.</li>
 </ol>
 <p>First, let’s define the function:</p>
@@ -227,10 +227,10 @@ was fired.</li>
 <span class="line"><span style="color: #ABB2BF">$$</span></span></code></pre>
 <h3 id="testing-everything">Testing everything</h3>
 <p>We can test our trigger with an insert and an update.</p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">INSERT INTO profile (name, email) VALUES ('Magnus', 'magnus@gmail.com');</span></span>
-<span class="line"><span style="color: #abb2bf">UPDATE profile SET email = 'magnus2@gmail.com' WHERE name = 'Magnus';</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">profile</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">name</span><span style="color: #ABB2BF">, email) </span><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'Magnus'</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'magnus@gmail.com'</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">UPDATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">profile</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">SET</span><span style="color: #ABB2BF"> email </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'magnus2@gmail.com'</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">WHERE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">name</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">'Magnus'</span><span style="color: #ABB2BF">;</span></span></code></pre>
 <p><strong>Result 1</strong></p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">SELECT * FROM profile</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">SELECT</span><span style="color: #ABB2BF"> * </span><span style="color: #C678DD">FROM</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">profile</span></span></code></pre>
 
 
 
@@ -248,7 +248,7 @@ was fired.</li>
 
 <table><thead><tr><th align="left">id</th><th align="left">name</th><th align="left">email</th></tr></thead><tbody><tr><td align="left">4</td><td align="left">Magnus</td><td align="left"><a href="mailto:magnus2@gmail.com">magnus2@gmail.com</a></td></tr></tbody></table>
 <p><strong>Result 2</strong></p>
-<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">SELECT * FROM profile_audits</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">SELECT</span><span style="color: #ABB2BF"> * </span><span style="color: #C678DD">FROM</span><span style="color: #ABB2BF"> profile_audits</span></span></code></pre>
 
 
 
@@ -377,7 +377,7 @@ was fired.</li>
 
 
     <div class="copyright-wrapper astro-FAGJKM3J">
-      <span class="astro-FAGJKM3J">Copyright &#169; 2022</span>
+      <span class="astro-FAGJKM3J">Copyright &#169; 2023</span>
       <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
       <span class="astro-FAGJKM3J">All rights reserved.</span>
     </div>

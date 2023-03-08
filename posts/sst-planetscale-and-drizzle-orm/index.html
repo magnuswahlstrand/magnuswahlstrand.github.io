@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://wahlstrand.dev/posts/sst-planetscale-and-drizzle-orm/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>SST, Planetscale and Drizzle ORM</title>
+    <meta name="title" content="SST, Planetscale and Drizzle ORM">
+    <meta name="description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="SST, Planetscale and Drizzle ORM">
+    <meta property="og:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="og:url" content="https://wahlstrand.dev/posts/sst-planetscale-and-drizzle-orm/">
+    <meta property="og:image" content="https://wahlstrand.dev/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://wahlstrand.dev/posts/sst-planetscale-and-drizzle-orm/">
+    <meta property="twitter:title" content="SST, Planetscale and Drizzle ORM">
+    <meta property="twitter:description" content="A minimal, responsive and SEO-friendly Astro blog theme.">
+    <meta property="twitter:image" content="https://wahlstrand.dev/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.242af6a5.css" />
+<link rel="stylesheet" href="/assets/about.de384e82.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-XOAOW6KJ">
+  <a id="skip-to-content" href="#main-content" class="astro-XOAOW6KJ">Skip to content</a>
+  <div class="nav-container astro-XOAOW6KJ">
+    <div class="top-nav-wrap astro-XOAOW6KJ">
+      <a href="/" class="logo astro-XOAOW6KJ">
+        wahlstrand.dev
+      </a>
+      <button class="hamburger-menu astro-XOAOW6KJ" aria-label="menu">
+        <div class="icon-container flex astro-XOAOW6KJ">
+          <div id="first-line" class="astro-XOAOW6KJ"></div>
+          <div id="second-line" class="astro-XOAOW6KJ"></div>
+          <div id="third-line" class="astro-XOAOW6KJ"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-XOAOW6KJ">
+      <ul class="astro-XOAOW6KJ">
+        <li class="astro-XOAOW6KJ"><a href="/posts" class=" astro-XOAOW6KJ">Posts</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/tags" class=" astro-XOAOW6KJ">Tags</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/about" class=" astro-XOAOW6KJ">About</a></li>
+        <li class="astro-XOAOW6KJ"><a href="/now" class=" astro-XOAOW6KJ">Now</a></li>
+      </ul>
+      <div class="button-wrapper astro-XOAOW6KJ">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-XOAOW6KJ astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-XOAOW6KJ"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-XOAOW6KJ"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-XOAOW6KJ" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-XOAOW6KJ">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-XOAOW6KJ"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-XOAOW6KJ">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-XOAOW6KJ"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">SST, Planetscale and Drizzle ORM</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">March 8, 2023</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>A few weeks back <a href="https://sst.dev">SST</a> released their 2.0 version. It is a (almost?) complete rewrite of their framework, which I wanted
+to try it out.</p>
+<p>In this post I will show you how to use the 2.0 version of <a href="https://sst.dev">SST</a> to build a serverless API with a serverless MySQL
+database hosted on <a href="https://planetscale.com">Planetscale</a> and
+a <a href="https://github.com/drizzle-team/drizzle-orm">Drizzle ORM</a>. We will implement the database structure as
+this <a href="https://sst.dev/examples/how-to-use-planetscale-in-your-serverless-app.html">SST Guide: How to use PlanetScale in your serverless app</a>,
+but adapt it for SST 2.0 and add Drizzle ORM on top for typesafe database queries.</p>
+<h2 id="lets-go">Let’s go!</h2>
+<p>Before we get started, you need the following tools installed</p>
+<ul>
+<li>SST CLI configured</li>
+<li><a href="https://planetscale.com">Planetscale</a> account
+<ul>
+<li><a href="https://docs.planetscale.com/cli/installation">CLI</a> installed</li>
+<li>A database created called <code>magnusscale</code>. (<strong>Note:</strong> The username and password will be needed later.)</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-create-the-planetscale-table">1. Create the Planetscale table</h2>
+<p>First we create our counter table</p>
+<ul>
+<li>Run command <code>pscale shell magnusscale main</code></li>
+<li>Run the following SQL commands:</li>
+</ul>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">IF</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">EXISTS</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">counter</span></span>
+<span class="line"><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">counter</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">VARCHAR</span></span>
+<span class="line"><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #D19A66">255</span></span>
+<span class="line"><span style="color: #ABB2BF">) </span><span style="color: #C678DD">PRIMARY</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">KEY</span><span style="color: #ABB2BF">, tally </span><span style="color: #C678DD">INT</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">counter</span><span style="color: #ABB2BF"> (</span><span style="color: #C678DD">counter</span><span style="color: #ABB2BF">, tally)</span></span>
+<span class="line"><span style="color: #C678DD">VALUES</span><span style="color: #ABB2BF"> (</span><span style="color: #98C379">'hits'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">0</span><span style="color: #ABB2BF">);</span></span></code></pre>
+<h2 id="2-store-sst-secret">2. Store SST secret</h2>
+<p>Our main secret in this project is the planetscale password. We store it in the SST secret store.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">pnpm sst secrets set PLANETSCALE_PASSWORD &#x3C;YOUR PASSWORD></span></span></code></pre>
+<h2 id="3-create-sst-project">3. Create SST project</h2>
+<p>Now we create our SST project</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">pnpx create-sst@latest --template=base/example magnusscale</span></span>
+<span class="line"><span style="color: #abb2bf">cd magnusscale</span></span>
+<span class="line"><span style="color: #abb2bf">pnpm install</span></span></code></pre>
+<h2 id="4-our-stack">4. Our stack</h2>
+<p>Then we define our stack. Here we create 3 references.</p>
+<ul>
+<li>PLANETSCALE_PASSWORD - The password we stored in the SST secret</li>
+<li>PLANETSCALE_USERNAME - The database username</li>
+<li>PLANETSCALE_HOST - The host we use to connect to the database. I think this is the same for all Planetscale databases.</li>
+</ul>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// stacks/MagnusScaleStack.ts</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">Api</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">Config</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">StackContext</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"sst/constructs"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">MagnusScaleStack</span><span style="color: #ABB2BF">({ </span><span style="color: #E06C75">stack</span><span style="color: #ABB2BF"> }: </span><span style="color: #E5C07B">StackContext</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PLANETSCALE_PASSWORD</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">Secret</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">stack</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"PLANETSCALE_PASSWORD"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PLANETSCALE_USERNAME</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">Parameter</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">stack</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #98C379">"PLANETSCALE_USERNAME"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"&#x3C;YOUR USERNAME>"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"><span style="color: #ABB2BF">  );</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PLANETSCALE_HOST</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">Parameter</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">stack</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"PLANETSCALE_HOST"</span><span style="color: #ABB2BF">, {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"aws.connect.psdb.cloud"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// Create an HTTP API</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">api</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Api</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">stack</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">"Api"</span><span style="color: #ABB2BF">, {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">routes</span><span style="color: #ABB2BF">: {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #98C379">"POST /"</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"packages/functions/src/lambda.handler"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    },</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// Make the secrets and config available to the lambda</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">api</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">bind</span><span style="color: #ABB2BF">([</span><span style="color: #E5C07B">PLANETSCALE_HOST</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">PLANETSCALE_USERNAME</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">PLANETSCALE_PASSWORD</span><span style="color: #ABB2BF">]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// Show the endpoint in the output</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">stack</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">addOutputs</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">ApiEndpoint</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">api</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">url</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="5-set-up-drizzle-orm">5. Set up Drizzle ORM</h2>
+<p>Now we can configure our database schema to match the table we created earlier. This will allow us to get typescript
+types in our queries.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// packages/core/schema.ts</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">int</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">mysqlTable</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">varchar</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"drizzle-orm/mysql-core"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">counters</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">mysqlTable</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"counter"</span><span style="color: #ABB2BF">, {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">: </span><span style="color: #61AFEF">varchar</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"counter"</span><span style="color: #ABB2BF">, { </span><span style="color: #E06C75">length</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">255</span><span style="color: #ABB2BF"> }).</span><span style="color: #61AFEF">primaryKey</span><span style="color: #ABB2BF">(),</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">tally</span><span style="color: #ABB2BF">: </span><span style="color: #61AFEF">int</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"tally"</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">notNull</span><span style="color: #ABB2BF">(),</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span></code></pre>
+<p>Next we create a <code>db.ts</code> with the database connection and queries.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E">// packages/core/db.ts</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">drizzle</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"drizzle-orm/planetscale-serverless"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">connect</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@planetscale/database"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">counters</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"./schema"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">Config</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"sst/node/config"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">eq</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"drizzle-orm/expressions"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">sql</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"drizzle-orm/sql"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">connection</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">connect</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">host</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">PLANETSCALE_HOST</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">username</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">PLANETSCALE_USERNAME</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">password</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">Config</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">PLANETSCALE_PASSWORD</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">db</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">drizzle</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">connection</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">getCounter</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">result</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">db</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">select</span><span style="color: #ABB2BF">()</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">from</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counters</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">where</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">eq</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">counters</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">result</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">length</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x3C;</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">1</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">throw</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Error</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">`No results found for counter </span><span style="color: #C678DD">${</span><span style="color: #E06C75">name</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">result</span><span style="color: #ABB2BF">[</span><span style="color: #D19A66">0</span><span style="color: #ABB2BF">];</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">increaseCounter</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">result</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">db</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">update</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">counters</span><span style="color: #ABB2BF">)</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">set</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">tally</span><span style="color: #ABB2BF">: </span><span style="color: #61AFEF">sql</span><span style="color: #98C379">`tally</span></span>
+<span class="line"><span style="color: #98C379">            + 1`</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    })</span></span>
+<span class="line"><span style="color: #ABB2BF">    .</span><span style="color: #61AFEF">where</span><span style="color: #ABB2BF">(</span><span style="color: #61AFEF">eq</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">counters</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">counter</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">name</span><span style="color: #ABB2BF">));</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="6-the-lambda-function">6. The lambda function</h2>
+<p>Finally, we create our lambda function. Here we use the <code>getCounter</code> and <code>increaseCounter</code> functions from <code>db.ts</code>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">APIGatewayProxyHandlerV2</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"aws-lambda"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">getCounter</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">increaseCounter</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"../../core/db"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">handler</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">APIGatewayProxyHandlerV2</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">increaseCounter</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"hits"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">counter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">getCounter</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"hits"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">statusCode</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">200</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">headers</span><span style="color: #ABB2BF">: { </span><span style="color: #98C379">"Content-Type"</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"json/application"</span><span style="color: #ABB2BF"> },</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">body</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">JSON</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">stringify</span><span style="color: #ABB2BF">({ </span><span style="color: #E06C75">count</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">counter</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">tally</span><span style="color: #ABB2BF"> }),</span></span>
+<span class="line"><span style="color: #ABB2BF">  };</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<h2 id="7-deploy">7. Deploy</h2>
+<p>If we did everything correctly, we can now deploy our app.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">pnpm run dev</span></span></code></pre>
+<p><strong>Output:</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">SST v2.1.15  ready!</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">➜  App:     magnusscale</span></span>
+<span class="line"><span style="color: #abb2bf">   Stage:   dev</span></span>
+<span class="line"><span style="color: #abb2bf">   Console: https://console.sst.dev/magnusscale/dev</span></span>
+<span class="line"><span style="color: #abb2bf"></span></span>
+<span class="line"><span style="color: #abb2bf">✔  Deployed:</span></span>
+<span class="line"><span style="color: #abb2bf">   MagnusScaleStack</span></span>
+<span class="line"><span style="color: #abb2bf">   ApiEndpoint: https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span></code></pre>
+<h2 id="8-test">8. Test</h2>
+<p>The endpoint output from the deploy command is the endpoint we can use to test our app:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">curl -XPOST https:</span><span style="color: #7F848E">//3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span>
+<span class="line"><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">"count"</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">1</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h3 id="success">Success 🎉!</h3>
+<br>
+<h1 id="conclusion">Conclusion</h1>
+<p>SST, Planetscale and Drizzle ORM are all great. <strong>SST</strong> 2.0 works great, and I especially enjoyed using the <code>Secret</code> and <code>Config</code> constructs. Feels a lot better than using .env files, and you get typesafety for your configuration (they might have existed pre-2.0).</p>
+<p>I had not used Drizzle ORM or <strong>Planetscale</strong> before, but I can recommend both. The Planetscale CLI is great, and creating an account and setting up a database was easy.</p>
+<p><strong>Drizzle</strong> ORM was fairly easy to use, though I had some problem with getting the types in my queries right. Tough, this was probably due to my lack of experience with typescript, than anyhting else.
+The Drizzle team also has a tool called <a href="https://github.com/drizzle-team/drizzle-kit-mirror">Drizzle Kit</a> for handling migrations that looks great, but I have yet to try it.</p>
+<p>Overall, I look forward to using these tools in the future.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="https://sst.dev/examples/how-to-use-planetscale-in-your-serverless-app.html">SST: How to use PlanetScale in your serverless app</a></li>
+<li><a href="https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-orm/src/mysql-core/README.md#connect-using-planetscale-serverless-client">Drizzle ORM: Connect using PlanetScale Serverless client</a></li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/aws" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">aws</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/sst" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">sst</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/planetscale" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">planetscale</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/drizzle-orm" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">drizzle-orm</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-FAGJKM3J">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-FAGJKM3J">
+    <div class="social-icons flex astro-QFVOVS4Q">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button astro-QFVOVS4Q astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+</div>
+
+
+    <div class="copyright-wrapper astro-FAGJKM3J">
+      <span class="astro-FAGJKM3J">Copyright &#169; 2023</span>
+      <span class="separator astro-FAGJKM3J">&nbsp;|&nbsp;</span>
+      <span class="astro-FAGJKM3J">All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+
+  </body></html>
+
+
