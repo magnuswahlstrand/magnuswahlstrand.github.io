@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://wahlstrand.dev/posts/building-a-checkout-with-adyen-and-nextjs/">
+    <meta name="generator" content="Astro v1.6.2">
+
+    <!-- General Meta Tags -->
+    <title>Building a checkout with Adyen and NextJS</title>
+    <meta name="title" content="Building a checkout with Adyen and NextJS">
+    <meta name="description" content="Made by a minimal, responsible and friendly person.">
+    <meta name="author" content="Magnus Wahlstrand">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Building a checkout with Adyen and NextJS">
+    <meta property="og:description" content="Made by a minimal, responsible and friendly person.">
+    <meta property="og:url" content="https://wahlstrand.dev/posts/building-a-checkout-with-adyen-and-nextjs/">
+    <meta property="og:image" content="https://wahlstrand.dev/default-og.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://wahlstrand.dev/posts/building-a-checkout-with-adyen-and-nextjs/">
+    <meta property="twitter:title" content="Building a checkout with Adyen and NextJS">
+    <meta property="twitter:description" content="Made by a minimal, responsible and friendly person.">
+    <meta property="twitter:image" content="https://wahlstrand.dev/default-og.png">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <script>
+      const primaryColorScheme = "none"; // "light" | "dark" | "none"
+
+      const darkModeMediaQuery = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      // Get theme data from local storage
+      const currentTheme = localStorage.getItem("theme");
+
+      let theme;
+
+      // Set theme to 'theme-dark' if currentTheme is 'dark'
+      if (currentTheme) {
+        theme = currentTheme === "dark" ? "theme-dark" : "";
+      } else {
+        // If primary color scheme is dark
+        // or primary color scheme is not set and prefers-color-scheme is dark
+        // choose dark mode
+        if (
+          primaryColorScheme === "dark" ||
+          (primaryColorScheme === "none" && darkModeMediaQuery)
+        ) {
+          theme = "theme-dark";
+        }
+        // If primary color scheme is light
+        // choose light mode
+        else if (primaryColorScheme === "light") {
+          theme = "";
+        }
+        // fallback to prefers-color-scheme
+        else {
+          theme = darkModeMediaQuery ? "theme-dark" : "";
+        }
+      }
+
+      // Put dark class on html tag to enable dark mode
+      document.querySelector("html").className = theme;
+    </script>
+  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
+<link rel="stylesheet" href="/assets/_slug_.242af6a5.css" />
+<link rel="stylesheet" href="/assets/resume.daa8ed95.css" />
+<link rel="stylesheet" href="/assets/about.1116d12d.css" />
+<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
+<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+  <body>
+    <header class="astro-SB63UGK4">
+  <a id="skip-to-content" href="#main-content" class="astro-SB63UGK4">Skip to content</a>
+  <div class="nav-container astro-SB63UGK4">
+    <div class="top-nav-wrap astro-SB63UGK4">
+      <a href="/" class="logo break-keep text-2xl astro-SB63UGK4">
+        Magnus Wahlstrand
+      </a>
+      <button class="hamburger-menu astro-SB63UGK4" aria-label="menu">
+        <div class="icon-container flex astro-SB63UGK4">
+          <div id="first-line" class="astro-SB63UGK4"></div>
+          <div id="second-line" class="astro-SB63UGK4"></div>
+          <div id="third-line" class="astro-SB63UGK4"></div>
+        </div>
+      </button>
+    </div>
+    <nav class="display-none sm:flex astro-SB63UGK4">
+      <ul class="astro-SB63UGK4">
+        <li class="astro-SB63UGK4">
+          <a href="/resume" class=" astro-SB63UGK4">Resumé</a>
+        </li>
+        <li class="astro-SB63UGK4">
+          <a href="/posts" class=" astro-SB63UGK4">Posts</a>
+        </li>
+        <!--
+        <li>
+          <a href="/tags" class={activeNav === "tags" ? "active" : ""}>Tags</a>
+        </li>
+        -->
+        <li class="astro-SB63UGK4">
+          <a href="/about" class=" astro-SB63UGK4">About</a>
+        </li>
+        <li class="astro-SB63UGK4">
+          <a href="/now" class=" astro-SB63UGK4">Now</a>
+        </li>
+      </ul>
+      <div class="button-wrapper astro-SB63UGK4">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-SB63UGK4 astro-QCEBUJFW" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-SB63UGK4"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-SB63UGK4"></path>
+          </svg>
+</a>
+
+
+
+        <button id="theme-btn" class="focus-outline astro-SB63UGK4" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-SB63UGK4">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-SB63UGK4"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-SB63UGK4">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-SB63UGK4"></path>
+              </svg>
+            </button>
+      </div>
+    </nav>
+  </div>
+  <div class="max-w-3xl mx-auto px-4">
+  <hr class="border-skin-line">
+</div>
+</header>
+
+
+
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
+      </svg><span class="astro-3O7NGGEO">Go back</span>
+    </button>
+  </div><main id="main-content" class="astro-3O7NGGEO">
+    <h1 class="post-title astro-3O7NGGEO">Building a checkout with Adyen and NextJS</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">May 1, 2023</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+      <p>The last couple of months, I’ve been working on adding card payments to our product at work. We use <a href="https://www.adyen.com/">Adyen</a> as our payment provider, and they have been great so far.</p>
+<p>As I have mostly worked on the backend parts of this
+integration, I wanted to see if I could build the frontend as well. In this guide, I will share some of the things I’ve learned building just that, a simple payment page using <a href="https://nextjs.org/">NextJS</a>, the <a href="https://www.npmjs.com/package/@adyen/api-library">Adyen Node SDK</a>, and the Adyen easy-to-use <a href="https://docs.adyen.com/online-payments/web-drop-in">Drop-in component</a>.</p>
+<p>It will look something like this:
+<img src="/img/adyen-checkout-with-nextjs/preview.png" alt="preview"></p>
+<p>Let’s go!</p>
+<h2 id="overview">Overview</h2>
+<p>First, let’s go through of the payment flow.
+<em>Feel free to skip to the next section if you just want to see the code</em> 🤓</p>
+<h4 id="the-steps">The steps</h4>
+<ol>
+<li><strong>Customer:</strong> goes to the checkout page</li>
+<li><strong>Client (frontend):</strong> sends information about the customer to the backend, such as currency, country code and other information to simplify checkout.</li>
+<li><strong>Backend:</strong> creates an Adyen session using the <a href="https://www.npmjs.com/package/@adyen/api-library">Node SDK</a>. In our simple app we will hardcode the amount to 100€, but in a real app you would probably get this from the backend as well.</li>
+<li><strong>Adyen:</strong> Returns session data</li>
+<li><strong>Backend:</strong> Returns session data to the client</li>
+<li><strong>Client:</strong> Creates the Drop-in component using the session data</li>
+<li><strong>Customer:</strong> Enters payment details and clicks pay</li>
+<li><strong>Drop-in component:</strong> Sends payment details directly to Adyen, without passing our backend. Customer sees payment results.</li>
+</ol>
+<p>… (some time later)</p>
+<ol start="9">
+<li><strong>Adyen:</strong> Sends payment confirmation webhook to the backend. While there is a <code>onPaymentComplete</code> hook in the client, it is best practice to rely on these notifications instead.</li>
+</ol>
+<p>We will be implementing 1-9 in this guide.</p>
+<p><img src="/img/adyen-checkout-with-nextjs/payment_flow_overview_modded_2.png" alt="flow"></p>
+<h1 id="building-the-payment-page">Building the payment page</h1>
+<p>Now we can start implementing! First, we make sure that we can get an Adyen session to be used with the Drop-in component. This will cover the steps 3-5 from above, i.e.</p>
+<blockquote>
+<ol start="3">
+<li><strong>Backend:</strong> create an Adyen session</li>
+<li><strong>Adyen:</strong> Returns session data</li>
+<li><strong>Backend:</strong> Returns session data to the client</li>
+</ol>
+</blockquote>
+<h2 id="implementing-the-session-endpoint">Implementing the session endpoint</h2>
+<ol>
+<li><strong>Initialize the NextJS app</strong> - I prefer using typescript, then defaults for everything else.</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">npx create-next-app@latest --typescript</span></span></code></pre>
+<ol start="2">
+<li><strong>Install dependencies</strong> - For this step, we only need the <a href="https://www.npmjs.com/package/@adyen/api-library">Adyen Node SDK</a></li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #abb2bf">npm install @adyen/api-library</span></span></code></pre>
+<ol start="3">
+<li>Get the API key and merchant from name from the <a href="https://ca-live.adyen.com/ca/ca/overview/default.shtml">Adyen portal</a> and store them in a <code>.env.local</code> file.</li>
+</ol>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E"># From Developers > API credentials > New API credential > Generate new API key.</span></span>
+<span class="line"><span style="color: #ABB2BF">ADYEN_API_KEY=&#x3C;YOUR API KEY></span></span>
+<span class="line"><span style="color: #7F848E"># From Settings > Merchant accounts. Get the name under "Account code"</span></span>
+<span class="line"><span style="color: #ABB2BF">ADYEN_MERCHANT_ACCOUNT=&#x3C;YOUR MERCHANT ACCOUNT></span></span></code></pre>
+<ol start="4">
+<li><strong>Create a NextJS endpoint</strong></li>
+</ol>
+<p>This will be the endpoint that we will use to get the session data from Adyen. Create a file called <code>pages/api/session.ts</code>.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">NextApiRequest</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">NextApiResponse</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"next"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">randomUUID</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"crypto"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">CheckoutAPI</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">Client</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">Config</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@adyen/api-library"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">config</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Config</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">apiKey</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">process</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">env</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">ADYEN_API_KEY</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">environment</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"TEST"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 1. Initialize the client &#x26; checkout</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">client</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Client</span><span style="color: #ABB2BF">({ </span><span style="color: #E06C75">config</span><span style="color: #ABB2BF"> });</span></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">checkout</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">new</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">CheckoutAPI</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">client</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">merchantAccount</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">process</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">env</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">ADYEN_MERCHANT_ACCOUNT</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">??</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">""</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 2. Define the return data</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">SessionData</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">id</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">sessionData</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #7F848E">// 3. NextJS handler</span></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">handler</span><span style="color: #ABB2BF">(</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">req</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">NextApiRequest</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">res</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">NextApiResponse</span><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E5C07B">SessionData</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 4. Use Adyen SDK to create a session</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">response</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">checkout</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">sessions</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">amount</span><span style="color: #ABB2BF">: { </span><span style="color: #E06C75">currency</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"EUR"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">value</span><span style="color: #ABB2BF">: </span><span style="color: #D19A66">10000</span><span style="color: #ABB2BF"> }, </span><span style="color: #7F848E">// value is 100€ in minor units</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">countryCode</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"NL"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">merchantAccount</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">reference</span><span style="color: #ABB2BF">: </span><span style="color: #61AFEF">randomUUID</span><span style="color: #ABB2BF">(), </span><span style="color: #7F848E">// Merchant reference</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">returnUrl</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">`http://localhost.com`</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// 👆 Not important for our use case.</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #7F848E">// Needed for more complex authorization flows.</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #7F848E">// 5. Return the session data to the caller</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">status</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">200</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">json</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">id</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">response</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">id</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #E06C75">sessionData</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">response</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">sessionData</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">??</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">""</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  });</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<ol start="5">
+<li><strong>Testing the endpoint</strong></li>
+</ol>
+<p>Now we can go to <a href="http://localhost:3000/api/session">localhost:3000/api/session</a> and see if we get a successful response. If we do, we can move on to the next step.</p>
+<p><strong>Example response:</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">{</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">"id"</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"CS2CD25B27F3052E4B"</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">"sessionData"</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"Ab02b4c0!n5HRZtzi1M4M..."</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<h2 id="implementing-the-payment-page">Implementing the payment page</h2>
+<p>Now that we can fetch session data, we can start build the payment page. We need to install two libraries, <a href="https://www.npmjs.com/package/swr">swr</a> for fetching data from the backend, and <a href="https://www.npmjs.com/package/adyen-web">adyen-web</a> for the Drop-in component.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #ABB2BF">npm install swr</span></span>
+<span class="line"><span style="color: #ABB2BF">npm install @adyen/adyen-web</span></span></code></pre>
+<p>Next, generate a client key in the <a href="https://ca-live.adyen.com/ca/ca/overview/default.shtml">Adyen portal</a>, and add the two following variables to <code>.env.local</code>. They will be used by the Drop-in component.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #7F848E"># Change to LIVE in production</span></span>
+<span class="line"><span style="color: #ABB2BF">NEXT_PUBLIC_ADYEN_ENVIRONMENT=</span><span style="color: #98C379">"TEST"</span></span>
+<span class="line"><span style="color: #7F848E"># From Developers > API credentials > Select your user</span></span>
+<span class="line"><span style="color: #7F848E">#  > Client settings > Generate client key</span></span>
+<span class="line"><span style="color: #ABB2BF">NEXT_PUBLIC_ADYEN_CLIENT_KEY=</span><span style="color: #98C379">"test_2C8...."</span></span></code></pre>
+<p>Create a file <code>src/components/Checkout.tsx</code> and add the following code. This will be the payment page. (<em>Inspired by Adyen’s own example repo, and specifically <a href="https://github.com/adyen-examples/adyen-react-online-payments/blob/main/src/features/payment/Payment.js">this file</a>.</em>)</p>
+<p><strong>src/components/Checkout.tsx</strong></p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">React</span><span style="color: #ABB2BF">, { </span><span style="color: #E06C75">useEffect</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">useRef</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"react"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">AdyenCheckout</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@adyen/adyen-web"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@adyen/adyen-web/dist/adyen.css"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">Fetcher</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"swr"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">SessionData</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@/types"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">useSWRImmutable</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"swr/immutable"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">PaymentContainer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">id</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"payment-page"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">className</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">        &#x3C;</span><span style="color: #E5C07B">Checkout</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  );</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">fetcher</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">Fetcher</span><span style="color: #ABB2BF">&#x3C;</span><span style="color: #E5C07B">SessionData</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> (...</span><span style="color: #E06C75">args</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">fetch</span><span style="color: #ABB2BF">(...</span><span style="color: #E06C75">args</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">then</span><span style="color: #ABB2BF">(</span><span style="color: #E06C75">res</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">res</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">json</span><span style="color: #ABB2BF">());</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">PaymentCompleteResponse</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">resultCode</span><span style="color: #ABB2BF">: </span><span style="color: #98C379">"Authorised"</span><span style="color: #ABB2BF"> | </span><span style="color: #98C379">"Refused"</span><span style="color: #ABB2BF"> | </span><span style="color: #98C379">"Cancelled"</span><span style="color: #ABB2BF"> | </span><span style="color: #98C379">"Error"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">sessionDate</span><span style="color: #C678DD">?</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #E06C75">sessionResult</span><span style="color: #C678DD">?</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">string</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Checkout</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">paymentContainer</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useRef</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">null</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">data</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">session</span><span style="color: #ABB2BF">, </span><span style="color: #E5C07B">error</span><span style="color: #ABB2BF"> } </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">useSWRImmutable</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"/api/session"</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">fetcher</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #61AFEF">useEffect</span><span style="color: #ABB2BF">(() </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">let</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">ignore</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">false</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #56B6C2">!</span><span style="color: #E06C75">session</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">||</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">!</span><span style="color: #E5C07B">paymentContainer</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">current</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">config</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">environment</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">process</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">env</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">NEXT_PUBLIC_ADYEN_ENVIRONMENT</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">clientKey</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">process</span><span style="color: #ABB2BF">.</span><span style="color: #E5C07B">env</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">NEXT_PUBLIC_ADYEN_CLIENT_KEY</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">    };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">createCheckout</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">async</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"create checkout"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">checkout</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">await</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">AdyenCheckout</span><span style="color: #ABB2BF">({</span></span>
+<span class="line"><span style="color: #ABB2BF">        ...</span><span style="color: #E06C75">config</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E06C75">session</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">onPaymentCompleted</span><span style="color: #ABB2BF">: (</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #E06C75">response</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">PaymentCompleteResponse</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #E06C75">_component</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">any</span></span>
+<span class="line"><span style="color: #ABB2BF">        ) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">response</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">resultCode</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">!==</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"Authorised"</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #61AFEF">alert</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">`Unhandled payment result "</span><span style="color: #C678DD">${</span><span style="color: #E5C07B">response</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">resultCode</span><span style="color: #C678DD">}</span><span style="color: #98C379">!"`</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">            </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">          }</span></span>
+<span class="line"><span style="color: #ABB2BF">        },</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #61AFEF">onError</span><span style="color: #ABB2BF">: (</span><span style="color: #E06C75">error</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">any</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">_component</span><span style="color: #ABB2BF">: </span><span style="color: #E5C07B">any</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">          </span><span style="color: #61AFEF">alert</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">`Error: </span><span style="color: #C678DD">${</span><span style="color: #E5C07B">error</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">message</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        },</span></span>
+<span class="line"><span style="color: #ABB2BF">      });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// The 'ignore' flag is used to avoid double re-rendering caused by React 18 StrictMode</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #7F848E">// More about it here: https://beta.reactjs.org/learn/synchronizing-with-effects#fetching-data</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E5C07B">paymentContainer</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">current</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">&#x26;&#x26;</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">!</span><span style="color: #E06C75">ignore</span><span style="color: #ABB2BF">) {</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">console</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">log</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"create checkout at the end"</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">        </span><span style="color: #E5C07B">checkout</span><span style="color: #ABB2BF">.</span><span style="color: #61AFEF">create</span><span style="color: #ABB2BF">(</span><span style="color: #98C379">"dropin"</span><span style="color: #ABB2BF">).</span><span style="color: #61AFEF">mount</span><span style="color: #ABB2BF">(</span><span style="color: #E5C07B">paymentContainer</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">current</span><span style="color: #ABB2BF">);</span></span>
+<span class="line"><span style="color: #ABB2BF">      }</span></span>
+<span class="line"><span style="color: #ABB2BF">    };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #61AFEF">createCheckout</span><span style="color: #ABB2BF">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">    </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> () </span><span style="color: #C678DD">=></span><span style="color: #ABB2BF"> {</span></span>
+<span class="line"><span style="color: #ABB2BF">      </span><span style="color: #E06C75">ignore</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">true</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #ABB2BF">    };</span></span>
+<span class="line"><span style="color: #ABB2BF">  }, [</span><span style="color: #E06C75">session</span><span style="color: #ABB2BF">]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #E06C75">error</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>Failed to load&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>;</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">if</span><span style="color: #ABB2BF"> (</span><span style="color: #56B6C2">!</span><span style="color: #E06C75">session</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>Loading...&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">>;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">className</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"payment-container"</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">ref</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #E06C75">paymentContainer</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">className</span><span style="color: #56B6C2">=</span><span style="color: #98C379">"payment"</span><span style="color: #ABB2BF">>&#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E06C75">div</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  );</span></span>
+<span class="line"><span style="color: #ABB2BF">};</span></span></code></pre>
+<p>Then we use the component in <code>pages/index.tsx</code>:</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">Inter</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"next/font/google"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> { </span><span style="color: #E06C75">PaymentContainer</span><span style="color: #ABB2BF"> } </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">"@/components/Checkout"</span><span style="color: #ABB2BF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">const</span><span style="color: #ABB2BF"> </span><span style="color: #E5C07B">inter</span><span style="color: #ABB2BF"> </span><span style="color: #56B6C2">=</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Inter</span><span style="color: #ABB2BF">({ </span><span style="color: #E06C75">subsets</span><span style="color: #ABB2BF">: [</span><span style="color: #98C379">"latin"</span><span style="color: #ABB2BF">] });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #C678DD">export</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">default</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">function</span><span style="color: #ABB2BF"> </span><span style="color: #61AFEF">Home</span><span style="color: #ABB2BF">() {</span></span>
+<span class="line"><span style="color: #ABB2BF">  </span><span style="color: #C678DD">return</span><span style="color: #ABB2BF"> (</span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;</span><span style="color: #E06C75">main</span><span style="color: #ABB2BF"> </span><span style="color: #D19A66">className</span><span style="color: #56B6C2">=</span><span style="color: #C678DD">{</span><span style="color: #98C379">`flex flex-col items-center </span><span style="color: #C678DD">${</span><span style="color: #E5C07B">inter</span><span style="color: #ABB2BF">.</span><span style="color: #E06C75">className</span><span style="color: #C678DD">}</span><span style="color: #98C379">`</span><span style="color: #C678DD">}</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">      &#x3C;</span><span style="color: #E5C07B">PaymentContainer</span><span style="color: #ABB2BF"> /></span></span>
+<span class="line"><span style="color: #ABB2BF">    &#x3C;/</span><span style="color: #E06C75">main</span><span style="color: #ABB2BF">></span></span>
+<span class="line"><span style="color: #ABB2BF">  );</span></span>
+<span class="line"><span style="color: #ABB2BF">}</span></span></code></pre>
+<p>Now, start your application (<code>npm run dev</code>) and go to <a href="localhost:3000">http://localhost:3000</a> and you should see the payment page.</p>
+<p><img src="/img/adyen-checkout-with-nextjs/payment_page.png" alt="payment page"></p>
+<h1 id="make-a-test-payment">Make a test payment</h1>
+<p>Finally, we can use the test card numbers from <a href="https://docs.adyen.com/development-resources/test-cards/test-card-numbers">Adyen’s documentation</a> to make a test payment. My favorite is dutch Visa card:</p>
+<ul>
+<li><strong>Card number:</strong> 4111 1111 1111 1111</li>
+<li><strong>Expiry date:</strong> 03/30</li>
+<li><strong>CVC:</strong> 737</li>
+</ul>
+<p><img src="/img/adyen-checkout-with-nextjs/payment_successful.gif" alt="payment successful"></p>
+<p><strong>Success</strong> 🎉</p>
+<h1 id="summary">Summary</h1>
+<p>We have created a payment page with the Drop-in component and made a test payment. I did not cover any advanced authorization methods (Klarna, PayPal, etc) or how to handle the payment result. I hope this post has given you a good starting point for integrating Adyen.</p>
+<p>All and all. I think Adyen is a great payment provider. The documentation is good, and the Drop-in component is easy to use. Their test environment is excellent, and their web UI is great as well.</p>
+<h1 id="links">Links</h1>
+<ul>
+<li><a href="https://docs.adyen.com/online-payments/web-components">Adyen: Web Components integration guide
+</a> - A good guide how to set up the Drop-in component. Definitely worth a read</li>
+<li><a href="https://github.com/adyen-examples/adyen-react-online-payments">Github: adyen-examples/adyen-react-online-payments</a> - Example of using the Drop-in component with React.</li>
+<li><a href="https://github.com/magnuswahlstrand/nextjs-with-adyen">Github: magnuswahlstrand/nextjs-with-adyen</a> - Repo for this post</li>
+</ul>
+    </article>
+
+    <ul class="tags-container astro-3O7NGGEO">
+      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/adyen" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">adyen</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/nextjs" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">nextjs</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/typescript" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">typescript</span>
+  </a>
+</li>
+
+<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
+  <a href="/tags/frontend" class="pr-1 text-sm group astro-M5B7HHFI">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    </svg>
+    &nbsp;<span class="astro-M5B7HHFI">frontend</span>
+  </a>
+</li>
+
+
+    </ul>
+  </main><footer class="mt-auto astro-QSPGO3WG">
+  <div class="max-w-3xl mx-auto px-0">
+  <hr class="border-skin-line">
+</div>
+  <div class="footer-wrapper astro-QSPGO3WG">
+    <div class="social-icons flex astro-JECGAOYA">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Github">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path
+      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+    ></path>
+  </svg>
+</a>
+
+
+
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Linkedin">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon-tabler"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+    <line x1="8" y1="11" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="8" y2="8.01"></line>
+    <line x1="12" y1="16" x2="12" y2="11"></line>
+    <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+  </svg>
+</a>
+
+
+
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Twitter">
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon-tabler"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+    </svg>
+</a>
+
+
+
+
+</div>
+
+
+    <!--<div class="copyright-wrapper">
+      <span>Copyright &#169; {currentYear}</span>
+      <span class="separator">&nbsp;|&nbsp;</span>
+      <span>All rights reserved.</span>
+    </div>-->
+  </div>
+</footer>
+
+
+  </body></html>
+
+
