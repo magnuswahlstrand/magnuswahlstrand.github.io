@@ -73,10 +73,10 @@
   <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
 <link rel="stylesheet" href="/assets/_slug_.242af6a5.css" />
 <link rel="stylesheet" href="/assets/resume.daa8ed95.css" />
-<link rel="stylesheet" href="/assets/about.4137a277.css" />
+<link rel="stylesheet" href="/assets/about.d8faf275.css" />
 <link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
 <link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
-<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.8382fc71.js"></script></head>
+<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.fc1c7024.js"></script></head>
   <body>
     <header class="astro-SB63UGK4">
   <a id="skip-to-content" href="#main-content" class="astro-SB63UGK4">Skip to content</a>
@@ -204,9 +204,59 @@ integration, I wanted to see if I could build the frontend as well. In this guid
 </ol>
 <p>This will be the endpoint that we will use to get the session data from Adyen. Create a file called <code>pages/api/session.ts</code>.</p>
 <div>
-  <div class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 relative top-8 w-fit">
-    <a class="!text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/pages/api/session.ts">src/pages/api/session.ts</a>
+  <div class="flex flex-row justify-between relative top-8">
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/pages/api/session.ts">src/pages/api/session.ts</a>
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="#" onclick="return false;">
+      
+
+<clipboard-copy value="import type {NextApiRequest, NextApiResponse} from 'next'
+
+import {randomUUID} from &#34;crypto&#34;;
+import {CheckoutAPI, Client, Config} from &#34;@adyen/api-library&#34;;
+
+const config = new Config({
+    apiKey: process.env.ADYEN_API_KEY,
+    environment: &#34;TEST&#34;,
+});
+
+// 1. Initialize the client &#38; checkout
+const client = new Client({config});
+const checkout = new CheckoutAPI(client);
+
+const merchantAccount = process.env.ADYEN_MERCHANT_ACCOUNT ?? &#34;&#34;;
+
+// 2. Define the return data
+export type SessionData = {
+    id: string
+    sessionData: string
+}
+
+// 3. NextJS handler
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse<SessionData>
+) {
+
+    // 4. Use Adyen SDK to create a session
+    const response = await checkout.sessions({
+        amount: {currency: &#34;EUR&#34;, value: 10000}, // value is 100€ in minor units
+        countryCode: &#34;NL&#34;,
+        merchantAccount,
+        reference: randomUUID(), // Merchant reference
+        returnUrl: `http://localhost.com`, // Not important for our use case
+    });
+
+    // 5. Return the session data to the caller
+    res.status(200).json({
+        id: response.id,
+        sessionData: response.sessionData ?? &#34;&#34;,
+    })
+}">
+  copy
+</clipboard-copy>
+    </a>
   </div>
+
   <pre class="astro-code" style="background-color: #282c34; overflow-x: auto;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">type</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">NextApiRequest</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">NextApiResponse</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&#39;next&#39;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">randomUUID</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;crypto&quot;</span><span style="color: #ABB2BF">;</span></span>
@@ -273,9 +323,102 @@ integration, I wanted to see if I could build the frontend as well. In this guid
 <span class="line"><span style="color:#ABB2BF">NEXT_PUBLIC_ADYEN_CLIENT_KEY=</span><span style="color:#98C379">&quot;test_2C8....&quot;</span></span></code></pre>
 <p>Create a file <code>src/components/Checkout.tsx</code> and add the following code. This will be the payment page. (<em>Inspired by Adyen’s own example repo, and specifically <a href="https://github.com/adyen-examples/adyen-react-online-payments/blob/main/src/features/payment/Payment.js">this file</a>.</em>)</p>
 <div>
-  <div class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 relative top-8 w-fit">
-    <a class="!text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/components/Checkout.tsx">src/components/Checkout.tsx</a>
+  <div class="flex flex-row justify-between relative top-8">
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/components/Checkout.tsx">src/components/Checkout.tsx</a>
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="#" onclick="return false;">
+      
+
+<clipboard-copy value="import React, {useEffect, useRef} from &#34;react&#34;;
+import AdyenCheckout from &#34;@adyen/adyen-web&#34;;
+import &#34;@adyen/adyen-web/dist/adyen.css&#34;;
+import {Fetcher} from &#34;swr&#34;;
+import {SessionData} from &#34;@/types&#34;;
+import useSWRImmutable from &#34;swr/immutable&#34;;
+
+
+export const PaymentContainer = () => {
+    return (
+        <div id=&#34;payment-page&#34;>
+            <div className=&#34;container&#34;>
+                <Checkout/>
+            </div>
+        </div>
+    );
+}
+
+const fetcher: Fetcher<SessionData, string> = (...args) =>
+    fetch(...args).then((res) => res.json())
+
+type PaymentCompleteResponse = {
+    resultCode: &#34;Authorised&#34; | &#34;Refused&#34; | &#34;Cancelled&#34; | &#34;Error&#34;;
+    sessionDate?: string;
+    sessionResult?: string;
+}
+
+
+const Checkout = () => {
+    const paymentContainer = useRef(null);
+    const {data: session, error} = useSWRImmutable('/api/session', fetcher)
+
+    useEffect(() => {
+        let ignore = false;
+
+        if (!session || !paymentContainer.current) {
+            return;
+        }
+
+        const config = {
+            environment: process.env.NEXT_PUBLIC_ADYEN_ENVIRONMENT,
+            clientKey: process.env.NEXT_PUBLIC_ADYEN_CLIENT_KEY,
+        }
+
+
+        const createCheckout = async () => {
+            console.log('create checkout')
+            const checkout = await AdyenCheckout({
+                ...config,
+                session,
+                onPaymentCompleted: (response: PaymentCompleteResponse, _component: any) => {
+                    if (response.resultCode !== &#34;Authorised&#34;) {
+                        alert(`Unhandled payment result &#34;${response.resultCode}!&#34;`);
+                        return
+                    }
+                },
+                onError: (error: any, _component: any) => {
+                    alert(`Error: ${error.message}`);
+                },
+            });
+
+
+            // The 'ignore' flag is used to avoid double re-rendering caused by React 18 StrictMode
+            // More about it here: https://beta.reactjs.org/learn/synchronizing-with-effects#fetching-data
+            if (paymentContainer.current &#38;&#38; !ignore) {
+                console.log('create checkout at the end')
+                checkout.create(&#34;dropin&#34;).mount(paymentContainer.current);
+            }
+        }
+
+        createCheckout()
+
+        return () => {
+            ignore = true;
+        }
+    }, [session])
+
+    if (error) return <div>Failed to load</div>
+    if (!session) return <div>Loading...</div>
+
+    return (
+        <div className=&#34;payment-container&#34;>
+            <div ref={paymentContainer} className=&#34;payment&#34;></div>
+        </div>
+    );
+}">
+  copy
+</clipboard-copy>
+    </a>
   </div>
+
   <pre class="astro-code" style="background-color: #282c34; overflow-x: auto;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">React</span><span style="color: #ABB2BF">, {</span><span style="color: #E06C75">useEffect</span><span style="color: #ABB2BF">, </span><span style="color: #E06C75">useRef</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;react&quot;</span><span style="color: #ABB2BF">;</span></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #E06C75">AdyenCheckout</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;@adyen/adyen-web&quot;</span><span style="color: #ABB2BF">;</span></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;@adyen/adyen-web/dist/adyen.css&quot;</span><span style="color: #ABB2BF">;</span></span>
@@ -366,9 +509,29 @@ integration, I wanted to see if I could build the frontend as well. In this guid
 </div>
 <p>Then we use the component in <code>pages/index.tsx</code>:</p>
 <div>
-  <div class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 relative top-8 w-fit">
-    <a class="!text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/pages/index.tsx">src/pages/index.tsx</a>
+  <div class="flex flex-row justify-between relative top-8">
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/pages/index.tsx">src/pages/index.tsx</a>
+    <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white" href="#" onclick="return false;">
+      
+
+<clipboard-copy value="import {Inter} from 'next/font/google'
+import {PaymentContainer} from &#34;@/components/Checkout&#34;;
+
+const inter = Inter({subsets: ['latin']})
+
+export default function Home() {
+    return (
+        <main className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}>
+            <PaymentContainer/>
+        </main>
+    )
+}
+">
+  copy
+</clipboard-copy>
+    </a>
   </div>
+
   <pre class="astro-code" style="background-color: #282c34; overflow-x: auto;"><code><span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">Inter</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&#39;next/font/google&#39;</span></span>
 <span class="line"><span style="color: #C678DD">import</span><span style="color: #ABB2BF"> {</span><span style="color: #E06C75">PaymentContainer</span><span style="color: #ABB2BF">} </span><span style="color: #C678DD">from</span><span style="color: #ABB2BF"> </span><span style="color: #98C379">&quot;@/components/Checkout&quot;</span><span style="color: #ABB2BF">;</span></span>
 <span class="line"></span>
