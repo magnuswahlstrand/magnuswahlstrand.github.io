@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="canonical" href="https://wahlstrand.dev/tags/python/">
+    <link rel="canonical" href="https://wahlstrand.dev/resources/seed-data/">
     <meta name="generator" content="Astro v1.6.2">
 
     <!-- General Meta Tags -->
-    <title>Tag:python | Magnus Wahlstrand</title>
-    <meta name="title" content="Tag:python | Magnus Wahlstrand">
+    <title>Seed data | Magnus Wahlstrand</title>
+    <meta name="title" content="Seed data | Magnus Wahlstrand">
     <meta name="description" content="Made by a minimal, responsible and friendly person.">
     <meta name="author" content="Magnus Wahlstrand">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Tag:python | Magnus Wahlstrand">
+    <meta property="og:title" content="Seed data | Magnus Wahlstrand">
     <meta property="og:description" content="Made by a minimal, responsible and friendly person.">
-    <meta property="og:url" content="https://wahlstrand.dev/tags/python/">
+    <meta property="og:url" content="https://wahlstrand.dev/resources/seed-data/">
     <meta property="og:image" content="https://wahlstrand.dev/default-og.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://wahlstrand.dev/tags/python/">
-    <meta property="twitter:title" content="Tag:python | Magnus Wahlstrand">
+    <meta property="twitter:url" content="https://wahlstrand.dev/resources/seed-data/">
+    <meta property="twitter:title" content="Seed data | Magnus Wahlstrand">
     <meta property="twitter:description" content="Made by a minimal, responsible and friendly person.">
     <meta property="twitter:image" content="https://wahlstrand.dev/default-og.png">
 
@@ -70,10 +70,8 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script>
-  <link rel="stylesheet" href="/assets/about.13a607d5.css" />
-<link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
-<link rel="stylesheet" href="/assets/resume.daa8ed95.css" />
-<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.fc1c7024.js"></script></head>
+  <link rel="stylesheet" href="/assets/resume.daa8ed95.css" />
+<link rel="stylesheet" href="/assets/about.13a607d5.css" /><script type="module" src="/hoisted.11ec86ff.js"></script></head>
   <body>
     <header class="astro-SB63UGK4">
   <a id="skip-to-content" href="#main-content" class="astro-SB63UGK4">Skip to content</a>
@@ -136,29 +134,31 @@
 
 
 
-<nav class="breadcrumb astro-VBCKGGQE" aria-label="breadcrumb">
-  <ul class="astro-VBCKGGQE">
-    <li class="astro-VBCKGGQE"><a href="/" class="astro-VBCKGGQE">Home</a></li>
-    <li class="astro-VBCKGGQE">
-          <a href="/tags" class="astro-VBCKGGQE">tags</a>
-        </li><li class="astro-VBCKGGQE">
-          <span class="lowercase astro-VBCKGGQE" aria-current="page">
-              python
-            </span>
-        </li>
-  </ul>
-</nav>
-
-
-<main id="main-content" class="astro-FPSLZLAA">
-  <h1 class="astro-FPSLZLAA">Tag:python</h1>
-  <p class="astro-FPSLZLAA">All the articles with the tag &quot;python&quot;.</p>
-  <ul>
-      <li class="my-6"><a href="/posts/2022-03-07-one-to-many" class="text-skin-accent font-medium text-lg underline-offset-4 decoration-dashed focus-visible:no-underline focus-visible:underline-offset-0 inline-block"><h2 class="font-medium text-lg decoration-dashed hover:underline">SQLALchemy: One to many-relationships</h2></a><div class="flex flex-row gap-2"><div class="opacity-80 flex items-center space-x-2 undefined"><svg xmlns="http://www.w3.org/2000/svg" class="scale-90 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-sm">March 7, 2022</span></div></div><div class="flex flex-row gap-3 text-xs mt-1 flex-wrap"><div class="break-keep hover:text-skin-accent"><a href="/tags/python">#<!-- -->python</a></div><div class="break-keep hover:text-skin-accent"><a href="/tags/sqlalchemy">#<!-- -->sqlalchemy</a></div><div class="break-keep hover:text-skin-accent"><a href="/tags/postgres">#<!-- -->postgres</a></div></div><p></p></li>
-    </ul>
-</main>
-
-<footer class="mt-auto astro-QSPGO3WG">
+<main id="main-content">
+    <section id="about" class="mt-12 mb-28 prose max-w-3xl prose-img:border-0">
+      <h1 class="text-4xl sm:text-4xl tracking-wider text-center">
+        Seed data
+      </h1>
+      <hr class="w-48 mx-auto border-2 text-center rounded mt-2">
+      <h2 id="employees-table">Employees table</h2>
+<p>Inspired by <a href="https://www.postgresguide.com/tips/window/">PostgresGuide</a>.
+Generated by ChatGPT.</p>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">CREATE</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">TABLE</span><span style="color: #ABB2BF"> employees (</span></span>
+<span class="line"><span style="color: #ABB2BF">	last_name </span><span style="color: #C678DD">VARCHAR</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">255</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	salary </span><span style="color: #C678DD">INTEGER</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span><span style="color: #ABB2BF">,</span></span>
+<span class="line"><span style="color: #ABB2BF">	department </span><span style="color: #C678DD">VARCHAR</span><span style="color: #ABB2BF">(</span><span style="color: #D19A66">255</span><span style="color: #ABB2BF">) </span><span style="color: #C678DD">NOT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">NULL</span></span>
+<span class="line"><span style="color: #ABB2BF">);</span></span></code></pre>
+<pre is:raw="" class="astro-code" style="background-color: #282c34; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;"><code><span class="line"><span style="color: #C678DD">INSERT</span><span style="color: #ABB2BF"> </span><span style="color: #C678DD">INTO</span><span style="color: #ABB2BF"> employees (last_name, salary, department) </span><span style="color: #C678DD">VALUES</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Larsson'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">48000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Accounting'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Bergstrom'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">52000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Sales'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Hakansson'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">46000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Marketing'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Svensson'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">39000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Accounting'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Lindberg'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">56000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Sales'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Nyström'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">58000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Sales'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Holm'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">43000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'IT'</span><span style="color: #ABB2BF">),</span></span>
+<span class="line"><span style="color: #ABB2BF">	(</span><span style="color: #98C379">'Engström'</span><span style="color: #ABB2BF">, </span><span style="color: #D19A66">50000</span><span style="color: #ABB2BF">, </span><span style="color: #98C379">'Marketing'</span><span style="color: #ABB2BF">);</span></span></code></pre>
+    </section>
+  </main><footer class="mt-auto astro-QSPGO3WG">
   <div class="max-w-3xl mx-auto px-0">
   <hr class="border-skin-line">
 </div>
