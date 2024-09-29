@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="canonical" href="https://wahlstrand.dev/posts/2022-07-09-trpc-with-lambda-function-urls-on-aws/">
-    <meta name="generator" content="Astro v1.6.2">
+    <meta name="generator" content="Astro v1.9.2">
 
     <!-- General Meta Tags -->
     <title>Even simpler way of calling your AWS backend</title>
@@ -70,63 +70,63 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script>
-  <link rel="stylesheet" href="/assets/_slug_.c4df4466.css" />
-<link rel="stylesheet" href="/assets/_slug_.242af6a5.css" />
-<link rel="stylesheet" href="/assets/resume.daa8ed95.css" />
-<link rel="stylesheet" href="/assets/about.13a607d5.css" />
-<link rel="stylesheet" href="/assets/_slug_.1b182ae4.css" />
-<link rel="stylesheet" href="/assets/_slug_.c9ee3c77.css" />
-<link rel="stylesheet" href="/assets/_slug_.b6af1842.css" /><script type="module" src="/hoisted.7623a748.js"></script></head>
+  <link rel="stylesheet" href="/assets/_slug_.2bb3b33a.css" />
+<link rel="stylesheet" href="/assets/about.44eed602.css" />
+<link rel="stylesheet" href="/assets/_slug_.d4b1af12.css" />
+<link rel="stylesheet" href="/assets/_slug_.8ed3857b.css" />
+<link rel="stylesheet" href="/assets/_slug_.15f8ad3d.css" />
+<link rel="stylesheet" href="/assets/_slug_.bf28fbff.css" />
+<link rel="stylesheet" href="/assets/resume.5afb7437.css" /><script type="module" src="/hoisted.a8d20b77.js"></script></head>
   <body>
-    <header class="astro-SB63UGK4">
-  <a id="skip-to-content" href="#main-content" class="astro-SB63UGK4">Skip to content</a>
-  <div class="nav-container astro-SB63UGK4">
-    <div class="top-nav-wrap astro-SB63UGK4">
-      <a href="/" class="logo break-keep text-2xl astro-SB63UGK4">
+    <header class="astro-Q5P3VAE2">
+  <a id="skip-to-content" href="#main-content" class="astro-Q5P3VAE2">Skip to content</a>
+  <div class="nav-container astro-Q5P3VAE2">
+    <div class="top-nav-wrap astro-Q5P3VAE2">
+      <a href="/" class="logo break-keep text-2xl astro-Q5P3VAE2">
         Magnus Wahlstrand
       </a>
-      <button class="hamburger-menu astro-SB63UGK4" aria-label="menu">
-        <div class="icon-container flex astro-SB63UGK4">
-          <div id="first-line" class="astro-SB63UGK4"></div>
-          <div id="second-line" class="astro-SB63UGK4"></div>
-          <div id="third-line" class="astro-SB63UGK4"></div>
+      <button class="hamburger-menu astro-Q5P3VAE2" aria-label="menu">
+        <div class="icon-container flex astro-Q5P3VAE2">
+          <div id="first-line" class="astro-Q5P3VAE2"></div>
+          <div id="second-line" class="astro-Q5P3VAE2"></div>
+          <div id="third-line" class="astro-Q5P3VAE2"></div>
         </div>
       </button>
     </div>
-    <nav class="display-none sm:flex astro-SB63UGK4">
-      <ul class="astro-SB63UGK4">
-        <li class="astro-SB63UGK4">
-          <a href="/resume" class=" astro-SB63UGK4">Resumé</a>
+    <nav class="display-none sm:flex astro-Q5P3VAE2">
+      <ul class="astro-Q5P3VAE2">
+        <li class="astro-Q5P3VAE2">
+          <a href="/resume" class=" astro-Q5P3VAE2">Resumé</a>
         </li>
-        <li class="astro-SB63UGK4">
-          <a href="/posts" class=" astro-SB63UGK4">Posts</a>
+        <li class="astro-Q5P3VAE2">
+          <a href="/posts" class=" astro-Q5P3VAE2">Posts</a>
         </li>
         <!--
         <li>
           <a href="/tags" class={activeNav === "tags" ? "active" : ""}>Tags</a>
         </li>
         -->
-        <li class="astro-SB63UGK4">
-          <a href="/about" class=" astro-SB63UGK4">About</a>
+        <li class="astro-Q5P3VAE2">
+          <a href="/about" class=" astro-Q5P3VAE2">About</a>
         </li>
-        <li class="astro-SB63UGK4">
-          <a href="/now" class=" astro-SB63UGK4">Now</a>
+        <li class="astro-Q5P3VAE2">
+          <a href="/now" class=" astro-Q5P3VAE2">Now</a>
         </li>
       </ul>
-      <div class="button-wrapper astro-SB63UGK4">
-        <a type="button" href="/search" class="group focus-outline p-1  astro-SB63UGK4 astro-QCEBUJFW" aria-label="search" title="Search">
-  <svg xmlns="http://www.w3.org/2000/svg" class="astro-SB63UGK4"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-SB63UGK4"></path>
+      <div class="button-wrapper astro-Q5P3VAE2">
+        <a type="button" href="/search" class="group focus-outline p-1  astro-Q5P3VAE2 astro-ELPTMOSO" aria-label="search" title="Search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="astro-Q5P3VAE2"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-Q5P3VAE2"></path>
           </svg>
 </a>
 
 
 
-        <button id="theme-btn" class="focus-outline astro-SB63UGK4" aria-label="switch theme">
-              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-SB63UGK4">
-                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-SB63UGK4"></path>
+        <button id="theme-btn" class="focus-outline astro-Q5P3VAE2" aria-label="switch theme">
+              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-Q5P3VAE2">
+                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-Q5P3VAE2"></path>
               </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-SB63UGK4">
-                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-SB63UGK4"></path>
+              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-Q5P3VAE2">
+                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-Q5P3VAE2"></path>
               </svg>
             </button>
       </div>
@@ -139,21 +139,21 @@
 
 
 
-<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-3O7NGGEO">
-    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-3O7NGGEO" onclick="history.back()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="astro-3O7NGGEO"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-3O7NGGEO"></path>
-      </svg><span class="astro-3O7NGGEO">Go back</span>
+<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-ASTNQLEE">
+    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-ASTNQLEE" onclick="history.back()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="astro-ASTNQLEE"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-ASTNQLEE"></path>
+      </svg><span class="astro-ASTNQLEE">Go back</span>
     </button>
-  </div><main id="main-content" class="astro-3O7NGGEO">
-    <h1 class="post-title astro-3O7NGGEO">Even simpler way of calling your AWS backend</h1>
-    <div class="opacity-80 flex items-center space-x-2 my-2 astro-3O7NGGEO"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">July 9, 2022</span></div>
-    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-3O7NGGEO">
+  </div><main id="main-content" class="astro-ASTNQLEE">
+    <h1 class="post-title astro-ASTNQLEE">Even simpler way of calling your AWS backend</h1>
+    <div class="opacity-80 flex items-center space-x-2 my-2 astro-ASTNQLEE"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">July 9, 2022</span></div>
+    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-ASTNQLEE">
       <p>A few weeks I wrote a post about using <a href="https://trpc.io/">tRPC</a> to get type safe requests between a web client and the
 server. It turns out that there is an <em><strong>even simpler</strong></em> way of calling your AWS backend (still using tRPC) 🤯!</p>
 <p>In this post I will show you how to use tRPC and a Lambda function
 with <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html">Lambda Function URLs</a> to create a ToDo-app for my
 terminal. The backend is deployed to AWS using the <a href="https://sst.dev/">Serverless Stack</a>.</p>
-<div class="astro-CZA65E6M" data-astro-asciinema-src="/assets/casts/trpc-with-lambda-function-urls-on-aws/ts-prompt.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
+<div class="astro-OENSINSI" data-astro-asciinema-src="/assets/casts/trpc-with-lambda-function-urls-on-aws/ts-prompt.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div>
 
 
 
@@ -167,9 +167,14 @@ procedures to <em>create</em>, <em>list</em> and <em>complete</em> ToDos.</p>
 <p>Let us look at the system we will have built (after section 2).</p>
 <p>The goal is to build a ToDo-app that we can run in our terminal. It will use a <strong>tRPC</strong> client to make requests to a <strong>Lambda function</strong> that stores our ToDos in a <strong>DynamoDB table</strong>. The Lambda function will be exposed as an HTTPS endpoint using a <strong>Lambda Function URL</strong>. As mentioned in the intro, this is deployed to AWS using the <a href="https://sst.dev/">Serverless Stack</a>.</p>
 <p><img src="/img/trpc-with-lambda-function-urls-on-aws/overview.png" alt="Overview"/></p>
-<p class="block mx-auto flex justify-center text-sm italic mt-0">
+<link rel="stylesheet" href="/assets/_slug_.2bb3b33a.css" />
+<link rel="stylesheet" href="/assets/about.44eed602.css" />
+<link rel="stylesheet" href="/assets/_slug_.d4b1af12.css" />
+<link rel="stylesheet" href="/assets/_slug_.8ed3857b.css" />
+<link rel="stylesheet" href="/assets/_slug_.15f8ad3d.css" />
+<link rel="stylesheet" href="/assets/_slug_.bf28fbff.css" />
+<link rel="stylesheet" href="/assets/resume.5afb7437.css" /><script type="module" src="/hoisted.a8d20b77.js"></script><p class="block mx-auto flex justify-center text-sm italic mt-0">
     <p>Our architecture diagram 🙌</p>
-
 
 </p>
 <p>Before we get coding, let us go through what <strong>Lambda Function URLs</strong> and <strong>tRPC</strong>.</p>
@@ -368,9 +373,9 @@ directly by the browser.</p>
 <p>What happened here?</p>
 <ol>
 <li>We created a client based on the <code>AppRouter</code> from the server</li>
-<li>We made a request to remote procedure <code>sayHello</code> with the argument ”<code>Bilbo</code>“.</li>
+<li>We made a request to remote procedure <code>sayHello</code> with the argument “<code>Bilbo</code>”.</li>
 <li>Our handler (Lambda function) received the request, and understood how to route it to the right procedure <code>sayHello</code>
-and responded with ”<code>Hello, Bilbo!</code>”</li>
+and responded with “<code>Hello, Bilbo!</code>”</li>
 <li>Our client printed the greeting to the terminal</li>
 </ol>
 <div class="relative left-10" style="top: 1px">
@@ -643,64 +648,70 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 </ul>
     </article>
 
-    <ul class="tags-container astro-3O7NGGEO">
-      <li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/aws" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+    <ul class="tags-container astro-ASTNQLEE">
+      <li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/aws" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">aws</span>
+    &nbsp;<span class="astro-YPJQ3EUO">aws</span>
   </a>
 </li>
 
-<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/lambda" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/lambda" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">lambda</span>
+    &nbsp;<span class="astro-YPJQ3EUO">lambda</span>
   </a>
 </li>
 
-<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/serverless" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/serverless" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">serverless</span>
+    &nbsp;<span class="astro-YPJQ3EUO">serverless</span>
   </a>
 </li>
 
-<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/sst" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/sst" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">sst</span>
+    &nbsp;<span class="astro-YPJQ3EUO">sst</span>
   </a>
 </li>
 
-<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/trpc" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/trpc" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">trpc</span>
+    &nbsp;<span class="astro-YPJQ3EUO">trpc</span>
   </a>
 </li>
 
-<li class="inline-block my-1 underline-offset-4 astro-M5B7HHFI">
-  <a href="/tags/typescript" class="pr-1 text-sm group astro-M5B7HHFI">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-M5B7HHFI"><path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-M5B7HHFI"></path>
+<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
+  <a href="/tags/typescript" class="pr-1 text-sm group astro-YPJQ3EUO">
+    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
+      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
     </svg>
-    &nbsp;<span class="astro-M5B7HHFI">typescript</span>
+    &nbsp;<span class="astro-YPJQ3EUO">typescript</span>
   </a>
 </li>
 
 
     </ul>
-  </main><footer class="mt-auto astro-QSPGO3WG">
+  </main><footer class="mt-auto astro-U6BPRU3O">
   <div class="max-w-3xl mx-auto px-0">
   <hr class="border-skin-line">
 </div>
-  <div class="footer-wrapper astro-QSPGO3WG">
-    <div class="social-icons flex astro-JECGAOYA">
-  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Github">
+  <div class="footer-wrapper astro-U6BPRU3O">
+    <div class="social-icons flex astro-FBUPWF4V">
+  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Github">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon-tabler"
@@ -716,7 +727,7 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 
 
 
-<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Linkedin">
+<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Linkedin">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon-tabler"
@@ -734,7 +745,7 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 
 
 
-<a type="button" href="https://twitter.com/wahlstra" class="group link-button p-2 sm:p-1 astro-JECGAOYA astro-Z3VVEKRA astro-QCEBUJFW" title="Twitter">
+<a type="button" href="https://twitter.com/wahlstra" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Twitter">
   <svg
       xmlns="http://www.w3.org/2000/svg"
       class="icon-tabler"
