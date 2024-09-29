@@ -125,7 +125,7 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span></code></pre>
 <p>Then we run <code>terraform apply</code></p>
-<div class="text-white"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/terraform.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
+<div class="text-white not-prose"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/terraform.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
 <h3 id="publish-messages">Publish messages</h3>
 <p>Now that we have our infrastructure in place, we can publish a couple of messages. The easiest way to publish messages to pub/sub is with the <code>gcloud</code>-cli.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">gcloud</span><span style="color:#98C379"> pubsub</span><span style="color:#98C379"> topics</span><span style="color:#98C379"> publish</span><span style="color:#56B6C2"> \</span></span>
@@ -160,7 +160,7 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"></span></code></pre>
 <p><strong>*Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub*</p>
 <p>Now we can run our app.</p>
-<div class="text-white"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/process-messages.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
+<div class="text-white not-prose"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/process-messages.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
 <p>We can see that we receive the two messages we published earlier, <em>“alive”</em> and <em>“dead”</em>. The former is <code>Ack</code>:ed, while “dead” gets <code>Nack</code>:ed. After attempt 5, it disappears. Is it lost forever? No! It got automatically sent over to our DLQ! Success!</p>
 <h2 id="what-now">What now?</h2>
 <p>Before we wrap up, we need to cover two things.</p>
