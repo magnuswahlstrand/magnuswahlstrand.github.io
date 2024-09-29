@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="canonical" href="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/">
-    <meta name="generator" content="Astro v1.9.2">
-
-    <!-- General Meta Tags -->
-    <title>Event-based apps with Go and EventBridge</title>
-    <meta name="title" content="Event-based apps with Go and EventBridge">
-    <meta name="description" content="Made by a minimal, responsible and friendly person.">
-    <meta name="author" content="Magnus Wahlstrand">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Event-based apps with Go and EventBridge">
-    <meta property="og:description" content="Made by a minimal, responsible and friendly person.">
-    <meta property="og:url" content="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/">
-    <meta property="og:image" content="https://wahlstrand.dev/default-og.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/">
-    <meta property="twitter:title" content="Event-based apps with Go and EventBridge">
-    <meta property="twitter:description" content="Made by a minimal, responsible and friendly person.">
-    <meta property="twitter:image" content="https://wahlstrand.dev/default-og.png">
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-
-    <script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/"><meta name="generator" content="Astro v4.15.9"><!-- General Meta Tags --><title>Event-based apps with Go and EventBridge</title><meta name="title" content="Event-based apps with Go and EventBridge"><meta name="description" content="Made by a minimal, responsible and friendly person."><meta name="author" content="Magnus Wahlstrand"><!-- Open Graph / Facebook --><meta property="og:title" content="Event-based apps with Go and EventBridge"><meta property="og:description" content="Made by a minimal, responsible and friendly person."><meta property="og:url" content="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/"><meta property="og:image" content="https://wahlstrand.dev/default-og.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://wahlstrand.dev/posts/2022-06-26-event-based-system-on-aws/"><meta property="twitter:title" content="Event-based apps with Go and EventBridge"><meta property="twitter:description" content="Made by a minimal, responsible and friendly person."><meta property="twitter:image" content="https://wahlstrand.dev/default-og.png"><!-- Google Font --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><script>
       const primaryColorScheme = "none"; // "light" | "dark" | "none"
 
       const darkModeMediaQuery = window.matchMedia(
@@ -69,154 +36,83 @@
 
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
-    </script>
-  <link rel="stylesheet" href="/assets/_slug_.2bb3b33a.css" />
-<link rel="stylesheet" href="/assets/about.44eed602.css" />
-<link rel="stylesheet" href="/assets/_slug_.d4b1af12.css" />
-<link rel="stylesheet" href="/assets/_slug_.8ed3857b.css" />
-<link rel="stylesheet" href="/assets/_slug_.15f8ad3d.css" />
-<link rel="stylesheet" href="/assets/_slug_.bf28fbff.css" />
-<link rel="stylesheet" href="/assets/resume.5afb7437.css" /><script type="module" src="/hoisted.a8d20b77.js"></script></head>
-  <body>
-    <header class="astro-Q5P3VAE2">
-  <a id="skip-to-content" href="#main-content" class="astro-Q5P3VAE2">Skip to content</a>
-  <div class="nav-container astro-Q5P3VAE2">
-    <div class="top-nav-wrap astro-Q5P3VAE2">
-      <a href="/" class="logo break-keep text-2xl astro-Q5P3VAE2">
-        Magnus Wahlstrand
-      </a>
-      <button class="hamburger-menu astro-Q5P3VAE2" aria-label="menu">
-        <div class="icon-container flex astro-Q5P3VAE2">
-          <div id="first-line" class="astro-Q5P3VAE2"></div>
-          <div id="second-line" class="astro-Q5P3VAE2"></div>
-          <div id="third-line" class="astro-Q5P3VAE2"></div>
-        </div>
-      </button>
-    </div>
-    <nav class="display-none sm:flex astro-Q5P3VAE2">
-      <ul class="astro-Q5P3VAE2">
-        <li class="astro-Q5P3VAE2">
-          <a href="/resume" class=" astro-Q5P3VAE2">Resumé</a>
-        </li>
-        <li class="astro-Q5P3VAE2">
-          <a href="/posts" class=" astro-Q5P3VAE2">Posts</a>
-        </li>
-        <!--
+    </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
+<link rel="stylesheet" href="/_astro/about.bb_WsBfw.css">
+<style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
+a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
+main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
+.pagination-wrapper[data-astro-cid-eenky23y]{margin-top:auto;margin-bottom:2rem;display:flex;justify-content:center}.disabled[data-astro-cid-eenky23y]{pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;opacity:.5}.disabled[data-astro-cid-eenky23y]:hover{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.group[data-astro-cid-eenky23y]:hover .disabled[data-astro-cid-eenky23y]{fill:rgb(var(--color-text-base))}.group[data-astro-cid-eenky23y]:hover .disabled-svg[data-astro-cid-eenky23y]{fill:rgb(var(--color-text-base))!important}
+.link-button[data-astro-cid-mm6olqhn]:hover{--tw-rotate: 6deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}
+</style>
+<link rel="stylesheet" href="/_astro/_slug_.DUJDte-_.css"><script type="module" src="/_astro/hoisted.yKWdqxaI.js"></script></head> <body>  <header data-astro-cid-3ef6ksr2> <a id="skip-to-content" href="#main-content" data-astro-cid-3ef6ksr2>Skip to content</a> <div class="nav-container" data-astro-cid-3ef6ksr2> <div class="top-nav-wrap" data-astro-cid-3ef6ksr2> <a href="/" class="logo break-keep text-2xl" data-astro-cid-3ef6ksr2> Magnus Wahlstrand </a> <button class="hamburger-menu" aria-label="menu" data-astro-cid-3ef6ksr2> <div class="icon-container flex" data-astro-cid-3ef6ksr2> <div id="first-line" data-astro-cid-3ef6ksr2></div> <div id="second-line" data-astro-cid-3ef6ksr2></div> <div id="third-line" data-astro-cid-3ef6ksr2></div> </div> </button> </div> <nav class="display-none sm:flex" data-astro-cid-3ef6ksr2> <ul data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/resume" class="" data-astro-cid-3ef6ksr2>Resumé</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/posts" class="" data-astro-cid-3ef6ksr2>Posts</a> </li> <!--
         <li>
           <a href="/tags" class={activeNav === "tags" ? "active" : ""}>Tags</a>
         </li>
-        -->
-        <li class="astro-Q5P3VAE2">
-          <a href="/about" class=" astro-Q5P3VAE2">About</a>
-        </li>
-        <li class="astro-Q5P3VAE2">
-          <a href="/now" class=" astro-Q5P3VAE2">Now</a>
-        </li>
-      </ul>
-      <div class="button-wrapper astro-Q5P3VAE2">
-        <a type="button" href="/search" class="group focus-outline p-1  astro-Q5P3VAE2 astro-ELPTMOSO" aria-label="search" title="Search">
-  <svg xmlns="http://www.w3.org/2000/svg" class="astro-Q5P3VAE2"><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" class="astro-Q5P3VAE2"></path>
-          </svg>
-</a>
-
-
-
-        <button id="theme-btn" class="focus-outline astro-Q5P3VAE2" aria-label="switch theme">
-              <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" class="astro-Q5P3VAE2">
-                <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" class="astro-Q5P3VAE2"></path>
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" class="astro-Q5P3VAE2">
-                <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" class="astro-Q5P3VAE2"></path>
-              </svg>
-            </button>
-      </div>
-    </nav>
-  </div>
-  <div class="max-w-3xl mx-auto px-4">
-  <hr class="border-skin-line">
-</div>
-</header>
-
-
-
-<div class="max-w-3xl mx-auto w-full px-2 flex justify-start astro-ASTNQLEE">
-    <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline astro-ASTNQLEE" onclick="history.back()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="astro-ASTNQLEE"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" class="astro-ASTNQLEE"></path>
-      </svg><span class="astro-ASTNQLEE">Go back</span>
-    </button>
-  </div><main id="main-content" class="astro-ASTNQLEE">
-    <h1 class="post-title astro-ASTNQLEE">Event-based apps with Go and EventBridge</h1>
-    <div class="opacity-80 flex items-center space-x-2 my-2 astro-ASTNQLEE"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">June 26, 2022</span></div>
-    <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose astro-ASTNQLEE">
-      <p>In this post I will build a small <a href="https://en.wikipedia.org/wiki/Event-driven_architecture">event-driven system</a> with Go. It will be serverless app with an API Gateway in front. I will use <a href="https://aws.amazon.com/eventbridge/">AWS EventBridge</a> as message bus that serves as glue between our components and the app will be deployed using <a href="https://sst.dev/">Serverless Stack </a>.</p>
+        --> <li data-astro-cid-3ef6ksr2> <a href="/about" class="" data-astro-cid-3ef6ksr2>About</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/now" class="" data-astro-cid-3ef6ksr2>Now</a> </li> </ul> <div class="button-wrapper" data-astro-cid-3ef6ksr2> <a type="button" href="/search" class="group focus-outline p-1 " aria-label="search" title="Search" data-astro-cid-5eunqzkt>  <svg xmlns="http://www.w3.org/2000/svg" data-astro-cid-3ef6ksr2><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" data-astro-cid-3ef6ksr2></path> </svg>  </a>  <button id="theme-btn" class="focus-outline" aria-label="switch theme" data-astro-cid-3ef6ksr2> <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" data-astro-cid-3ef6ksr2> <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" data-astro-cid-3ef6ksr2></path> </svg> <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" data-astro-cid-3ef6ksr2> <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" data-astro-cid-3ef6ksr2></path> </svg> </button> </div> </nav> </div> <div class="max-w-3xl mx-auto px-4"> <hr class="border-skin-line"> </div> </header>   <div class="max-w-3xl mx-auto w-full px-2 flex justify-start" data-astro-cid-vj4tpspi> <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline" onclick="history.back()" data-astro-cid-vj4tpspi> <svg xmlns="http://www.w3.org/2000/svg" data-astro-cid-vj4tpspi><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" data-astro-cid-vj4tpspi></path> </svg><span data-astro-cid-vj4tpspi>Go back</span> </button> </div> <main id="main-content" data-astro-cid-vj4tpspi> <h1 class="post-title" data-astro-cid-vj4tpspi>Event-based apps with Go and EventBridge</h1> <div class="opacity-80 flex items-center space-x-2 my-2"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">June 26, 2022</span></div> <article id="article" role="article" class="mx-auto max-w-3xl mt-8 prose" data-astro-cid-vj4tpspi> <p>In this post I will build a small <a href="https://en.wikipedia.org/wiki/Event-driven_architecture">event-driven system</a> with Go. It will be serverless app with an API Gateway in front. I will use <a href="https://aws.amazon.com/eventbridge/">AWS EventBridge</a> as message bus that serves as glue between our components and the app will be deployed using <a href="https://sst.dev/">Serverless Stack </a>.</p>
 <div class="b-8 l-16 max-w-xl mx-auto"><img src="/img/event-based-system-on-aws/teaser.png" alt="Event-based system" class=""/></div>
 <h2 id="overview">Overview</h2>
 <p>Our overall goal is quite simple. We want to build a simple system where we can have things create events (producers) and other things receive those events (consumers). To tie the producers and consumers together we need a message bus. We will use <a href="https://aws.amazon.com/eventbridge/">AWS EventBridge</a> for this purpose.</p>
 <p>In this tutorial, we will build an order taking app. On the one side, orders are placed through a public API endpoint <code>POST /orders</code>. The handler for that endpoint is a Lambda function that “creates” order by publishing them to EventBridge. It in turn is configured to route messages to our consumers, two Lambda functions. <strong>CreateInvoice</strong> and <strong>LogEvents</strong> will receive <code>order.created</code> events and log them to standard out, just to showcase the broadcasting of events.</p>
 <p><img src="/img/event-based-system-on-aws/overview.png" alt="overview"/></p>
-<link rel="stylesheet" href="/assets/_slug_.2bb3b33a.css" />
-<link rel="stylesheet" href="/assets/about.44eed602.css" />
-<link rel="stylesheet" href="/assets/_slug_.d4b1af12.css" />
-<link rel="stylesheet" href="/assets/_slug_.8ed3857b.css" />
-<link rel="stylesheet" href="/assets/_slug_.15f8ad3d.css" />
-<link rel="stylesheet" href="/assets/_slug_.bf28fbff.css" />
-<link rel="stylesheet" href="/assets/resume.5afb7437.css" /><script type="module" src="/hoisted.a8d20b77.js"></script><p class="block mx-auto flex justify-center text-sm italic mt-0">
-    <p>Target architecture</p>
-
-</p>
+<p class="block mx-auto flex justify-center text-sm italic mt-0">  Target architecture  </p>
 <p>Our app is deployed to AWS using my new favorite tool: <a href="https://sst.dev/">Serverless Stack</a> (SST). It has great <a href="https://aws.amazon.com/cdk/">CDK</a> constructs for quick development, and gives us hot reload of the Lambda functions. Great!</p>
 <h2 id="project-set-up">Project set up</h2>
 <p>First we need to bootstrap our project. The <a href="https://sst.dev/">SST CLI</a> will do most of the heavy lifting. Since most of our application code is Go, I use the <strong>starters/go-starter</strong> template.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">npx create-sst@latest --template=starters/go-starter eventbus</span></span>
-<span class="line"><span style="color:#abb2bf">cd eventbus</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx create-sst@latest --template=starters/go-starter eventbus</span></span>
+<span class="line"><span>cd eventbus</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Our directory now looks as follows.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">&gt; tree -a -L 2</span></span>
-<span class="line"><span style="color:#abb2bf">.</span></span>
-<span class="line"><span style="color:#abb2bf">├── .env</span></span>
-<span class="line"><span style="color:#abb2bf">├── .gitignore</span></span>
-<span class="line"><span style="color:#abb2bf">├── .vscode</span></span>
-<span class="line"><span style="color:#abb2bf">│   └── launch.json</span></span>
-<span class="line"><span style="color:#abb2bf">├── package.json</span></span>
-<span class="line"><span style="color:#abb2bf">├── services</span></span>
-<span class="line"><span style="color:#abb2bf">│   ├── functions</span></span>
-<span class="line"><span style="color:#abb2bf">│   │  └── lambda.go</span></span>
-<span class="line"><span style="color:#abb2bf">│   ├── go.mod</span></span>
-<span class="line"><span style="color:#abb2bf">│   └── go.sum</span></span>
-<span class="line"><span style="color:#abb2bf">├── sst.json</span></span>
-<span class="line"><span style="color:#abb2bf">├── stacks</span></span>
-<span class="line"><span style="color:#abb2bf">│   ├── MyStack.ts</span></span>
-<span class="line"><span style="color:#abb2bf">│   └── index.ts</span></span>
-<span class="line"><span style="color:#abb2bf">├── tsconfig.json</span></span>
-<span class="line"><span style="color:#abb2bf">└── vitest.config.ts</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>&gt; tree -a -L 2</span></span>
+<span class="line"><span>.</span></span>
+<span class="line"><span>├── .env</span></span>
+<span class="line"><span>├── .gitignore</span></span>
+<span class="line"><span>├── .vscode</span></span>
+<span class="line"><span>│   └── launch.json</span></span>
+<span class="line"><span>├── package.json</span></span>
+<span class="line"><span>├── services</span></span>
+<span class="line"><span>│   ├── functions</span></span>
+<span class="line"><span>│   │  └── lambda.go</span></span>
+<span class="line"><span>│   ├── go.mod</span></span>
+<span class="line"><span>│   └── go.sum</span></span>
+<span class="line"><span>├── sst.json</span></span>
+<span class="line"><span>├── stacks</span></span>
+<span class="line"><span>│   ├── MyStack.ts</span></span>
+<span class="line"><span>│   └── index.ts</span></span>
+<span class="line"><span>├── tsconfig.json</span></span>
+<span class="line"><span>└── vitest.config.ts</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>In this tutorial, we are interested in two parts</p>
 <ul>
 <li><code>./stack/MyStack.ts</code> - This is where our SST/CDK stack is defined. It will define the infrastructure for API Gateway, EventBridge and our Lambda functions.</li>
 <li><code>./services/functions/</code> - Here we define our Lambda functions. The go-starter template comes with a single function called <code>lambda.go</code>.</li>
 </ul>
 <p>We also install <a href="https://dave.cheney.net/">Dave Cheney</a>’s package <a href="https://github.com/davecgh/go-spew">go-spew</a>. It is a Go package to dump things to the logs. I often use it to explore what data is passed around in a new service, in this case AWS EventBridge.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">cd eventbus/services</span></span>
-<span class="line"><span style="color:#abb2bf">go get github.com/davecgh/go-spew/spew</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd eventbus/services</span></span>
+<span class="line"><span>go get github.com/davecgh/go-spew/spew</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>With everything in place, we can deploy our initial stack</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">npm install</span></span>
-<span class="line"><span style="color:#abb2bf">npm start</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm install</span></span>
+<span class="line"><span>npm start</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>Output:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">...</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf"> ✅  magnus-eventbus-MyStack</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">Stack magnus-eventbus-MyStack</span></span>
-<span class="line"><span style="color:#abb2bf">  Status: deployed</span></span>
-<span class="line"><span style="color:#abb2bf">  Outputs:</span></span>
-<span class="line"><span style="color:#abb2bf">    ApiEndpoint: https://c5fk9hc8kk.execute-api.us-east-1.amazonaws.com</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">==========================</span></span>
-<span class="line"><span style="color:#abb2bf"> Starting Live Lambda Dev</span></span>
-<span class="line"><span style="color:#abb2bf">==========================</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">SST Console: https://console.sst.dev/eventbus/magnus/local</span></span>
-<span class="line"><span style="color:#abb2bf">Debug session started. Listening for requests...</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>...</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span> ✅  magnus-eventbus-MyStack</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Stack magnus-eventbus-MyStack</span></span>
+<span class="line"><span>  Status: deployed</span></span>
+<span class="line"><span>  Outputs:</span></span>
+<span class="line"><span>    ApiEndpoint: https://c5fk9hc8kk.execute-api.us-east-1.amazonaws.com</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>==========================</span></span>
+<span class="line"><span> Starting Live Lambda Dev</span></span>
+<span class="line"><span>==========================</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>SST Console: https://console.sst.dev/eventbus/magnus/local</span></span>
+<span class="line"><span>Debug session started. Listening for requests...</span></span>
+<span class="line"><span></span></span></code></pre>
 <h2 id="consuming-events">Consuming events</h2>
 <p>Now we can start building! First out we will get the <strong><em>event consuming</em></strong> to work. Our setup will look like this:</p>
 <ol>
@@ -225,35 +121,33 @@
 <li>A Lambda function to receive the events</li>
 </ol>
 <p><img src="/img/event-based-system-on-aws/consume.png" alt="consume"/></p>
-<p class="block mx-auto flex justify-center text-sm italic mt-0">
-    <p><strong>Goal:</strong> produce events from the terminal, through EventBridge and consume in
-our Lambda function</p>
-
-</p>
+<p class="block mx-auto flex justify-center text-sm italic mt-0"> <p><strong>Goal:</strong> produce events from the terminal, through EventBridge and consume in
+our Lambda function</p> </p>
 <p>First up, let’s create a serverless function that listens to events from the event bus. SST makes this easy for us! All we need to do is to replace the initial stack in <code>./stack/MyStack.ts</code> with the following:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> {EventBus, StackContext} from </span><span style="color:#98C379">&quot;@serverless-stack/resources&quot;</span><span style="color:#ABB2BF">;</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> {</span><span style="color:#E06C75">EventBus</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">StackContext</span><span style="color:#ABB2BF">} </span><span style="color:#E06C75">from</span><span style="color:#98C379"> &quot;@serverless-stack/resources&quot;</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">export function </span><span style="color:#56B6C2">Stack</span><span style="color:#ABB2BF">({stack}: StackContext) {</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#7F848E">// 1. Create event bus</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#C678DD">const</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">bus</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">=</span><span style="color:#ABB2BF"> new </span><span style="color:#56B6C2">EventBus</span><span style="color:#ABB2BF">(stack, </span><span style="color:#98C379">&quot;EventBus&quot;</span><span style="color:#ABB2BF">, {})</span></span>
+<span class="line"><span style="color:#E06C75">export</span><span style="color:#E06C75"> function</span><span style="color:#61AFEF"> Stack</span><span style="color:#ABB2BF">({</span><span style="color:#E06C75">stack</span><span style="color:#ABB2BF">}: </span><span style="color:#E06C75">StackContext</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    // 1. Create event bus</span></span>
+<span class="line"><span style="color:#C678DD">    const</span><span style="color:#E06C75"> bus</span><span style="color:#E5C07B"> =</span><span style="color:#E06C75"> new</span><span style="color:#61AFEF"> EventBus</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">stack</span><span style="color:#ABB2BF">, </span><span style="color:#98C379">&quot;EventBus&quot;</span><span style="color:#ABB2BF">, {})</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#7F848E">// 2. Add set up event routing rules</span></span>
-<span class="line"><span style="color:#ABB2BF">    bus.</span><span style="color:#56B6C2">addRules</span><span style="color:#ABB2BF">(stack, {</span></span>
-<span class="line"><span style="color:#ABB2BF">        </span><span style="color:#98C379">&quot;order_created&quot;</span><span style="color:#ABB2BF">: {</span></span>
-<span class="line"><span style="color:#ABB2BF">            pattern: {</span></span>
-<span class="line"><span style="color:#ABB2BF">                detailType: [</span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">],</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">    // 2. Add set up event routing rules</span></span>
+<span class="line"><span style="color:#E06C75">    bus</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">addRules</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">stack</span><span style="color:#ABB2BF">, {</span></span>
+<span class="line"><span style="color:#98C379">        &quot;order_created&quot;</span><span style="color:#ABB2BF">: {</span></span>
+<span class="line"><span style="color:#E06C75">            pattern</span><span style="color:#ABB2BF">: {</span></span>
+<span class="line"><span style="color:#E06C75">                detailType</span><span style="color:#ABB2BF">: [</span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">],</span></span>
 <span class="line"><span style="color:#ABB2BF">            },</span></span>
-<span class="line"><span style="color:#ABB2BF">            targets: {</span></span>
-<span class="line"><span style="color:#ABB2BF">                function: </span><span style="color:#98C379">&quot;functions/log_events.go&quot;</span></span>
+<span class="line"><span style="color:#E06C75">            targets</span><span style="color:#ABB2BF">: {</span></span>
+<span class="line"><span style="color:#E06C75">                function</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;functions/log_events.go&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">            }</span></span>
 <span class="line"><span style="color:#ABB2BF">        }</span></span>
 <span class="line"><span style="color:#ABB2BF">    })</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#7F848E">// 3. Output the event bus name</span></span>
-<span class="line"><span style="color:#ABB2BF">    stack.</span><span style="color:#56B6C2">addOutputs</span><span style="color:#ABB2BF">({</span></span>
-<span class="line"><span style="color:#ABB2BF">        BusName: bus.eventBusName</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">	// 3. Output the event bus name</span></span>
+<span class="line"><span style="color:#E06C75">    stack</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">addOutputs</span><span style="color:#ABB2BF">({</span></span>
+<span class="line"><span style="color:#E06C75">        BusName</span><span style="color:#ABB2BF">: </span><span style="color:#E06C75">bus</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">eventBusName</span></span>
 <span class="line"><span style="color:#ABB2BF">    });</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
 <p>Let’s break this down.</p>
 <ol>
 <li>We create our event bus using <code>EventBus</code> from <code>@serverless-stack/resources</code>. This is a higher order CDK construct that simplifies our set up. This create a new custom EventBridge bus.</li>
@@ -261,65 +155,70 @@ our Lambda function</p>
 <li>Finally, we output the name of the created event.</li>
 </ol>
 <p>We haven’t actually created our function yet. Create a new file called <code>functions/log_events.go</code>.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">main</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#E5C07B"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> (</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;fmt&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/davecgh/go-spew/spew&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/davecgh/go-spew/spew&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">LogHandler</span><span style="color:#ABB2BF">(request events.CloudWatchEvent) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">	fmt.</span><span style="color:#56B6C2">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;received event of type </span><span style="color:#D19A66">%q</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, request.DetailType)</span></span>
-<span class="line"><span style="color:#ABB2BF">	spew.</span><span style="color:#56B6C2">Dump</span><span style="color:#ABB2BF">(request)</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span></span>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> LogHandler</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">request</span><span style="color:#E5C07B"> events</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">CloudWatchEvent</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#E06C75">	fmt</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;received event of type </span><span style="color:#D19A66">%q</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">request</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">DetailType</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#E06C75">	spew</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Dump</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">request</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">	return</span><span style="color:#D19A66"> nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">() {</span></span>
-<span class="line"><span style="color:#ABB2BF">	lambda.</span><span style="color:#56B6C2">Start</span><span style="color:#ABB2BF">(LogHandler)</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> main</span><span style="color:#ABB2BF">() {</span></span>
+<span class="line"><span style="color:#E06C75">	lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">LogHandler</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
 <p>This function receives an event of type CloudWatchEvent (this is the event format sent over EventBridge) and logs it to standard out using <code>go-spew</code> that we installed earlier. We will see it in action.</p>
 <h3 id="testing-the-event-consumer">Testing the event consumer</h3>
 <p>Before we run our tests, make sure that the SST CLI is still running. If not, start it with <code>npm start</code> in the root folder. Next, we create a file with a single event payload in a file called <code>order_created.json</code>.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#ABB2BF">[</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="json"><code><span class="line"><span style="color:#ABB2BF">[</span></span>
 <span class="line"><span style="color:#ABB2BF">  {</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#E06C75">&quot;Source&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;terminal&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#E06C75">&quot;Detail&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;{ </span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">amount</span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">: 999, </span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">line_items</span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">: [] }&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#E06C75">&quot;EventBusName&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;magnus-eventbus-EventBus&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF">    </span><span style="color:#E06C75">&quot;DetailType&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
+<span class="line"><span style="color:#E06C75">    &quot;Source&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;terminal&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75">    &quot;Detail&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;{ </span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">amount</span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">: 999, </span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">line_items</span><span style="color:#56B6C2">\&quot;</span><span style="color:#98C379">: [] }&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75">    &quot;EventBusName&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;magnus-eventbus-EventBus&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75">    &quot;DetailType&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">  }</span></span>
-<span class="line"><span style="color:#ABB2BF">]</span></span></code></pre>
+<span class="line"><span style="color:#ABB2BF">]</span></span>
+<span class="line"></span></code></pre>
 <p>This is the minimal payload (I believe). Full definition <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html">here</a>.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">aws --region us-east-1 events put-events --entries file://order_created.json</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws --region us-east-1 events put-events --entries file://order_created.json</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>You should see something like this to indicate that the publishing was successful:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#ABB2BF">{</span></span>
-<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">&quot;FailedEntryCount&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF">  </span><span style="color:#E06C75">&quot;Entries&quot;</span><span style="color:#ABB2BF">: [</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="json"><code><span class="line"><span style="color:#ABB2BF">{</span></span>
+<span class="line"><span style="color:#E06C75">  &quot;FailedEntryCount&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#E06C75">  &quot;Entries&quot;</span><span style="color:#ABB2BF">: [</span></span>
 <span class="line"><span style="color:#ABB2BF">    {</span></span>
-<span class="line"><span style="color:#ABB2BF">      </span><span style="color:#E06C75">&quot;EventId&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&quot;</span></span>
+<span class="line"><span style="color:#E06C75">      &quot;EventId&quot;</span><span style="color:#ABB2BF">: </span><span style="color:#98C379">&quot;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">    }</span></span>
 <span class="line"><span style="color:#ABB2BF">  ]</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
 <p>If you open the terminal with the SST CLI, you should see our the function <code>functions/log_events.go</code> was invoked, and the whole payload was logged!</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">9e3818c0-5f28-449c-a4e5-f94fd2d24cd3 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">received event of type &quot;order.created&quot;</span></span>
-<span class="line"><span style="color:#abb2bf">(events.CloudWatchEvent) {</span></span>
-<span class="line"><span style="color:#abb2bf"> Version: (string) (len=1) &quot;0&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> ID: (string) (len=36) &quot;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> DetailType: (string) (len=13) &quot;order.created&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> Source: (string) (len=8) &quot;terminal&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> AccountID: (string) (len=12) &quot;601855032707&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> Time: (time.Time) 2022-06-26 13:10:29 +0000 UTC,</span></span>
-<span class="line"><span style="color:#abb2bf"> Region: (string) (len=9) &quot;us-east-1&quot;,</span></span>
-<span class="line"><span style="color:#abb2bf"> Resources: ([]string) {</span></span>
-<span class="line"><span style="color:#abb2bf"> },</span></span>
-<span class="line"><span style="color:#abb2bf"> Detail: (json.RawMessage) (len=30 cap=32) {</span></span>
-<span class="line"><span style="color:#abb2bf">  00000000  7b 22 61 6d 6f 75 6e 74  22 3a 39 39 39 2c 22 6c  |{&quot;amount&quot;:999,&quot;l|</span></span>
-<span class="line"><span style="color:#abb2bf">  00000010  69 6e 65 5f 69 74 65 6d  73 22 3a 5b 5d 7d        |ine_items&quot;:[]}|</span></span>
-<span class="line"><span style="color:#abb2bf"> }</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>9e3818c0-5f28-449c-a4e5-f94fd2d24cd3 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>received event of type &quot;order.created&quot;</span></span>
+<span class="line"><span>(events.CloudWatchEvent) {</span></span>
+<span class="line"><span> Version: (string) (len=1) &quot;0&quot;,</span></span>
+<span class="line"><span> ID: (string) (len=36) &quot;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&quot;,</span></span>
+<span class="line"><span> DetailType: (string) (len=13) &quot;order.created&quot;,</span></span>
+<span class="line"><span> Source: (string) (len=8) &quot;terminal&quot;,</span></span>
+<span class="line"><span> AccountID: (string) (len=12) &quot;601855032707&quot;,</span></span>
+<span class="line"><span> Time: (time.Time) 2022-06-26 13:10:29 +0000 UTC,</span></span>
+<span class="line"><span> Region: (string) (len=9) &quot;us-east-1&quot;,</span></span>
+<span class="line"><span> Resources: ([]string) {</span></span>
+<span class="line"><span> },</span></span>
+<span class="line"><span> Detail: (json.RawMessage) (len=30 cap=32) {</span></span>
+<span class="line"><span>  00000000  7b 22 61 6d 6f 75 6e 74  22 3a 39 39 39 2c 22 6c  |{&quot;amount&quot;:999,&quot;l|</span></span>
+<span class="line"><span>  00000010  69 6e 65 5f 69 74 65 6d  73 22 3a 5b 5d 7d        |ine_items&quot;:[]}|</span></span>
+<span class="line"><span> }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <p>As you can see, this is mostly the same event as we sent from using <code>aws events put-events</code>. The most interesting fields here are</p>
 <ul>
 <li><code>DetailType</code>: <strong>order.created</strong>, this is the field that we use for routing.</li>
@@ -335,7 +234,7 @@ our Lambda function</p>
 <li>Our route is defined in the props under <code>routers</code>, we point it to a new function defined in the file <code>create_order.go</code>.</li>
 <li>We add permission to publish to the event bus, and define the environment variable <strong>EVENT_BUS_NAME</strong>, needed when publishing events.</li>
 </ol>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#E06C75"><span style="user-select:none">-</span>import {EventBus, StackContext} from &quot;@serverless-stack/resources&quot;;</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="diff"><code><span class="line"><span style="color:#E06C75"><span style="user-select:none">-</span>import {EventBus, StackContext} from &quot;@serverless-stack/resources&quot;;</span></span>
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>import {EventBus, Api, StackContext} from &quot;@serverless-stack/resources&quot;;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#ABB2BF"> export function Stack({stack}: StackContext) {</span></span>
@@ -371,71 +270,73 @@ our Lambda function</p>
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>        ApiEndpoint: api.url,</span></span>
 <span class="line"><span style="color:#ABB2BF">         BusName: bus.eventBusName</span></span>
 <span class="line"><span style="color:#ABB2BF">     });</span></span>
-<span class="line"><span style="color:#ABB2BF"> }</span></span></code></pre>
+<span class="line"><span style="color:#ABB2BF"> }</span></span>
+<span class="line"></span></code></pre>
 <p>Next we define our new function. Create a new file called <code>functions/create_order.go</code>.</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">main</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#E5C07B"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> (</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;context&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;encoding/json&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-sdk-go-v2/aws&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-sdk-go-v2/config&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;os&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;context&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;encoding/json&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-sdk-go-v2/aws&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-sdk-go-v2/config&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;os&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">var</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">busName</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">=</span><span style="color:#ABB2BF"> os.</span><span style="color:#56B6C2">Getenv</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;EVENT_BUS_NAME&quot;</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">var</span><span style="color:#E06C75"> busName</span><span style="color:#E5C07B"> =</span><span style="color:#E06C75"> os</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Getenv</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;EVENT_BUS_NAME&quot;</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">type</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">CreateOrderRequest</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">struct</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">	Amount    </span><span style="color:#C678DD">int64</span><span style="color:#ABB2BF">    </span><span style="color:#98C379">`json:&quot;amount&quot;`</span></span>
-<span class="line"><span style="color:#ABB2BF">	LineItems []</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">`json:&quot;line_items&quot;`</span></span>
+<span class="line"><span style="color:#C678DD">type</span><span style="color:#E5C07B"> CreateOrderRequest</span><span style="color:#C678DD"> struct</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#E06C75">	Amount</span><span style="color:#C678DD">    int64</span><span style="color:#98C379">    `json:&quot;amount&quot;`</span></span>
+<span class="line"><span style="color:#E06C75">	LineItems</span><span style="color:#ABB2BF"> []</span><span style="color:#C678DD">string</span><span style="color:#98C379"> `json:&quot;line_items&quot;`</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">CreateOrderHandler</span><span style="color:#ABB2BF">(request events.APIGatewayProxyRequest) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#7F848E">// 1. Unmarshal request</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">var</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">req</span><span style="color:#ABB2BF"> CreateOrderRequest</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> json.</span><span style="color:#56B6C2">Unmarshal</span><span style="color:#ABB2BF">([]</span><span style="color:#56B6C2">byte</span><span style="color:#ABB2BF">(request.Body), </span><span style="color:#C678DD">&amp;</span><span style="color:#ABB2BF">req); err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> err</span></span>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> CreateOrderHandler</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">request</span><span style="color:#E5C07B"> events</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">APIGatewayProxyRequest</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">	// 1. Unmarshal request</span></span>
+<span class="line"><span style="color:#C678DD">	var</span><span style="color:#E06C75"> req</span><span style="color:#E5C07B"> CreateOrderRequest</span></span>
+<span class="line"><span style="color:#C678DD">	if</span><span style="color:#E06C75"> err</span><span style="color:#E5C07B"> :=</span><span style="color:#E06C75"> json</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Unmarshal</span><span style="color:#ABB2BF">([]</span><span style="color:#C678DD">byte</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">request</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Body</span><span style="color:#ABB2BF">), </span><span style="color:#C678DD">&amp;</span><span style="color:#E06C75">req</span><span style="color:#ABB2BF">); </span><span style="color:#E06C75">err</span><span style="color:#56B6C2"> !=</span><span style="color:#D19A66"> nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">		return</span><span style="color:#E06C75"> err</span></span>
 <span class="line"><span style="color:#ABB2BF">	}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#7F848E">// 2. Set up EventBridge client</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">cfg</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> config.</span><span style="color:#56B6C2">LoadDefaultConfig</span><span style="color:#ABB2BF">(context.</span><span style="color:#56B6C2">TODO</span><span style="color:#ABB2BF">())</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> err</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">	// 2. Set up EventBridge client</span></span>
+<span class="line"><span style="color:#E06C75">	cfg</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#E5C07B"> :=</span><span style="color:#E06C75"> config</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">LoadDefaultConfig</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">context</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">TODO</span><span style="color:#ABB2BF">())</span></span>
+<span class="line"><span style="color:#C678DD">	if</span><span style="color:#E06C75"> err</span><span style="color:#56B6C2"> !=</span><span style="color:#D19A66"> nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">		return</span><span style="color:#E06C75"> err</span></span>
 <span class="line"><span style="color:#ABB2BF">	}</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">client</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> cloudwatchevents.</span><span style="color:#56B6C2">NewFromConfig</span><span style="color:#ABB2BF">(cfg)</span></span>
+<span class="line"><span style="color:#E06C75">	client</span><span style="color:#E5C07B"> :=</span><span style="color:#E06C75"> cloudwatchevents</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">NewFromConfig</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">cfg</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#7F848E">// 3. Marshal order into JSON again</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">b</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> json.</span><span style="color:#56B6C2">Marshal</span><span style="color:#ABB2BF">(req)</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> err</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">	// 3. Marshal order into JSON again</span></span>
+<span class="line"><span style="color:#E06C75">	b</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#E5C07B"> :=</span><span style="color:#E06C75"> json</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Marshal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">req</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">	if</span><span style="color:#E06C75"> err</span><span style="color:#56B6C2"> !=</span><span style="color:#D19A66"> nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">		return</span><span style="color:#E06C75"> err</span></span>
 <span class="line"><span style="color:#ABB2BF">	}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#7F848E">// 4. Publish events to EventBridge</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#E06C75">_</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">=</span><span style="color:#ABB2BF"> client.</span><span style="color:#56B6C2">PutEvents</span><span style="color:#ABB2BF">(context.</span><span style="color:#56B6C2">Background</span><span style="color:#ABB2BF">(),</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">&amp;</span><span style="color:#ABB2BF">cloudwatchevents.PutEventsInput{</span></span>
-<span class="line"><span style="color:#ABB2BF">			Entries: []types.PutEventsRequestEntry{</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic">	// 4. Publish events to EventBridge</span></span>
+<span class="line"><span style="color:#E06C75">	_</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">err</span><span style="color:#E5C07B"> =</span><span style="color:#E06C75"> client</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">PutEvents</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">context</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Background</span><span style="color:#ABB2BF">(),</span></span>
+<span class="line"><span style="color:#C678DD">		&amp;</span><span style="color:#E5C07B">cloudwatchevents</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">PutEventsInput</span><span style="color:#ABB2BF">{</span></span>
+<span class="line"><span style="color:#E06C75">			Entries</span><span style="color:#ABB2BF">: []</span><span style="color:#E5C07B">types</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">PutEventsRequestEntry</span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span style="color:#ABB2BF">				{</span></span>
-<span class="line"><span style="color:#ABB2BF">					EventBusName: aws.</span><span style="color:#56B6C2">String</span><span style="color:#ABB2BF">(busName),</span></span>
-<span class="line"><span style="color:#ABB2BF">					Source:       aws.</span><span style="color:#56B6C2">String</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;create_order_fn&quot;</span><span style="color:#ABB2BF">),</span></span>
+<span class="line"><span style="color:#E06C75">					EventBusName</span><span style="color:#ABB2BF">: </span><span style="color:#E06C75">aws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">String</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">busName</span><span style="color:#ABB2BF">),</span></span>
+<span class="line"><span style="color:#E06C75">					Source</span><span style="color:#ABB2BF">:       </span><span style="color:#E06C75">aws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">String</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;create_order_fn&quot;</span><span style="color:#ABB2BF">),</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">					DetailType: aws.</span><span style="color:#56B6C2">String</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">),</span></span>
-<span class="line"><span style="color:#ABB2BF">					Detail:     aws.</span><span style="color:#56B6C2">String</span><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">string</span><span style="color:#ABB2BF">(b)),</span></span>
+<span class="line"><span style="color:#E06C75">					DetailType</span><span style="color:#ABB2BF">: </span><span style="color:#E06C75">aws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">String</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">),</span></span>
+<span class="line"><span style="color:#E06C75">					Detail</span><span style="color:#ABB2BF">:     </span><span style="color:#E06C75">aws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">String</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">b</span><span style="color:#ABB2BF">)),</span></span>
 <span class="line"><span style="color:#ABB2BF">				},</span></span>
 <span class="line"><span style="color:#ABB2BF">			},</span></span>
 <span class="line"><span style="color:#ABB2BF">		})</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> err</span></span>
+<span class="line"><span style="color:#C678DD">	if</span><span style="color:#E06C75"> err</span><span style="color:#56B6C2"> !=</span><span style="color:#D19A66"> nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">		return</span><span style="color:#E06C75"> err</span></span>
 <span class="line"><span style="color:#ABB2BF">	}</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span></span>
+<span class="line"><span style="color:#C678DD">	return</span><span style="color:#D19A66"> nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">() {</span></span>
-<span class="line"><span style="color:#ABB2BF">	lambda.</span><span style="color:#56B6C2">Start</span><span style="color:#ABB2BF">(CreateOrderHandler)</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> main</span><span style="color:#ABB2BF">() {</span></span>
+<span class="line"><span style="color:#E06C75">	lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">CreateOrderHandler</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
 <p>Here we do the following:</p>
 <ol>
 <li>Unmarshal the request body from the API gateway into <code>CreateOrderRequest</code>.</li>
@@ -443,59 +344,53 @@ our Lambda function</p>
 <li>Marshal the JSON we want to send in our event</li>
 <li>Send our event to EventBridge</li>
 </ol>
-<div class="relative left-10" style="top: 1px">
-    <h3 class="border-2 border-b-0 border-gray-700 bg-gray-800 inline py-2 px-4">Note:</h3>
-</div>
-
-
-<div class="bg-gray-800 mt-0 border-2 border-gray-700 px-6 rounded">
-    <p>We could probably get away with creating a global client and re-use that between requests. During testing, I got an authentication error due to stale credentials. This might only be a test environment problem, but for now we will create the client on every request.</p>
-</div>
-
+<div class="relative left-10" style="top: 1px"><h3 class="border-2 border-b-0 border-gray-700 bg-gray-800 inline py-2 px-4">Note:</h3></div> <div class="bg-gray-800 mt-0 border-2 border-gray-700 px-6 rounded"> <p>We could probably get away with creating a global client and re-use that between requests. During testing, I got an authentication error due to stale credentials. This might only be a test environment problem, but for now we will create the client on every request.</p> </div>
 <p>Once again, let SST deploy all updates.</p>
 <h3 id="testing-the-event-producer">Testing the event producer</h3>
 <p>Now we are ready to test our new event producer. There are at least two ways of doing this.</p>
 <ul>
 <li>Use curl, or your favorite HTTP client and make the request. <em>Remember to update the API gateway URL.</em></li>
 </ul>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#abb2bf">POST https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order</span></span>
-<span class="line"><span style="color:#abb2bf">Content-Type: application/json</span></span>
-<span class="line"><span style="color:#abb2bf"></span></span>
-<span class="line"><span style="color:#abb2bf">{</span></span>
-<span class="line"><span style="color:#abb2bf">  &quot;amount&quot;: 999,</span></span>
-<span class="line"><span style="color:#abb2bf">  &quot;line_items&quot;: [&quot;food&quot;, &quot;shelter&quot;]</span></span>
-<span class="line"><span style="color:#abb2bf">}</span></span></code></pre>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>POST https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order</span></span>
+<span class="line"><span>Content-Type: application/json</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  &quot;amount&quot;: 999,</span></span>
+<span class="line"><span>  &quot;line_items&quot;: [&quot;food&quot;, &quot;shelter&quot;]</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
 <ul>
 <li>Or, the option I used: go to the SST console and make the request.
 <img src="/img/event-based-system-on-aws/sst-console.png" alt="SST console"/></li>
 </ul>
 <p>Going back to the terminal, we see the result:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#7F848E"># 1. create_order invoked via the API gateway</span></span>
-<span class="line"><span style="color:#ABB2BF">e31bc6c6-fe85-4e92-b30d-050bf33f0498 REQUEST magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR [functions/create_order.go] invoked by API POST /order</span></span>
-<span class="line"><span style="color:#ABB2BF">e31bc6c6-fe85-4e92-b30d-050bf33f0498 RESPONSE null</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 1. create_order invoked via the API gateway</span></span>
+<span class="line"><span style="color:#61AFEF">e31bc6c6-fe85-4e92-b30d-050bf33f0498</span><span style="color:#98C379"> REQUEST</span><span style="color:#98C379"> magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR</span><span style="color:#ABB2BF"> [functions/create_order.go] invoked by API POST /order</span></span>
+<span class="line"><span style="color:#61AFEF">e31bc6c6-fe85-4e92-b30d-050bf33f0498</span><span style="color:#98C379"> RESPONSE</span><span style="color:#98C379"> null</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#7F848E"># 2. log_events.go invoked (by event from event bus)</span></span>
-<span class="line"><span style="color:#ABB2BF">ea5ecb52-90f0-416a-aa69-1645ab6b965e REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 2. log_events.go invoked (by event from event bus)</span></span>
+<span class="line"><span style="color:#61AFEF">ea5ecb52-90f0-416a-aa69-1645ab6b965e</span><span style="color:#98C379"> REQUEST</span><span style="color:#98C379"> magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K</span><span style="color:#ABB2BF"> [functions/log_events.go] invoked</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#7F848E"># 3. Log invocation</span></span>
-<span class="line"><span style="color:#ABB2BF">received event of </span><span style="color:#56B6C2">type</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">(events.CloudWatchEvent) {</span></span>
-<span class="line"><span style="color:#ABB2BF"> Version: (string) (len=1) </span><span style="color:#98C379">&quot;0&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> ID: (string) (len=36) </span><span style="color:#98C379">&quot;c3a5c355-f1b0-b642-a957-48dec75c8f8d&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> DetailType: (string) (len=13) </span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> Source: (string) (len=15) </span><span style="color:#98C379">&quot;create_order_fn&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> AccountID: (string) (len=12) </span><span style="color:#98C379">&quot;601855032707&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> Time: (time.Time) 2022-06-28 20:46:55 +0000 UTC,</span></span>
-<span class="line"><span style="color:#ABB2BF"> Region: (string) (len=9) </span><span style="color:#98C379">&quot;us-east-1&quot;</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF"> Resources: ([]string) {</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 3. Log invocation</span></span>
+<span class="line"><span style="color:#61AFEF">received</span><span style="color:#98C379"> event</span><span style="color:#98C379"> of</span><span style="color:#98C379"> type</span><span style="color:#98C379"> &quot;order.created&quot;</span></span>
+<span class="line"><span style="color:#ABB2BF">(</span><span style="color:#61AFEF">events.CloudWatchEvent</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#61AFEF"> Version:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">1</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;0&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> ID:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">36</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;c3a5c355-f1b0-b642-a957-48dec75c8f8d&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> DetailType:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">13</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;order.created&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> Source:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">15</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;create_order_fn&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> AccountID:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">12</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;601855032707&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> Time:</span><span style="color:#ABB2BF"> (time.Time) 2022-06-28 20:46:55 +0000 UTC,</span></span>
+<span class="line"><span style="color:#61AFEF"> Region:</span><span style="color:#ABB2BF"> (string) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">9</span><span style="color:#ABB2BF">) </span><span style="color:#98C379">&quot;us-east-1&quot;</span><span style="color:#ABB2BF">,</span></span>
+<span class="line"><span style="color:#61AFEF"> Resources:</span><span style="color:#ABB2BF"> ([]string) {</span></span>
 <span class="line"><span style="color:#ABB2BF"> },</span></span>
-<span class="line"><span style="color:#ABB2BF"> Detail: (json.RawMessage) (len=46 cap=48) {</span></span>
-<span class="line"><span style="color:#ABB2BF">  00000000  7b 22 61 6d 6f 75 6e 74  22 3a 39 39 39 2c 22 6c  |{</span><span style="color:#98C379">&quot;amount&quot;</span><span style="color:#ABB2BF">:999,</span><span style="color:#98C379">&quot;l|</span></span>
-<span class="line"><span style="color:#98C379">  00000010  69 6e 65 5f 69 74 65 6d  73 22 3a 5b 22 66 6f 6f  |ine_items&quot;</span><span style="color:#ABB2BF">:[</span><span style="color:#98C379">&quot;foo|</span></span>
-<span class="line"><span style="color:#98C379">  00000020  64 22 2c 22 73 68 65 6c  74 65 72 22 5d 7d        |d&quot;</span><span style="color:#ABB2BF">,</span><span style="color:#98C379">&quot;shelter&quot;</span><span style="color:#ABB2BF">]}|</span></span>
-<span class="line"><span style="color:#ABB2BF"> }</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"><span style="color:#ABB2BF">ea5ecb52-90f0-416a-aa69-1645ab6b965e RESPONSE null</span></span></code></pre>
+<span class="line"><span style="color:#61AFEF"> Detail:</span><span style="color:#ABB2BF"> (json.RawMessage) (</span><span style="color:#E06C75">len</span><span style="color:#56B6C2">=</span><span style="color:#98C379">46</span><span style="color:#E06C75"> cap</span><span style="color:#56B6C2">=</span><span style="color:#98C379">48</span><span style="color:#ABB2BF">) {</span></span>
+<span class="line"><span style="color:#61AFEF">  00000000</span><span style="color:#98C379">  7b</span><span style="color:#D19A66"> 22</span><span style="color:#D19A66"> 61</span><span style="color:#98C379"> 6d</span><span style="color:#98C379"> 6f</span><span style="color:#D19A66"> 75</span><span style="color:#98C379"> 6e</span><span style="color:#D19A66"> 74</span><span style="color:#D19A66">  22</span><span style="color:#98C379"> 3a</span><span style="color:#D19A66"> 39</span><span style="color:#D19A66"> 39</span><span style="color:#D19A66"> 39</span><span style="color:#98C379"> 2c</span><span style="color:#D19A66"> 22</span><span style="color:#98C379"> 6c</span><span style="color:#ABB2BF">  |{&quot;amount&quot;:999,&quot;l|</span></span>
+<span class="line"><span style="color:#61AFEF">  00000010</span><span style="color:#D19A66">  69</span><span style="color:#98C379"> 6e</span><span style="color:#D19A66"> 65</span><span style="color:#98C379"> 5f</span><span style="color:#D19A66"> 69</span><span style="color:#D19A66"> 74</span><span style="color:#D19A66"> 65</span><span style="color:#98C379"> 6d</span><span style="color:#D19A66">  73</span><span style="color:#D19A66"> 22</span><span style="color:#98C379"> 3a</span><span style="color:#98C379"> 5b</span><span style="color:#D19A66"> 22</span><span style="color:#D19A66"> 66</span><span style="color:#98C379"> 6f</span><span style="color:#98C379"> 6f</span><span style="color:#ABB2BF">  |</span><span style="color:#61AFEF">ine_items</span><span style="color:#61AFEF">&quot;:[&quot;</span><span style="color:#61AFEF">foo</span><span style="color:#ABB2BF">|</span></span>
+<span class="line"><span style="color:#61AFEF">  00000020</span><span style="color:#D19A66">  64</span><span style="color:#D19A66"> 22</span><span style="color:#98C379"> 2c</span><span style="color:#D19A66"> 22</span><span style="color:#D19A66"> 73</span><span style="color:#D19A66"> 68</span><span style="color:#D19A66"> 65</span><span style="color:#98C379"> 6c</span><span style="color:#D19A66">  74</span><span style="color:#D19A66"> 65</span><span style="color:#D19A66"> 72</span><span style="color:#D19A66"> 22</span><span style="color:#98C379"> 5d</span><span style="color:#98C379"> 7d</span><span style="color:#ABB2BF">        |</span><span style="color:#61AFEF">d</span><span style="color:#61AFEF">&quot;,&quot;</span><span style="color:#61AFEF">shelter</span><span style="color:#61AFEF">&quot;]}|</span></span>
+<span class="line"><span style="color:#61AFEF"> }</span></span>
+<span class="line"><span style="color:#61AFEF">}</span></span>
+<span class="line"><span style="color:#61AFEF">ea5ecb52-90f0-416a-aa69-1645ab6b965e RESPONSE null</span></span>
+<span class="line"></span></code></pre>
 <p>Not only did we test event producing, but we ended up consuming the events as well! 🍾</p>
 <h2 id="adding-a-new-consumer">Adding a new consumer</h2>
 <p>Now, imagine the following scenario. The accounting department contacts us:</p>
@@ -504,36 +399,37 @@ our Lambda function</p>
 </blockquote>
 <p>We have forgotten our second event consumer, <code>CreateInvoice</code> 😱.</p>
 <p>Lucky for us, one of the benefit of event based systems with a message bus, is that it (should be) easy to add a new consumers to the system, based on new requirements. First, we create our new function as <code>functions/create_invoice.go</code>:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">main</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span style="color:#E5C07B"> main</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C678DD">import</span><span style="color:#ABB2BF"> (</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;encoding/json&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;fmt&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#98C379">&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;encoding/json&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;fmt&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/events&quot;</span></span>
+<span class="line"><span style="color:#98C379">	&quot;github.com/aws/aws-lambda-go/lambda&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">type</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">OrderCreatedEvent</span><span style="color:#ABB2BF"> </span><span style="color:#C678DD">struct</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">	Amount    </span><span style="color:#C678DD">int64</span><span style="color:#ABB2BF">    </span><span style="color:#98C379">`json:&quot;amount&quot;`</span></span>
-<span class="line"><span style="color:#ABB2BF">	LineItems []</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">`json:&quot;line_items&quot;`</span></span>
+<span class="line"><span style="color:#C678DD">type</span><span style="color:#E5C07B"> OrderCreatedEvent</span><span style="color:#C678DD"> struct</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#E06C75">	Amount</span><span style="color:#C678DD">    int64</span><span style="color:#98C379">    `json:&quot;amount&quot;`</span></span>
+<span class="line"><span style="color:#E06C75">	LineItems</span><span style="color:#ABB2BF"> []</span><span style="color:#C678DD">string</span><span style="color:#98C379"> `json:&quot;line_items&quot;`</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">CreateInvoiceHandler</span><span style="color:#ABB2BF">(request events.CloudWatchEvent) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">var</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">event</span><span style="color:#ABB2BF"> OrderCreatedEvent</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">if</span><span style="color:#ABB2BF"> </span><span style="color:#E06C75">err</span><span style="color:#ABB2BF"> </span><span style="color:#E5C07B">:=</span><span style="color:#ABB2BF"> json.</span><span style="color:#56B6C2">Unmarshal</span><span style="color:#ABB2BF">(request.Detail, </span><span style="color:#C678DD">&amp;</span><span style="color:#ABB2BF">event); err </span><span style="color:#56B6C2">!=</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF"> {</span></span>
-<span class="line"><span style="color:#ABB2BF">		</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> err</span></span>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> CreateInvoiceHandler</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">request</span><span style="color:#E5C07B"> events</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">CloudWatchEvent</span><span style="color:#ABB2BF">) </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">	var</span><span style="color:#E06C75"> event</span><span style="color:#E5C07B"> OrderCreatedEvent</span></span>
+<span class="line"><span style="color:#C678DD">	if</span><span style="color:#E06C75"> err</span><span style="color:#E5C07B"> :=</span><span style="color:#E06C75"> json</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Unmarshal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">request</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Detail</span><span style="color:#ABB2BF">, </span><span style="color:#C678DD">&amp;</span><span style="color:#E06C75">event</span><span style="color:#ABB2BF">); </span><span style="color:#E06C75">err</span><span style="color:#56B6C2"> !=</span><span style="color:#D19A66"> nil</span><span style="color:#ABB2BF"> {</span></span>
+<span class="line"><span style="color:#C678DD">		return</span><span style="color:#E06C75"> err</span></span>
 <span class="line"><span style="color:#ABB2BF">	}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#ABB2BF">	fmt.</span><span style="color:#56B6C2">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;received event of type </span><span style="color:#D19A66">%q</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, request.DetailType)</span></span>
-<span class="line"><span style="color:#ABB2BF">	fmt.</span><span style="color:#56B6C2">Println</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;creating invoice for event&quot;</span><span style="color:#ABB2BF">, event)</span></span>
-<span class="line"><span style="color:#ABB2BF">	</span><span style="color:#C678DD">return</span><span style="color:#ABB2BF"> </span><span style="color:#D19A66">nil</span></span>
+<span class="line"><span style="color:#E06C75">	fmt</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;received event of type </span><span style="color:#D19A66">%q</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">&quot;</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">request</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">DetailType</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#E06C75">	fmt</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Println</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;creating invoice for event&quot;</span><span style="color:#ABB2BF">, </span><span style="color:#E06C75">event</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#C678DD">	return</span><span style="color:#D19A66"> nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">func</span><span style="color:#ABB2BF"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">() {</span></span>
-<span class="line"><span style="color:#ABB2BF">	lambda.</span><span style="color:#56B6C2">Start</span><span style="color:#ABB2BF">(CreateInvoiceHandler)</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span></code></pre>
+<span class="line"><span style="color:#C678DD">func</span><span style="color:#61AFEF"> main</span><span style="color:#ABB2BF">() {</span></span>
+<span class="line"><span style="color:#E06C75">	lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">CreateInvoiceHandler</span><span style="color:#ABB2BF">)</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code></pre>
 <p>Then we add it as a target for our stack:</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#ABB2BF">    bus.addRules(stack, {</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="diff"><code><span class="line"><span style="color:#ABB2BF">    bus.addRules(stack, {</span></span>
 <span class="line"><span style="color:#ABB2BF">        &quot;order_created&quot;: {</span></span>
 <span class="line"><span style="color:#ABB2BF">            pattern: {</span></span>
 <span class="line"><span style="color:#ABB2BF">                detailType: [&quot;order.created&quot;],</span></span>
@@ -544,25 +440,27 @@ our Lambda function</p>
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>                invoiceFunction: &quot;functions/create_invoice.go&quot;,</span></span>
 <span class="line"><span style="color:#ABB2BF">            }</span></span>
 <span class="line"><span style="color:#ABB2BF">        }</span></span>
-<span class="line"><span style="color:#ABB2BF">    })</span></span></code></pre>
+<span class="line"><span style="color:#ABB2BF">    })</span></span>
+<span class="line"></span></code></pre>
 <p>Now all we need to do is to create a new order</p>
-<pre class="astro-code" style="background-color:#282c34;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word"><code><span class="line"><span style="color:#7F848E"># 1. create_order invoked via the API gateway</span></span>
-<span class="line"><span style="color:#ABB2BF">60647f24-3e36-438c-964e-e6644e472f84 REQUEST magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR [functions/create.go] invoked by API POST /order</span></span>
-<span class="line"><span style="color:#ABB2BF">60647f24-3e36-438c-964e-e6644e472f84 RESPONSE null</span></span>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic"># 1. create_order invoked via the API gateway</span></span>
+<span class="line"><span style="color:#61AFEF">60647f24-3e36-438c-964e-e6644e472f84</span><span style="color:#98C379"> REQUEST</span><span style="color:#98C379"> magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR</span><span style="color:#ABB2BF"> [functions/create.go] invoked by API POST /order</span></span>
+<span class="line"><span style="color:#61AFEF">60647f24-3e36-438c-964e-e6644e472f84</span><span style="color:#98C379"> RESPONSE</span><span style="color:#98C379"> null</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#7F848E"># 2. create_invoice.go invoked (by event from event bus)</span></span>
-<span class="line"><span style="color:#ABB2BF">5b939ded-8715-4ad4-90e4-775d783893b4 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedin-awtbjGrQeKcw [functions/create_invoice.go] invoked</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 2. create_invoice.go invoked (by event from event bus)</span></span>
+<span class="line"><span style="color:#61AFEF">5b939ded-8715-4ad4-90e4-775d783893b4</span><span style="color:#98C379"> REQUEST</span><span style="color:#98C379"> magnus-eventbus-Stack-TargetEventBusordercreatedin-awtbjGrQeKcw</span><span style="color:#ABB2BF"> [functions/create_invoice.go] invoked</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#7F848E"># 3. log_events.go invoked (by event from event bus)</span></span>
-<span class="line"><span style="color:#ABB2BF">525f7e61-e03a-4a31-a58b-4d9e9593bc91 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked</span></span>
-<span class="line"><span style="color:#ABB2BF">received event of </span><span style="color:#56B6C2">type</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">...</span></span>
-<span class="line"><span style="color:#ABB2BF">525f7e61-e03a-4a31-a58b-4d9e9593bc91 RESPONSE null</span></span>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 3. log_events.go invoked (by event from event bus)</span></span>
+<span class="line"><span style="color:#61AFEF">525f7e61-e03a-4a31-a58b-4d9e9593bc91</span><span style="color:#98C379"> REQUEST</span><span style="color:#98C379"> magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K</span><span style="color:#ABB2BF"> [functions/log_events.go] invoked</span></span>
+<span class="line"><span style="color:#61AFEF">received</span><span style="color:#98C379"> event</span><span style="color:#98C379"> of</span><span style="color:#98C379"> type</span><span style="color:#98C379"> &quot;order.created&quot;</span></span>
+<span class="line"><span style="color:#56B6C2">...</span></span>
+<span class="line"><span style="color:#61AFEF">525f7e61-e03a-4a31-a58b-4d9e9593bc91</span><span style="color:#98C379"> RESPONSE</span><span style="color:#98C379"> null</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#7F848E"># 4. Our invoice</span></span>
-<span class="line"><span style="color:#ABB2BF">received event of </span><span style="color:#56B6C2">type</span><span style="color:#ABB2BF"> </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">creating invoice </span><span style="color:#C678DD">for</span><span style="color:#ABB2BF"> event {999 [food shelter]}</span></span>
-<span class="line"><span style="color:#ABB2BF">5b939ded-8715-4ad4-90e4-775d783893b4 RESPONSE null</span></span></code></pre>
+<span class="line"><span style="color:#7F848E;font-style:italic"># 4. Our invoice</span></span>
+<span class="line"><span style="color:#61AFEF">received</span><span style="color:#98C379"> event</span><span style="color:#98C379"> of</span><span style="color:#98C379"> type</span><span style="color:#98C379"> &quot;order.created&quot;</span></span>
+<span class="line"><span style="color:#61AFEF">creating</span><span style="color:#98C379"> invoice</span><span style="color:#98C379"> for</span><span style="color:#98C379"> event</span><span style="color:#98C379"> {</span><span style="color:#D19A66">999</span><span style="color:#ABB2BF"> [food </span><span style="color:#98C379">shelter]}</span></span>
+<span class="line"><span style="color:#61AFEF">5b939ded-8715-4ad4-90e4-775d783893b4</span><span style="color:#98C379"> RESPONSE</span><span style="color:#98C379"> null</span></span>
+<span class="line"></span></code></pre>
 <p>If we forward this log to the accounting department, they will surely be happy!</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>We have built an event-based system using Go and AWS services. SST helps us quickly set up the infrastructure, and simplifies things like IAM permissions and propagating environment variables.</p>
@@ -572,92 +470,15 @@ our Lambda function</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/lambda/latest/dg/golang-handler.html">AWS Lambda function handler in Go</a></li>
 <li>YouTube: <a href="https://www.youtube.com/watch?v=iMsPztMiFIk">SST Weekly: Event Bus</a> - inspiration for this video</li>
-</ul>
-    </article>
-
-    <ul class="tags-container astro-ASTNQLEE">
-      <li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/sst" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">sst</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/serverless" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">serverless</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/cdk" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">cdk</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/lambda" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">lambda</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/event-based" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">event-based</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/eventbridge" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">eventbridge</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/aws" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">aws</span>
-  </a>
-</li>
-
-<li class="inline-block my-1 underline-offset-4 astro-YPJQ3EUO">
-  <a href="/tags/go" class="pr-1 text-sm group astro-YPJQ3EUO">
-    <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75 astro-YPJQ3EUO">
-      <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" class="astro-YPJQ3EUO"></path>
-    </svg>
-    &nbsp;<span class="astro-YPJQ3EUO">go</span>
-  </a>
-</li>
-
-
-    </ul>
-  </main><footer class="mt-auto astro-U6BPRU3O">
-  <div class="max-w-3xl mx-auto px-0">
-  <hr class="border-skin-line">
-</div>
-  <div class="footer-wrapper astro-U6BPRU3O">
-    <div class="social-icons flex astro-FBUPWF4V">
-  <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Github">
-  <svg
+</ul> </article> <ul class="tags-container" data-astro-cid-vj4tpspi> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/sst" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>sst</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/serverless" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>serverless</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/cdk" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>cdk</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/lambda" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>lambda</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/event-based" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>event-based</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/eventbridge" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>eventbridge</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/aws" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>aws</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/go" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+&nbsp;<span data-astro-cid-blwjyjpt>go</span> </a> </li>  </ul> </main> <footer class="mt-auto" data-astro-cid-sz7xmlte> <div class="max-w-3xl mx-auto px-0"> <hr class="border-skin-line"> </div> <div class="footer-wrapper" data-astro-cid-sz7xmlte> <div class="social-icons flex" data-astro-cid-upu6fzxr> <a type="button" href="https://github.com/magnuswahlstrand" class="group link-button p-2 sm:p-1" title="Github" data-astro-cid-5eunqzkt>  <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon-tabler"
     stroke-linecap="round"
@@ -667,13 +488,7 @@ our Lambda function</p>
     <path
       d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
     ></path>
-  </svg>
-</a>
-
-
-
-<a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Linkedin">
-  <svg
+  </svg>  </a>  <a type="button" href="https://www.linkedin.com/in/magnus-wahlstrand" class="group link-button p-2 sm:p-1" title="Linkedin" data-astro-cid-5eunqzkt>  <svg
     xmlns="http://www.w3.org/2000/svg"
     class="icon-tabler"
     stroke-linecap="round"
@@ -685,13 +500,7 @@ our Lambda function</p>
     <line x1="8" y1="8" x2="8" y2="8.01"></line>
     <line x1="12" y1="16" x2="12" y2="11"></line>
     <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
-  </svg>
-</a>
-
-
-
-<a type="button" href="https://twitter.com/wahlstra" class="group link-button p-2 sm:p-1 astro-FBUPWF4V astro-5B2AVNVX astro-ELPTMOSO" title="Twitter">
-  <svg
+  </svg>  </a>  <a type="button" href="https://twitter.com/wahlstra" class="group link-button p-2 sm:p-1" title="Twitter" data-astro-cid-5eunqzkt>  <svg
       xmlns="http://www.w3.org/2000/svg"
       class="icon-tabler"
       stroke-linecap="round"
@@ -699,24 +508,8 @@ our Lambda function</p>
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
-    </svg>
-</a>
-
-
-
-
-</div>
-
-
-    <!--<div class="copyright-wrapper">
+    </svg>  </a>   </div>  <!--<div class="copyright-wrapper">
       <span>Copyright &#169; {currentYear}</span>
       <span class="separator">&nbsp;|&nbsp;</span>
       <span>All rights reserved.</span>
-    </div>-->
-  </div>
-</footer>
-
-
-  </body></html>
-
-
+    </div>--> </div> </footer>   </body></html> 
