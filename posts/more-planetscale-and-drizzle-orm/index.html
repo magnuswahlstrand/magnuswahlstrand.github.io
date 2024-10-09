@@ -156,11 +156,11 @@ main()
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h4 id="test-run">Test run</h4>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>></span><span class="space"> </span><span>npx</span><span class="space"> </span><span>ts-node</span><span class="space"> </span><span>index.ts</span><span class="space"> </span><span>--add</span><span class="space"> </span><span>magnus</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Add</span><span class="space"> </span><span>user</span><span class="space"> </span><span>magnus</span></span>
-<span class="line"><span>Success!</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> npx ts-node index.ts --add magnus
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">npx</span><span class="space"> </span><span style="color:#ABB2BF">ts-node</span><span class="space"> </span><span style="color:#ABB2BF">index.ts</span><span class="space"> </span><span style="color:#ABB2BF">--add</span><span class="space"> </span><span style="color:#ABB2BF">magnus</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">Add</span><span class="space"> </span><span style="color:#98C379">user</span><span class="space"> </span><span style="color:#98C379">magnus</span></span>
+<span class="line"><span style="color:#61AFEF">Success!</span></span>
+<span class="line"></span></code><button class="copy" data-code="> npx ts-node index.ts --add magnus
 
 Add user magnus
 Success!
@@ -173,8 +173,8 @@ Success!
 <ul>
 <li>First, install the planetscale database driver</li>
 </ul>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>@planetscale/database</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npm install @planetscale/database
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@planetscale/database</span></span>
+<span class="line"></span></code><button class="copy" data-code="npm install @planetscale/database
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
@@ -185,9 +185,9 @@ Success!
 <li>Follow the instructions to initialize the planetscale CLI and connect to your database.</li>
 <li>Now we can connect to our database <strong>(magnusscale)</strong> and create to our table</li>
 </ul>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>></span><span class="space"> </span><span>pscale</span><span class="space"> </span><span>shell</span><span class="space"> </span><span>magnusscale</span><span class="space"> </span><span>main</span></span>
-<span class="line"><span>magnusscale/main></span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> pscale shell magnusscale main
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">pscale</span><span class="space"> </span><span style="color:#ABB2BF">shell</span><span class="space"> </span><span style="color:#ABB2BF">magnusscale</span><span class="space"> </span><span style="color:#ABB2BF">main</span></span>
+<span class="line"><span style="color:#61AFEF">magnusscale/main</span><span style="color:#ABB2BF">></span></span>
+<span class="line"></span></code><button class="copy" data-code="> pscale shell magnusscale main
 magnusscale/main>
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -219,8 +219,8 @@ magnusscale/main>
 <ol>
 <li>Install drizzle-orm and the mysql2 driver</li>
 </ol>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>i</span><span class="space"> </span><span>drizzle-orm</span><span class="space"> </span><span>mysql2</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npm i drizzle-orm mysql2
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">i</span><span class="space"> </span><span style="color:#98C379">drizzle-orm</span><span class="space"> </span><span style="color:#98C379">mysql2</span></span>
+<span class="line"></span></code><button class="copy" data-code="npm i drizzle-orm mysql2
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
@@ -295,9 +295,9 @@ export async function listUsersFromDb() {
 <ol start="4">
 <li>Get the planetscale credentials and store somewhere. I use <code>direnv</code> and an <code>.env</code> file</li>
 </ol>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>PLANETSCALE_USERNAME=cgiyexqws13g...</span></span>
-<span class="line"><span>PLANETSCALE_PASSWORD=pscale_pw_2R...</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="PLANETSCALE_USERNAME=cgiyexqws13g...
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#E06C75">PLANETSCALE_USERNAME</span><span style="color:#56B6C2">=</span><span style="color:#98C379">cgiyexqws13g...</span></span>
+<span class="line"><span style="color:#E06C75">PLANETSCALE_PASSWORD</span><span style="color:#56B6C2">=</span><span style="color:#98C379">pscale_pw_2R...</span></span>
+<span class="line"></span></code><button class="copy" data-code="PLANETSCALE_USERNAME=cgiyexqws13g...
 PLANETSCALE_PASSWORD=pscale_pw_2R...
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -466,9 +466,9 @@ work. 🥴</p>
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="using-the-cli">Using the CLI</h2>
 <p>Let’s add some users…</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>></span><span class="space"> </span><span>npx</span><span class="space"> </span><span>ts-node</span><span class="space"> </span><span>index.ts</span><span class="space"> </span><span>--add</span><span class="space"> </span><span>magnus</span></span>
-<span class="line"><span>></span><span class="space"> </span><span>npx</span><span class="space"> </span><span>ts-node</span><span class="space"> </span><span>index.ts</span><span class="space"> </span><span>--add</span><span class="space"> </span><span>eve</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> npx ts-node index.ts --add magnus
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">npx</span><span class="space"> </span><span style="color:#ABB2BF">ts-node</span><span class="space"> </span><span style="color:#ABB2BF">index.ts</span><span class="space"> </span><span style="color:#ABB2BF">--add</span><span class="space"> </span><span style="color:#ABB2BF">magnus</span></span>
+<span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">npx</span><span class="space"> </span><span style="color:#ABB2BF">ts-node</span><span class="space"> </span><span style="color:#ABB2BF">index.ts</span><span class="space"> </span><span style="color:#ABB2BF">--add</span><span class="space"> </span><span style="color:#ABB2BF">eve</span></span>
+<span class="line"></span></code><button class="copy" data-code="> npx ts-node index.ts --add magnus
 > npx ts-node index.ts --add eve
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -476,12 +476,12 @@ work. 🥴</p>
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>…and list them</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>></span><span class="space"> </span><span>npx</span><span class="space"> </span><span>ts-node</span><span class="space"> </span><span>index.ts</span><span class="space"> </span><span>--list</span></span>
-<span class="line"><span>ID</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>Name</span></span>
-<span class="line"><span>-----</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>-----</span></span>
-<span class="line"><span>1</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>magnus</span></span>
-<span class="line"><span>2</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>eve</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> npx ts-node index.ts --list
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">npx</span><span class="space"> </span><span style="color:#ABB2BF">ts-node</span><span class="space"> </span><span style="color:#ABB2BF">index.ts</span><span class="space"> </span><span style="color:#ABB2BF">--list</span></span>
+<span class="line"><span style="color:#61AFEF">ID</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">Name</span></span>
+<span class="line"><span style="color:#61AFEF">-----</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">-----</span></span>
+<span class="line"><span style="color:#61AFEF">1</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">magnus</span></span>
+<span class="line"><span style="color:#61AFEF">2</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">eve</span></span>
+<span class="line"></span></code><button class="copy" data-code="> npx ts-node index.ts --list
 ID        Name
 -----      -----
 1         magnus
