@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -114,15 +114,32 @@ similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2
 <p>.</p>
 <p>Next, we set up our React app. I use <a href="https://vitejs.dev/guide/">Vite</a> to bootstrap my app, but you can write it from scratch or use something like <a href="https://create-react-app.dev/">Create React App</a>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>&gt;</span><span class="space"> </span><span>yarn</span><span class="space"> </span><span>create</span><span class="space"> </span><span>vite</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="> yarn create vite
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>output</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>✔</span><span class="space"> </span><span>Project</span><span class="space"> </span><span>name:</span><span class="space"> </span><span>&gt;</span><span class="space"> </span><span>frontend</span></span>
 <span class="line"><span>✔</span><span class="space"> </span><span>Select</span><span class="space"> </span><span>a</span><span class="space"> </span><span>framework:</span><span class="space"> </span><span>›</span><span class="space"> </span><span>react</span></span>
 <span class="line"><span>✔</span><span class="space"> </span><span>Select</span><span class="space"> </span><span>a</span><span class="space"> </span><span>variant:</span><span class="space"> </span><span>›</span><span class="space"> </span><span>react-ts</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="✔ Project name: > frontend
+✔ Select a framework: › react
+✔ Select a variant: › react-ts
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Install the <code>aws-amplify</code> and its UI components:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>yarn</span><span class="space"> </span><span>add</span><span class="space"> </span><span>aws-amplify</span><span class="space"> </span><span>@aws-amplify/ui-react</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="yarn add aws-amplify @aws-amplify/ui-react
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>The source code is kept in <code>./src</code>, and we can remove everything expect <code>App.tsx</code> and <code>main.tsx</code>.</p>
 <p><code>src/main.tsx</code></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#E06C75">React</span><span class="space"> </span><span style="color:#C678DD">from</span><span class="space"> </span><span style="color:#98C379">&quot;react&quot;</span><span style="color:#ABB2BF">;</span></span>
@@ -137,7 +154,23 @@ similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&lt;</span><span style="color:#E06C75">App</span><span class="space"> </span><span style="color:#56B6C2">/&gt;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&lt;/</span><span style="color:#E5C07B">React</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">StrictMode</span><span style="color:#56B6C2">&gt;</span></span>
 <span class="line"><span style="color:#ABB2BF">);</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import React from &#34;react&#34;;
+import ReactDOM from &#34;react-dom/client&#34;;
+import App from &#34;./App&#34;;
+import { Amplify } from &#34;aws-amplify&#34;;
+import awsExports from &#34;./aws-exports&#34;;
+Amplify.configure(awsExports);
+
+ReactDOM.createRoot(document.getElementById(&#34;root&#34;)!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><code>src/App.tsx</code></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">Authenticator</span><span style="color:#ABB2BF">,</span></span>
@@ -172,7 +205,44 @@ similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&lt;/&gt;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import {
+  Authenticator,
+  Button,
+  Card,
+  Heading,
+  Text,
+  View,
+} from &#34;@aws-amplify/ui-react&#34;;
+import &#34;@aws-amplify/ui-react/styles.css&#34;;
+
+export default function App() {
+  return (
+    <>
+      <Authenticator>
+        {({ signOut = () => {}, user }) => {
+          return (
+            <View width=&#34;40rem&#34; textAlign=&#34;center&#34;>
+              <Card variation=&#34;elevated&#34;>
+                <Heading level={1}>Welcome!</Heading>
+                <Text margin=&#34;2em&#34;>
+                  You are logged in as <b>{user?.attributes?.email}</b>
+                </Text>
+                <Button variation=&#34;primary&#34; onClick={() => signOut()}>
+                  Log out now!
+                </Button>
+              </Card>
+            </View>
+          );
+        }}
+      </Authenticator>
+    </>
+  );
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="how-to-extend-this">How to extend this?</h2>
 <p>Frontend + Cogninto</p>
 <p>Could connect something like this</p>

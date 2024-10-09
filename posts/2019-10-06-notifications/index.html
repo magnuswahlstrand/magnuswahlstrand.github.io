@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -103,7 +103,38 @@ Taxis, while keeping the one for E-mails.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="class MainActivity : AppCompatActivity() {
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channelID = &#x22;Some channel ID&#x22;
+            val channelName = &#x22;E-mail&#x22;
+            val channelDescription = &#x22;Information about e-mail&#x22;
+            val channel = NotificationChannel(channelID, channelName, importance).apply {
+                description = channelDescription
+            }
+
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        createNotificationChannel()
+
+        // We will create the notification here next
+        ...
+    }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>More info here: <a href="https://developer.android.com/training/notify-user/channels">Android: notification channels</a>.</p>
 <h3 id="creating-a-notification">Creating a notification</h3>
 <p>Now we can create a notification that is shown when the user opens the app</p>
@@ -125,7 +156,29 @@ Taxis, while keeping the one for E-mails.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">val</span><span class="space"> </span><span style="color:#ABB2BF">notificationManager</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">getSystemService</span><span style="color:#ABB2BF">(Context.NOTIFICATION_SERVICE)</span><span class="space"> </span><span style="color:#C678DD">as</span><span class="space"> </span><span style="color:#ABB2BF">NotificationManager</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">notificationManager.</span><span style="color:#61AFEF">notify</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">notificationBuilder.</span><span style="color:#61AFEF">build</span><span style="color:#ABB2BF">())</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        createNotificationChannel()
+
+        sendNotification()
+    }
+
+    private fun sendNotification() {
+        // Note: if Android API level is less than 26, the channelID will be ignored
+        val notificationBuilder = NotificationCompat.Builder(this, channelID)
+            .setContentTitle(&#x22;Hello Notification! \uD83D\uDC7B&#x22;)
+            .setContentText(&#x22;This is the notification text \uD83D\uDC4F&#x22;)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(1, notificationBuilder.build())
+    }
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Now if we build the app:</p>
 <p><img src="/img/push-notifications/2_notifications.jpg" alt="Successful push"></p>
 <h4 id="optional-add-a-button-that-will-trigger-the-notification">(Optional) Add a button that will trigger the notification</h4>
@@ -159,7 +212,40 @@ Taxis, while keeping the one for E-mails.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">app:layout_constraintStart_toStartOf</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"parent"</span><span style="color:#ABB2BF">/></span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">androidx.constraintlayout.widget.ConstraintLayout</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&#x22;http://schemas.android.com/apk/res/android&#x22;
+                                                   xmlns:app=&#x22;http://schemas.android.com/apk/res-auto&#x22;
+                                                   xmlns:tools=&#x22;http://schemas.android.com/tools&#x22;
+                                                   android:layout_width=&#x22;match_parent&#x22;
+                                                   android:layout_height=&#x22;match_parent&#x22;
+                                                   tools:context=&#x22;.MainActivity&#x22;>
+
+    <TextView
+            android:layout_width=&#x22;wrap_content&#x22;
+            android:layout_height=&#x22;wrap_content&#x22;
+            android:text=&#x22;Hello World!&#x22;
+            app:layout_constraintBottom_toTopOf=&#x22;@+id/notify_button&#x22;
+            app:layout_constraintLeft_toLeftOf=&#x22;parent&#x22;
+            app:layout_constraintRight_toRightOf=&#x22;parent&#x22;
+            app:layout_constraintTop_toTopOf=&#x22;parent&#x22;/>
+
+    <!-- Added -->
+    <Button
+            android:id=&#x22;@+id/notify_button&#x22;
+            android:layout_width=&#x22;wrap_content&#x22;
+            android:layout_height=&#x22;wrap_content&#x22;
+            android:layout_marginBottom=&#x22;280dp&#x22;
+            android:text=&#x22;Notify!&#x22;
+            app:layout_constraintBottom_toBottomOf=&#x22;parent&#x22;
+            app:layout_constraintEnd_toEndOf=&#x22;parent&#x22;
+            app:layout_constraintStart_toStartOf=&#x22;parent&#x22;/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>ActivityMain.kt</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">override</span><span class="space"> </span><span style="color:#C678DD">fun</span><span class="space"> </span><span style="color:#61AFEF">onCreate</span><span style="color:#ABB2BF">(savedInstanceState:</span><span class="space"> </span><span style="color:#E5C07B">Bundle</span><span style="color:#ABB2BF">?)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
@@ -167,7 +253,17 @@ Taxis, while keeping the one for E-mails.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">sendNotification</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="    override fun onCreate(savedInstanceState: Bundle?) {
+        ...
+        notify_button.setOnClickListener {
+            sendNotification()
+        }
+    }
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="code">Code</h3>
 <p><em>The code for the push notification is foreground mode
 is <a href="https://github.com/magnuswahlstrand/android-push-notifications/tree/foreground-mode">here</a>.</em></p>
@@ -196,7 +292,27 @@ information <a href="https://developer.android.com/training/notify-user/build-no
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">val</span><span class="space"> </span><span style="color:#ABB2BF">notificationManager</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">getSystemService</span><span style="color:#ABB2BF">(Context.NOTIFICATION_SERVICE)</span><span class="space"> </span><span style="color:#C678DD">as</span><span class="space"> </span><span style="color:#ABB2BF">NotificationManager</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">notificationManager.</span><span style="color:#61AFEF">notify</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">notificationBuilder.</span><span style="color:#61AFEF">build</span><span style="color:#ABB2BF">())</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="    private fun sendNotification() {
+        val intent = Intent(this, DetailsActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
+
+        // Note: if Android API level is less than 26, the channelID will be ignored
+        val notificationBuilder = NotificationCompat.Builder(this, channelID)
+            ...
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(1, notificationBuilder.build())
+    }
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Set <code>setAutoCancel(true)</code> will make sure that the notification disappears when the user clicks it.
 Here is the result.</p>
 <p><img src="/img/push-notifications/2_specific_view.gif" alt="Go to specific view"></p>

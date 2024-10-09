@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -150,7 +150,21 @@ the <a href="https://trpc.io/docs">official documentation</a>).</p>
 <span class="line"></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Install</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">tRPC</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">client</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">and</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">server</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">packages</span></span>
 <span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@trpc/server</span><span class="space"> </span><span style="color:#98C379">@trpc/client</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# First we initialize the Serverless Stack using the Typescript starter
+npx create-sst@latest \
+  --template=starters/typescript-starter trpc-with-lambda-function-urls
+
+# Install the dependencies
+cd trpc-with-lambda-function-urls
+npm install
+
+# Install the tRPC client and server packages
+npm install @trpc/server @trpc/client
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>After the SST setup, our directory looks as follows:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>.</span></span>
 <span class="line"><span>├──</span><span class="space"> </span><span>package.json</span></span>
@@ -167,7 +181,26 @@ the <a href="https://trpc.io/docs">official documentation</a>).</p>
 <span class="line"><span>│  </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>index.ts</span></span>
 <span class="line"><span>├──</span><span class="space"> </span><span>tsconfig.json</span></span>
 <span class="line"><span>└──</span><span class="space"> </span><span>vitest.config.ts</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code=".
+├── package.json
+├── services
+│   ├── functions
+│   │   └── lambda.ts
+│   ├── package.json
+│   ├── test
+│   │   └── sample.test.ts
+│   └── tsconfig.json
+├── sst.json
+├── stacks
+│   ├── MyStack.ts
+│   └── index.ts
+├── tsconfig.json
+└── vitest.config.ts
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="updating-the-stack">Updating the stack</h2>
 <p>As I mentioned in the introduction, we do not need the API gateway in our stack. Let’s update the stack that SST gave us, and replace the API Gateway with it with a Lambda function. It is located in <code>./stacks/MyStack.ts</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="diff"><code><span class="line"><span style="color:#E06C75"><span style="user-select:none">-</span>import { StackContext, Api } from &quot;@serverless-stack/resources&quot;;</span></span>
@@ -190,10 +223,39 @@ the <a href="https://trpc.io/docs">official documentation</a>).</p>
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>    FunctionURL: fn.url ?? &quot;&quot;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="-import { StackContext, Api } from &#34;@serverless-stack/resources&#34;;
++import { StackContext, Function } from &#34;@serverless-stack/resources&#34;;
+
+ export function MyStack({ stack }: StackContext) {
+-  const api = new Api(stack, &#34;api&#34;, {
+-    routes: {
+-      &#34;GET /&#34;: &#34;functions/lambda.handler&#34;,
+-    },
+-  });
++
++  const fn = new Function(stack, &#34;trpc&#34;, {
++    handler: &#34;functions/lambda.handler&#34;,
++    url: true  // <--- enable function URL
++  })
++
+   stack.addOutputs({
+-    ApiEndpoint: api.url
++    FunctionURL: fn.url ?? &#34;&#34;
+   });
+ }
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then we can deploy our stack for the first time. It takes around a minute.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>start</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npm start
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Output:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#ABB2BF">trpc-with-lambda-</span><span style="color:#C678DD">function</span><span style="color:#61AFEF">-urls@0.0.0</span><span class="space"> </span><span style="color:#ABB2BF">start</span></span>
 <span class="line"><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#ABB2BF">sst</span><span class="space"> </span><span style="color:#ABB2BF">start</span></span>
@@ -210,7 +272,26 @@ the <a href="https://trpc.io/docs">official documentation</a>).</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Status:</span><span class="space"> </span><span style="color:#98C379">deployed</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Outputs:</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">FunctionURL:</span><span class="space"> </span><span style="color:#98C379">https://kr2madrbusxrglf3aamfj7o4sy0hlebb.lambda-url.us-east-1.on.aws/</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> trpc-with-lambda-function-urls@0.0.0 start
+> sst start
+
+Look like you’re running sst for the first time in this directory. Please enter a stage name you’d like to use locally. Or hit enter to use the one based on your AWS credentials (magnus):
+Using stage: magnus
+...
+
+...
+ ✅  magnus-trpc-with-lambda-function-urls-MyStack
+
+
+Stack magnus-trpc-with-lambda-function-urls-MyStack
+  Status: deployed
+  Outputs:
+    FunctionURL: https://kr2madrbusxrglf3aamfj7o4sy0hlebb.lambda-url.us-east-1.on.aws/
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Open the <code>FunctionURL</code> from the ouput, and you should get a response from your function:</p>
 <p><img src="/img/trpc-with-lambda-function-urls-on-aws/first_request.png" alt="First request"/></p>
 <p>How cool is that? Next we will replace it our tRPC handler Lambda.</p>
@@ -233,7 +314,28 @@ the <a href="https://trpc.io/docs">official documentation</a>).</p>
 <span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">handler</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">awsLambdaRequestHandler</span><span style="color:#ABB2BF">({</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">router</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">appRouter</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
+import * as z from &#34;zod&#34;;
+import { awsLambdaRequestHandler } from &#34;@trpc/server/adapters/aws-lambda&#34;;
+
+const appRouter = trpc.router().query(&#34;sayHello&#34;, {
+  // 1. Procedure name
+  input: z.string(), // 2. Input
+  async resolve(req) {
+    return `Hello, ${req.input}!`; // 3. Response
+  },
+});
+
+export type AppRouter = typeof appRouter;
+
+export const handler = awsLambdaRequestHandler({
+  router: appRouter,
+});
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>SST will automatically reload the handler. If you go to the same URL as before, you will get an error similar to the one
 below.</p>
 <p><img src="/img/trpc-with-lambda-function-urls-on-aws/trpc_error.png" alt="tRPC error"/></p>
@@ -259,10 +361,36 @@ directly by the browser.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">greeting</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#C678DD">await</span><span class="space"> </span><span style="color:#E5C07B">client</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">query</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">&quot;sayHello&quot;</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">&quot;Bilbo&quot;</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E5C07B">console</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">log</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">greeting</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#ABB2BF">})();</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import type { AppRouter } from &#34;../services/functions/lambda&#34;;
+import { createTRPCClient } from &#34;@trpc/client&#34;;
+
+// 1. Replace with your Function URL, e.g.
+// https://kr2madrbusxrglf3aamfj7o4sy0hlebb.lambda-url.us-east-1.on.aws
+const function_url = &#34;<YOUR FUNCTION URL HERE>&#34;;
+
+// 2. Create tPRC client
+const client = createTRPCClient<AppRouter>({
+  url: function_url,
+});
+
+// 3. Make request to server
+(async function () {
+  const greeting = await client.query(&#34;sayHello&#34;, &#34;Bilbo&#34;);
+  console.log(greeting);
+})();
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We invoke our client with <code>npx ts-node ./client</code>. Output:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">Hello,</span><span class="space"> </span><span style="color:#98C379">Bilbo!</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="Hello, Bilbo!
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Success!</p>
 <h3 id="summary---section-1">Summary - section 1</h3>
 <p>What happened here?</p>
@@ -288,7 +416,13 @@ for making requests to our remote backend 💘.</p> </div>
 <p>For the next steps, we need <code>ksuid</code> that will be used as ID for our ToDos, and <code>prompt</code> that is used by our client.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>ksuid</span></span>
 <span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>prompts</span><span class="space"> </span><span>@types/prompts</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npm install ksuid
+npm install prompts @types/prompts
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="updating-the-stack-1">Updating the stack</h2>
 <p>Next, we add a DynamoDB table, using the SST construct <a href="https://docs.sst.dev/constructs/Table"><strong>Table</strong></a>. Make sure to give the Lambda function permission to access the table, and set the name of the table as an environment.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="diff"><code><span class="line"><span style="color:#E06C75"><span style="user-select:none">-</span>import {Function, StackContext} from &quot;@serverless-stack/resources&quot;;</span></span>
@@ -312,7 +446,32 @@ for making requests to our remote backend 💘.</p> </div>
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>        },</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">url:</span><span class="space"> </span><span style="color:#ABB2BF">true</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">})</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="-import {Function, StackContext} from &#34;@serverless-stack/resources&#34;;
++import {Function, StackContext, Table} from &#34;@serverless-stack/resources&#34;;
+
+
+ export function MyStack({stack}: StackContext) {
++    const todoTable = new Table(stack, &#34;table&#34;, {
++        fields: {
++            id: &#34;string&#34;,
++        },
++        primaryIndex: {partitionKey: &#34;id&#34;},
++    })
+
+
+     const fn = new Function(stack, &#34;trpc&#34;, {
+         handler: &#34;functions/lambda.handler&#34;,
++        permissions: [todoTable],
++        environment: {
++            TABLE_NAME: todoTable.tableName,
++        },
+         url: true
+     })
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="updating-the-router">Updating the router</h2>
 <p>To make the code a bit easier to follow, I will break out the database calls to a separate file. We will create two mutations (writers of data) and one query (reader of data).</p>
 <ul>
@@ -373,7 +532,63 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">promise</span><span style="color:#ABB2BF">();</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E5C07B">resp</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Items</span><span style="color:#ABB2BF">?.</span><span style="color:#61AFEF">map</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">item</span><span class="space"> </span><span style="color:#C678DD">=&gt;</span><span class="space"> </span><span style="color:#E06C75">item</span><span class="space"> </span><span style="color:#C678DD">as</span><span class="space"> </span><span style="color:#E5C07B">ToDo</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#ABB2BF">};</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import { DynamoDB } from &#34;aws-sdk&#34;;
+
+const tableName = process.env.TABLE_NAME ?? &#34;&#34;; // <--- 1.
+
+const dynamoDb = new DynamoDB.DocumentClient(); // <--- 2.
+
+type ToDo = {
+  id: string;
+  description: string;
+  completed: boolean;
+};
+
+export const createToDo = async (id: string, description: string) => {
+  const todo = {
+    id: id,
+    description: description,
+    completed: false,
+  };
+
+  const putParams = {
+    TableName: tableName,
+    Item: todo,
+  };
+
+  await dynamoDb.put(putParams).promise();
+};
+
+export const completeToDo = async (id: string) => {
+  const updateParams = {
+    TableName: tableName,
+    Key: {
+      id: id,
+    },
+    UpdateExpression: `set completed = :completed`,
+    ExpressionAttributeValues: {
+      &#34;:completed&#34;: true,
+      &#34;:id&#34;: id,
+    },
+    ConditionExpression: &#34;id = :id&#34;,
+  };
+
+  await dynamoDb.update(updateParams).promise();
+};
+
+export const listToDos = async () => {
+  const resp = await dynamoDb
+    .scan({
+      TableName: tableName,
+    })
+    .promise();
+  return resp.Items?.map(item => item as ToDo);
+};
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>I will not go into the details of how the request to DynamoDB works. A couple of notes:</p>
 <ol>
 <li>We get to use the environment variable <code>TABLE_NAME</code> we propagated in the stack.</li>
@@ -413,7 +628,43 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 <span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">handler</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">awsLambdaRequestHandler</span><span style="color:#ABB2BF">({</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">router</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">appRouter</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
+import * as z from &#34;zod&#34;;
+import KSUID from &#34;ksuid&#34;;
+import { awsLambdaRequestHandler } from &#34;@trpc/server/adapters/aws-lambda&#34;;
+import { completeToDo, createToDo, listToDos } from &#34;./db&#34;;
+
+const appRouter = trpc
+  .router()
+  .mutation(&#34;createToDo&#34;, {
+    input: z.string(),
+    async resolve(req) {
+      const id = KSUID.randomSync().string;
+      await createToDo(id, req.input);
+      return id;
+    },
+  })
+  .mutation(&#34;completeToDo&#34;, {
+    input: z.string(),
+    async resolve(req) {
+      return completeToDo(req.input);
+    },
+  })
+  .query(&#34;listToDos&#34;, {
+    async resolve(_) {
+      return listToDos();
+    },
+  });
+export type AppRouter = typeof appRouter;
+
+export const handler = awsLambdaRequestHandler({
+  router: appRouter,
+});
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Here we have created 3 remote procedures:</p>
 <ul>
 <li><code>createToDo</code> - takes a description string as input, generates a KSUID, and creates a new Todo</li>
@@ -450,11 +701,50 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E5C07B">console</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">log</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">`</span><span style="color:#C678DD">${</span><span style="color:#E06C75">i</span><span class="space"> </span><span style="color:#56B6C2">+</span><span class="space"> </span><span style="color:#D19A66">1</span><span style="color:#C678DD">}</span><span class="space"> </span><span style="color:#98C379">-</span><span class="space"> </span><span style="color:#C678DD">${</span><span style="color:#E5C07B">todo</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">description</span><span style="color:#C678DD">}</span><span class="space"> </span><span style="color:#98C379">(</span><span style="color:#C678DD">${</span><span style="color:#E06C75">state</span><span style="color:#C678DD">}</span><span style="color:#98C379">)`</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span style="color:#ABB2BF">})();</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import type { AppRouter } from &#34;../services/functions/lambda&#34;;
+import { createTRPCClient } from &#34;@trpc/client&#34;;
+
+const function_url =
+  &#34;https://kr2madrbusxrglf3aamfj7o4sy0hlebb.lambda-url.us-east-1.on.aws&#34;;
+
+const client = createTRPCClient<AppRouter>({
+  url: function_url,
+});
+
+(async function () {
+  // Create two ToDos
+  const first_id = await client.mutation(&#34;createToDo&#34;, &#34;Buy milk&#34;);
+  const secnd_id = await client.mutation(&#34;createToDo&#34;, &#34;Buy eggs&#34;);
+
+  // Mark one as completed
+  await client.mutation(&#34;completeToDo&#34;, first_id);
+
+  // List Todos
+  const todos = await client.query(&#34;listToDos&#34;);
+  if (!todos) {
+    return;
+  }
+
+  todos.forEach(function (todo, i) {
+    const state = todo.completed ? &#34;completed&#34; : &#34;in progress&#34;;
+    console.log(`${i + 1} - ${todo.description} (${state})`);
+  });
+})();
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>If we run the client, we get the following output.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>1</span><span class="space"> </span><span>-</span><span class="space"> </span><span>Buy</span><span class="space"> </span><span>milk</span><span class="space"> </span><span>(completed)</span></span>
 <span class="line"><span>2</span><span class="space"> </span><span>-</span><span class="space"> </span><span>Buy</span><span class="space"> </span><span>eggs</span><span class="space"> </span><span>(in</span><span class="space"> </span><span>progress)</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="1 - Buy milk (completed)
+2 - Buy eggs (in progress)
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Seems to work!</p>
 <h2 id="client">Client</h2>
 <p>Finally, let’s turn our client into a prompt, as promised.</p>
@@ -527,7 +817,78 @@ Create a new file at <code>./services/functions/db.ts</code></li>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>}</span></span>
 <span class="line"><span>})();</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="import type {AppRouter} from '../services/functions/lambda';
+import {createTRPCClient} from '@trpc/client';
+import prompts from &#34;prompts&#34;
+
+const function_url = &#34;https://kr2madrbusxrglf3aamfj7o4sy0hlebb.lambda-url.us-east-1.on.aws&#34;
+
+const client = createTRPCClient<AppRouter>({
+    url: function_url,
+});
+
+const promptNewTodo = async () => {
+    const entered = await prompts({
+        type: 'text',
+        name: 'description',
+        message: `Please describe your ToDo`,
+    });
+
+    await client.mutation('createToDo', entered.description)
+}
+
+async function promptForTodoComplete() {
+    const todos = await client.query('listToDos') ?? [];
+    const todoChoices = todos.map((todo) => {
+        return {
+            title: todo.description + (todo.completed ? &#34; (completed)&#34; : &#34;&#34;),
+            description: `Mark as completed`,
+            value: todo.id,
+            disabled: todo.completed,
+        }
+    })
+
+    const choices = [
+        ...todoChoices,
+        {title: &#34;ACTION: CREATE TODO&#34;, value: &#34;new&#34;},
+        {title: &#34;ACTION: EXIT&#34;, value: &#34;exit&#34;}
+    ]
+
+    const selected = await prompts({
+        type: 'select',
+        name: &#34;id&#34;,
+        message: 'Select an action',
+        warn: &#34; &#34;,
+        hint: &#34; &#34;,
+        choices: choices,
+    });
+
+    if (!selected.id || selected.id == &#34;exit&#34;) {
+        return {id: &#34;&#34;, exit: true}
+    }
+    return {id: selected.id, exit: false}
+}
+
+(async () => {
+    console.log(&#34;Loading ToDos...&#34;)
+    let exit = false;
+    while (!exit) {
+        const {id, exit} = await promptForTodoComplete();
+        if (exit)
+            break
+
+        if (id == &#34;new&#34;) {
+            await promptNewTodo()
+        } else {
+            await client.mutation('completeToDo', id)
+        }
+    }
+})();
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>And for the last time, run the client. The app is now complete 👏!</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>We have created a semi-useful ToDo-app using <strong>tRPC</strong> and Lambda functions and Function URLs. I hope by now I have made it apparent how easy <strong>tRPC</strong> (and <strong>SST</strong>) made developing this app. I spent more time writing the silly prompt than hooking up the client to the server, and deploying it all. Great developer experience!</p>

@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -60,7 +60,13 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <p>First we need to bootstrap our project. The <a href="https://sst.dev/">SST CLI</a> will do most of the heavy lifting. Since most of our application code is Go, I use the <strong>starters/go-starter</strong> template.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx</span><span class="space"> </span><span>create-sst@latest</span><span class="space"> </span><span>--template=starters/go-starter</span><span class="space"> </span><span>eventbus</span></span>
 <span class="line"><span>cd</span><span class="space"> </span><span>eventbus</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npx create-sst@latest --template=starters/go-starter eventbus
+cd eventbus
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Our directory now looks as follows.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>&gt;</span><span class="space"> </span><span>tree</span><span class="space"> </span><span>-a</span><span class="space"> </span><span>-L</span><span class="space"> </span><span>2</span></span>
 <span class="line"><span>.</span></span>
@@ -80,7 +86,29 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>index.ts</span></span>
 <span class="line"><span>├──</span><span class="space"> </span><span>tsconfig.json</span></span>
 <span class="line"><span>└──</span><span class="space"> </span><span>vitest.config.ts</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="> tree -a -L 2
+.
+├── .env
+├── .gitignore
+├── .vscode
+│   └── launch.json
+├── package.json
+├── services
+│   ├── functions
+│   │  └── lambda.go
+│   ├── go.mod
+│   └── go.sum
+├── sst.json
+├── stacks
+│   ├── MyStack.ts
+│   └── index.ts
+├── tsconfig.json
+└── vitest.config.ts
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>In this tutorial, we are interested in two parts</p>
 <ul>
 <li><code>./stack/MyStack.ts</code> - This is where our SST/CDK stack is defined. It will define the infrastructure for API Gateway, EventBridge and our Lambda functions.</li>
@@ -89,11 +117,23 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <p>We also install <a href="https://dave.cheney.net/">Dave Cheney</a>’s package <a href="https://github.com/davecgh/go-spew">go-spew</a>. It is a Go package to dump things to the logs. I often use it to explore what data is passed around in a new service, in this case AWS EventBridge.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd</span><span class="space"> </span><span>eventbus/services</span></span>
 <span class="line"><span>go</span><span class="space"> </span><span>get</span><span class="space"> </span><span>github.com/davecgh/go-spew/spew</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="cd eventbus/services
+go get github.com/davecgh/go-spew/spew
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>With everything in place, we can deploy our initial stack</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span></span>
 <span class="line"><span>npm</span><span class="space"> </span><span>start</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npm install
+npm start
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Output:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>...</span></span>
 <span class="line"><span></span></span>
@@ -112,7 +152,28 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span></span></span>
 <span class="line"><span>SST</span><span class="space"> </span><span>Console:</span><span class="space"> </span><span>https://console.sst.dev/eventbus/magnus/local</span></span>
 <span class="line"><span>Debug</span><span class="space"> </span><span>session</span><span class="space"> </span><span>started.</span><span class="space"> </span><span>Listening</span><span class="space"> </span><span>for</span><span class="space"> </span><span>requests...</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="...
+
+ ✅  magnus-eventbus-MyStack
+
+
+Stack magnus-eventbus-MyStack
+  Status: deployed
+  Outputs:
+    ApiEndpoint: https://c5fk9hc8kk.execute-api.us-east-1.amazonaws.com
+
+
+==========================
+ Starting Live Lambda Dev
+==========================
+
+SST Console: https://console.sst.dev/eventbus/magnus/local
+Debug session started. Listening for requests...
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="consuming-events">Consuming events</h2>
 <p>Now we can start building! First out we will get the <strong><em>event consuming</em></strong> to work. Our setup will look like this:</p>
 <ol>
@@ -147,7 +208,34 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">BusName</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">bus</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">eventBusName</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import {EventBus, StackContext} from &#34;@serverless-stack/resources&#34;;
+
+export function Stack({stack}: StackContext) {
+    // 1. Create event bus
+    const bus = new EventBus(stack, &#34;EventBus&#34;, {})
+
+    // 2. Add set up event routing rules
+    bus.addRules(stack, {
+        &#34;order_created&#34;: {
+            pattern: {
+                detailType: [&#34;order.created&#34;],
+            },
+            targets: {
+                function: &#34;functions/log_events.go&#34;
+            }
+        }
+    })
+
+	// 3. Output the event bus name
+    stack.addOutputs({
+        BusName: bus.eventBusName
+    });
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Let’s break this down.</p>
 <ol>
 <li>We create our event bus using <code>EventBus</code> from <code>@serverless-stack/resources</code>. This is a higher order CDK construct that simplifies our set up. This create a new custom EventBridge bus.</li>
@@ -173,7 +261,29 @@ our Lambda function</p> </p>
 <span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">LogHandler</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+	&#34;fmt&#34;
+	&#34;github.com/aws/aws-lambda-go/events&#34;
+	&#34;github.com/aws/aws-lambda-go/lambda&#34;
+	&#34;github.com/davecgh/go-spew/spew&#34;
+)
+
+func LogHandler(request events.CloudWatchEvent) error {
+	fmt.Printf(&#34;received event of type %q\n&#34;, request.DetailType)
+	spew.Dump(request)
+	return nil
+}
+
+func main() {
+	lambda.Start(LogHandler)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This function receives an event of type CloudWatchEvent (this is the event format sent over EventBridge) and logs it to standard out using <code>go-spew</code> that we installed earlier. We will see it in action.</p>
 <h3 id="testing-the-event-consumer">Testing the event consumer</h3>
 <p>Before we run our tests, make sure that the SST CLI is still running. If not, start it with <code>npm start</code> in the root folder. Next, we create a file with a single event payload in a file called <code>order_created.json</code>.</p>
@@ -185,10 +295,27 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">&quot;DetailType&quot;</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">]</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="[
+  {
+    &#34;Source&#34;: &#34;terminal&#34;,
+    &#34;Detail&#34;: &#34;{ \&#34;amount\&#34;: 999, \&#34;line_items\&#34;: [] }&#34;,
+    &#34;EventBusName&#34;: &#34;magnus-eventbus-EventBus&#34;,
+    &#34;DetailType&#34;: &#34;order.created&#34;
+  }
+]
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This is the minimal payload (I believe). Full definition <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html">here</a>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>aws</span><span class="space"> </span><span>--region</span><span class="space"> </span><span>us-east-1</span><span class="space"> </span><span>events</span><span class="space"> </span><span>put-events</span><span class="space"> </span><span>--entries</span><span class="space"> </span><span>file://order_created.json</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="aws --region us-east-1 events put-events --entries file://order_created.json
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>You should see something like this to indicate that the publishing was successful:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="json"><code><span class="line"><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">&quot;FailedEntryCount&quot;</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">,</span></span>
@@ -198,7 +325,19 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">]</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="{
+  &#34;FailedEntryCount&#34;: 0,
+  &#34;Entries&#34;: [
+    {
+      &#34;EventId&#34;: &#34;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&#34;
+    }
+  ]
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>If you open the terminal with the SST CLI, you should see our the function <code>functions/log_events.go</code> was invoked, and the whole payload was logged!</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>9e3818c0-5f28-449c-a4e5-f94fd2d24cd3</span><span class="space"> </span><span>REQUEST</span><span class="space"> </span><span>magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K</span><span class="space"> </span><span>[functions/log_events.go]</span><span class="space"> </span><span>invoked</span></span>
 <span class="line"><span></span></span>
@@ -218,7 +357,29 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span>00000010</span><span class="space"> </span><span class="space"> </span><span>69</span><span class="space"> </span><span>6e</span><span class="space"> </span><span>65</span><span class="space"> </span><span>5f</span><span class="space"> </span><span>69</span><span class="space"> </span><span>74</span><span class="space"> </span><span>65</span><span class="space"> </span><span>6d</span><span class="space"> </span><span class="space"> </span><span>73</span><span class="space"> </span><span>22</span><span class="space"> </span><span>3a</span><span class="space"> </span><span>5b</span><span class="space"> </span><span>5d</span><span class="space"> </span><span>7d</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>|ine_items&quot;:[]}|</span></span>
 <span class="line"><span class="space"> </span><span>}</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="9e3818c0-5f28-449c-a4e5-f94fd2d24cd3 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked
+
+received event of type &#34;order.created&#34;
+(events.CloudWatchEvent) {
+ Version: (string) (len=1) &#34;0&#34;,
+ ID: (string) (len=36) &#34;4d2d7ae8-57e4-5e17-97be-dcd98c22014b&#34;,
+ DetailType: (string) (len=13) &#34;order.created&#34;,
+ Source: (string) (len=8) &#34;terminal&#34;,
+ AccountID: (string) (len=12) &#34;601855032707&#34;,
+ Time: (time.Time) 2022-06-26 13:10:29 +0000 UTC,
+ Region: (string) (len=9) &#34;us-east-1&#34;,
+ Resources: ([]string) {
+ },
+ Detail: (json.RawMessage) (len=30 cap=32) {
+  00000000  7b 22 61 6d 6f 75 6e 74  22 3a 39 39 39 2c 22 6c  |{&#34;amount&#34;:999,&#34;l|
+  00000010  69 6e 65 5f 69 74 65 6d  73 22 3a 5b 5d 7d        |ine_items&#34;:[]}|
+ }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>As you can see, this is mostly the same event as we sent from using <code>aws events put-events</code>. The most interesting fields here are</p>
 <ul>
 <li><code>DetailType</code>: <strong>order.created</strong>, this is the field that we use for routing.</li>
@@ -271,7 +432,48 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">BusName:</span><span class="space"> </span><span style="color:#ABB2BF">bus.eventBusName</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="-import {EventBus, StackContext} from &#34;@serverless-stack/resources&#34;;
++import {EventBus, Api, StackContext} from &#34;@serverless-stack/resources&#34;;
+
+ export function Stack({stack}: StackContext) {
+    const bus = new EventBus(stack, &#34;EventBus&#34;, {})
+
+    bus.addRules(stack, {
+        &#34;order_created&#34;: {
+            pattern: {
+                detailType: [&#34;order.created&#34;],
+            },
+            targets: {
+                function: &#34;functions/log_events.go&#34;
+            }
+        }
+    })
+
++    const api = new Api(stack, &#34;api&#34;, {
++        routes: {
++            &#34;POST /order&#34;: &#34;functions/create_order.go&#34;,
++        },
++        defaults: {
++            function: {
++                permissions: [bus],
++                environment: {
++                    EVENT_BUS_NAME: bus.eventBusName
++                }
++            },
++
++        },
++    });
++
+     stack.addOutputs({
++        ApiEndpoint: api.url,
+         BusName: bus.eventBusName
+     });
+ }
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Next we define our new function. Create a new file called <code>functions/create_order.go</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span class="space"> </span><span style="color:#E5C07B">main</span></span>
 <span class="line"></span>
@@ -336,7 +538,74 @@ our Lambda function</p> </p>
 <span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">CreateOrderHandler</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+	&#34;context&#34;
+	&#34;encoding/json&#34;
+	&#34;github.com/aws/aws-lambda-go/events&#34;
+	&#34;github.com/aws/aws-lambda-go/lambda&#34;
+	&#34;github.com/aws/aws-sdk-go-v2/aws&#34;
+	&#34;github.com/aws/aws-sdk-go-v2/config&#34;
+	&#34;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents&#34;
+	&#34;github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types&#34;
+	&#34;os&#34;
+)
+
+var busName = os.Getenv(&#34;EVENT_BUS_NAME&#34;)
+
+type CreateOrderRequest struct {
+	Amount    int64    `json:&#34;amount&#34;`
+	LineItems []string `json:&#34;line_items&#34;`
+}
+
+func CreateOrderHandler(request events.APIGatewayProxyRequest) error {
+	// 1. Unmarshal request
+	var req CreateOrderRequest
+	if err := json.Unmarshal([]byte(request.Body), &#38;req); err != nil {
+		return err
+	}
+
+	// 2. Set up EventBridge client
+	cfg, err := config.LoadDefaultConfig(context.TODO())
+	if err != nil {
+		return err
+	}
+	client := cloudwatchevents.NewFromConfig(cfg)
+
+	// 3. Marshal order into JSON again
+	b, err := json.Marshal(req)
+	if err != nil {
+		return err
+	}
+
+	// 4. Publish events to EventBridge
+	_, err = client.PutEvents(context.Background(),
+		&#38;cloudwatchevents.PutEventsInput{
+			Entries: []types.PutEventsRequestEntry{
+				{
+					EventBusName: aws.String(busName),
+					Source:       aws.String(&#34;create_order_fn&#34;),
+
+					DetailType: aws.String(&#34;order.created&#34;),
+					Detail:     aws.String(string(b)),
+				},
+			},
+		})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func main() {
+	lambda.Start(CreateOrderHandler)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Here we do the following:</p>
 <ol>
 <li>Unmarshal the request body from the API gateway into <code>CreateOrderRequest</code>.</li>
@@ -358,7 +627,18 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span>&quot;amount&quot;:</span><span class="space"> </span><span>999,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span>&quot;line_items&quot;:</span><span class="space"> </span><span>[&quot;food&quot;,</span><span class="space"> </span><span>&quot;shelter&quot;]</span></span>
 <span class="line"><span>}</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="POST https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order
+Content-Type: application/json
+
+{
+  &#34;amount&#34;: 999,
+  &#34;line_items&#34;: [&#34;food&#34;, &#34;shelter&#34;]
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <ul>
 <li>Or, the option I used: go to the SST console and make the request.
 <img src="/img/event-based-system-on-aws/sst-console.png" alt="SST console"/></li>
@@ -390,7 +670,37 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span style="color:#61AFEF">}</span></span>
 <span class="line"><span style="color:#61AFEF">}</span></span>
 <span class="line"><span style="color:#61AFEF">ea5ecb52-90f0-416a-aa69-1645ab6b965e</span><span class="space"> </span><span style="color:#61AFEF">RESPONSE</span><span class="space"> </span><span style="color:#61AFEF">null</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# 1. create_order invoked via the API gateway
+e31bc6c6-fe85-4e92-b30d-050bf33f0498 REQUEST magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR [functions/create_order.go] invoked by API POST /order
+e31bc6c6-fe85-4e92-b30d-050bf33f0498 RESPONSE null
+
+# 2. log_events.go invoked (by event from event bus)
+ea5ecb52-90f0-416a-aa69-1645ab6b965e REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked
+
+# 3. Log invocation
+received event of type &#34;order.created&#34;
+(events.CloudWatchEvent) {
+ Version: (string) (len=1) &#34;0&#34;,
+ ID: (string) (len=36) &#34;c3a5c355-f1b0-b642-a957-48dec75c8f8d&#34;,
+ DetailType: (string) (len=13) &#34;order.created&#34;,
+ Source: (string) (len=15) &#34;create_order_fn&#34;,
+ AccountID: (string) (len=12) &#34;601855032707&#34;,
+ Time: (time.Time) 2022-06-28 20:46:55 +0000 UTC,
+ Region: (string) (len=9) &#34;us-east-1&#34;,
+ Resources: ([]string) {
+ },
+ Detail: (json.RawMessage) (len=46 cap=48) {
+  00000000  7b 22 61 6d 6f 75 6e 74  22 3a 39 39 39 2c 22 6c  |{&#34;amount&#34;:999,&#34;l|
+  00000010  69 6e 65 5f 69 74 65 6d  73 22 3a 5b 22 66 6f 6f  |ine_items&#34;:[&#34;foo|
+  00000020  64 22 2c 22 73 68 65 6c  74 65 72 22 5d 7d        |d&#34;,&#34;shelter&#34;]}|
+ }
+}
+ea5ecb52-90f0-416a-aa69-1645ab6b965e RESPONSE null
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Not only did we test event producing, but we ended up consuming the events as well! 🍾</p>
 <h2 id="adding-a-new-consumer">Adding a new consumer</h2>
 <p>Now, imagine the following scenario. The accounting department contacts us:</p>
@@ -427,7 +737,39 @@ our Lambda function</p> </p>
 <span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">lambda</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Start</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">CreateInvoiceHandler</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+	&#34;encoding/json&#34;
+	&#34;fmt&#34;
+	&#34;github.com/aws/aws-lambda-go/events&#34;
+	&#34;github.com/aws/aws-lambda-go/lambda&#34;
+)
+
+type OrderCreatedEvent struct {
+	Amount    int64    `json:&#34;amount&#34;`
+	LineItems []string `json:&#34;line_items&#34;`
+}
+
+func CreateInvoiceHandler(request events.CloudWatchEvent) error {
+	var event OrderCreatedEvent
+	if err := json.Unmarshal(request.Detail, &#38;event); err != nil {
+		return err
+	}
+
+	fmt.Printf(&#34;received event of type %q\n&#34;, request.DetailType)
+	fmt.Println(&#34;creating invoice for event&#34;, event)
+	return nil
+}
+
+func main() {
+	lambda.Start(CreateInvoiceHandler)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then we add it as a target for our stack:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="diff"><code><span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">bus.addRules(stack,</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&quot;order_created&quot;:</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
@@ -441,7 +783,23 @@ our Lambda function</p> </p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">})</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="    bus.addRules(stack, {
+        &#34;order_created&#34;: {
+            pattern: {
+                detailType: [&#34;order.created&#34;],
+            },
+            targets: {
+-                function: &#34;functions/log_events.go&#34;
++                function: &#34;functions/log_events.go&#34;,
++                invoiceFunction: &#34;functions/create_invoice.go&#34;,
+            }
+        }
+    })
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Now all we need to do is to create a new order</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">1.</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">create_order</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">invoked</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">via</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">API</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">gateway</span></span>
 <span class="line"><span style="color:#61AFEF">60647f24-3e36-438c-964e-e6644e472f84</span><span class="space"> </span><span style="color:#98C379">REQUEST</span><span class="space"> </span><span style="color:#98C379">magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR</span><span class="space"> </span><span style="color:#ABB2BF">[functions/create.go]</span><span class="space"> </span><span style="color:#ABB2BF">invoked</span><span class="space"> </span><span style="color:#ABB2BF">by</span><span class="space"> </span><span style="color:#ABB2BF">API</span><span class="space"> </span><span style="color:#ABB2BF">POST</span><span class="space"> </span><span style="color:#ABB2BF">/order</span></span>
@@ -460,7 +818,28 @@ our Lambda function</p> </p>
 <span class="line"><span style="color:#61AFEF">received</span><span class="space"> </span><span style="color:#98C379">event</span><span class="space"> </span><span style="color:#98C379">of</span><span class="space"> </span><span style="color:#98C379">type</span><span class="space"> </span><span style="color:#98C379">&quot;order.created&quot;</span></span>
 <span class="line"><span style="color:#61AFEF">creating</span><span class="space"> </span><span style="color:#98C379">invoice</span><span class="space"> </span><span style="color:#98C379">for</span><span class="space"> </span><span style="color:#98C379">event</span><span class="space"> </span><span style="color:#98C379">{</span><span style="color:#D19A66">999</span><span class="space"> </span><span style="color:#ABB2BF">[food</span><span class="space"> </span><span style="color:#98C379">shelter]}</span></span>
 <span class="line"><span style="color:#61AFEF">5b939ded-8715-4ad4-90e4-775d783893b4</span><span class="space"> </span><span style="color:#98C379">RESPONSE</span><span class="space"> </span><span style="color:#98C379">null</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# 1. create_order invoked via the API gateway
+60647f24-3e36-438c-964e-e6644e472f84 REQUEST magnus-eventbus-Stack-apiLambdaPOSTorderCF2979AB-jZgSzQgXMeRR [functions/create.go] invoked by API POST /order
+60647f24-3e36-438c-964e-e6644e472f84 RESPONSE null
+
+# 2. create_invoice.go invoked (by event from event bus)
+5b939ded-8715-4ad4-90e4-775d783893b4 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedin-awtbjGrQeKcw [functions/create_invoice.go] invoked
+
+# 3. log_events.go invoked (by event from event bus)
+525f7e61-e03a-4a31-a58b-4d9e9593bc91 REQUEST magnus-eventbus-Stack-TargetEventBusordercreatedfu-O4LYRS80WS4K [functions/log_events.go] invoked
+received event of type &#34;order.created&#34;
+...
+525f7e61-e03a-4a31-a58b-4d9e9593bc91 RESPONSE null
+
+# 4. Our invoice
+received event of type &#34;order.created&#34;
+creating invoice for event {999 [food shelter]}
+5b939ded-8715-4ad4-90e4-775d783893b4 RESPONSE null
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>If we forward this log to the accounting department, they will surely be happy!</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>We have built an event-based system using Go and AWS services. SST helps us quickly set up the infrastructure, and simplifies things like IAM permissions and propagating environment variables.</p>

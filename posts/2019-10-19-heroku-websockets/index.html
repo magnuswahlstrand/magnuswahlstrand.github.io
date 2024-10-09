@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -80,7 +80,39 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">log</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Fatal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">err</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+   &#x22;fmt&#x22;
+   &#x22;log&#x22;
+   &#x22;net/http&#x22;
+
+   &#x22;github.com/go-chi/chi&#x22;
+)
+
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+   fmt.Fprintf(w, &#x22;Welcome home!&#x22;)
+}
+
+func wsHandler(w http.ResponseWriter, r *http.Request) {
+   fmt.Fprintf(w, &#x22;Welcome, sock!&#x22;)
+}
+
+func main() {
+
+   r := chi.NewRouter()
+   r.Get(&#x22;/&#x22;, homeHandler)
+   r.Get(&#x22;/ws&#x22;, wsHandler)
+
+   if err := http.ListenAndServe(&#x22;:8080&#x22;, r); err != nil {
+      log.Fatal(err)
+   }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Start the server using <code>go run main.go</code> and go to <a href="http://localhost:8080">http://localhost:8080</a> and you should see</p>
 <blockquote>
 <p>Welcome, home!</p>
@@ -98,7 +130,14 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#E5C07B">server</span><span class="space"> </span><span style="color:#C678DD">struct</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E5C07B">websocket</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Upgrader</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="type server struct {
+   websocket.Upgrader
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Step 2:</strong> Turn <code>wsHandler</code> into <code>func (s *server) wsHandler</code></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">s</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">server</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#61AFEF">wsHandler</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">w</span><span class="space"> </span><span style="color:#E5C07B">http</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">ResponseWriter</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">r</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">http</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Request</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ws</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">err</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#E06C75">s</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Upgrader</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Upgrade</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">w</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">r</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">nil</span><span style="color:#ABB2BF">)</span></span>
@@ -109,7 +148,20 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">defer</span><span class="space"> </span><span style="color:#E06C75">ws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Close</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ws</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">WriteMessage</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">websocket</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">TextMessage</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">[]</span><span style="color:#C678DD">byte</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"Welcome,</span><span class="space"> </span><span style="color:#98C379">sock"</span><span style="color:#ABB2BF">))</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func (s *server) wsHandler(w http.ResponseWriter, r *http.Request) {
+   ws, err := s.Upgrader.Upgrade(w, r, nil)
+   if err != nil {
+      http.Error(w, err.Error(), http.StatusInternalServerError)
+      return
+   }
+   defer ws.Close()
+   ws.WriteMessage(websocket.TextMessage, []byte(&#x22;Welcome, sock&#x22;))
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>The code above upgrades HTTP connection to use the websocket protocol, handles errors if any and sends a message to the client.</p>
 <p><strong>Step 3:</strong> Finally, instantiate a <code>server</code> object in the main and use its handlers in the router.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
@@ -119,7 +171,18 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">r</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Get</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"/ws"</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">s</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">wsHandler</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func main() {
+    var s server
+    ...
+    r.Get(&#x22;/&#x22;, s.homeHandler)
+    r.Get(&#x22;/ws&#x22;, s.wsHandler)
+    ...
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="testing-the-connection">Testing the connection</h3>
 <p>To test the websockets, we cannot use the browser directly, or we get the error:</p>
 <blockquote>
@@ -130,7 +193,14 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">ws</span><span class="space"> </span><span style="color:#ABB2BF">ws://localhost:8080/ws</span></span>
 <span class="line"><span style="color:#61AFEF">Welcome,</span><span class="space"> </span><span style="color:#98C379">sock</span></span>
 <span class="line"><span style="color:#61AFEF">websocket:</span><span class="space"> </span><span style="color:#98C379">close</span><span class="space"> </span><span style="color:#D19A66">1006</span><span class="space"> </span><span style="color:#ABB2BF">(abnormal</span><span class="space"> </span><span style="color:#98C379">closure</span><span style="color:#ABB2BF">):</span><span class="space"> </span><span style="color:#ABB2BF">unexpected</span><span class="space"> </span><span style="color:#ABB2BF">EOF</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> ws ws://localhost:8080/ws
+Welcome, sock
+websocket: close 1006 (abnormal closure): unexpected EOF
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>As you see we successfully received the response <code>"Welcome, sock"</code>, and then the server closes the connection. Success!</p>
 <h3 id="code-1">Code</h3>
 <p><em>The code for the websocket server is <a href="https://github.com/magnuswahlstrand/websockets-server/tree/pt2-websocket-endpoint">here</a>.</em></p>
@@ -151,11 +221,32 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">log</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Fatal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">err</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func main() {
+   port, exists := os.LookupEnv(&#x22;PORT&#x22;)
+   if !exists {
+      log.Fatal(&#x22;PORT not set&#x22;)
+   }
+
+   ...
+
+   if err := http.ListenAndServe(&#x22;:&#x22;+port, r); err != nil {
+      log.Fatal(err)
+   }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="add-app-dependencies">Add app dependencies</h3>
 <p>Heroku supports multiple dependency managers, but I normally use <a href="https://github.com/golang/dep"><code>dep</code></a>. Initialize it:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">dep</span><span class="space"> </span><span style="color:#98C379">init</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="dep init
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This creates the <code>Gopkg.toml</code> and <code>Gopkg.lock</code> and a <code>vendor</code>folder with our dependencies like so</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">Gopkg.toml</span></span>
 <span class="line"><span style="color:#61AFEF">Gopkg.lock</span></span>
@@ -163,7 +254,17 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">github.com/</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">go-chi/</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">gorilla/</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="Gopkg.toml
+Gopkg.lock
+vendor/
+   github.com/
+      go-chi/
+      gorilla/
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>More details <a href="https://devcenter.heroku.com/categories/managing-go-dependencies">here</a>.</p>
 <h3 id="heroku-configuration">Heroku configuration</h3>
 <p>In the <code>Gopkg.toml</code> we add some metadata that Heroku will read</p>
@@ -174,7 +275,18 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">"."</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">]</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ensure</span><span class="space"> </span><span style="color:#ABB2BF">=</span><span class="space"> </span><span style="color:#98C379">"false"</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="[metadata.heroku]
+  root-package = &#x22;github.com/magnuswahlstrand/websockets&#x22;
+  go-version = &#x22;go1.12&#x22;
+  install = [
+      &#x22;.&#x22;,
+  ]
+  ensure = &#x22;false&#x22;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>root-package</strong>: the name here affects the binary time. In my case this will cause the installed binary to be called <code>websockets</code>.</p>
 <p><strong>install:</strong>
 <code>.</code> is default installation path. If you have a <code>cmd</code> directory you can use something like <code>./cmd/...</code>.</p>
@@ -182,27 +294,59 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <p>We also need a <code>Procfile</code> in the base of the repo that tell Heroku that we want to run a web server, and where the binary is found</p>
 <p><strong>Procfile</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">web:</span><span class="space"> </span><span style="color:#98C379">bin/websockets</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="web: bin/websockets
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="create-heroku-app">Create Heroku App</h3>
 <p>Create the Heroku app from the command line.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">heroku</span><span class="space"> </span><span style="color:#98C379">apps:create</span><span class="space"> </span><span style="color:#98C379">some-websockets-server</span><span class="space"> </span><span style="color:#D19A66">--region</span><span class="space"> </span><span style="color:#98C379">eu</span><span class="space"> </span><span style="color:#D19A66">--buildpack</span><span class="space"> </span><span style="color:#98C379">heroku/go</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="heroku apps:create some-websockets-server --region eu --buildpack heroku/go
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This configures it to run on the EU server (US default), and tells it to download the <code>go</code> buildpack.</p>
 <p>Next we make sure we link our git repo to heroku, and then we can push the current master to the heroku remote.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">heroku</span><span class="space"> </span><span style="color:#98C379">git:remote</span><span class="space"> </span><span style="color:#98C379">some-websockets-server</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="heroku git:remote some-websockets-server
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em><strong>Note:</strong> make sure to commit everything before pushing.</em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">git</span><span class="space"> </span><span style="color:#98C379">push</span><span class="space"> </span><span style="color:#98C379">heroku</span><span class="space"> </span><span style="color:#98C379">master</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="git push heroku master
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="testing-the-connection-again">Testing the connection again</h3>
 <p>Finally, we can test the connection again, but this time with the url we got from <code>heroku apps:create</code> command.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">ws</span><span class="space"> </span><span style="color:#ABB2BF">ws://some-websockets-server.herokuapp.com/ws</span></span>
 <span class="line"><span style="color:#61AFEF">Welcome,</span><span class="space"> </span><span style="color:#98C379">sock</span></span>
 <span class="line"><span style="color:#61AFEF">websocket:</span><span class="space"> </span><span style="color:#98C379">close</span><span class="space"> </span><span style="color:#D19A66">1006</span><span class="space"> </span><span style="color:#ABB2BF">(abnormal</span><span class="space"> </span><span style="color:#98C379">closure</span><span style="color:#ABB2BF">):</span><span class="space"> </span><span style="color:#ABB2BF">unexpected</span><span class="space"> </span><span style="color:#ABB2BF">EOF</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> ws ws://some-websockets-server.herokuapp.com/ws
+Welcome, sock
+websocket: close 1006 (abnormal closure): unexpected EOF
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Great! Everything works as expected. If something went wrong, and you need to monitor your deployed app, you can use the following command.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">heroku</span><span class="space"> </span><span style="color:#98C379">logs</span><span class="space"> </span><span style="color:#D19A66">--tail</span><span class="space"> </span><span style="color:#D19A66">-a</span><span class="space"> </span><span style="color:#98C379">some-websockets-server</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="heroku logs --tail -a some-websockets-server
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="code-2">Code</h3>
 <p><em>The code for the Heroku app is <a href="https://github.com/magnuswahlstrand/websockets-server/tree/pt3-deploy-to-heroku">here</a>.</em></p> </article> <ul class="tags-container" data-astro-cid-vj4tpspi> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/websocket" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
 &nbsp;<span data-astro-cid-blwjyjpt>websocket</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/go" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>

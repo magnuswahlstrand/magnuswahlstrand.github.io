@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -110,7 +110,39 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">]</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="terraform {
+}
+
+locals {
+  topic_name  = &#34;user-created&#34;
+  app_name    = &#34;app&#34;
+}
+
+provider &#34;google&#34; {
+  project = var.project_id
+}
+
+module &#34;pubsub-main&#34; {
+  source     = &#34;terraform-google-modules/pubsub/google&#34;
+  project_id = var.project_id
+
+  topic              = &#34;${local.topic_name}&#34;
+  pull_subscriptions = [
+    {
+      name                  = &#34;${local.app_name}.${local.topic_name}&#34;
+      dead_letter_topic     = module.pubsub-dlq.id
+      service_account       = google_service_account.pubsub_sa.email
+      max_delivery_attempts = 5
+      maximum_backoff       = &#34;10s&#34;
+      minimum_backoff       = &#34;1s&#34;
+    }
+  ]
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Above, we set <code>dead_letter_topic = module.pubsub-dlq.id</code>. This references this section where we set up our DLQ.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="hcl"><code><span class="line"><span style="color:#E5C07B">module</span><span class="space"> </span><span style="color:#E06C75">&quot;pubsub-dlq&quot;</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">source</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#98C379">&quot;terraform-google-modules/pubsub/google&quot;</span></span>
@@ -123,17 +155,44 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">]</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="module &#34;pubsub-dlq&#34; {
+  source     = &#34;terraform-google-modules/pubsub/google&#34;
+  project_id = var.project_id
+
+  topic              = &#34;${local.app_name}.${local.topic_name}.dlq&#34;
+  pull_subscriptions = [
+    {
+      name = &#34;${local.app_name}.${local.topic_name}.dlq&#34;
+    }
+  ]
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then we run <code>terraform apply</code></p>
 <div class="text-white not-prose"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/terraform.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
 <h3 id="publish-messages">Publish messages</h3>
 <p>Now that we have our infrastructure in place, we can publish a couple of messages. The easiest way to publish messages to pub/sub is with the <code>gcloud</code>-cli.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">gcloud</span><span class="space"> </span><span style="color:#98C379">pubsub</span><span class="space"> </span><span style="color:#98C379">topics</span><span class="space"> </span><span style="color:#98C379">publish</span><span class="space"> </span><span style="color:#56B6C2">\</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#98C379">projects/b32-demo-projects/topics/user-created</span><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">--message=</span><span style="color:#98C379">&quot;alive&quot;</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="gcloud pubsub topics publish \
+  projects/b32-demo-projects/topics/user-created  --message=&#34;alive&#34;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">gcloud</span><span class="space"> </span><span style="color:#98C379">pubsub</span><span class="space"> </span><span style="color:#98C379">topics</span><span class="space"> </span><span style="color:#98C379">publish</span><span class="space"> </span><span style="color:#56B6C2">\</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#98C379">projects/b32-demo-projects/topics/user-created</span><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">--message=</span><span style="color:#98C379">&quot;dead&quot;</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="gcloud pubsub topics publish \
+  projects/b32-demo-projects/topics/user-created  --message=&#34;dead&#34;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="consuming">Consuming</h2>
 <p>Next is consuming. Here is a small consumer written in Go that will pull messages from our subscription. It will <strong>Nack</strong> (negatively acknowledge) any message starting with “dead”. Any other messages are <strong>Ack</strong> (acknowledged).</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">ProcessMessages</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">ctx</span><span class="space"> </span><span style="color:#E5C07B">context</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Context</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">projectID</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">subID</span><span class="space"> </span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">error</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
@@ -157,7 +216,32 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="tab">	</span><span class="tab">	</span><span style="color:#E06C75">msg</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Ack</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">})</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func ProcessMessages(ctx context.Context, projectID, subID string) error {
+	client, err := pubsub.NewClient(ctx, projectID)
+	if err != nil {
+		return fmt.Errorf(&#34;pubsub.NewClient: %v&#34;, err)
+	}
+	defer client.Close()
+
+	subscription := client.Subscription(subID)
+	return subscription.Receive(ctx, func(_ context.Context, msg *pubsub.Message) {
+		txt := fmt.Sprintf(&#34;Received message: %q (attempt %d)&#34;, string(msg.Data), *msg.DeliveryAttempt)
+
+		if bytes.HasPrefix(msg.Data, []byte(&#34;dead&#34;)) {
+			fmt.Println(txt, &#34; - NACK&#34;)
+			msg.Nack()
+			return
+		}
+
+		fmt.Println(txt, &#34; - ACK&#34;)
+		msg.Ack()
+	})
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>*Note</strong>: we use googles pubsub client cloud.google.com/go/pubsub*</p>
 <p>Now we can run our app.</p>
 <div class="text-white not-prose"> <div data-astro-asciinema-src="/assets/casts//pubsub-with-dlq/process-messages.cast" data-astro-asciinema-settings="{&#34;loop&#34;:true,&#34;speed&#34;:1.7,&#34;rows&#34;:14,&#34;cols&#34;:80,&#34;theme&#34;:&#34;solarized-dark&#34;,&#34;terminalFontSize&#34;:&#34;big&#34;}"></div> </div> 
@@ -194,7 +278,34 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">app</span><span class="space"> </span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#ABB2BF">local.app_name</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="resource &#34;google_monitoring_alert_policy&#34; &#34;alert_policy&#34; {
+  display_name = &#34;Messages on dead-letter queue (app: ${local.app_name}, topic: ${local.topic_name})&#34;
+  combiner     = &#34;OR&#34;
+  conditions {
+    display_name = &#34;Cloud Pub/Sub Subscription - Unacked messages&#34;
+    condition_threshold {
+      filter     = &#34;resource.type = \&#34;pubsub_subscription\&#34; AND resource.labels.subscription_id = \&#34;${module.pubsub-dlq.subscription_names.0}\&#34; AND metric.type = \&#34;pubsub.googleapis.com/subscription/num_undelivered_messages\&#34;&#34;
+      duration   = &#34;120s&#34;
+      comparison = &#34;COMPARISON_GT&#34;
+      aggregations {
+        alignment_period   = &#34;60s&#34;
+        per_series_aligner = &#34;ALIGN_MAX&#34;
+      }
+    }
+  }
+  notification_channels = [
+    &#34;projects/b32-demo-projects/notificationChannels/6746093406737316903&#34;
+  ]
+
+  user_labels = {
+    app : local.app_name
+  }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="handling-stuck-messages">Handling stuck messages</h3>
 <p>When an operator has received the alarm from the monitor, they manually inspect the messages in the DLQ. If the message is completely invalid, they can just pull and acknowledge that specific message in the cloud console.</p>
 <p>If the message ended up in the DLQ because of a bug in the application. We can republish it to the main topic with the following code.</p>
@@ -220,7 +331,33 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="tab">	</span><span class="tab">	</span><span style="color:#E06C75">msg</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Ack</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">})</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func RepublishMessages(ctx context.Context, projectID, dlqSubID, toTopicID string) error {
+	client, err := pubsub.NewClient(ctx, projectID)
+	if err != nil {
+		return fmt.Errorf(&#34;pubsub.NewClient: %v&#34;, err)
+	}
+	defer client.Close()
+
+	subscription := client.Subscription(dlqSubID)
+	topic := client.Topic(toTopicID)
+
+	return subscription.Receive(ctx, func(_ context.Context, msg *pubsub.Message) {
+		// Republish message
+		result := topic.Publish(ctx, msg)
+		if _, err := result.Get(ctx); err != nil {
+			msg.Nack()
+			return
+		}
+
+		fmt.Printf(&#34;Republished message: %q\n&#34;, string(msg.Data))
+		msg.Ack()
+	})
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>A few caveats on this method.</p>
 <ol>
 <li>If the message still cannot be processed by the application, it will be sent to the DLQ again, meaning we can end up in an infinite loop <code>DLQ -&gt; main -&gt; DLQ -&gt; ...</code>.</li>

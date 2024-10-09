@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -72,7 +72,19 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">application</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<application
+        ...
+        android:icon=&#x22;@drawable/ic_app_icon&#x22;
+        android:roundIcon=&#x22;@drawable/ic_app_icon&#x22;
+        ...
+        >
+    ...
+</application>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>And create the text for the shortcuts</p>
 <p><em><strong>res/values/strings.xml</strong></em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">resources</span><span style="color:#ABB2BF">></span></span>
@@ -80,7 +92,16 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">string</span><span class="space"> </span><span style="color:#D19A66">name</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"charge_shortcut"</span><span style="color:#ABB2BF">>Charge&#x3C;/</span><span style="color:#E06C75">string</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">string</span><span class="space"> </span><span style="color:#D19A66">name</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"widgets_shortcut"</span><span style="color:#ABB2BF">>Widgets&#x3C;/</span><span style="color:#E06C75">string</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">resources</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<resources>
+    <string name=&#x22;app_name&#x22;>New App</string>
+    <string name=&#x22;charge_shortcut&#x22;>Charge</string>
+    <string name=&#x22;widgets_shortcut&#x22;>Widgets</string>
+</resources>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="creating-the-shortcuts">Creating the shortcuts</h2>
 <p>Once the setup is done, we can create the actual shortcuts. Add the following meta-data tag inside your <em><strong>AndroidManifest.xml</strong></em>, and create the corresponding <strong>res/xml/shortcuts.xml</strong> file.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#ABB2BF">...</span></span>
@@ -90,7 +111,18 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">android:resource</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"@xml/shortcuts"</span><span class="space"> </span><span style="color:#ABB2BF">/></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">activity</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="...
+<activity android:name=&#x22;.MainActivity&#x22;>
+    ...
+    <meta-data android:name=&#x22;android.app.shortcuts&#x22;
+        android:resource=&#x22;@xml/shortcuts&#x22; />
+    ...
+</activity>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Notice that I add the <code>android:action</code> that will be used in the MainActivity.</p>
 <p><em><strong>res/xml/shortcuts.xml</strong></em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="xml"><code><span class="line"><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">shortcuts</span><span class="space"> </span><span style="color:#D19A66">xmlns:android</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"http://schemas.android.com/apk/res/android"</span><span style="color:#ABB2BF">></span></span>
@@ -116,7 +148,34 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">/></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">shortcut</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">shortcuts</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<shortcuts xmlns:android=&#x22;http://schemas.android.com/apk/res/android&#x22;>
+    <shortcut
+        android:shortcutId=&#x22;show widgets&#x22;
+        android:icon=&#x22;@drawable/ic_widgets_shortcut&#x22;
+        android:shortcutShortLabel=&#x22;@string/widgets_shortcut&#x22;>
+        <intent
+            android:action=&#x22;cafe.gophers.myintenttutorial.ShowWidgets&#x22;
+            android:targetPackage=&#x22;cafe.gophers.myintenttutorial&#x22;
+            android:targetClass=&#x22;cafe.gophers.myintenttutorial.MainActivity&#x22;
+            />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId=&#x22;charge&#x22;
+        android:icon=&#x22;@drawable/ic_battery_shortcut&#x22;
+        android:shortcutShortLabel=&#x22;@string/charge_shortcut&#x22;>
+        <intent
+            android:action=&#x22;cafe.gophers.myintenttutorial.Charge&#x22;
+            android:targetPackage=&#x22;cafe.gophers.myintenttutorial&#x22;
+            android:targetClass=&#x22;cafe.gophers.myintenttutorial.MainActivity&#x22;
+            />
+    </shortcut>
+</shortcuts>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Finally, we update the text in the app based on which action was clicked:</p>
 <p><em><strong>MainActivity.kt</strong></em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="kotlin"><code><span class="line"><span style="color:#C678DD">package</span><span class="space"> </span><span style="color:#ABB2BF">cafe.gophers.myintenttutorial</span></span>
@@ -143,7 +202,35 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package cafe.gophers.myintenttutorial
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    val CHARGE_BATTERY_ACTION = &#x22;cafe.gophers.myintenttutorial.Charge&#x22;
+    val SHOW_WIDGETS_ACTION = &#x22;cafe.gophers.myintenttutorial.ShowWidgets&#x22;
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Following code added
+        val action: String? = intent?.action
+        text_view.text = when (action) {
+            CHARGE_BATTERY_ACTION -> &#x22;Charging battery&#x22;
+            SHOW_WIDGETS_ACTION -> &#x22;Showing some widgets&#x22;
+            else -> &#x22;Main app&#x22;
+        }
+    }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em><strong>Note:</strong> an alternative would be to use <code>intent?.data</code> and pass it in the shortcut using something like <code>android:data="content://cafe.gophers.myintenttutorial/?from=shortcut_charge"</code></em></p>
 <h2 id="end-result">End result</h2>
 <p>Here is the end result. By clicking on the app icon, we come to the main activity with the default text, and if we press and hold we can click one of the shortcuts we have defined.</p>

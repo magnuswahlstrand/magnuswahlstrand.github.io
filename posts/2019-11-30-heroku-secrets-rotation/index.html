@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -59,7 +59,16 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 <span class="line"></span>
 <span class="line"><span style="color:#61AFEF">Creating</span><span class="space"> </span><span style="color:#98C379">securekey:fortnightly</span><span class="space"> </span><span style="color:#98C379">on</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-1...</span><span class="space"> </span><span style="color:#98C379">free</span></span>
 <span class="line"><span style="color:#61AFEF">Created</span><span class="space"> </span><span style="color:#98C379">securekey-solid-14332</span><span class="space"> </span><span style="color:#98C379">as</span><span class="space"> </span><span style="color:#98C379">SECURE_KEY</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# Add addon to app
+> heroku addons:create securekey:fortnightly -a service-1
+
+Creating securekey:fortnightly on ⬢ service-1... free
+Created securekey-solid-14332 as SECURE_KEY
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This does two things:</p>
 <ol>
 <li>Add an instance of the <code>securekey</code> addon (named <code>securekey-solid-14332</code>)</li>
@@ -70,20 +79,45 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 <span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">heroku</span><span class="space"> </span><span style="color:#ABB2BF">config</span><span class="space"> </span><span style="color:#ABB2BF">-a</span><span class="space"> </span><span style="color:#ABB2BF">service-1</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#61AFEF">grep</span><span class="space"> </span><span style="color:#98C379">SECURE_KEY</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#61AFEF">SECURE_KEY:</span><span class="space"> </span><span style="color:#98C379">3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="
+# List secret in service #1
+> heroku config -a service-1 | grep SECURE_KEY
+
+SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="attaching-it-to-service-2">Attaching it to service #2</h3>
 <p>We can attach this secret to <code>service-2</code> using the following command. Remember to use the addon instance name (in my case <code>securekey-solid-14332</code>). We can set the name of the variable using the flag <code>--as SERVICE_ONE_SECURE</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">heroku</span><span class="space"> </span><span style="color:#ABB2BF">addons:attach</span><span class="space"> </span><span style="color:#ABB2BF">securekey-solid-14332</span><span class="space"> </span><span style="color:#ABB2BF">--as</span><span class="space"> </span><span style="color:#ABB2BF">SERVICE_ONE_SECURE</span><span class="space"> </span><span style="color:#ABB2BF">-a</span><span class="space"> </span><span style="color:#ABB2BF">service-2</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#61AFEF">Attaching</span><span class="space"> </span><span style="color:#98C379">securekey-solid-14332</span><span class="space"> </span><span style="color:#98C379">as</span><span class="space"> </span><span style="color:#98C379">SERVICE_ONE_SECURE</span><span class="space"> </span><span style="color:#98C379">to</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-2...</span><span class="space"> </span><span style="color:#98C379">done</span></span>
 <span class="line"><span style="color:#61AFEF">Setting</span><span class="space"> </span><span style="color:#98C379">SERVICE_ONE_SECURE</span><span class="space"> </span><span style="color:#98C379">config</span><span class="space"> </span><span style="color:#98C379">vars</span><span class="space"> </span><span style="color:#98C379">and</span><span class="space"> </span><span style="color:#98C379">restarting</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-2...</span><span class="space"> </span><span style="color:#98C379">done,</span><span class="space"> </span><span style="color:#98C379">v3</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> heroku addons:attach securekey-solid-14332 --as SERVICE_ONE_SECURE -a service-2
+
+Attaching securekey-solid-14332 as SERVICE_ONE_SECURE to ⬢ service-2... done
+Setting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... done, v3
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>As you can see, both services now share the same key</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">List</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">secret</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">in</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">service</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">#2</span></span>
 <span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">heroku</span><span class="space"> </span><span style="color:#ABB2BF">config</span><span class="space"> </span><span style="color:#ABB2BF">-a</span><span class="space"> </span><span style="color:#ABB2BF">service-2</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#61AFEF">grep</span><span class="space"> </span><span style="color:#98C379">SERVICE_ONE_SECURE_KEY</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#61AFEF">SERVICE_ONE_SECURE_KEY:</span><span class="space"> </span><span style="color:#98C379">3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# List secret in service #2
+> heroku config -a service-2 | grep SERVICE_ONE_SECURE_KEY
+
+SERVICE_ONE_SECURE_KEY: 3F6D463C2A79289DC5B3C13A4EB2736B0D51A80234CAEAF0EA12D15F12E9FDEE,CF8BBE474F57D9CA1DB402B2D19873E2F05ABED1213256FB761E166A2C8E6EBA
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="key-rotation">Key rotation</h3>
 <p>In fact, key rotation is already enabled! <a href="https://elements.heroku.com/addons/securekey"><code>securekey</code></a> only has one plan, <em>Fortnightly</em>, so all we have to do is wait 2 weeks, and the key will be rotated for both services!</p>
 <h3 id="clean-up">Clean up</h3>
@@ -93,7 +127,15 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 <span class="line"></span>
 <span class="line"><span style="color:#61AFEF">Detaching</span><span class="space"> </span><span style="color:#98C379">SERVICE_ONE_SECURE</span><span class="space"> </span><span style="color:#98C379">to</span><span class="space"> </span><span style="color:#98C379">securekey-solid-14332</span><span class="space"> </span><span style="color:#98C379">from</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-2...</span><span class="space"> </span><span style="color:#98C379">done</span></span>
 <span class="line"><span style="color:#61AFEF">Unsetting</span><span class="space"> </span><span style="color:#98C379">SERVICE_ONE_SECURE</span><span class="space"> </span><span style="color:#98C379">config</span><span class="space"> </span><span style="color:#98C379">vars</span><span class="space"> </span><span style="color:#98C379">and</span><span class="space"> </span><span style="color:#98C379">restarting</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-2...</span><span class="space"> </span><span style="color:#98C379">done,</span><span class="space"> </span><span style="color:#98C379">v4</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> heroku addons:remove securekey -a service-1
+
+Detaching SERVICE_ONE_SECURE to securekey-solid-14332 from ⬢ service-2... done
+Unsetting SERVICE_ONE_SECURE config vars and restarting ⬢ service-2... done, v4
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then in <code>service-1</code></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">heroku</span><span class="space"> </span><span style="color:#ABB2BF">addons:detach</span><span class="space"> </span><span style="color:#ABB2BF">securekey-solid-14332</span><span class="space"> </span><span style="color:#ABB2BF">-a</span><span class="space"> </span><span style="color:#ABB2BF">service-2</span></span>
 <span class="line"><span class="space"> </span><span style="color:#61AFEF">▸</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">WARNING:</span><span class="space"> </span><span style="color:#98C379">Destructive</span><span class="space"> </span><span style="color:#98C379">Action</span></span>
@@ -103,7 +145,19 @@ We will use the Heroku plugin <a href="https://elements.heroku.com/addons/secure
 <span class="line"></span>
 <span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">service-1</span></span>
 <span class="line"><span style="color:#61AFEF">Destroying</span><span class="space"> </span><span style="color:#98C379">securekey-solid-14332</span><span class="space"> </span><span style="color:#98C379">on</span><span class="space"> </span><span style="color:#98C379">⬢</span><span class="space"> </span><span style="color:#98C379">service-1...</span><span class="space"> </span><span style="color:#98C379">done</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> heroku addons:detach securekey-solid-14332 -a service-2
+ ▸    WARNING: Destructive Action
+ ▸    This command will affect the app service-1
+ ▸    To proceed, type service-1 or re-run this command with
+ ▸    --confirm service-1
+
+> service-1
+Destroying securekey-solid-14332 on ⬢ service-1... done
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong><em>Done!</em></strong></p>
 <h2 id="bonus-graceful-key-rotation"><em>(Bonus) Graceful key rotation</em></h2>
 <p>They key generated above is actually two keys, separated by a comma.</p>

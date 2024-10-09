@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -77,7 +77,14 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#E5C07B">Service</span><span class="space"> </span><span style="color:#C678DD">struct</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">mongo</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">qmgo</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">QmgoClient</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="type Service struct {
+    mongo *qmgo.QmgoClient
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We set up our <code>mongo</code>-client to talk to MongoDB on localhost.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">var</span><span class="space"> </span><span style="color:#E06C75">mongoConfig</span><span class="space"> </span><span style="color:#E5C07B">=</span><span class="space"> </span><span style="color:#C678DD">&#x26;</span><span style="color:#E5C07B">qmgo</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Config</span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">Uri</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">"mongodb://localhost:27017"</span><span style="color:#ABB2BF">,</span></span>
@@ -92,7 +99,24 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">mongo</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="var mongoConfig = &#x26;qmgo.Config{
+	Uri:      &#x22;mongodb://localhost:27017&#x22;,
+	Database: &#x22;user-db&#x22;,
+	Coll:     &#x22;users&#x22;,
+}
+
+func mongoClient() *qmgo.QmgoClient {
+	mongo, err := qmgo.Open(context.Background(), mongoConfig)
+	if err != nil {
+		log.Fatalln(mongo)
+	}
+	return mongo
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We create the <code>mongo</code> client, and create a new Fiber-router. The router has a CORS-middleware and our two handlers, and listens on port <code>:8080</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">main</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">mongo</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#61AFEF">mongoClient</span><span style="color:#ABB2BF">()</span></span>
@@ -108,7 +132,25 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">log</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Fatal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">app</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Listen</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">":8080"</span><span style="color:#ABB2BF">))</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func main() {
+	mongo := mongoClient()
+
+	s := Service{
+		mongo: mongo,
+	}
+
+	app := fiber.New()
+	app.Use(cors.New(cors.Config{AllowOrigins: &#x22;http://localhost:3000&#x22;}))
+	app.Get(&#x22;/users&#x22;, s.ListUsers)
+	app.Post(&#x22;/users&#x22;, s.AddUser)
+
+	log.Fatal(app.Listen(&#x22;:8080&#x22;))
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="the-handlers">The handlers</h3>
 <p><strong>List users handler</strong> - A very slim handler. Either returns a list of users, or an error.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#E5C07B">ListUsersResponse</span><span class="space"> </span><span style="color:#C678DD">struct</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
@@ -124,7 +166,24 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">c</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">JSON</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">ListUsersResponse</span><span style="color:#ABB2BF">{</span><span style="color:#E06C75">users</span><span style="color:#ABB2BF">})</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="type ListUsersResponse struct {
+    Users []User &#x60;json:&#x22;users&#x22;&#x60;
+}
+
+func (s *Service) ListUsers(c *fiber.Ctx) error {
+  query := c.Query(&#x22;q&#x22;, &#x22;&#x22;)
+  users, err := s.listDBUsers(c.Context(), query)
+  if err != nil {
+	  return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{&#x22;message&#x22;: err.Error()})
+  }
+
+  return c.JSON(ListUsersResponse{users})
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Add user handler</strong> - Parses the user request calls the database layer for insertion.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">s</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">Service</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#61AFEF">AddUser</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">c</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">fiber</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Ctx</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">error</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">var</span><span class="space"> </span><span style="color:#E06C75">user</span><span class="space"> </span><span style="color:#E5C07B">User</span></span>
@@ -140,7 +199,25 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">c</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">JSON</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">user</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func (s *Service) AddUser(c *fiber.Ctx) error {
+  var user User
+  if err := c.BodyParser(&#x26;user); err != nil {
+    return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{&#x22;message&#x22;: err.Error()})
+  }
+
+  ID, err := s.insertDBUser(c.Context(), user)
+  if err != nil {
+    return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{&#x22;message&#x22;: err.Error()})
+  }
+  user.ID = ID
+
+  return c.JSON(user)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em><strong>Note</strong>: Fiber supports request validation (required fields, min length, etc.), but I skipped it here for brevity.</em></p>
 <h3 id="the-db-layer">The DB layer</h3>
 <p><strong>List users</strong> - To list users, we call use the basic <code>find()</code> of Mongo. If query is empty, we will list all users, and if query is <em>not</em> empty we will perform a full text search on all fields. For this, we use a <a href="https://www.mongodb.com/docs/manual/core/index-text/#wildcard-text-indexes">Mongo text index</a>. It matches only complete words.</p>
@@ -155,7 +232,22 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">users</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func (s *Service) listDBUsers(ctx context.Context, query string) ([]User, error) {
+  filter := bson.M{}
+  if query != &#x22;&#x22; {
+    filter = bson.M{&#x22;$text&#x22;: bson.M{&#x22;$search&#x22;: query}}
+  }
+  users := []User{}
+  if err := s.mongo.Find(ctx, filter).All(&#x26;users); err != nil {
+    return nil, err
+  }
+  return users, nil
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Add a user</strong> - We insert name, email and phone number of a user. MongoDB adds an ID automatically.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">s</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">Service</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#61AFEF">insertDBUser</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">ctx</span><span class="space"> </span><span style="color:#E5C07B">context</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Context</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">u</span><span class="space"> </span><span style="color:#E5C07B">User</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">string</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">error</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">res</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">err</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#E06C75">s</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">mongo</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">InsertOne</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">ctx</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E5C07B">bson</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">M</span><span style="color:#ABB2BF">{</span></span>
@@ -168,15 +260,40 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">res</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">InsertedID</span><span style="color:#ABB2BF">.(</span><span style="color:#E5C07B">primitive</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">ObjectID</span><span style="color:#ABB2BF">).</span><span style="color:#61AFEF">String</span><span style="color:#ABB2BF">(),</span><span class="space"> </span><span style="color:#E06C75">err</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func (s *Service) insertDBUser(ctx context.Context, u User) (string, error) {
+  res, err := s.mongo.InsertOne(ctx, bson.M{
+    &#x22;name&#x22;:  u.Name,
+    &#x22;email&#x22;: u.Email,
+    &#x22;phone&#x22;: u.Phone,
+  })
+  if err != nil {
+    return &#x22;&#x22;, err
+  }
+  return res.InsertedID.(primitive.ObjectID).String(), err
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em><strong>Note</strong>: We could also add uniqueness checks on email and phone number, by adding <a href="https://www.mongodb.com/docs/manual/core/index-unique">unique indexes</a></em></p>
 <h2 id="frontend">Frontend</h2>
 <p>The frontend is bootstrapped using <a href="https://create-react-app.dev/">Create React App (CRA)</a>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx</span><span class="space"> </span><span>create-react-app</span><span class="space"> </span><span>frontend</span><span class="space"> </span><span>--template</span><span class="space"> </span><span>typescript</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npx create-react-app frontend --template typescript
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We install our dependencies:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>@mantine/hooks</span><span class="space"> </span><span>@mantine/core</span><span class="space"> </span><span>react-query</span><span class="space"> </span><span>axios</span><span class="space"> </span><span>tabler-icons-react</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npm install @mantine/hooks @mantine/core react-query axios tabler-icons-react
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <ul>
 <li><a href="https://react-query.tanstack.com/">React-Query</a> to handle async HTTP requests with the <code>useQuery</code> hook</li>
 <li><a href="https://axios-http.com/docs/intro">Axios</a> HTTP client</li>
@@ -204,7 +321,30 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span style="color:#ABB2BF">}</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">default</span><span class="space"> </span><span style="color:#E06C75">App</span><span style="color:#ABB2BF">;</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import React from &#x22;react&#x22;;
+import &#x22;./App.css&#x22;;
+import { Container } from &#x22;@mantine/core&#x22;;
+import { UserTable } from &#x22;./components/UserTable&#x22;;
+import { QueryClient, QueryClientProvider } from &#x22;react-query&#x22;;
+
+const queryClient = new QueryClient();
+
+function App() {
+  return (
+    <Container size=&#x22;xs&#x22; px=&#x22;xs&#x22;>
+      <QueryClientProvider client={queryClient}>
+        <UserTable />
+      </QueryClientProvider>
+    </Container>
+  );
+}
+
+export default App;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>hooks/useUsers.ts</strong> - We have a simple custom React hook. It controls the search value in the search field, and returns <code>data</code> if we have gotten any from the backend. For now, we ignore error handling, and showing a different view during initial fetch.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">function</span><span class="space"> </span><span style="color:#61AFEF">useUsers</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#ABB2BF">[</span><span style="color:#E5C07B">searchValue</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E5C07B">setSearchValue</span><span style="color:#ABB2BF">]</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">useState</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">""</span><span style="color:#ABB2BF">);</span></span>
@@ -228,7 +368,33 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">users</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">data</span><span class="space"> </span><span style="color:#C678DD">?</span><span class="space"> </span><span style="color:#E06C75">data</span><span class="space"> </span><span style="color:#C678DD">:</span><span class="space"> </span><span style="color:#ABB2BF">[],</span><span class="space"> </span><span style="color:#E06C75">searchValue</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">setSearchValue</span><span class="space"> </span><span style="color:#ABB2BF">};</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="function useUsers() {
+  const [searchValue, setSearchValue] = useState(&#x22;&#x22;);
+
+  // Only search if term is more than 3 characters
+  const cappedSearchValue = searchValue.length >= 3 ? searchValue : null;
+
+  const query = async () => {
+    const url = &#x22;http://localhost:8080/users&#x22;;
+    const params = cappedSearchValue
+      ? { params: { q: searchValue } }
+      : { params: {} };
+
+    const { data } = await axios.get(url, params);
+    return data.users;
+  };
+  const { isLoading, error, data, isFetching } = useQuery(
+    [&#x22;user data&#x22;, cappedSearchValue],
+    query
+  );
+
+  return { users: data ? data : [], searchValue, setSearchValue };
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>components/UserSearch.tsx</strong> - A simple input field, used for setting the <code>q</code>-parameter in requests to the backend.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#E5C07B">SearchProps</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">value</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E5C07B">string</span><span style="color:#ABB2BF">;</span></span>
@@ -246,7 +412,27 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">/></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#ABB2BF">};</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="type SearchProps = {
+  value: string;
+  setValue: (s: string) => void;
+};
+
+export const UserSearch = ({ value, setValue }: SearchProps) => {
+  return (
+    <TextInput
+      value={value}
+      placeholder=&#x22;ID, E-mail or Phone&#x22;
+      icon={<Search size={14} />}
+      onChange={event => setValue(event.currentTarget.value)}
+      style={SearchStyle}
+    />
+  );
+};
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>components/UserTable.tsx</strong> - Consists of two parts, a <code>UserSearch</code>-component and a simple table to show the results.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#61AFEF">UserTable</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#C678DD">=></span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E5C07B">users</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E5C07B">searchValue</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E5C07B">setSearchValue</span><span class="space"> </span><span style="color:#ABB2BF">}</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">useUsers</span><span style="color:#ABB2BF">();</span></span>
@@ -277,21 +463,74 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&#x3C;/></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#ABB2BF">};</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="export const UserTable = () => {
+  const { users, searchValue, setSearchValue } = useUsers();
+
+  const rows = users.map((user: User) => (
+    <tr key={user.id}>
+      <td style={{ whiteSpace: &#x22;nowrap&#x22; }}>{user.id.slice(-6)}</td>
+      <td style={{ whiteSpace: &#x22;nowrap&#x22; }}>{user.name}</td>
+      <td style={{ whiteSpace: &#x22;nowrap&#x22; }}>{user.phone}</td>
+      <td style={{ whiteSpace: &#x22;nowrap&#x22; }}>{user.email}</td>
+    </tr>
+  ));
+
+  return (
+    <>
+      <UserSearch value={searchValue} setValue={setSearchValue} />
+      <Table highlightOnHover striped style={TableStyle}>
+        <thead>
+          <tr>
+            <th>Short&#x26;nbsp;ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+    </>
+  );
+};
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="the-result">The result</h2>
 <p>Now that we have everything in place, we can start all our applications:</p>
 <p><strong>MongoDB</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#61AFEF">docker</span><span class="space"> </span><span style="color:#98C379">run</span><span class="space"> </span><span style="color:#D19A66">--name</span><span class="space"> </span><span style="color:#98C379">some-mongo</span><span class="space"> </span><span style="color:#D19A66">-p</span><span class="space"> </span><span style="color:#98C379">27017:27017</span><span class="space"> </span><span style="color:#98C379">mongo</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="docker run --name some-mongo -p 27017:27017 mongo
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Generate fake data</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">backend</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#61AFEF">go</span><span class="space"> </span><span style="color:#98C379">test</span><span class="space"> </span><span style="color:#D19A66">-v</span><span class="space"> </span><span style="color:#D19A66">-run</span><span class="space"> </span><span style="color:#98C379">Test_GenerateFakeData</span><span style="color:#ABB2BF">)</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="(cd backend; go test -v -run Test_GenerateFakeData)
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Start backend</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">backend</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#61AFEF">go</span><span class="space"> </span><span style="color:#98C379">run</span><span class="space"> </span><span style="color:#98C379">.</span><span style="color:#ABB2BF">)</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="(cd backend; go run .)
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Start frontend (separate terminal)</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">frontend</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">start</span><span style="color:#ABB2BF">)</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="(cd frontend; npm start)
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Go to <a href="http://localhost:3000">localhost:3000</a> and you should see the following:</p>
 <p><img src="/img/react-fiber-mongo/search.gif" alt="Search"></p>
 <h2 id="takeaways">Takeaways</h2>

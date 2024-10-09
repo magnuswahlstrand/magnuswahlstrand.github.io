@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -55,20 +55,44 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <p>To run the emulator, you first need the <code>gcloud</code> cli (<a href="https://cloud.google.com/sdk/docs/install">setup instructions</a>). Next can we install the emulator.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gcloud</span><span class="space"> </span><span>components</span><span class="space"> </span><span>install</span><span class="space"> </span><span>pubsub-emulator</span></span>
 <span class="line"><span>gcloud</span><span class="space"> </span><span>components</span><span class="space"> </span><span>update</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="gcloud components install pubsub-emulator
+gcloud components update
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gcloud</span><span class="space"> </span><span>beta</span><span class="space"> </span><span>emulators</span><span class="space"> </span><span>pubsub</span><span class="space"> </span><span>start</span><span class="space"> </span><span>--project=test-project</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="gcloud beta emulators pubsub start --project=test-project
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Output:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Executing:</span><span class="space"> </span><span>/Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator</span><span class="space"> </span><span>--host=localhost</span><span class="space"> </span><span>--port=8085</span></span>
 <span class="line"><span>[pubsub]</span><span class="space"> </span><span>This</span><span class="space"> </span><span>is</span><span class="space"> </span><span>the</span><span class="space"> </span><span>Google</span><span class="space"> </span><span>Pub/Sub</span><span class="space"> </span><span>fake.</span></span>
 <span class="line"><span>[pubsub]</span><span class="space"> </span><span>Implementation</span><span class="space"> </span><span>may</span><span class="space"> </span><span>be</span><span class="space"> </span><span>incomplete</span><span class="space"> </span><span>or</span><span class="space"> </span><span>differ</span><span class="space"> </span><span>from</span><span class="space"> </span><span>the</span><span class="space"> </span><span>real</span><span class="space"> </span><span>system.</span></span>
 <span class="line"><span>....</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
+[pubsub] This is the Google Pub/Sub fake.
+[pubsub] Implementation may be incomplete or differ from the real system.
+....
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="code">Code</h2>
 <p>We can use the Google Pub/Sub client to publish or subscribe on a topic.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>go</span><span class="space"> </span><span>get</span><span class="space"> </span><span>-u</span><span class="space"> </span><span>cloud.google.com/go/pubsub</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="go get -u cloud.google.com/go/pubsub
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h4 id="setup-the-client">Setup the client</h4>
 <p>We need to point the <code>pubsub.Client</code> to our emulator. For this purpose, <code>pubsub.NewClient</code> uses a magic environment variable <code>PUBSUB_EMULATOR_HOST</code>.
 You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</code>. For our test code, we use <code>os.Setenv</code>.</p>
@@ -84,7 +108,22 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Create</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">topic</span></span>
 <span class="line"><span style="color:#E06C75">topic</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">err</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#E06C75">client</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">CreateTopic</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">ctx</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">"some-topic"</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">...</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// Initialize client
+os.Setenv(&#x22;PUBSUB_EMULATOR_HOST&#x22;, &#x22;localhost:8085&#x22;)
+client, err := pubsub.NewClient(ctx, &#x22;test-project&#x22;)
+...
+
+#### Receive message
+
+#### Receive message
+// Create topic
+topic, err := client.CreateTopic(ctx, &#x22;some-topic&#x22;)
+...
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h4 id="receive-message">Receive message</h4>
 <p>Now that we have a topic, we could publish a message. However, we don’t have any subscriptions yet, and so the published message would be discared.</p>
 <ul>
@@ -104,7 +143,23 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">m</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Ack</span><span style="color:#ABB2BF">()</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">cancel</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">for</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">test</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">purpose,</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">shut</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">down</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">after</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">first</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">message</span></span>
 <span class="line"><span style="color:#ABB2BF">})</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="sub, err := client.CreateSubscription(ctx, &#x22;some-subscription-id&#x22;, pubsub.SubscriptionConfig{
+    Topic: topic,
+})
+
+// Wrap context for cancellation, and cancel the first
+cctx, cancel := context.WithCancel(ctx)
+
+// Receive will block until the context is cancelled, or we get a non-recoverable error
+err = sub.Receive(cctx, func(_ context.Context, m *pubsub.Message) {
+    m.Ack()
+    cancel() // for test purpose, shut down after first message
+})
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Note</strong>: If we don’t receive a message for some reason, the <code>Receive</code> call will be stuck forever. I will fix this in the full test code example.</p>
 <h5 id="creating-a-push-subscription">Creating a push subscription</h5>
 <p>For the push example, we need a endpoint that can receive and decode the PubSub message.</p>
@@ -120,7 +175,23 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span class="tab">	</span><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Do</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">something</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">with</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">event</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">...</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func pubSubHandler(w http.ResponseWriter, r *http.Request) {
+	var event pubSubMessage
+
+	if err := json.NewDecoder(r.Body).Decode(&#x26;event); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+
+	// Do something with event
+	// ...
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then all we need to do is to add <code>pubsub.PushConfig</code> with our endpoint, when we configure create a subscription.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#E06C75">_</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">err</span><span class="space"> </span><span style="color:#E5C07B">=</span><span class="space"> </span><span style="color:#E06C75">client</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">CreateSubscription</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">ctx</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">"some-subscription-id-2"</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E5C07B">pubsub</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">SubscriptionConfig</span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">Topic</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">topic</span><span style="color:#ABB2BF">,</span></span>
@@ -128,7 +199,17 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">Endpoint</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">"localhost:8080/pubsub/event"</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">},</span></span>
 <span class="line"><span style="color:#ABB2BF">})</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="_, err = client.CreateSubscription(ctx, &#x22;some-subscription-id-2&#x22;, pubsub.SubscriptionConfig{
+    Topic: topic,
+    PushConfig: pubsub.PushConfig{
+        Endpoint: &#x22;localhost:8080/pubsub/event&#x22;,
+    },
+})
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h4 id="publishing-a-message">Publishing a message</h4>
 <p>Finally, we can publish a message to <strong>Pub/Sub</strong>. Keep in mind that <code>Publish</code> is asynchronous, and you should use <code>res.Get</code> afterwards if the result is important.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#E06C75">res</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#E06C75">topic</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Publish</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">ctx</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">&#x26;</span><span style="color:#E5C07B">pubsub</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Message</span><span style="color:#ABB2BF">{</span></span>
@@ -138,7 +219,18 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Wait</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">for</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">result,</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">if</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">you</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">care</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">about</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">it</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">:-)</span></span>
 <span class="line"><span style="color:#E06C75">messageID</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">err</span><span class="space"> </span><span style="color:#E5C07B">=</span><span class="space"> </span><span style="color:#E06C75">res</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Get</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">ctx</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">...</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="res := topic.Publish(ctx, &#x26;pubsub.Message{
+    Data: []byte(&#x22;hello test&#x22;),
+})
+
+// Wait for result, if you care about it :-)
+messageID, err = res.Get(ctx)
+...
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="summary">Summary</h2>
 <p>In this guide I showed how to do the following:</p>
 <ol>
@@ -262,7 +354,123 @@ You can set it in a shell using <code>$(gcloud beta emulators pubsub env-init)</
 <span class="line"><span class="tab">	</span><span class="tab">	</span><span style="color:#E06C75">require</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Fail</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">t</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">"did</span><span class="space"> </span><span style="color:#98C379">not</span><span class="space"> </span><span style="color:#98C379">receive</span><span class="space"> </span><span style="color:#98C379">message</span><span class="space"> </span><span style="color:#98C379">within</span><span class="space"> </span><span style="color:#98C379">deadline"</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+	&#x22;cloud.google.com/go/pubsub&#x22;
+	&#x22;context&#x22;
+	&#x22;encoding/json&#x22;
+	&#x22;github.com/google/uuid&#x22;
+	&#x22;github.com/magnuswahlstrand/gcp-examples/pubsub/common&#x22;
+	&#x22;github.com/stretchr/testify/require&#x22;
+	&#x22;net/http&#x22;
+	&#x22;net/http/httptest&#x22;
+	&#x22;os&#x22;
+	&#x22;testing&#x22;
+	&#x22;time&#x22;
+)
+
+// Test 1: Pull subscription
+func TestSendWithPull(t *testing.T) {
+	topicID := &#x22;topic-&#x22; + uuid.New().String()
+	subscriptionID := &#x22;sub-&#x22; + uuid.New().String()
+
+	ctx := context.Background()
+
+	os.Setenv(&#x22;PUBSUB_EMULATOR_HOST&#x22;, &#x22;localhost:8085&#x22;)
+	client, err := pubsub.NewClient(ctx, &#x22;fake-project&#x22;)
+	require.NoError(t, err)
+
+	topic, err := client.CreateTopic(ctx, topicID)
+	require.NoError(t, err)
+
+	sub, err := client.CreateSubscription(ctx, subscriptionID, pubsub.SubscriptionConfig{
+		Topic: topic,
+	})
+	require.NoError(t, err)
+
+	// Act: publish message
+	res := topic.Publish(ctx, &#x26;pubsub.Message{
+		Data: []byte(&#x22;hello test&#x22;),
+	})
+
+	_, err = res.Get(ctx)
+	require.NoError(t, err)
+
+	cctx, cancel := context.WithCancel(ctx)
+	okCh := make(chan string)
+
+	go func() {
+		// Use a callback to receive messages via subscription.
+		// Receive will block until the context is cancelled, or we get a non-recoverable error
+		err = sub.Receive(cctx, func(_ context.Context, m *pubsub.Message) {
+			m.Ack()
+			okCh <- string(m.Data)
+			cancel()
+		})
+	}()
+
+	select {
+	case msg := <-okCh:
+		require.Equal(t, &#x22;hello test&#x22;, msg)
+	case <-time.After(300 * time.Millisecond):
+		require.Fail(t, &#x22;did not receive message within deadline&#x22;)
+		cancel()
+	}
+}
+
+// Test 2: Push subscription
+func TestSendWithPush(t *testing.T) {
+	topicID := &#x22;topic-&#x22; + uuid.New().String()[0:8]
+	subscriptionID := &#x22;sub-&#x22; + uuid.New().String()[0:8]
+
+	okCh := make(chan string)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		var event pubSubMessage
+
+		if err := json.NewDecoder(r.Body).Decode(&#x26;event); err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
+		defer r.Body.Close()
+
+		okCh <- string(event.Message.Data)
+	}))
+
+	ctx := context.Background()
+
+	os.Setenv(&#x22;PUBSUB_EMULATOR_HOST&#x22;, &#x22;localhost:8085&#x22;)
+	client, err := pubsub.NewClient(ctx, &#x22;fake-project&#x22;)
+	require.NoError(t, err)
+
+	topic, err := client.CreateTopic(ctx, topicID)
+	require.NoError(t, err)
+
+	_, err = client.CreateSubscription(ctx, subscriptionID, pubsub.SubscriptionConfig{
+		Topic: topic,
+		PushConfig: pubsub.PushConfig{
+			Endpoint: server.URL,
+		},
+	})
+	require.NoError(t, err)
+
+	// Act: publish message
+	_ = topic.Publish(ctx, &#x26;pubsub.Message{
+		Data: []byte(&#x22;hello test&#x22;),
+	})
+
+	select {
+	case msg := <-okCh:
+		require.Equal(t, &#x22;hello test&#x22;, msg)
+	case <-time.After(500 * time.Millisecond):
+		require.Fail(t, &#x22;did not receive message within deadline&#x22;)
+	}
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://cloud.google.com/sdk/docs/install">Installing Google Cloud SDK</a></li>

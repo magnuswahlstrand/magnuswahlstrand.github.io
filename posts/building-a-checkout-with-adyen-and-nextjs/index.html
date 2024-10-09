@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -88,12 +88,22 @@ integration, I wanted to see if I could build the frontend as well. In this guid
 <li><strong>Initialize the NextJS app</strong> - I prefer using typescript, then defaults for everything else.</li>
 </ol>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx</span><span class="space"> </span><span>create-next-app@latest</span><span class="space"> </span><span>--typescript</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npx create-next-app@latest --typescript
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <ol start="2">
 <li><strong>Install dependencies</strong> - For this step, we only need the <a href="https://www.npmjs.com/package/@adyen/api-library">Adyen Node SDK</a></li>
 </ol>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>@adyen/api-library</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="npm install @adyen/api-library
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <ol start="3">
 <li>Get the API key and merchant from name from the <a href="https://ca-live.adyen.com/ca/ca/overview/default.shtml">Adyen portal</a> and store them in a <code>.env.local</code> file.</li>
 </ol>
@@ -101,7 +111,15 @@ integration, I wanted to see if I could build the frontend as well. In this guid
 <span class="line"><span style="color:#E06C75">ADYEN_API_KEY</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">&lt;</span><span style="color:#98C379">YOUR</span><span class="space"> </span><span style="color:#61AFEF">API</span><span class="space"> </span><span style="color:#98C379">KE</span><span style="color:#ABB2BF">Y&gt;</span></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">From</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Settings</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&gt;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Merchant</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">accounts.</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Get</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">name</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">under</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&quot;Account</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">code&quot;</span></span>
 <span class="line"><span style="color:#E06C75">ADYEN_MERCHANT_ACCOUNT</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">&lt;</span><span style="color:#98C379">YOUR</span><span class="space"> </span><span style="color:#61AFEF">MERCHANT</span><span class="space"> </span><span style="color:#98C379">ACCOUN</span><span style="color:#ABB2BF">T&gt;</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# From Developers > API credentials > New API credential > Generate new API key.
+ADYEN_API_KEY=<YOUR API KEY>
+# From Settings > Merchant accounts. Get the name under &#34;Account code&#34;
+ADYEN_MERCHANT_ACCOUNT=<YOUR MERCHANT ACCOUNT>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <ol start="4">
 <li><strong>Create a NextJS endpoint</strong></li>
 </ol>
@@ -200,19 +218,42 @@ export default async function handler(
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">&quot;id&quot;</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">&quot;CS2CD25B27F3052E4B&quot;</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">&quot;sessionData&quot;</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">&quot;Ab02b4c0!n5HRZtzi1M4M...&quot;</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="{
+  &#34;id&#34;: &#34;CS2CD25B27F3052E4B&#34;,
+  &#34;sessionData&#34;: &#34;Ab02b4c0!n5HRZtzi1M4M...&#34;
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="implementing-the-payment-page">Implementing the payment page</h2>
 <p>Now that we can fetch session data, we can start build the payment page. We need to install two libraries, <a href="https://www.npmjs.com/package/swr">swr</a> for fetching data from the backend, and <a href="https://www.npmjs.com/package/adyen-web">adyen-web</a> for the Drop-in component.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">swr</span></span>
 <span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@adyen/adyen-web</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="npm install swr
+npm install @adyen/adyen-web
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Next, generate a client key in the <a href="https://ca-live.adyen.com/ca/ca/overview/default.shtml">Adyen portal</a>, and add the two following variables to <code>.env.local</code>. They will be used by the Drop-in component.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Change</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">to</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">LIVE</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">in</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">production</span></span>
 <span class="line"><span style="color:#E06C75">NEXT_PUBLIC_ADYEN_ENVIRONMENT</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;TEST&quot;</span></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">From</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Developers</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&gt;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">API</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">credentials</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&gt;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Select</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">your</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">user</span></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&gt;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Client</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">settings</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">&gt;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Generate</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">client</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">key</span></span>
 <span class="line"><span style="color:#E06C75">NEXT_PUBLIC_ADYEN_CLIENT_KEY</span><span style="color:#56B6C2">=</span><span style="color:#98C379">&quot;test_2C8....&quot;</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="# Change to LIVE in production
+NEXT_PUBLIC_ADYEN_ENVIRONMENT=&#34;TEST&#34;
+# From Developers > API credentials > Select your user
+#  > Client settings > Generate client key
+NEXT_PUBLIC_ADYEN_CLIENT_KEY=&#34;test_2C8....&#34;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add('copied');
+          setTimeout(() => this.classList.remove('copied'), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Create a file <code>src/components/Checkout.tsx</code> and add the following code. This will be the payment page. (<em>Inspired by Adyen’s own example repo, and specifically <a href="https://github.com/adyen-examples/adyen-react-online-payments/blob/main/src/features/payment/Payment.js">this file</a>.</em>)</p>
 <div> <div class="flex flex-row justify-between relative top-8 overflow-clip"> <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white text-sm sm:text-base" href="https://github.com/magnuswahlstrand/nextjs-with-adyen/blob/main/src/components/Checkout.tsx">src/components/Checkout.tsx</a> <a class="bg-[#282c34] rounded-t-lg z px-5 pt-1 pb-3 !text-white text-sm sm:text-base" href="#" onclick="return false;">  <clipboard-copy value="import React, {useEffect, useRef} from &#34;react&#34;;
 import AdyenCheckout from &#34;@adyen/adyen-web&#34;;

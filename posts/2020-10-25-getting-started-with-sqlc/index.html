@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -80,19 +80,45 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#C678DD">TEXT</span><span class="space"> </span><span style="color:#C678DD">NOT</span><span class="space"> </span><span style="color:#C678DD">NULL</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">created_at</span><span class="space"> </span><span style="color:#C678DD">TIMESTAMP</span><span class="space"> </span><span style="color:#C678DD">WITH</span><span class="space"> </span><span style="color:#C678DD">TIME</span><span class="space"> </span><span style="color:#C678DD">ZONE</span><span class="space"> </span><span style="color:#C678DD">DEFAULT</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">NOW</span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#C678DD">AT</span><span class="space"> </span><span style="color:#C678DD">TIME</span><span class="space"> </span><span style="color:#C678DD">ZONE</span><span class="space"> </span><span style="color:#98C379">'UTC'</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">);</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="CREATE TABLE animals (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT (NOW() AT TIME ZONE &#x27;UTC&#x27;)
+);
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This will be used also be used by <code>sqlc</code> to generate Go structs. For now, we will use it to bootstrap our local database.</p>
 <p>Let’s start our local PostgresSQL database.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">docker</span><span class="space"> </span><span style="color:#98C379">run</span><span class="space"> </span><span style="color:#D19A66">-p</span><span class="space"> </span><span style="color:#98C379">5432:5432</span><span class="space"> </span><span style="color:#D19A66">-it</span><span class="space"> </span><span style="color:#D19A66">--rm</span><span class="space"> </span><span style="color:#98C379">postgres</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="docker run -p 5432:5432 -it --rm postgres
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Next we connect to it using <code>psql</code> and run the commands in <strong><em>schema.sql</em></strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">psql</span><span class="space"> </span><span style="color:#ABB2BF">-h</span><span class="space"> </span><span style="color:#ABB2BF">localhost</span><span class="space"> </span><span style="color:#E06C75">--username</span><span style="color:#56B6C2">=</span><span style="color:#98C379">postgres</span><span class="space"> </span><span style="color:#61AFEF">-c</span><span class="space"> </span><span style="color:#98C379">"\i</span><span class="space"> </span><span style="color:#98C379">schema.sql"</span></span>
 <span class="line"><span style="color:#61AFEF">CREATE</span><span class="space"> </span><span style="color:#98C379">TABLE</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> psql -h localhost --username=postgres -c &#x22;\i schema.sql&#x22;
+CREATE TABLE
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="queries">Queries</h3>
 <p>Now that we have set up our table, we can run some queries. Open a psql shell</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">psql</span><span class="space"> </span><span style="color:#D19A66">-h</span><span class="space"> </span><span style="color:#98C379">localhost</span><span class="space"> </span><span style="color:#D19A66">--username=postgres</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="psql -h localhost --username=postgres
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#ABB2BF">postgres</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">#</span><span class="space"> </span><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">animals</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">name</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">type</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'Fido'</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">'dog'</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#D19A66">0</span><span class="space"> </span><span style="color:#D19A66">1</span></span>
 <span class="line"><span style="color:#ABB2BF">postgres</span><span style="color:#56B6C2">=</span><span style="color:#ABB2BF">#</span><span class="space"> </span><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">animals</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">name</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">type</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'Spot'</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">'cat'</span><span style="color:#ABB2BF">);</span></span>
@@ -106,7 +132,24 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">1</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">Fido</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">dog</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#D19A66">2020</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">10</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">25</span><span class="space"> </span><span style="color:#D19A66">16</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">17</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">22</span><span style="color:#ABB2BF">.</span><span style="color:#D19A66">641659</span><span style="color:#ABB2BF">+</span><span style="color:#D19A66">00</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">2</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">Spot</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">cat</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#D19A66">2020</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">10</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">25</span><span class="space"> </span><span style="color:#D19A66">16</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">17</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">32</span><span style="color:#ABB2BF">.</span><span style="color:#D19A66">089118</span><span style="color:#ABB2BF">+</span><span style="color:#D19A66">00</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">3</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">Magnus</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#ABB2BF">racoon</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#D19A66">2020</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">10</span><span style="color:#ABB2BF">-</span><span style="color:#D19A66">25</span><span class="space"> </span><span style="color:#D19A66">16</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">17</span><span style="color:#ABB2BF">:</span><span style="color:#D19A66">41</span><span style="color:#ABB2BF">.</span><span style="color:#D19A66">17342</span><span style="color:#ABB2BF">+</span><span style="color:#D19A66">00</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="postgres=# INSERT INTO animals (name, type) VALUES (&#x27;Fido&#x27;, &#x27;dog&#x27;);
+INSERT 0 1
+postgres=# INSERT INTO animals (name, type) VALUES (&#x27;Spot&#x27;, &#x27;cat&#x27;);
+INSERT 0 1
+postgres=# INSERT INTO animals (name, type) VALUES (&#x27;Magnus&#x27;, &#x27;racoon&#x27;);
+INSERT 0 1
+postgres=# SELECT * FROM animals
+postgres-# ;
+ id |  name  |  type  |          created_at
+----+--------+--------+-------------------------------
+  1 | Fido   | dog    | 2020-10-25 16:17:22.641659+00
+  2 | Spot   | cat    | 2020-10-25 16:17:32.089118+00
+  3 | Magnus | racoon | 2020-10-25 16:17:41.17342+00
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We have successfully written and read some data! For now, these are the queries we want for this simple application.</p>
 <h3 id="setup-for-sqlc">Setup for <code>sqlc</code></h3>
 <p>We want to turn the queries and schema into code. <code>sqlc</code> needs a configuration file with the following things</p>
@@ -123,7 +166,17 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">path</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">"data"</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">schema</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">"schema.sql"</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">queries</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">"queries.sql"</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="version: &#x22;1&#x22;
+packages:
+  - name: &#x22;data&#x22;
+    path: &#x22;data&#x22;
+    schema: &#x22;schema.sql&#x22;
+    queries: &#x22;queries.sql&#x22;
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>After this file, we need to create <code>queries.sql</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">name:</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">ListAnimals</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">:many</span></span>
 <span class="line"><span style="color:#C678DD">SELECT</span><span class="space"> </span><span style="color:#ABB2BF">*</span><span class="space"> </span><span style="color:#C678DD">FROM</span><span class="space"> </span><span style="color:#ABB2BF">animals</span></span>
@@ -131,7 +184,17 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">name:</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">CreateAnimal</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">:exec</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">animals</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">name</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">type</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">($</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">$</span><span style="color:#D19A66">2</span><span style="color:#ABB2BF">)</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="-- name: ListAnimals :many
+SELECT * FROM animals
+ORDER BY created_at;
+
+-- name: CreateAnimal :exec
+INSERT INTO animals (name, type) VALUES ($1, $2)
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>The comments are extra notation for <code>sqlc</code>.</p>
 <ul>
 <li><code>name: ListAnimals :many</code> - Generate a method called <code>ListAnimals</code> that returns a slice of <code>Animal</code></li>
@@ -140,7 +203,12 @@ In this article I cover how to set up a very useful application that insert anim
 <h4 id="generate-code">Generate code</h4>
 <p>Now we can run</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">sqlc</span><span class="space"> </span><span style="color:#98C379">generate</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="sqlc generate
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>This generates the following two files of interest</p>
 <p><strong><em>data/models.go</em></strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span class="space"> </span><span style="color:#E5C07B">data</span></span>
@@ -155,7 +223,23 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">Type</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">string</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#E06C75">CreatedAt</span><span class="space"> </span><span style="color:#E5C07B">time</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Time</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package data
+
+import (
+	&#x22;time&#x22;
+)
+
+type Animal struct {
+	ID        int32
+	Name      string
+	Type      string
+	CreatedAt time.Time
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong><em>data/queries.sql.go</em></strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">package</span><span class="space"> </span><span style="color:#E5C07B">data</span></span>
 <span class="line"></span>
@@ -209,7 +293,63 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#E06C75">items</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package data
+
+import (
+	&#x22;context&#x22;
+)
+
+const createAnimal = &#x60;-- name: CreateAnimal :exec
+INSERT INTO animals (name, type) VALUES ($1, $2)
+&#x60;
+
+type CreateAnimalParams struct {
+	Name string
+	Type string
+}
+
+func (q *Queries) CreateAnimal(ctx context.Context, arg CreateAnimalParams) error {
+	_, err := q.db.ExecContext(ctx, createAnimal, arg.Name, arg.Type)
+	return err
+}
+
+const listAnimals = &#x60;-- name: ListAnimals :many
+SELECT id, name, type, created_at FROM animals
+ORDER BY created_at
+&#x60;
+
+func (q *Queries) ListAnimals(ctx context.Context) ([]Animal, error) {
+	rows, err := q.db.QueryContext(ctx, listAnimals)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Animal
+	for rows.Next() {
+		var i Animal
+		if err := rows.Scan(
+			&#x26;i.ID,
+			&#x26;i.Name,
+			&#x26;i.Type,
+			&#x26;i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="using-in-application">Using in application</h3>
 <p>Since we already have our Postgres instance up and running with database table defined. We can now use this generated code directly our application.</p>
 <p><strong><em>main.go</em></strong></p>
@@ -267,14 +407,81 @@ In this article I cover how to set up a very useful application that insert anim
 <span class="line"><span class="tab">	</span><span class="tab">	</span><span style="color:#E06C75">fmt</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Printf</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"--</span><span class="space"> </span><span style="color:#D19A66">%d</span><span style="color:#56B6C2">\t</span><span style="color:#D19A66">%s</span><span style="color:#56B6C2">\t</span><span style="color:#D19A66">%s</span><span style="color:#56B6C2">\n</span><span style="color:#98C379">"</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">animal</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">ID</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">animal</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Name</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">animal</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Type</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="tab">	</span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="package main
+
+import (
+	&#x22;context&#x22;
+	&#x22;database/sql&#x22;
+	&#x22;fmt&#x22;
+	_ &#x22;github.com/lib/pq&#x22;
+	&#x22;math/rand&#x22;
+	&#x22;time&#x22;
+
+	&#x22;github.com/magnuswahlstrand/sqlc-example/data&#x22;
+	&#x22;log&#x22;
+)
+
+const (
+	host     = &#x22;localhost&#x22;
+	port     = 5432
+	user     = &#x22;postgres&#x22;
+	password = &#x22;&#x22;
+)
+
+var sourceName = fmt.Sprintf(&#x22;host=%s port=%d user=%s password=%s dbname=%s sslmode=disable&#x22;, host, port, user, password, &#x22;&#x22;)
+
+func main() {
+	// Seed randomizer
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	db, err := sql.Open(&#x22;postgres&#x22;, sourceName)
+	if err != nil {
+		log.Fatalf(&#x22;failed to open connection to DB: %v&#x22;, err)
+	}
+	database := data.New(db)
+
+	// Create animal
+	err = database.CreateAnimal(context.Background(), data.CreateAnimalParams{
+		Name: &#x22;Fido&#x22;,
+		Type: &#x22;dog&#x22;,
+	})
+	if err != nil {
+		log.Fatal(&#x22;failed to create animal&#x22;, err)
+	}
+	fmt.Println(&#x22;* new animal with created&#x22;)
+
+	// List animals
+	animals, err := database.ListAnimals(context.Background())
+	if err != nil {
+		log.Fatal(&#x22;failed to list animals&#x22;, err)
+	}
+
+	fmt.Println(&#x22;* complete list of animals&#x22;)
+	for _, animal := range animals {
+		fmt.Printf(&#x22;-- %d\t%s\t%s\n&#x22;, animal.ID, animal.Name, animal.Type)
+	}
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Finally, if we run the application, we get the following output</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">></span><span class="space"> </span><span style="color:#ABB2BF">go</span><span class="space"> </span><span style="color:#ABB2BF">run</span><span class="space"> </span><span style="color:#ABB2BF">main.go</span></span>
 <span class="line"><span style="color:#ABB2BF">*</span><span class="space"> </span><span style="color:#ABB2BF">new</span><span class="space"> </span><span style="color:#ABB2BF">animal</span><span class="space"> </span><span style="color:#ABB2BF">with</span><span class="space"> </span><span style="color:#ABB2BF">created</span></span>
 <span class="line"><span style="color:#ABB2BF">*</span><span class="space"> </span><span style="color:#ABB2BF">complete</span><span class="space"> </span><span style="color:#ABB2BF">list</span><span class="space"> </span><span style="color:#ABB2BF">of</span><span class="space"> </span><span style="color:#ABB2BF">animals</span></span>
 <span class="line"><span style="color:#61AFEF">--</span><span class="space"> </span><span style="color:#D19A66">1</span><span class="tab">	</span><span style="color:#98C379">Fido</span><span class="tab">	</span><span style="color:#98C379">dog</span></span>
 <span class="line"><span style="color:#61AFEF">--</span><span class="space"> </span><span style="color:#D19A66">2</span><span class="tab">	</span><span style="color:#98C379">Fido</span><span class="tab">	</span><span style="color:#98C379">dog</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="> go run main.go
+* new animal with created
+* complete list of animals
+-- 1	Fido	dog
+-- 2	Fido	dog
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Success!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p><code>sqlc</code> is a neat, easy to use tool, which makes working with Postgres in Go fun!</p>

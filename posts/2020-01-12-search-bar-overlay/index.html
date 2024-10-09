@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -98,7 +98,42 @@ If we enter something into the input field, we will show a few dummy search resu
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">div</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">div</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">div</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<!-- Modal -->
+<div
+  class=&#x22;modal&#x22;
+  id=&#x22;search_modal&#x22;
+  tabindex=&#x22;-1&#x22;
+  role=&#x22;dialog&#x22;
+  aria-hidden=&#x22;true&#x22;
+>
+  <div class=&#x22;modal-dialog modal-lg&#x22; role=&#x22;document&#x22;>
+    <div class=&#x22;modal-content&#x22;>
+      <!-- Search icon -->
+      <i class=&#x22;fa fa-search search-icon&#x22; aria-hidden=&#x22;true&#x22;></i>
+
+      <!-- Close search modal button -->
+      <i
+        class=&#x22;fa fa-times search-close&#x22;
+        data-dismiss=&#x22;modal&#x22;
+        aria-hidden=&#x22;true&#x22;
+      ></i>
+
+      <!-- Search input -->
+      <input
+        type=&#x22;text&#x22;
+        class=&#x22;form-control pl-5 border-0&#x22;
+        id=&#x22;search_input&#x22;
+        name=&#x22;123e4567-e89b-12d3-a456-42665544000&#x22;
+        placeholder=&#x22;Search discussions and channels&#x22;
+      />
+    </div>
+  </div>
+</div>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>Styling:</em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">style</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#D19A66">.search-close</span><span style="color:#ABB2BF">,</span></span>
@@ -113,7 +148,24 @@ If we enter something into the input field, we will show a few dummy search resu
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">cursor:</span><span class="space"> </span><span style="color:#D19A66">hand</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">style</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<style>
+  .search-close,
+  .search-icon {
+    margin: 0 6px 0 12px;
+    padding: 10px;
+    position: absolute;
+  }
+
+  .search-close {
+    right: 0px;
+    cursor: hand;
+  }
+</style>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <hr>
 <p>A few highlights:</p>
 <ul>
@@ -143,7 +195,21 @@ If we enter something into the input field, we will show a few dummy search resu
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;</span><span style="color:#E06C75">li</span><span class="space"> </span><span style="color:#D19A66">class</span><span style="color:#ABB2BF">=</span><span style="color:#98C379">"list-group-item"</span><span style="color:#ABB2BF">>Vestibulum</span><span class="space"> </span><span style="color:#ABB2BF">at</span><span class="space"> </span><span style="color:#ABB2BF">eros&#x3C;/</span><span style="color:#E06C75">li</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">ul</span><span style="color:#ABB2BF">></span></span>
 <span class="line"><span style="color:#ABB2BF">&#x3C;/</span><span style="color:#E06C75">div</span><span style="color:#ABB2BF">></span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="<!-- Dummy search results -->
+<div class=&#x22;search_results&#x22;>
+  <ul class=&#x22;list-group&#x22;>
+    <li class=&#x22;list-group-item&#x22;>Cras justo odio</li>
+    <li class=&#x22;list-group-item&#x22;>Dapibus ac facilisis in</li>
+    <li class=&#x22;list-group-item&#x22;>Morbi leo risus</li>
+    <li class=&#x22;list-group-item&#x22;>Porta ac consectetur ac</li>
+    <li class=&#x22;list-group-item&#x22;>Vestibulum at eros</li>
+  </ul>
+</div>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>Styling:</em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#D19A66">.search_results</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">border-top:</span><span class="space"> </span><span style="color:#D19A66">1</span><span style="color:#E06C75">px</span><span class="space"> </span><span style="color:#D19A66">solid</span><span class="space"> </span><span style="color:#ABB2BF">lightgray;</span></span>
@@ -164,7 +230,30 @@ If we enter something into the input field, we will show a few dummy search resu
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">color:</span><span class="space"> </span><span style="color:#D19A66">white</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">cursor:</span><span class="space"> </span><span style="color:#D19A66">hand</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code=".search_results {
+  border-top: 1px solid lightgray;
+  display: none;
+}
+.search_results > label {
+  padding: 20px 16px 0px 28px;
+  font-size: 12px;
+  color: gray;
+}
+.search_results > ul > li {
+  border: 0px;
+  padding-left: 28px;
+  border-radius: 0;
+}
+.search_results > ul > li:hover {
+  background-color: cornflowerblue;
+  color: white;
+  cursor: hand;
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Using jQuery and some javascript, we can complete the solution.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#61AFEF">$</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">document</span><span style="color:#ABB2BF">).</span><span style="color:#61AFEF">ready</span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">function</span><span class="space"> </span><span style="color:#ABB2BF">()</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Focus</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">search</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">input</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">whenever</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">modal</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">is</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">shown</span></span>
@@ -188,7 +277,33 @@ If we enter something into the input field, we will show a few dummy search resu
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="$(document).ready(function () {
+  // Focus the search input whenever the modal is shown
+  $(&#x22;#search_modal&#x22;).on(&#x22;hidden.bs.modal&#x22;, function (e) {
+    $(&#x22;#search_input&#x22;).val(&#x22;&#x22;);
+    $(&#x22;.search_results&#x22;).hide();
+  });
+
+  // Focus the search input whenever the modal is shown
+  $(&#x22;#search_modal&#x22;).on(&#x22;shown.bs.modal&#x22;, function (e) {
+    $(&#x22;#search_input&#x22;).focus();
+  });
+
+  // Show search results when the input field has some text in it
+  // Hide it when it empty
+  $(&#x22;#search_input&#x22;).keyup(function () {
+    if ($(this).val() == &#x22;&#x22;) {
+      $(&#x22;.search_results&#x22;).hide();
+    } else {
+      $(&#x22;.search_results&#x22;).show();
+    }
+  });
+});
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>That’s it! Now we have the base a nice search bar.</p>
 <p><img src="/img/slack-clone/6_end_result.gif" alt="Search overlay"></p>
 <h3 id="improvements">Improvements</h3>

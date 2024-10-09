@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -62,13 +62,32 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">users_events</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'user</span><span class="space"> </span><span style="color:#98C379">1</span><span class="space"> </span><span style="color:#98C379">created'</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">users</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#C678DD">COMMIT</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Commit</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">both</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">statements</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">to</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">database</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="CREATE TABLE users(id INT UNIQUE);
+CREATE TABLE users_events(type TEXT);
+
+BEGIN; -- Begin transaction
+INSERT INTO users_events VALUES (&#x27;user 1 created&#x27;);
+INSERT INTO users VALUES (1);
+COMMIT; -- Commit both statements to the database
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Now, if we get an error half way (maybe the database connection timed out, or in the case below there is already a user with the same ID). We use <code>ROLLBACK</code> to abort the transaction.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sql"><code><span class="line"><span style="color:#C678DD">BEGIN</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Begin</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">transaction</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">users_events</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'user</span><span class="space"> </span><span style="color:#98C379">1</span><span class="space"> </span><span style="color:#98C379">created</span><span class="space"> </span><span style="color:#98C379">again'</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#ABB2BF">users</span><span class="space"> </span><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">1</span><span style="color:#ABB2BF">);</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">ERROR:</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">duplicate</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">key</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">value</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">violates</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">unique</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">constraint</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">"users_id_key"</span></span>
 <span class="line"><span style="color:#C678DD">ROLLBACK</span><span style="color:#ABB2BF">;</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">--</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Abort</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">transaction</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">and</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">both</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">statements</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="BEGIN; -- Begin transaction
+INSERT INTO users_events VALUES (&#x27;user 1 created again&#x27;);
+INSERT INTO users VALUES (1); -- ERROR: duplicate key value violates unique constraint &#x22;users_id_key&#x22;
+ROLLBACK; -- Abort the transaction and both statements
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>And so we have an atomic transaction!</p>
 <h3 id="consistency">Consistency</h3>
 <p><a href="https://en.wikipedia.org/wiki/Consistency_(database_systems)">Consistency</a> means that the database should be in a valid state, before and after a transaction. What does valid mean? It means that it is <em>consistent</em> to whatever rules have been defined.
@@ -78,7 +97,15 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">ID</span><span class="space"> </span><span style="color:#C678DD">bigint</span><span class="space"> </span><span style="color:#C678DD">UNIQUE</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">email</span><span class="space"> </span><span style="color:#C678DD">TEXT</span><span class="space"> </span><span style="color:#C678DD">NOT</span><span class="space"> </span><span style="color:#C678DD">NULL</span></span>
 <span class="line"><span style="color:#ABB2BF">);</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="CREATE TABLE customers(
+    ID bigint UNIQUE,
+    email TEXT NOT NULL
+);
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Given the following table definition, our database would be <em>inconsistent</em> if we found the following database rows:</p>
 <p><em>Violation the UNIQUE constraint</em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">SELECT</span><span class="space"> </span><span style="color:#E5C07B">*</span><span class="space"> </span><span style="color:#98C379">FROM</span><span class="space"> </span><span style="color:#98C379">customers</span><span style="color:#ABB2BF">;</span></span>
@@ -87,7 +114,17 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
 <span class="line"><span style="color:#61AFEF">----+-----------------</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">1</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#61AFEF">hedvor@mail.com</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">1</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#61AFEF">john@mail.com</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="SELECT * FROM customers;
+
+ id |      email
+----+-----------------
+  1 | hedvor@mail.com
+  1 | john@mail.com
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>Violation of the NOT NULL constraint</em></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">SELECT</span><span class="space"> </span><span style="color:#E5C07B">*</span><span class="space"> </span><span style="color:#98C379">FROM</span><span class="space"> </span><span style="color:#98C379">customers</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"></span>
@@ -95,7 +132,17 @@ Good examples includes constraints for table rows, such as <code>UNIQUE</code> a
 <span class="line"><span style="color:#61AFEF">----+-----------------</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">1</span><span class="space"> </span><span style="color:#ABB2BF">|</span><span class="space"> </span><span style="color:#61AFEF">hedvor@mail.com</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">2</span><span class="space"> </span><span style="color:#ABB2BF">|</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="SELECT * FROM customers;
+
+ id |      email
+----+-----------------
+  1 | hedvor@mail.com
+  2 |
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>In my experience, keeping your database consistent isn’t really a problem for the application developer, but for the database itself. The responsibility split is as follows</p>
 <ol>
 <li><strong>Developer:</strong> Defining the rules (uniqueness, <a href="https://www.postgresql.org/docs/9.2/plpgsql-trigger.html">postgres triggers</a>, …)</li>

@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -81,17 +81,41 @@ but adapt it for SST 2.0 and add Drizzle ORM on top for typesafe database querie
 <span class="line"><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">PRIMARY</span><span class="space"> </span><span style="color:#C678DD">KEY</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">tally</span><span class="space"> </span><span style="color:#C678DD">INT</span><span style="color:#ABB2BF">);</span></span>
 <span class="line"><span style="color:#C678DD">INSERT</span><span class="space"> </span><span style="color:#C678DD">INTO</span><span class="space"> </span><span style="color:#C678DD">counter</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#C678DD">counter</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">tally)</span></span>
 <span class="line"><span style="color:#C678DD">VALUES</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#98C379">'hits'</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">);</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="CREATE TABLE IF NOT EXISTS counter
+(
+    counter VARCHAR
+(
+    255
+) PRIMARY KEY, tally INT);
+INSERT INTO counter (counter, tally)
+VALUES (&#x27;hits&#x27;, 0);
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="2-store-sst-secret">2. Store SST secret</h2>
 <p>Our main secret in this project is the planetscale password. We store it in the SST secret store.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpm</span><span class="space"> </span><span>sst</span><span class="space"> </span><span>secrets</span><span class="space"> </span><span>set</span><span class="space"> </span><span>PLANETSCALE_PASSWORD</span><span class="space"> </span><span>&#x3C;YOUR</span><span class="space"> </span><span>PASSWORD></span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="pnpm sst secrets set PLANETSCALE_PASSWORD <YOUR PASSWORD>
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="3-create-sst-project">3. Create SST project</h2>
 <p>Now we create our SST project</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpx</span><span class="space"> </span><span>create-sst@latest</span><span class="space"> </span><span>--template=base/example</span><span class="space"> </span><span>magnusscale</span></span>
 <span class="line"><span>cd</span><span class="space"> </span><span>magnusscale</span></span>
 <span class="line"><span>pnpm</span><span class="space"> </span><span>install</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="pnpx create-sst@latest --template=base/example magnusscale
+cd magnusscale
+pnpm install
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="4-our-stack">4. Our stack</h2>
 <p>Then we define our stack. Here we create 3 references.</p>
 <ul>
@@ -130,7 +154,42 @@ but adapt it for SST 2.0 and add Drizzle ORM on top for typesafe database querie
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ApiEndpoint</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E5C07B">api</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">url</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// stacks/MagnusScaleStack.ts
+import { Api, Config, StackContext } from &#x22;sst/constructs&#x22;;
+
+export function MagnusScaleStack({ stack }: StackContext) {
+  const PLANETSCALE_PASSWORD = new Config.Secret(stack, &#x22;PLANETSCALE_PASSWORD&#x22;);
+  const PLANETSCALE_USERNAME = new Config.Parameter(
+    stack,
+    &#x22;PLANETSCALE_USERNAME&#x22;,
+    {
+      value: &#x22;<YOUR USERNAME>&#x22;,
+    }
+  );
+  const PLANETSCALE_HOST = new Config.Parameter(stack, &#x22;PLANETSCALE_HOST&#x22;, {
+    value: &#x22;aws.connect.psdb.cloud&#x22;,
+  });
+
+  // Create an HTTP API
+  const api = new Api(stack, &#x22;Api&#x22;, {
+    routes: {
+      &#x22;POST /&#x22;: &#x22;packages/functions/src/lambda.handler&#x22;,
+    },
+  });
+
+  // Make the secrets and config available to the lambda
+  api.bind([PLANETSCALE_HOST, PLANETSCALE_USERNAME, PLANETSCALE_PASSWORD]);
+
+  // Show the endpoint in the output
+  stack.addOutputs({
+    ApiEndpoint: api.url,
+  });
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="5-set-up-drizzle-orm">5. Set up Drizzle ORM</h2>
 <p>Now we can configure our database schema to match the table we created earlier. This will allow us to get typescript
 types in our queries.</p>
@@ -141,7 +200,18 @@ types in our queries.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">counter</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#61AFEF">varchar</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"counter"</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">length</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#D19A66">255</span><span class="space"> </span><span style="color:#ABB2BF">}).</span><span style="color:#61AFEF">primaryKey</span><span style="color:#ABB2BF">(),</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">tally</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#61AFEF">int</span><span style="color:#ABB2BF">(</span><span style="color:#98C379">"tally"</span><span style="color:#ABB2BF">).</span><span style="color:#61AFEF">notNull</span><span style="color:#ABB2BF">(),</span></span>
 <span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// packages/core/schema.ts
+import { int, mysqlTable, varchar } from &#x22;drizzle-orm/mysql-core&#x22;;
+
+export const counters = mysqlTable(&#x22;counter&#x22;, {
+  counter: varchar(&#x22;counter&#x22;, { length: 255 }).primaryKey(),
+  tally: int(&#x22;tally&#x22;).notNull(),
+});
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Next we create a <code>db.ts</code> with the database connection and queries.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">packages/core/db.ts</span></span>
 <span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">drizzle</span><span class="space"> </span><span style="color:#ABB2BF">}</span><span class="space"> </span><span style="color:#C678DD">from</span><span class="space"> </span><span style="color:#98C379">"drizzle-orm/planetscale-serverless"</span><span style="color:#ABB2BF">;</span></span>
@@ -183,7 +253,51 @@ types in our queries.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">})</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">where</span><span style="color:#ABB2BF">(</span><span style="color:#61AFEF">eq</span><span style="color:#ABB2BF">(</span><span style="color:#E5C07B">counters</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">counter</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">name</span><span style="color:#ABB2BF">));</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// packages/core/db.ts
+import { drizzle } from &#x22;drizzle-orm/planetscale-serverless&#x22;;
+
+import { connect } from &#x22;@planetscale/database&#x22;;
+import { counters } from &#x22;./schema&#x22;;
+
+import { Config } from &#x22;sst/node/config&#x22;;
+import { eq } from &#x22;drizzle-orm/expressions&#x22;;
+import { sql } from &#x22;drizzle-orm/sql&#x22;;
+
+const connection = connect({
+  host: Config.PLANETSCALE_HOST,
+  username: Config.PLANETSCALE_USERNAME,
+  password: Config.PLANETSCALE_PASSWORD,
+});
+
+export const db = drizzle(connection);
+
+export async function getCounter(name: string) {
+  const result = await db
+    .select()
+    .from(counters)
+    .where(eq(counters.counter, name));
+
+  if (result.length < 1) {
+    throw new Error(&#x60;No results found for counter ${name}&#x60;);
+  }
+
+  return result[0];
+}
+
+export async function increaseCounter(name: string) {
+  await db
+    .update(counters)
+    .set({
+      tally: sql&#x60;${counters.tally}
+            + 1&#x60;,
+    })
+    .where(eq(counters.counter, name));
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="6-the-lambda-function">6. The lambda function</h2>
 <p>Finally, we create our lambda function. Here we use the <code>getCounter</code> and <code>increaseCounter</code> functions from <code>db.ts</code>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">APIGatewayProxyHandlerV2</span><span class="space"> </span><span style="color:#ABB2BF">}</span><span class="space"> </span><span style="color:#C678DD">from</span><span class="space"> </span><span style="color:#98C379">"aws-lambda"</span><span style="color:#ABB2BF">;</span></span>
@@ -198,11 +312,32 @@ types in our queries.</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">body</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E5C07B">JSON</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">stringify</span><span style="color:#ABB2BF">({</span><span class="space"> </span><span style="color:#E06C75">count</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E5C07B">counter</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">tally</span><span class="space"> </span><span style="color:#ABB2BF">}),</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">};</span></span>
 <span class="line"><span style="color:#ABB2BF">};</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="import { APIGatewayProxyHandlerV2 } from &#x22;aws-lambda&#x22;;
+import { getCounter, increaseCounter } from &#x22;../../core/db&#x22;;
+
+export const handler: APIGatewayProxyHandlerV2 = async () => {
+  await increaseCounter(&#x22;hits&#x22;);
+  const counter = await getCounter(&#x22;hits&#x22;);
+  return {
+    statusCode: 200,
+    headers: { &#x22;Content-Type&#x22;: &#x22;json/application&#x22; },
+    body: JSON.stringify({ count: counter.tally }),
+  };
+};
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="7-deploy">7. Deploy</h2>
 <p>If we did everything correctly, we can now deploy our app.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpm</span><span class="space"> </span><span>run</span><span class="space"> </span><span>dev</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="pnpm run dev
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Output:</strong></p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>SST</span><span class="space"> </span><span>v2.1.15</span><span class="space"> </span><span class="space"> </span><span>ready!</span></span>
 <span class="line"><span></span></span>
@@ -213,14 +348,35 @@ types in our queries.</p>
 <span class="line"><span>✔</span><span class="space"> </span><span class="space"> </span><span>Deployed:</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>MagnusScaleStack</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>ApiEndpoint:</span><span class="space"> </span><span>https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span></span></span></code><button class="copy" data-code="SST v2.1.15  ready!
+
+➜  App:     magnusscale
+   Stage:   dev
+   Console: https://console.sst.dev/magnusscale/dev
+
+✔  Deployed:
+   MagnusScaleStack
+   ApiEndpoint: https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="8-test">8. Test</h2>
 <p>The endpoint output from the deploy command is the endpoint we can use to test our app:</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#ABB2BF">curl</span><span class="space"> </span><span style="color:#ABB2BF">-XPOST</span><span class="space"> </span><span style="color:#ABB2BF">https:</span><span style="color:#7F848E;font-style:italic">//3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span>
 <span class="line"><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">"count"</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#D19A66">1</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="curl -XPOST https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com
+{
+  &#x22;count&#x22;: 1
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h3 id="success">Success 🎉!</h3>
 <br>
 <h1 id="conclusion">Conclusion</h1>
@@ -240,7 +396,20 @@ The Drizzle team also has a tool called <a href="https://github.com/drizzle-team
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">})</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">.where(eq(counters.counter,</span><span class="space"> </span><span style="color:#ABB2BF">name));</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="export async function increaseCounter(name: string) {
+  await db
+  .update(counters)
+  .set({
++   tally: sql&#x60;${counters.tally} + 1&#x60;,
+-   tally: sql&#x60;tally + 1&#x60;,
+  })
+  .where(eq(counters.counter, name));
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="links">Links</h2>
 <ul>
 <li><a href="https://sst.dev/examples/how-to-use-planetscale-in-your-serverless-app.html">SST guide</a>: How to use PlanetScale in your serverless app</li>

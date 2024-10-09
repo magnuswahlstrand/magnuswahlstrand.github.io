@@ -37,7 +37,7 @@
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
     </script><link rel="stylesheet" href="/_astro/about.CiHJ2SG-.css">
-<link rel="stylesheet" href="/_astro/about.BaGuqNWS.css">
+<link rel="stylesheet" href="/_astro/about.CkMpCxMM.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.625rem;height:1.5rem;width:1.5rem;--tw-scale-x: .95;--tw-scale-y: .95;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:2rem;margin-bottom:2rem}
@@ -82,7 +82,29 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">log</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Fatal</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">err</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func main() {
+    // Load resources
+   scene1Data, err := shovelknightresources.Asset(&#x22;scene_1.png&#x22;)
+   if err != nil {
+      log.Fatal(err)
+   }
+   scoreboardData, err := shovelknightresources.Asset(&#x22;scoreboard.png&#x22;)
+   if err != nil {
+      log.Fatal(err)
+   }
+   scene1 = ebitendrawutil.ImageFromBytes(scene1Data)
+   scoreboard = ebitendrawutil.ImageFromBytes(scoreboardData)
+
+   // Start the Ebiten update loop
+   if err := ebiten.Run(update, screenWidth, screenHeight, 1, &#x22;my application&#x22;); err != nil {
+      log.Fatal(err)
+   }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>The following function draws the two images to the screen (<a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-1/transitions/main.go">full code here</a>).</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">update</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">screen</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Image</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">error</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Draw</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">scenes</span></span>
@@ -92,7 +114,19 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">screen</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">DrawImage</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">scoreboard</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#C678DD">&#x26;</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">DrawImageOptions</span><span style="color:#ABB2BF">{})</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#D19A66">nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func update(screen *ebiten.Image) error {
+   // Draw the scenes
+   screen.DrawImage(scene1, &#x26;ebiten.DrawImageOptions{})
+
+   // Draw scoreboard
+   screen.DrawImage(scoreboard, &#x26;ebiten.DrawImageOptions{})
+   return nil
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><img src="/img/2d-transitions/static.png" alt="Static scene"></p>
 <h2 id="growing-rectangle">Growing Rectangle</h2>
 <p>Let’s start with the easiest transition: <em>a rectangle that expands from the center</em></p>
@@ -110,7 +144,18 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">h</span><span class="space"> </span><span style="color:#E5C07B">:=</span><span class="space"> </span><span style="color:#E06C75">gfx</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">Lerp</span><span style="color:#ABB2BF">(</span><span style="color:#D19A66">0</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">maxRect</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">H</span><span style="color:#ABB2BF">(),</span><span class="space"> </span><span style="color:#E06C75">t</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ebitenutil</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">DrawRect</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">screen</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">v</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">X</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">v</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Y</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">w</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">h</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">clr</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// TransitionGrowingRect draws a rectangle that grows from the center to fill maxRect as t goes from 0 to 1
+func TransitionGrowingRect(screen *ebiten.Image, maxRect gfx.Rect, t float64, clr color.Color) {
+   v := maxRect.Center().Lerp(maxRect.Min, t)
+   w := gfx.Lerp(0, maxRect.W(), t)
+   h := gfx.Lerp(0, maxRect.H(), t)
+   ebitenutil.DrawRect(screen, v.X, v.Y, w, h, clr)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Then we add the following to our update function. <code>maxRect</code> is the rectangle we want to cover over time.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">update</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">screen</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Image</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">error</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">...</span></span>
@@ -127,7 +172,26 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#D19A66">nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func update(screen *ebiten.Image) error {
+   ...
+   // Draw transition
+   scoreboardHeight := 44.0
+   maxRect := gfx.R(0, scoreboardHeight, screenWidth, screenHeight)
+   switch step {
+   case 0:
+      TransitionGrowingRect(screen, maxRect, t, colornames.Black)
+   }
+   ...
+   if t < 1 {
+      t += 0.01
+   }
+   return nil
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>code for part two > <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-2/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-rect.gif" alt="Growing rectangle"></p>
 <h2 id="shrinking-rectangle">Shrinking Rectangle</h2>
@@ -135,7 +199,14 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">TransitionShrinkingRect</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">screen</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Image</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">maxRect</span><span class="space"> </span><span style="color:#E5C07B">gfx</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Rect</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">t</span><span class="space"> </span><span style="color:#C678DD">float64</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">clr</span><span class="space"> </span><span style="color:#E5C07B">color</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Color</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">TransitionGrowingRect</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">screen</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">maxRect</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">1</span><span style="color:#C678DD">-</span><span style="color:#E06C75">t</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">clr</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func TransitionShrinkingRect(screen *ebiten.Image, maxRect gfx.Rect, t float64, clr color.Color) {
+   TransitionGrowingRect(screen, maxRect, 1-t, clr)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Now we can transition for real between scenes. I have added a second scene <code>"scene_2.png"</code> and made the <code>update</code> function toggle between them.</p>
 <p><strong>Note:</strong> <em>I have put <code>TransitionShrinkingRect</code> before <code>TransitionGrowingRect</code> in the second switch below</em>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="go"><code><span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">update</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">screen</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Image</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">error</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
@@ -168,7 +239,41 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#D19A66">nil</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="func update(screen *ebiten.Image) error {
+   // Draw the scenes
+   switch n {
+   case 0:
+      screen.DrawImage(scene1, &#x26;ebiten.DrawImageOptions{})
+   case 1: // NEW
+      screen.DrawImage(scene2, &#x26;ebiten.DrawImageOptions{})
+   }
+
+   // Draw transition
+   scoreboardHeight := 44.0
+   maxRect := gfx.R(0, scoreboardHeight, screenWidth, screenHeight)
+   switch int(t) {
+   case 0:
+      TransitionShrinkingRect(screen, maxRect, t, colornames.Black)
+   case 1:
+      offset := 1.0 // NEW
+      TransitionGrowingRect(screen, maxRect, t-offset, colornames.Black)
+   }
+
+   // Draw scoreboard
+   screen.DrawImage(scoreboard, &#x26;ebiten.DrawImageOptions{})
+
+   t += 0.01
+   if t >= 2 { // UPDATED
+      t = 0
+      n = 1 - n
+   }
+   return nil
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>code for part three > <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-3/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-shrink-rect.gif" alt="Growing-Shrinking rectangle"></p>
 <h2 id="shrinkinggrowing-frame">Shrinking/Growing Frame</h2>
@@ -184,7 +289,21 @@ For this I use my own util-package <a href="https://github.com/magnuswahlstrand/
 <span class="line"><span style="color:#C678DD">func</span><span class="space"> </span><span style="color:#61AFEF">TransitionShrinkingBorder</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">screen</span><span class="space"> </span><span style="color:#C678DD">*</span><span style="color:#E5C07B">ebiten</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Image</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">maxRect</span><span class="space"> </span><span style="color:#E5C07B">gfx</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Rect</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">t</span><span class="space"> </span><span style="color:#C678DD">float64</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75;font-style:italic">clr</span><span class="space"> </span><span style="color:#E5C07B">color</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">Color</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">TransitionGrowingBorder</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">screen</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">maxRect</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#D19A66">1</span><span style="color:#C678DD">-</span><span style="color:#E06C75">t</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">clr</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// TransitionGrowingBorder draws a border that expands inwards until it fills maxRect
+func TransitionGrowingBorder(screen *ebiten.Image, maxRect gfx.Rect, t float64, clr color.Color) {
+   min := gfx.MathMin(maxRect.W(), maxRect.H())
+   ebitendrawutil.DrawRect(screen, maxRect, colornames.Black, int(t*min/2.0))
+}
+
+// TransitionShrinkingBorder is TransitionGrowingBorder run backwards
+func TransitionShrinkingBorder(screen *ebiten.Image, maxRect gfx.Rect, t float64, clr color.Color) {
+   TransitionGrowingBorder(screen, maxRect, 1-t, clr)
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p><em>code for part four > <a href="https://github.com/magnuswahlstrand/animex/blob/transitions-part-4/transitions/">here</a></em></p>
 <p><img src="/img/2d-transitions/grow-shrink-rect-frame.gif" alt="Growing-Shrinking rectangle and frame"></p>
 <h2 id="blinds">Blinds</h2>
@@ -199,7 +318,21 @@ For this I use my own util-package <a href="https://github.com/magnuswahlstrand/
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ebitenutil</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">DrawRect</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75">screen</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">x</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">y</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">maxRect</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">W</span><span style="color:#ABB2BF">(),</span><span class="space"> </span><span style="color:#E06C75">height</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#E06C75">clr</span><span style="color:#ABB2BF">)</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">}</span></span>
 <span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code></pre>
+<span class="line"></span></code><button class="copy" data-code="// TransitionBlinds draws n rectangles that expands up to cover maxRect  as t goes from 0 to 1
+func TransitionBlinds(screen *ebiten.Image, maxRect gfx.Rect, nRectangles int, t float64, clr color.Color) {
+   blindMaxHeight := maxRect.H() / float64(nRectangles)
+   for i := 0; i < nRectangles; i++ {
+      x := maxRect.Min.X
+      y := maxRect.Min.Y + float64(i)*blindMaxHeight
+      height := gfx.Lerp(0, blindMaxHeight, t)
+      ebitenutil.DrawRect(screen, x, y, maxRect.W(), height, clr)
+   }
+}
+" onclick="
+          navigator.clipboard.writeText(this.dataset.code);
+          this.classList.add(&#x27;copied&#x27;);
+          setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
+        "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Here is the end result. <em>The final code > <a href="https://github.com/magnuswahlstrand/animex/tree/master/transitions">here</a></em></p>
 <p><img src="/img/2d-transitions/final.gif" alt="End result"></p>
 <hr> </article> <ul class="tags-container" data-astro-cid-vj4tpspi> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/go" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
