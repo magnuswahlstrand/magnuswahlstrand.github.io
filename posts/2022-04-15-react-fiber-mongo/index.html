@@ -279,16 +279,16 @@ func (s *Service) ListUsers(c *fiber.Ctx) error {
 <p><em><strong>Note</strong>: We could also add uniqueness checks on email and phone number, by adding <a href="https://www.mongodb.com/docs/manual/core/index-unique">unique indexes</a></em></p>
 <h2 id="frontend">Frontend</h2>
 <p>The frontend is bootstrapped using <a href="https://create-react-app.dev/">Create React App (CRA)</a>.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx</span><span class="space"> </span><span>create-react-app</span><span class="space"> </span><span>frontend</span><span class="space"> </span><span>--template</span><span class="space"> </span><span>typescript</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npx create-react-app frontend --template typescript
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npx</span><span class="space"> </span><span style="color:#98C379">create-react-app</span><span class="space"> </span><span style="color:#98C379">frontend</span><span class="space"> </span><span style="color:#D19A66">--template</span><span class="space"> </span><span style="color:#98C379">typescript</span></span>
+<span class="line"></span></code><button class="copy" data-code="npx create-react-app frontend --template typescript
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>We install our dependencies:</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span><span class="space"> </span><span>@mantine/hooks</span><span class="space"> </span><span>@mantine/core</span><span class="space"> </span><span>react-query</span><span class="space"> </span><span>axios</span><span class="space"> </span><span>tabler-icons-react</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npm install @mantine/hooks @mantine/core react-query axios tabler-icons-react
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@mantine/hooks</span><span class="space"> </span><span style="color:#98C379">@mantine/core</span><span class="space"> </span><span style="color:#98C379">react-query</span><span class="space"> </span><span style="color:#98C379">axios</span><span class="space"> </span><span style="color:#98C379">tabler-icons-react</span></span>
+<span class="line"></span></code><button class="copy" data-code="npm install @mantine/hooks @mantine/core react-query axios tabler-icons-react
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);

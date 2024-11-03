@@ -96,8 +96,8 @@ VALUES (&#x27;hits&#x27;, 0);
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="2-store-sst-secret">2. Store SST secret</h2>
 <p>Our main secret in this project is the planetscale password. We store it in the SST secret store.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpm</span><span class="space"> </span><span>sst</span><span class="space"> </span><span>secrets</span><span class="space"> </span><span>set</span><span class="space"> </span><span>PLANETSCALE_PASSWORD</span><span class="space"> </span><span>&#x3C;YOUR</span><span class="space"> </span><span>PASSWORD></span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="pnpm sst secrets set PLANETSCALE_PASSWORD <YOUR PASSWORD>
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">pnpm</span><span class="space"> </span><span style="color:#98C379">sst</span><span class="space"> </span><span style="color:#98C379">secrets</span><span class="space"> </span><span style="color:#98C379">set</span><span class="space"> </span><span style="color:#98C379">PLANETSCALE_PASSWORD</span><span class="space"> </span><span style="color:#ABB2BF">&#x3C;</span><span style="color:#98C379">YOUR</span><span class="space"> </span><span style="color:#98C379">PASSWOR</span><span style="color:#ABB2BF">D></span></span>
+<span class="line"></span></code><button class="copy" data-code="pnpm sst secrets set PLANETSCALE_PASSWORD <YOUR PASSWORD>
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
@@ -105,10 +105,10 @@ VALUES (&#x27;hits&#x27;, 0);
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="3-create-sst-project">3. Create SST project</h2>
 <p>Now we create our SST project</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpx</span><span class="space"> </span><span>create-sst@latest</span><span class="space"> </span><span>--template=base/example</span><span class="space"> </span><span>magnusscale</span></span>
-<span class="line"><span>cd</span><span class="space"> </span><span>magnusscale</span></span>
-<span class="line"><span>pnpm</span><span class="space"> </span><span>install</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="pnpx create-sst@latest --template=base/example magnusscale
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">pnpx</span><span class="space"> </span><span style="color:#98C379">create-sst@latest</span><span class="space"> </span><span style="color:#D19A66">--template=base/example</span><span class="space"> </span><span style="color:#98C379">magnusscale</span></span>
+<span class="line"><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">magnusscale</span></span>
+<span class="line"><span style="color:#61AFEF">pnpm</span><span class="space"> </span><span style="color:#98C379">install</span></span>
+<span class="line"></span></code><button class="copy" data-code="pnpx create-sst@latest --template=base/example magnusscale
 cd magnusscale
 pnpm install
 " onclick="
@@ -331,24 +331,24 @@ export const handler: APIGatewayProxyHandlerV2 = async () => {
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="7-deploy">7. Deploy</h2>
 <p>If we did everything correctly, we can now deploy our app.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>pnpm</span><span class="space"> </span><span>run</span><span class="space"> </span><span>dev</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="pnpm run dev
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">pnpm</span><span class="space"> </span><span style="color:#98C379">run</span><span class="space"> </span><span style="color:#98C379">dev</span></span>
+<span class="line"></span></code><button class="copy" data-code="pnpm run dev
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Output:</strong></p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>SST</span><span class="space"> </span><span>v2.1.15</span><span class="space"> </span><span class="space"> </span><span>ready!</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>➜</span><span class="space"> </span><span class="space"> </span><span>App:</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>magnusscale</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>Stage:</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>dev</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>Console:</span><span class="space"> </span><span>https://console.sst.dev/magnusscale/dev</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>✔</span><span class="space"> </span><span class="space"> </span><span>Deployed:</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>MagnusScaleStack</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>ApiEndpoint:</span><span class="space"> </span><span>https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="SST v2.1.15  ready!
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">SST</span><span class="space"> </span><span style="color:#98C379">v2.1.15</span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">ready!</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">➜</span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">App:</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">magnusscale</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Stage:</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">dev</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Console:</span><span class="space"> </span><span style="color:#98C379">https://console.sst.dev/magnusscale/dev</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">✔</span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">Deployed:</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">MagnusScaleStack</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">ApiEndpoint:</span><span class="space"> </span><span style="color:#98C379">https://3zohsaahd3.execute-api.eu-west-1.amazonaws.com</span></span>
+<span class="line"></span></code><button class="copy" data-code="SST v2.1.15  ready!
 
 ➜  App:     magnusscale
    Stage:   dev

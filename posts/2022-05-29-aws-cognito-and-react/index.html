@@ -113,18 +113,18 @@ similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2
 <p>.</p>
 <p>.</p>
 <p>Next, we set up our React app. I use <a href="https://vitejs.dev/guide/">Vite</a> to bootstrap my app, but you can write it from scratch or use something like <a href="https://create-react-app.dev/">Create React App</a>.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>&gt;</span><span class="space"> </span><span>yarn</span><span class="space"> </span><span>create</span><span class="space"> </span><span>vite</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> yarn create vite
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#ABB2BF">yarn</span><span class="space"> </span><span style="color:#ABB2BF">create</span><span class="space"> </span><span style="color:#ABB2BF">vite</span></span>
+<span class="line"></span></code><button class="copy" data-code="> yarn create vite
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>output</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>✔</span><span class="space"> </span><span>Project</span><span class="space"> </span><span>name:</span><span class="space"> </span><span>&gt;</span><span class="space"> </span><span>frontend</span></span>
-<span class="line"><span>✔</span><span class="space"> </span><span>Select</span><span class="space"> </span><span>a</span><span class="space"> </span><span>framework:</span><span class="space"> </span><span>›</span><span class="space"> </span><span>react</span></span>
-<span class="line"><span>✔</span><span class="space"> </span><span>Select</span><span class="space"> </span><span>a</span><span class="space"> </span><span>variant:</span><span class="space"> </span><span>›</span><span class="space"> </span><span>react-ts</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="✔ Project name: > frontend
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">✔</span><span class="space"> </span><span style="color:#98C379">Project</span><span class="space"> </span><span style="color:#98C379">name:</span><span class="space"> </span><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#98C379">frontend</span></span>
+<span class="line"><span style="color:#61AFEF">✔</span><span class="space"> </span><span style="color:#98C379">Select</span><span class="space"> </span><span style="color:#98C379">a</span><span class="space"> </span><span style="color:#98C379">framework:</span><span class="space"> </span><span style="color:#98C379">›</span><span class="space"> </span><span style="color:#98C379">react</span></span>
+<span class="line"><span style="color:#61AFEF">✔</span><span class="space"> </span><span style="color:#98C379">Select</span><span class="space"> </span><span style="color:#98C379">a</span><span class="space"> </span><span style="color:#98C379">variant:</span><span class="space"> </span><span style="color:#98C379">›</span><span class="space"> </span><span style="color:#98C379">react-ts</span></span>
+<span class="line"></span></code><button class="copy" data-code="✔ Project name: > frontend
 ✔ Select a framework: › react
 ✔ Select a variant: › react-ts
 " onclick="
@@ -133,8 +133,8 @@ similar purpose as Terraform or AWS’s own CloudFormation. It was launched in 2
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Install the <code>aws-amplify</code> and its UI components:</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>yarn</span><span class="space"> </span><span>add</span><span class="space"> </span><span>aws-amplify</span><span class="space"> </span><span>@aws-amplify/ui-react</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="yarn add aws-amplify @aws-amplify/ui-react
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">yarn</span><span class="space"> </span><span style="color:#98C379">add</span><span class="space"> </span><span style="color:#98C379">aws-amplify</span><span class="space"> </span><span style="color:#98C379">@aws-amplify/ui-react</span></span>
+<span class="line"></span></code><button class="copy" data-code="yarn add aws-amplify @aws-amplify/ui-react
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');

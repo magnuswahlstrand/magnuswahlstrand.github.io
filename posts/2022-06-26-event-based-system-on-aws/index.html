@@ -58,9 +58,9 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <p>Our app is deployed to AWS using my new favorite tool: <a href="https://sst.dev/">Serverless Stack</a> (SST). It has great <a href="https://aws.amazon.com/cdk/">CDK</a> constructs for quick development, and gives us hot reload of the Lambda functions. Great!</p>
 <h2 id="project-set-up">Project set up</h2>
 <p>First we need to bootstrap our project. The <a href="https://sst.dev/">SST CLI</a> will do most of the heavy lifting. Since most of our application code is Go, I use the <strong>starters/go-starter</strong> template.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npx</span><span class="space"> </span><span>create-sst@latest</span><span class="space"> </span><span>--template=starters/go-starter</span><span class="space"> </span><span>eventbus</span></span>
-<span class="line"><span>cd</span><span class="space"> </span><span>eventbus</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npx create-sst@latest --template=starters/go-starter eventbus
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npx</span><span class="space"> </span><span style="color:#98C379">create-sst@latest</span><span class="space"> </span><span style="color:#D19A66">--template=starters/go-starter</span><span class="space"> </span><span style="color:#98C379">eventbus</span></span>
+<span class="line"><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">eventbus</span></span>
+<span class="line"></span></code><button class="copy" data-code="npx create-sst@latest --template=starters/go-starter eventbus
 cd eventbus
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -68,25 +68,25 @@ cd eventbus
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Our directory now looks as follows.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>&gt;</span><span class="space"> </span><span>tree</span><span class="space"> </span><span>-a</span><span class="space"> </span><span>-L</span><span class="space"> </span><span>2</span></span>
-<span class="line"><span>.</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>.env</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>.gitignore</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>.vscode</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>launch.json</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>package.json</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>services</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>├──</span><span class="space"> </span><span>functions</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>│</span><span class="space"> </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>lambda.go</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>├──</span><span class="space"> </span><span>go.mod</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>go.sum</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>sst.json</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>stacks</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>├──</span><span class="space"> </span><span>MyStack.ts</span></span>
-<span class="line"><span>│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>└──</span><span class="space"> </span><span>index.ts</span></span>
-<span class="line"><span>├──</span><span class="space"> </span><span>tsconfig.json</span></span>
-<span class="line"><span>└──</span><span class="space"> </span><span>vitest.config.ts</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="> tree -a -L 2
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#ABB2BF">tree</span><span class="space"> </span><span style="color:#ABB2BF">-a</span><span class="space"> </span><span style="color:#ABB2BF">-L</span><span class="space"> </span><span style="color:#ABB2BF">2</span></span>
+<span class="line"><span style="color:#56B6C2">.</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">.env</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">.gitignore</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">.vscode</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">└──</span><span class="space"> </span><span style="color:#98C379">launch.json</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">package.json</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">services</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">├──</span><span class="space"> </span><span style="color:#98C379">functions</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">│</span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">└──</span><span class="space"> </span><span style="color:#98C379">lambda.go</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">├──</span><span class="space"> </span><span style="color:#98C379">go.mod</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">└──</span><span class="space"> </span><span style="color:#98C379">go.sum</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">sst.json</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">stacks</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">├──</span><span class="space"> </span><span style="color:#98C379">MyStack.ts</span></span>
+<span class="line"><span style="color:#61AFEF">│</span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">└──</span><span class="space"> </span><span style="color:#98C379">index.ts</span></span>
+<span class="line"><span style="color:#61AFEF">├──</span><span class="space"> </span><span style="color:#98C379">tsconfig.json</span></span>
+<span class="line"><span style="color:#61AFEF">└──</span><span class="space"> </span><span style="color:#98C379">vitest.config.ts</span></span>
+<span class="line"></span></code><button class="copy" data-code="> tree -a -L 2
 .
 ├── .env
 ├── .gitignore
@@ -115,9 +115,9 @@ cd eventbus
 <li><code>./services/functions/</code> - Here we define our Lambda functions. The go-starter template comes with a single function called <code>lambda.go</code>.</li>
 </ul>
 <p>We also install <a href="https://dave.cheney.net/">Dave Cheney</a>’s package <a href="https://github.com/davecgh/go-spew">go-spew</a>. It is a Go package to dump things to the logs. I often use it to explore what data is passed around in a new service, in this case AWS EventBridge.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>cd</span><span class="space"> </span><span>eventbus/services</span></span>
-<span class="line"><span>go</span><span class="space"> </span><span>get</span><span class="space"> </span><span>github.com/davecgh/go-spew/spew</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="cd eventbus/services
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">eventbus/services</span></span>
+<span class="line"><span style="color:#61AFEF">go</span><span class="space"> </span><span style="color:#98C379">get</span><span class="space"> </span><span style="color:#98C379">github.com/davecgh/go-spew/spew</span></span>
+<span class="line"></span></code><button class="copy" data-code="cd eventbus/services
 go get github.com/davecgh/go-spew/spew
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -125,9 +125,9 @@ go get github.com/davecgh/go-spew/spew
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>With everything in place, we can deploy our initial stack</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>npm</span><span class="space"> </span><span>install</span></span>
-<span class="line"><span>npm</span><span class="space"> </span><span>start</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="npm install
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span></span>
+<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">start</span></span>
+<span class="line"></span></code><button class="copy" data-code="npm install
 npm start
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -135,24 +135,24 @@ npm start
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Output:</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>...</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span class="space"> </span><span>✅</span><span class="space"> </span><span class="space"> </span><span>magnus-eventbus-MyStack</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>Stack</span><span class="space"> </span><span>magnus-eventbus-MyStack</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span>Status:</span><span class="space"> </span><span>deployed</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span>Outputs:</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span>ApiEndpoint:</span><span class="space"> </span><span>https://c5fk9hc8kk.execute-api.us-east-1.amazonaws.com</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>==========================</span></span>
-<span class="line"><span class="space"> </span><span>Starting</span><span class="space"> </span><span>Live</span><span class="space"> </span><span>Lambda</span><span class="space"> </span><span>Dev</span></span>
-<span class="line"><span>==========================</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>SST</span><span class="space"> </span><span>Console:</span><span class="space"> </span><span>https://console.sst.dev/eventbus/magnus/local</span></span>
-<span class="line"><span>Debug</span><span class="space"> </span><span>session</span><span class="space"> </span><span>started.</span><span class="space"> </span><span>Listening</span><span class="space"> </span><span>for</span><span class="space"> </span><span>requests...</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="...
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#56B6C2">...</span></span>
+<span class="line"></span>
+<span class="line"><span class="space"> </span><span style="color:#61AFEF">✅</span><span class="space"> </span><span class="space"> </span><span style="color:#98C379">magnus-eventbus-MyStack</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">Stack</span><span class="space"> </span><span style="color:#98C379">magnus-eventbus-MyStack</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Status:</span><span class="space"> </span><span style="color:#98C379">deployed</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">Outputs:</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">ApiEndpoint:</span><span class="space"> </span><span style="color:#98C379">https://c5fk9hc8kk.execute-api.us-east-1.amazonaws.com</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#98C379">==========================</span></span>
+<span class="line"><span class="space"> </span><span style="color:#61AFEF">Starting</span><span class="space"> </span><span style="color:#98C379">Live</span><span class="space"> </span><span style="color:#98C379">Lambda</span><span class="space"> </span><span style="color:#98C379">Dev</span></span>
+<span class="line"><span style="color:#98C379">==========================</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#61AFEF">SST</span><span class="space"> </span><span style="color:#98C379">Console:</span><span class="space"> </span><span style="color:#98C379">https://console.sst.dev/eventbus/magnus/local</span></span>
+<span class="line"><span style="color:#61AFEF">Debug</span><span class="space"> </span><span style="color:#98C379">session</span><span class="space"> </span><span style="color:#98C379">started.</span><span class="space"> </span><span style="color:#98C379">Listening</span><span class="space"> </span><span style="color:#98C379">for</span><span class="space"> </span><span style="color:#98C379">requests...</span></span>
+<span class="line"></span></code><button class="copy" data-code="...
 
  ✅  magnus-eventbus-MyStack
 
@@ -620,14 +620,14 @@ func main() {
 <ul>
 <li>Use curl, or your favorite HTTP client and make the request. <em>Remember to update the API gateway URL.</em></li>
 </ul>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="plaintext"><code><span class="line"><span>POST</span><span class="space"> </span><span>https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order</span></span>
-<span class="line"><span>Content-Type:</span><span class="space"> </span><span>application/json</span></span>
-<span class="line"><span></span></span>
-<span class="line"><span>{</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span>&quot;amount&quot;:</span><span class="space"> </span><span>999,</span></span>
-<span class="line"><span class="space"> </span><span class="space"> </span><span>&quot;line_items&quot;:</span><span class="space"> </span><span>[&quot;food&quot;,</span><span class="space"> </span><span>&quot;shelter&quot;]</span></span>
-<span class="line"><span>}</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="POST https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">POST</span><span class="space"> </span><span style="color:#98C379">https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order</span></span>
+<span class="line"><span style="color:#61AFEF">Content-Type:</span><span class="space"> </span><span style="color:#98C379">application/json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#ABB2BF">{</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">&quot;amount&quot;</span><span style="color:#56B6C2">:</span><span class="space"> </span><span style="color:#98C379">999,</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#61AFEF">&quot;line_items&quot;</span><span style="color:#56B6C2">:</span><span class="space"> </span><span style="color:#ABB2BF">[</span><span style="color:#98C379">&quot;food&quot;</span><span style="color:#ABB2BF">,</span><span class="space"> </span><span style="color:#98C379">&quot;shelter&quot;]</span></span>
+<span class="line"><span style="color:#ABB2BF">}</span></span>
+<span class="line"></span></code><button class="copy" data-code="POST https://4ty44qcuya.execute-api.us-east-1.amazonaws.com/order
 Content-Type: application/json
 
 {

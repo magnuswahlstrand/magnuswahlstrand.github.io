@@ -53,9 +53,9 @@ main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;max-
 <!--more-->
 <h2 id="starting-the-emulator">Starting the emulator</h2>
 <p>To run the emulator, you first need the <code>gcloud</code> cli (<a href="https://cloud.google.com/sdk/docs/install">setup instructions</a>). Next can we install the emulator.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gcloud</span><span class="space"> </span><span>components</span><span class="space"> </span><span>install</span><span class="space"> </span><span>pubsub-emulator</span></span>
-<span class="line"><span>gcloud</span><span class="space"> </span><span>components</span><span class="space"> </span><span>update</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="gcloud components install pubsub-emulator
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">gcloud</span><span class="space"> </span><span style="color:#98C379">components</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">pubsub-emulator</span></span>
+<span class="line"><span style="color:#61AFEF">gcloud</span><span class="space"> </span><span style="color:#98C379">components</span><span class="space"> </span><span style="color:#98C379">update</span></span>
+<span class="line"></span></code><button class="copy" data-code="gcloud components install pubsub-emulator
 gcloud components update
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
@@ -63,19 +63,19 @@ gcloud components update
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Finally, we start the emulator on <strong>localhost:8085</strong>.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gcloud</span><span class="space"> </span><span>beta</span><span class="space"> </span><span>emulators</span><span class="space"> </span><span>pubsub</span><span class="space"> </span><span>start</span><span class="space"> </span><span>--project=test-project</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="gcloud beta emulators pubsub start --project=test-project
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">gcloud</span><span class="space"> </span><span style="color:#98C379">beta</span><span class="space"> </span><span style="color:#98C379">emulators</span><span class="space"> </span><span style="color:#98C379">pubsub</span><span class="space"> </span><span style="color:#98C379">start</span><span class="space"> </span><span style="color:#D19A66">--project=test-project</span></span>
+<span class="line"></span></code><button class="copy" data-code="gcloud beta emulators pubsub start --project=test-project
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
           setTimeout(() => this.classList.remove(&#x27;copied&#x27;), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>Output:</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Executing:</span><span class="space"> </span><span>/Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator</span><span class="space"> </span><span>--host=localhost</span><span class="space"> </span><span>--port=8085</span></span>
-<span class="line"><span>[pubsub]</span><span class="space"> </span><span>This</span><span class="space"> </span><span>is</span><span class="space"> </span><span>the</span><span class="space"> </span><span>Google</span><span class="space"> </span><span>Pub/Sub</span><span class="space"> </span><span>fake.</span></span>
-<span class="line"><span>[pubsub]</span><span class="space"> </span><span>Implementation</span><span class="space"> </span><span>may</span><span class="space"> </span><span>be</span><span class="space"> </span><span>incomplete</span><span class="space"> </span><span>or</span><span class="space"> </span><span>differ</span><span class="space"> </span><span>from</span><span class="space"> </span><span>the</span><span class="space"> </span><span>real</span><span class="space"> </span><span>system.</span></span>
-<span class="line"><span>....</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">Executing:</span><span class="space"> </span><span style="color:#98C379">/Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator</span><span class="space"> </span><span style="color:#D19A66">--host=localhost</span><span class="space"> </span><span style="color:#D19A66">--port=8085</span></span>
+<span class="line"><span style="color:#ABB2BF">[pubsub]</span><span class="space"> </span><span style="color:#ABB2BF">This</span><span class="space"> </span><span style="color:#ABB2BF">is</span><span class="space"> </span><span style="color:#ABB2BF">the</span><span class="space"> </span><span style="color:#ABB2BF">Google</span><span class="space"> </span><span style="color:#ABB2BF">Pub/Sub</span><span class="space"> </span><span style="color:#ABB2BF">fake.</span></span>
+<span class="line"><span style="color:#ABB2BF">[pubsub]</span><span class="space"> </span><span style="color:#ABB2BF">Implementation</span><span class="space"> </span><span style="color:#ABB2BF">may</span><span class="space"> </span><span style="color:#ABB2BF">be</span><span class="space"> </span><span style="color:#ABB2BF">incomplete</span><span class="space"> </span><span style="color:#ABB2BF">or</span><span class="space"> </span><span style="color:#ABB2BF">differ</span><span class="space"> </span><span style="color:#ABB2BF">from</span><span class="space"> </span><span style="color:#ABB2BF">the</span><span class="space"> </span><span style="color:#ABB2BF">real</span><span class="space"> </span><span style="color:#ABB2BF">system.</span></span>
+<span class="line"><span style="color:#56B6C2">....</span></span>
+<span class="line"></span></code><button class="copy" data-code="Executing: /Users/test/Downloads/google-cloud-sdk/platform/pubsub-emulator/bin/cloud-pubsub-emulator --host=localhost --port=8085
 [pubsub] This is the Google Pub/Sub fake.
 [pubsub] Implementation may be incomplete or differ from the real system.
 ....
@@ -86,8 +86,8 @@ gcloud components update
         "><span class="ready"></span><span class="success"></span></button></pre>
 <h2 id="code">Code</h2>
 <p>We can use the Google Pub/Sub client to publish or subscribe on a topic.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>go</span><span class="space"> </span><span>get</span><span class="space"> </span><span>-u</span><span class="space"> </span><span>cloud.google.com/go/pubsub</span></span>
-<span class="line"><span></span></span></code><button class="copy" data-code="go get -u cloud.google.com/go/pubsub
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">go</span><span class="space"> </span><span style="color:#98C379">get</span><span class="space"> </span><span style="color:#D19A66">-u</span><span class="space"> </span><span style="color:#98C379">cloud.google.com/go/pubsub</span></span>
+<span class="line"></span></code><button class="copy" data-code="go get -u cloud.google.com/go/pubsub
 " onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add(&#x27;copied&#x27;);
