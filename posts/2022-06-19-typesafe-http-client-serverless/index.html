@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta name="generator" content="Astro v4.15.12"><!-- General Meta Tags --><title>Typesafe serverless API with tRPC</title><meta name="title" content="Typesafe serverless API with tRPC"><meta name="description" content="Made by a minimal, responsible and friendly person."><meta name="author" content="Magnus Wahlstrand"><!-- Open Graph / Facebook --><meta property="og:title" content="Typesafe serverless API with tRPC"><meta property="og:description" content="Made by a minimal, responsible and friendly person."><meta property="og:url" content="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta property="og:image" content="https://wahlstrand.dev/default-og.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta property="twitter:title" content="Typesafe serverless API with tRPC"><meta property="twitter:description" content="Made by a minimal, responsible and friendly person."><meta property="twitter:image" content="https://wahlstrand.dev/default-og.png"><!-- Google Font --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta name="generator" content="Astro v5.8.1"><!-- General Meta Tags --><title>Typesafe serverless API with tRPC</title><meta name="title" content="Typesafe serverless API with tRPC"><meta name="description" content="Made by a minimal, responsible and friendly person."><meta name="author" content="Magnus Wahlstrand"><!-- Open Graph / Facebook --><meta property="og:title" content="Typesafe serverless API with tRPC"><meta property="og:description" content="Made by a minimal, responsible and friendly person."><meta property="og:url" content="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta property="og:image" content="https://wahlstrand.dev/default-og.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://wahlstrand.dev/posts/2022-06-19-typesafe-http-client-serverless/"><meta property="twitter:title" content="Typesafe serverless API with tRPC"><meta property="twitter:description" content="Made by a minimal, responsible and friendly person."><meta property="twitter:image" content="https://wahlstrand.dev/default-og.png"><!-- Google Font --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><script>
       const primaryColorScheme = "none"; // "light" | "dark" | "none"
 
       const darkModeMediaQuery = window.matchMedia(
@@ -36,19 +36,19 @@
 
       // Put dark class on html tag to enable dark mode
       document.querySelector("html").className = theme;
-    </script><link rel="stylesheet" href="/_astro/about.CNRB2s6F.css">
-<link rel="stylesheet" href="/_astro/about.CFhNuVDC.css">
+    </script><link rel="stylesheet" href="/_astro/about.B7KqXHef.css">
+<link rel="stylesheet" href="/_astro/about.C3TVQ6nI.css">
 <style>.breadcrumb[data-astro-cid-ilhxcym7]{margin-left:auto;margin-right:auto;margin-top:2rem;margin-bottom:.25rem;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]{display:inline;text-transform:capitalize;opacity:.7}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]+li[data-astro-cid-ilhxcym7]:before{--tw-content: ">";content:var(--tw-content)}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover{opacity:1}.breadcrumb[data-astro-cid-ilhxcym7] ul[data-astro-cid-ilhxcym7] li[data-astro-cid-ilhxcym7]:not(:last-child):hover:before{content:var(--tw-content);opacity:.7}#main-content[data-astro-cid-hsp6otuf]{margin-left:auto;margin-right:auto;width:100%;max-width:48rem;padding-left:1rem;padding-right:1rem;padding-bottom:3rem}#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.5rem;line-height:2rem;font-weight:600}@media (min-width: 640px){#main-content[data-astro-cid-hsp6otuf] h1[data-astro-cid-hsp6otuf]{font-size:1.875rem;line-height:2.25rem}}#main-content[data-astro-cid-hsp6otuf] p[data-astro-cid-hsp6otuf]{margin-top:.5rem;margin-bottom:1.5rem;font-style:italic}
 a[data-astro-cid-blwjyjpt]{position:relative;text-decoration-line:underline;text-decoration-style:dashed}a[data-astro-cid-blwjyjpt]:hover{top:-.125rem;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}a[data-astro-cid-blwjyjpt]:focus-visible{padding:.25rem}a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{margin-right:-.5rem;height:1.5rem;width:1.5rem;--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity));opacity:.8}.group[data-astro-cid-blwjyjpt]:hover a[data-astro-cid-blwjyjpt] svg[data-astro-cid-blwjyjpt]{fill:rgb(var(--color-accent))}
 .col-1[data-astro-cid-vj4tpspi]{display:none}@media (min-width: 1280px){.col-1[data-astro-cid-vj4tpspi]{grid-column:span 3 / span 3;display:block}}.col-2[data-astro-cid-vj4tpspi]{grid-column:span 12 / span 12;padding-left:1rem;padding-right:1rem}@media (min-width: 1024px){.col-2[data-astro-cid-vj4tpspi]{grid-column:span 9 / span 9}}@media (min-width: 1280px){.col-2[data-astro-cid-vj4tpspi]{grid-column:span 6 / span 6}}.col-3[data-astro-cid-vj4tpspi]{display:none}@media (min-width: 1024px){.col-3[data-astro-cid-vj4tpspi]{grid-column:span 3 / span 3;display:block}}main[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto;width:100%;padding-left:.5rem;padding-right:.5rem;padding-bottom:3rem}#main-content-wrapper[data-astro-cid-vj4tpspi]{margin-left:auto;margin-right:auto}.post-title[data-astro-cid-vj4tpspi]{font-size:1.5rem;line-height:2rem;font-weight:600;--tw-text-opacity: 1;color:rgba(var(--color-accent),var(--tw-text-opacity))}.tags-container[data-astro-cid-vj4tpspi]{margin-top:.25rem;margin-bottom:.25rem;font-size:.875rem;line-height:1.25rem}.toc[data-astro-cid-vj4tpspi]{border-left-width:2px;padding-left:1rem;font-size:.75rem;line-height:1rem}
 .pagination-wrapper[data-astro-cid-eenky23y]{margin-top:auto;margin-bottom:2rem;display:flex;justify-content:center}.disabled[data-astro-cid-eenky23y]{pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none;opacity:.5}.disabled[data-astro-cid-eenky23y]:hover{--tw-text-opacity: 1;color:rgba(var(--color-text-base),var(--tw-text-opacity))}.group[data-astro-cid-eenky23y]:hover .disabled[data-astro-cid-eenky23y]{fill:rgb(var(--color-text-base))}.group[data-astro-cid-eenky23y]:hover .disabled-svg[data-astro-cid-eenky23y]{fill:rgb(var(--color-text-base))!important}
 .link-button[data-astro-cid-mm6olqhn]:hover{--tw-rotate: 6deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skew(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}
 </style>
-<link rel="stylesheet" href="/_astro/_slug_.DUJDte-_.css"><script type="module" src="/_astro/hoisted.yKWdqxaI.js"></script></head> <body>  <header data-astro-cid-3ef6ksr2> <a id="skip-to-content" href="#main-content" data-astro-cid-3ef6ksr2>Skip to content</a> <div class="nav-container" data-astro-cid-3ef6ksr2> <div class="top-nav-wrap" data-astro-cid-3ef6ksr2> <a href="/" class="logo break-keep text-2xl" data-astro-cid-3ef6ksr2> Magnus Wahlstrand </a> <button class="hamburger-menu" aria-label="menu" data-astro-cid-3ef6ksr2> <div class="icon-container flex" data-astro-cid-3ef6ksr2> <div id="first-line" data-astro-cid-3ef6ksr2></div> <div id="second-line" data-astro-cid-3ef6ksr2></div> <div id="third-line" data-astro-cid-3ef6ksr2></div> </div> </button> </div> <nav class="display-none sm:flex" data-astro-cid-3ef6ksr2> <ul data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/resume" class="" data-astro-cid-3ef6ksr2>Resumé</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/posts" class="" data-astro-cid-3ef6ksr2>Posts</a> </li> <!--
+<link rel="stylesheet" href="/_astro/_slug_.QUFunAUZ.css"></head> <body>  <header data-astro-cid-3ef6ksr2> <a id="skip-to-content" href="#main-content" data-astro-cid-3ef6ksr2>Skip to content</a> <div class="nav-container" data-astro-cid-3ef6ksr2> <div class="top-nav-wrap" data-astro-cid-3ef6ksr2> <a href="/" class="logo break-keep text-2xl" data-astro-cid-3ef6ksr2> Magnus Wahlstrand </a> <button class="hamburger-menu" aria-label="menu" data-astro-cid-3ef6ksr2> <div class="icon-container flex" data-astro-cid-3ef6ksr2> <div id="first-line" data-astro-cid-3ef6ksr2></div> <div id="second-line" data-astro-cid-3ef6ksr2></div> <div id="third-line" data-astro-cid-3ef6ksr2></div> </div> </button> </div> <nav class="display-none sm:flex" data-astro-cid-3ef6ksr2> <ul data-astro-cid-3ef6ksr2> <li data-astro-cid-3ef6ksr2> <a href="/resume" class data-astro-cid-3ef6ksr2>Resumé</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/posts" class data-astro-cid-3ef6ksr2>Posts</a> </li> <!--
         <li>
           <a href="/tags" class={activeNav === "tags" ? "active" : ""}>Tags</a>
         </li>
-        --> <li data-astro-cid-3ef6ksr2> <a href="/about" class="" data-astro-cid-3ef6ksr2>About</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/now" class="" data-astro-cid-3ef6ksr2>Now</a> </li> </ul> <div class="button-wrapper sm:display-none" data-astro-cid-3ef6ksr2> <a type="button" href="/search" class="group focus-outline p-1 " aria-label="search" title="Search" data-astro-cid-5eunqzkt>  <svg xmlns="http://www.w3.org/2000/svg" data-astro-cid-3ef6ksr2><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" data-astro-cid-3ef6ksr2></path> </svg>  </a>  <button id="theme-btn" class="focus-outline" aria-label="switch theme" data-astro-cid-3ef6ksr2> <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" data-astro-cid-3ef6ksr2> <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" data-astro-cid-3ef6ksr2></path> </svg> <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" data-astro-cid-3ef6ksr2> <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" data-astro-cid-3ef6ksr2></path> </svg> </button> </div> </nav> </div> <div class="max-w-3xl mx-auto px-4"> <hr class="border-skin-line"> </div> </header>   <div class="" data-astro-cid-vj4tpspi> <div class="mx-auto grid grid-cols-12 max-w-7xl" data-astro-cid-vj4tpspi> <div class="col-1" data-astro-cid-vj4tpspi></div> <div class="col-2" data-astro-cid-vj4tpspi> <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline" onclick="history.back()"> <svg xmlns="http://www.w3.org/2000/svg"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg> <span>Go back</span> </button> <div class="justify-start mx-auto" data-astro-cid-vj4tpspi> <h1 class="post-title" data-astro-cid-vj4tpspi>Typesafe serverless API with tRPC</h1> <div class="opacity-80 flex items-center space-x-2 my-2"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">June 19, 2022</span></div> <ul class="tags-container" data-astro-cid-vj4tpspi> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/aws" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
+        --> <li data-astro-cid-3ef6ksr2> <a href="/about" class data-astro-cid-3ef6ksr2>About</a> </li> <li data-astro-cid-3ef6ksr2> <a href="/now" class data-astro-cid-3ef6ksr2>Now</a> </li> </ul> <div class="button-wrapper sm:display-none" data-astro-cid-3ef6ksr2> <a type="button" href="/search" class="group focus-outline p-1 " aria-label="search" title="Search" data-astro-cid-5eunqzkt>  <svg xmlns="http://www.w3.org/2000/svg" data-astro-cid-3ef6ksr2><path d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z" data-astro-cid-3ef6ksr2></path> </svg>  </a>  <button id="theme-btn" class="focus-outline" aria-label="switch theme" data-astro-cid-3ef6ksr2> <svg xmlns="http://www.w3.org/2000/svg" id="moon-svg" data-astro-cid-3ef6ksr2> <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z" data-astro-cid-3ef6ksr2></path> </svg> <svg xmlns="http://www.w3.org/2000/svg" id="sun-svg" data-astro-cid-3ef6ksr2> <path d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z" data-astro-cid-3ef6ksr2></path> </svg> </button> </div> </nav> </div> <div class="max-w-3xl mx-auto px-4"> <hr class="border-skin-line"> </div> </header>  <script type="module">const l=document.querySelector("#theme-btn"),t=document.querySelector("html")?.classList;l?.addEventListener("click",function(){t?.contains("theme-dark")?(localStorage.setItem("theme","light"),t?.remove("theme-dark")):(localStorage.setItem("theme","dark"),t?.add("theme-dark"))});const c=document.querySelector(".hamburger-menu"),o=document.querySelector("nav")?.classList,e=document.querySelector(".icon-container")?.classList,n=document.querySelector("#first-line")?.classList,s=document.querySelector("#second-line ")?.classList,a=document.querySelector("#third-line")?.classList;c.addEventListener("click",function(){o?.contains("display-none")?(o?.remove("display-none"),e?.remove("flex"),e?.add("relative"),n?.add("rotate-45","absolute","bottom-1/2"),a?.add("display-none"),s?.add("!w-full","-rotate-45","absolute","bottom-1/2")):(o?.add("display-none"),e?.add("flex"),e?.remove("relative"),n?.remove("rotate-45","absolute","bottom-1/2"),a?.remove("display-none"),s?.remove("!w-full","-rotate-45","absolute","bottom-1/2"))});</script> <div class="" data-astro-cid-vj4tpspi> <div class="mx-auto grid grid-cols-12 max-w-7xl" data-astro-cid-vj4tpspi> <div class="col-1" data-astro-cid-vj4tpspi></div> <div class="col-2" data-astro-cid-vj4tpspi> <button class="mt-8 mb-2 hover:opacity-75 flex focus-outline" onclick="history.back()"> <svg xmlns="http://www.w3.org/2000/svg"> <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path> </svg> <span>Go back</span> </button> <div class="justify-start mx-auto" data-astro-cid-vj4tpspi> <h1 class="post-title" data-astro-cid-vj4tpspi>Typesafe serverless API with tRPC</h1> <div class="opacity-80 flex items-center space-x-2 my-2"><svg xmlns="http://www.w3.org/2000/svg" class="scale-100 w-6 h-6 inline-block fill-skin-base"><path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path><path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path></svg><span class="italic text-base">June 19, 2022</span></div> <ul class="tags-container" data-astro-cid-vj4tpspi> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/aws" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
 &nbsp;<span data-astro-cid-blwjyjpt>aws</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/serverless" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
 &nbsp;<span data-astro-cid-blwjyjpt>serverless</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/sst" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
 &nbsp;<span data-astro-cid-blwjyjpt>sst</span> </a> </li> <li class="inline-block my-1 underline-offset-4" data-astro-cid-blwjyjpt> <a href="/tags/typescript" class="pr-1 text-sm group" data-astro-cid-blwjyjpt> <svg xmlns="http://www.w3.org/2000/svg" class=" scale-75" data-astro-cid-blwjyjpt> <path d="M16.018 3.815 15.232 8h-4.966l.716-3.815-1.964-.37L8.232 8H4v2h3.857l-.751 4H3v2h3.731l-.714 3.805 1.965.369L8.766 16h4.966l-.714 3.805 1.965.369.783-4.174H20v-2h-3.859l.751-4H21V8h-3.733l.716-3.815-1.965-.37zM14.106 14H9.141l.751-4h4.966l-.752 4z" data-astro-cid-blwjyjpt></path> </svg>
@@ -81,14 +81,12 @@ Call</strong> (RPC)</a>. The latter simply means that a program call in one plac
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">if</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">!</span><span style="color:#E5C07B">hello</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">data</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">div</span><span style="color:#ABB2BF">&gt;</span><span style="color:#E06C75">Loading</span><span style="color:#ABB2BF">...</span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">div</span><span style="color:#56B6C2">&gt;</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">div</span><span style="color:#ABB2BF">&gt;{hello.data.</span><span style="color:#E06C75">message</span><span style="color:#ABB2BF">}</span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">div</span><span style="color:#56B6C2">&gt;</span><span style="color:#ABB2BF">;</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code><button class="copy" data-code="export function Hello() {
+<span class="line"><span style="color:#ABB2BF">}</span></span></code><button class="copy" data-code="export function Hello() {
   const hello = trpc.useQuery([&#34;hello&#34;, { name: &#34;Magnus&#34; }]);
   if (!hello.data) return <div>Loading...</div>;
 
   return <div>{hello.data.message}</div>;
-}
-" onclick="
+}" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -105,8 +103,7 @@ Call</strong> (RPC)</a>. The latter simply means that a program call in one plac
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">async</span><span class="space"> </span><span style="color:#61AFEF">resolve</span><span style="color:#ABB2BF">(</span><span style="color:#E06C75;font-style:italic">req</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#ABB2BF">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">message</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#98C379">`Hello,</span><span class="space"> </span><span style="color:#C678DD">${</span><span style="color:#E5C07B">req</span><span style="color:#ABB2BF">.</span><span style="color:#E5C07B">input</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">name</span><span style="color:#C678DD">}</span><span style="color:#98C379">!`</span><span class="space"> </span><span style="color:#ABB2BF">};</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">},</span></span>
-<span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
+<span class="line"><span style="color:#ABB2BF">});</span></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
 import { z } from &#34;zod&#34;;
 import { awsLambdaRequestHandler } from &#34;@trpc/server/adapters/aws-lambda&#34;;
 
@@ -117,8 +114,7 @@ const appRouter = trpc.router().query(&#34;hello&#34;, {
   async resolve(req) {
     return { message: `Hello, ${req.input.name}!` };
   },
-});
-" onclick="
+});" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -159,14 +155,12 @@ const appRouter = trpc.router().query(&#34;hello&#34;, {
 <span class="line"></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Install</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">tRPC</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">server</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">package</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">in</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">root</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">of</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">project</span></span>
 <span class="line"><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">typesafe-client-serverless</span></span>
-<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@trpc/server</span></span>
-<span class="line"></span></code><button class="copy" data-code="# Initialize the Serverless Stack based on the typescript-starter
+<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@trpc/server</span></span></code><button class="copy" data-code="# Initialize the Serverless Stack based on the typescript-starter
 npm init sst typescript-starter typesafe-client-serverless
 
 # Install the tRPC server package in the root of the project
 cd typesafe-client-serverless
-npm install @trpc/server
-" onclick="
+npm install @trpc/server" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -181,8 +175,7 @@ npm install @trpc/server
 <span class="line"></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">We</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">also</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">need</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">static-site-env</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">from</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">serverless</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">stack</span></span>
 <span class="line"><span style="color:#7F848E;font-style:italic">#</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">to</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">API</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">URL</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">into</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">our</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">React</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">app</span></span>
-<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@serverless-stack/static-site-env</span><span class="space"> </span><span style="color:#D19A66">--save-dev</span></span>
-<span class="line"></span></code><button class="copy" data-code="# Create a React app in ./frontend, with the Typescript template.
+<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">install</span><span class="space"> </span><span style="color:#98C379">@serverless-stack/static-site-env</span><span class="space"> </span><span style="color:#D19A66">--save-dev</span></span></code><button class="copy" data-code="# Create a React app in ./frontend, with the Typescript template.
 npx create-react-app frontend --template typescript --use-npm
 
 # Install the tRPC react and client packages and react-query
@@ -192,8 +185,7 @@ npm install @trpc/client @trpc/react react-query
 
 # We also need static-site-env from serverless stack
 # to the API URL into our React app
-npm install @serverless-stack/static-site-env --save-dev
-" onclick="
+npm install @serverless-stack/static-site-env --save-dev" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -205,23 +197,19 @@ npm install @serverless-stack/static-site-env --save-dev
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&quot;build&quot;:</span><span class="space"> </span><span style="color:#ABB2BF">&quot;react-scripts</span><span class="space"> </span><span style="color:#ABB2BF">build&quot;,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&quot;test&quot;:</span><span class="space"> </span><span style="color:#ABB2BF">&quot;react-scripts</span><span class="space"> </span><span style="color:#ABB2BF">test&quot;,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">&quot;eject&quot;:</span><span class="space"> </span><span style="color:#ABB2BF">&quot;react-scripts</span><span class="space"> </span><span style="color:#ABB2BF">eject&quot;</span></span>
-<span class="line"><span style="color:#ABB2BF">},</span></span>
-<span class="line"></span></code><button class="copy" data-code="&#34;scripts&#34;: {
+<span class="line"><span style="color:#ABB2BF">},</span></span></code><button class="copy" data-code="&#34;scripts&#34;: {
 -   &#34;start&#34;: &#34;react-scripts start&#34;,
 +   &#34;start&#34;: &#34;sst-env -- react-scripts start&#34;,
     &#34;build&#34;: &#34;react-scripts build&#34;,
     &#34;test&#34;: &#34;react-scripts test&#34;,
     &#34;eject&#34;: &#34;react-scripts eject&#34;
-},
-" onclick="
+}," onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p><strong>Note:</strong> if you have <a href="https://stedolan.github.io/jq/">jq</a> installed, you can use</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">jq</span><span class="space"> </span><span style="color:#98C379">&#39;.scripts.start=&quot;sst-env</span><span class="space"> </span><span style="color:#98C379">--</span><span class="space"> </span><span style="color:#98C379">react-scripts</span><span class="space"> </span><span style="color:#98C379">start&quot;&#39;</span><span class="space"> </span><span style="color:#98C379">package.json</span><span class="space"> </span><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#98C379">package.json</span></span>
-<span class="line"></span></code><button class="copy" data-code="jq '.scripts.start=&#34;sst-env -- react-scripts start&#34;' package.json > package.json
-" onclick="
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">jq</span><span class="space"> </span><span style="color:#98C379">&#39;.scripts.start=&quot;sst-env</span><span class="space"> </span><span style="color:#98C379">--</span><span class="space"> </span><span style="color:#98C379">react-scripts</span><span class="space"> </span><span style="color:#98C379">start&quot;&#39;</span><span class="space"> </span><span style="color:#98C379">package.json</span><span class="space"> </span><span style="color:#ABB2BF">&gt;</span><span class="space"> </span><span style="color:#98C379">package.json</span></span></code><button class="copy" data-code="jq '.scripts.start=&#34;sst-env -- react-scripts start&#34;' package.json > package.json" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -244,8 +232,7 @@ npm install @serverless-stack/static-site-env --save-dev
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E5C07B">stack</span><span style="color:#ABB2BF">.</span><span style="color:#61AFEF">addOutputs</span><span style="color:#ABB2BF">({</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">ApiEndpoint</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E5C07B">api</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">url</span><span style="color:#ABB2BF">,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code><button class="copy" data-code="import { StackContext, Api } from &#34;@serverless-stack/resources&#34;;
+<span class="line"><span style="color:#ABB2BF">}</span></span></code><button class="copy" data-code="import { StackContext, Api } from &#34;@serverless-stack/resources&#34;;
 
 export function MyStack({ stack }: StackContext) {
   const api = new Api(stack, &#34;api&#34;, {
@@ -256,8 +243,7 @@ export function MyStack({ stack }: StackContext) {
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
-}
-" onclick="
+}" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -284,8 +270,7 @@ export function MyStack({ stack }: StackContext) {
 <span class="line"><span class="space"> </span><span style="color:#61AFEF">Starting</span><span class="space"> </span><span style="color:#98C379">Live</span><span class="space"> </span><span style="color:#98C379">Lambda</span><span class="space"> </span><span style="color:#98C379">Dev</span></span>
 <span class="line"><span style="color:#98C379">==========================</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#61AFEF">SST</span><span class="space"> </span><span style="color:#98C379">Console:</span><span class="space"> </span><span style="color:#98C379">https://console.sst.dev/typesafe-client-serverless/magnus/local</span></span>
-<span class="line"></span></code><button class="copy" data-code="npm start
+<span class="line"><span style="color:#61AFEF">SST</span><span class="space"> </span><span style="color:#98C379">Console:</span><span class="space"> </span><span style="color:#98C379">https://console.sst.dev/typesafe-client-serverless/magnus/local</span></span></code><button class="copy" data-code="npm start
 
 > typesafe-client-serverless@0.0.0 start
 > sst start
@@ -305,8 +290,7 @@ Stack magnus-typesafe-client-serverless-MyStack
  Starting Live Lambda Dev
 ==========================
 
-SST Console: https://console.sst.dev/typesafe-client-serverless/magnus/local
-" onclick="
+SST Console: https://console.sst.dev/typesafe-client-serverless/magnus/local" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -342,8 +326,7 @@ SST Console: https://console.sst.dev/typesafe-client-serverless/magnus/local
 <span class="line"><span style="color:#98C379"><span style="user-select:none">+</span>   SiteUrl: site.url,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">ApiEndpoint:</span><span class="space"> </span><span style="color:#ABB2BF">api.url,</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">});</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code><button class="copy" data-code="-import {Api, StackContext} from &#34;@serverless-stack/resources&#34;;
+<span class="line"><span style="color:#ABB2BF">}</span></span></code><button class="copy" data-code="-import {Api, StackContext} from &#34;@serverless-stack/resources&#34;;
 +import {Api, ReactStaticSite, StackContext} from &#34;@serverless-stack/resources&#34;;
 
 
@@ -367,16 +350,13 @@ export function MyStack({stack}: StackContext) {
 +   SiteUrl: site.url,
     ApiEndpoint: api.url,
   });
-}
-" onclick="
+}" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
         "><span class="ready"></span><span class="success"></span></button></pre>
 <p>If we go to our terminal, SST has detected the changes and asks us if we want to redeploy.</p>
-<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">Stacks:</span><span class="space"> </span><span style="color:#98C379">There</span><span class="space"> </span><span style="color:#98C379">are</span><span class="space"> </span><span style="color:#98C379">new</span><span class="space"> </span><span style="color:#98C379">infrastructure</span><span class="space"> </span><span style="color:#98C379">changes.</span><span class="space"> </span><span style="color:#98C379">Press</span><span class="space"> </span><span style="color:#98C379">ENTER</span><span class="space"> </span><span style="color:#98C379">to</span><span class="space"> </span><span style="color:#98C379">redeploy.</span></span>
-<span class="line"></span></code><button class="copy" data-code="Stacks: There are new infrastructure changes. Press ENTER to redeploy.
-" onclick="
+<pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#61AFEF">Stacks:</span><span class="space"> </span><span style="color:#98C379">There</span><span class="space"> </span><span style="color:#98C379">are</span><span class="space"> </span><span style="color:#98C379">new</span><span class="space"> </span><span style="color:#98C379">infrastructure</span><span class="space"> </span><span style="color:#98C379">changes.</span><span class="space"> </span><span style="color:#98C379">Press</span><span class="space"> </span><span style="color:#98C379">ENTER</span><span class="space"> </span><span style="color:#98C379">to</span><span class="space"> </span><span style="color:#98C379">redeploy.</span></span></code><button class="copy" data-code="Stacks: There are new infrastructure changes. Press ENTER to redeploy." onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -408,8 +388,7 @@ export function MyStack({stack}: StackContext) {
 <span class="line"><span style="color:#7F848E;font-style:italic">//</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">3.</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">Export</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">the</span><span class="space"> </span><span style="color:#7F848E;font-style:italic">handler.</span></span>
 <span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">handler</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">awsLambdaRequestHandler</span><span style="color:#ABB2BF">({</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E06C75">router</span><span style="color:#ABB2BF">:</span><span class="space"> </span><span style="color:#E06C75">appRouter</span><span style="color:#ABB2BF">,</span></span>
-<span class="line"><span style="color:#ABB2BF">});</span></span>
-<span class="line"></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
+<span class="line"><span style="color:#ABB2BF">});</span></span></code><button class="copy" data-code="import * as trpc from &#34;@trpc/server&#34;;
 import { z } from &#34;zod&#34;;
 import { awsLambdaRequestHandler } from &#34;@trpc/server/adapters/aws-lambda&#34;;
 
@@ -432,8 +411,7 @@ export type AppRouter = typeof appRouter;
 // 3. Export the handler.
 export const handler = awsLambdaRequestHandler({
   router: appRouter,
-});
-" onclick="
+});" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -457,12 +435,10 @@ type <code>{name: string}</code>. It does type narrowing for us!</li>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">createReactQueryHooks</span><span class="space"> </span><span style="color:#ABB2BF">}</span><span class="space"> </span><span style="color:#C678DD">from</span><span class="space"> </span><span style="color:#98C379">&quot;@trpc/react&quot;</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"><span style="color:#C678DD">import</span><span class="space"> </span><span style="color:#C678DD">type</span><span class="space"> </span><span style="color:#ABB2BF">{</span><span class="space"> </span><span style="color:#E06C75">AppRouter</span><span class="space"> </span><span style="color:#ABB2BF">}</span><span class="space"> </span><span style="color:#C678DD">from</span><span class="space"> </span><span style="color:#98C379">&quot;../../../api/functions/lambda&quot;</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">trpc</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">createReactQueryHooks</span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">AppRouter</span><span style="color:#ABB2BF">&gt;();</span></span>
-<span class="line"></span></code><button class="copy" data-code="import { createReactQueryHooks } from &#34;@trpc/react&#34;;
+<span class="line"><span style="color:#C678DD">export</span><span class="space"> </span><span style="color:#C678DD">const</span><span class="space"> </span><span style="color:#E5C07B">trpc</span><span class="space"> </span><span style="color:#56B6C2">=</span><span class="space"> </span><span style="color:#61AFEF">createReactQueryHooks</span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">AppRouter</span><span style="color:#ABB2BF">&gt;();</span></span></code><button class="copy" data-code="import { createReactQueryHooks } from &#34;@trpc/react&#34;;
 import type { AppRouter } from &#34;../../../api/functions/lambda&#34;;
 
-export const trpc = createReactQueryHooks<AppRouter>();
-" onclick="
+export const trpc = createReactQueryHooks<AppRouter>();" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -491,8 +467,7 @@ the <strong>tRPC</strong> client with the URL from the <code>REACT_APP_API_URL</
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">QueryClientProvider</span><span style="color:#56B6C2">&gt;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span style="color:#56B6C2">&lt;/</span><span style="color:#E5C07B">trpc</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">Provider</span><span style="color:#56B6C2">&gt;</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#ABB2BF">);</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code><button class="copy" data-code="import React, { useState } from &#34;react&#34;;
+<span class="line"><span style="color:#ABB2BF">}</span></span></code><button class="copy" data-code="import React, { useState } from &#34;react&#34;;
 import { QueryClient, QueryClientProvider } from &#34;react-query&#34;;
 import { trpc } from &#34;./utils/trpc&#34;;
 
@@ -513,8 +488,7 @@ export default function App() {
       </QueryClientProvider>
     </trpc.Provider>
   );
-}
-" onclick="
+}" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -526,14 +500,12 @@ use our typesafe client 🎉!</p>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">if</span><span class="space"> </span><span style="color:#ABB2BF">(</span><span style="color:#56B6C2">!</span><span style="color:#E5C07B">hello</span><span style="color:#ABB2BF">.</span><span style="color:#E06C75">data</span><span style="color:#ABB2BF">)</span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">div</span><span style="color:#ABB2BF">&gt;</span><span style="color:#E06C75">Loading</span><span style="color:#ABB2BF">...</span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">div</span><span style="color:#56B6C2">&gt;</span><span style="color:#ABB2BF">;</span></span>
 <span class="line"></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#C678DD">return</span><span class="space"> </span><span style="color:#ABB2BF">&lt;</span><span style="color:#E5C07B">div</span><span style="color:#ABB2BF">&gt;{hello.data.</span><span style="color:#E06C75">message</span><span style="color:#ABB2BF">}</span><span style="color:#56B6C2">&lt;/</span><span style="color:#E06C75">div</span><span style="color:#56B6C2">&gt;</span><span style="color:#ABB2BF">;</span></span>
-<span class="line"><span style="color:#ABB2BF">}</span></span>
-<span class="line"></span></code><button class="copy" data-code="export function Hello() {
+<span class="line"><span style="color:#ABB2BF">}</span></span></code><button class="copy" data-code="export function Hello() {
   const hello = trpc.useQuery([&#34;hello&#34;, { name: &#34;Magnus&#34; }]);
   if (!hello.data) return <div>Loading...</div>;
 
   return <div>{hello.data.message}</div>;
-}
-" onclick="
+}" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
@@ -543,10 +515,8 @@ a <code>hello.data</code> which is of type <code>{message: string}</code>.</p>
 <h3 id="testing-our-app">Testing our app</h3>
 <p>Now, with everything deployed, we can start our React app and go to <a href="http://localhost:3000/">localhost:3000</a>.</p>
 <pre class="astro-code one-dark-pro" style="background-color:#282c34;color:#abb2bf;overflow-x:auto;white-space:pre-wrap;word-wrap:break-word" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#56B6C2">cd</span><span class="space"> </span><span style="color:#98C379">frontend</span></span>
-<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">start</span></span>
-<span class="line"></span></code><button class="copy" data-code="cd frontend
-npm start
-" onclick="
+<span class="line"><span style="color:#61AFEF">npm</span><span class="space"> </span><span style="color:#98C379">start</span></span></code><button class="copy" data-code="cd frontend
+npm start" onclick="
           navigator.clipboard.writeText(this.dataset.code);
           this.classList.add('copied');
           setTimeout(() => this.classList.remove('copied'), 500)
