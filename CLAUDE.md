@@ -32,11 +32,19 @@ Astro components and pages are not covered by tests — the testable logic lives
 
 Deployment is automatic: pushing to `main` triggers `.github/workflows/deploy.yml`,
 which builds with pnpm and publishes `dist/` to GitHub Pages via
-`upload-pages-artifact` + `deploy-pages`. The live site is <https://wahlstrand.dev>;
-the custom domain is held by *this* repo's Pages site and `public/CNAME` carries it
-into every build — don't delete that file. There is no manual deploy path any more
-(the old `scripts/deploy.sh`, which copied `dist/` into a sibling
-`../magnuswahlstrand.github.io` repo, is gone).
+`upload-pages-artifact` + `deploy-pages`. There is no manual deploy path any more
+(the old `scripts/deploy.sh`, which built locally and copied `dist/` into a sibling
+repo, is gone). `public/CNAME` carries the custom domain into every build — don't
+delete that file.
+
+This repo is **`magnuswahlstrand/magnuswahlstrand.github.io`**, the account's *user
+site*, and that is load-bearing: `wahlstrand.dev` must stay attached to the user
+site's Pages, because GitHub serves every other Pages-enabled repo in the account at
+`wahlstrand.dev/<repo>/` by inheriting the user site's custom domain. Moving the
+domain onto a project repo silently 404s all of those (`/tools/`, `/til/`,
+`/presentations/`, …). The blog source used to live in `magnuswahlstrand/blog`; that
+repo is now dormant and its Pages site is deleted. The pre-Actions built site is
+kept on the `legacy-built-site` branch.
 
 `.husky/pre-commit` runs `lint-staged`, which prettier-formats every staged file.
 
