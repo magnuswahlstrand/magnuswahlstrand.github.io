@@ -98,9 +98,10 @@ There are **no Astro content collections**. Each kind of content has its own loa
    the format. Each entry gets an `id` anchor from its filename with the date
    prefix stripped (`readingSlug`), so a take is linkable as
    `/lists/reading#some-article`.
-   The three `reading-summary-week-*.md` files in `src/contents/` are the old
-   week-batched version of this, still shipping as posts; they're meant to be
-   retired over time.
+   This replaced an older week-batched format, `reading-summary-week-*.md`
+   posts in `src/contents/`; those three (weeks 20, 22, 29) have been split into
+   one file per article and deleted, so `/posts/week-*-reading-summary` and
+   `/tags/reading` no longer exist.
 5. **JSON data** — `src/data/food-log.json`, `src/pages/menu/_menus.json`,
    imported directly by their pages (`_`-prefixed files are not routed by Astro).
 

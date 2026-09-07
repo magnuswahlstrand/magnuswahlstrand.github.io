@@ -11,7 +11,7 @@ generated or sent by colleagues or bosses. It is easy to produce, but can take a
 long time to parse, review and reason about. Sean calls this type of content
 "Workslop".
 
-> “Workslop” is when your colleagues or bosses communicate with you by pasting
+> **Workslop** is when your colleagues or bosses communicate with you by pasting
 > big chunks of AI-generated text.
 
 I think this is a very interesting, new phenomenon that has emerged in the last
@@ -40,18 +40,18 @@ contributions:
 
 A few thoughts about the strategies:
 
-1. Many of these strategies were valid before AI agents. What if your colleague
-   produced PRs that were too large? Or too tiny? Tests were lacking? Too many
-   integration and too few unit tests? Same strategies worked before as well
-   (with the exception of fight AI with AI).
-2. What are these strategies about?
-   1. **Protecting your own time** by ignoring, or slowing down production of
-      work that takes your time.
-   2. **Making the cost of producing slop higher** (with meetings or slow
-      turnaround time)
-   3. **Classifying how serious the contribution should be taken**. Is this just
-      an idea that someone thought about, created a PR with Claude and didn't
-      look at it themselves? Or did they actually think the change through?
+- Many of these strategies were valid before AI agents. What if your colleague
+  produced PRs that were too large? Or too tiny? Tests were lacking? Too many
+  integration and too few unit tests? Same strategies worked before as well (with
+  the exception of fight AI with AI).
+- What are these strategies about?
+  - **Protecting your own time** by ignoring, or slowing down production of work
+    that takes your time.
+  - **Making the cost of producing slop higher** (with meetings or slow
+    turnaround time)
+  - **Classifying how serious the contribution should be taken**. Is this just an
+    idea that someone thought about, created a PR with Claude and didn't look at
+    it themselves? Or did they actually think the change through?
 
 Overall, I think that the ideal response, if possible, is to talk directly to
 your colleague to see if you can agree to a common standard way of working. If
