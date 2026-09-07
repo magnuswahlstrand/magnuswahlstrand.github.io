@@ -1,0 +1,67 @@
+---
+import AboutNowLayout from "../../layouts/AboutNowLayout.astro";
+import { getSortedReading, readingSlug } from "../../lib/reading";
+
+const entries = getSortedReading();
+
+function formatRead(read: string | Date) {
+  return new Date(read).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+function hostname(url: string) {
+  return new URL(url).hostname.replace(/^www\./, "");
+}
+---
+
+<AboutNowLayout frontmatter={{ title: "Reading", navName: "lists" }}>
+  <p>
+    Articles I've read, and what I took from them. Newest first — kept here
+    rather than in <a href="/posts">posts</a>, since these are notes, not
+    writing.
+  </p>
+
+  {
+    entries.map(entry => {
+      const { Content, frontmatter } = entry;
+      const { title, url, author, read, tags } = frontmatter;
+      return (
+        <article
+          id={readingSlug(entry)}
+          class="mt-10 border-t border-skin-line pt-8 first-of-type:border-t-0"
+        >
+          <h2 class="mb-1 text-xl">
+            <a href={url} class="no-underline hover:underline">
+              {title}
+            </a>
+          </h2>
+          <p class="mt-0 mb-4 text-sm opacity-75">
+            {author && <span>{author} · </span>}
+            <a href={url} class="text-skin-base no-underline hover:underline">
+              {hostname(url)}
+            </a>
+            {" · read "}
+            <time datetime={new Date(read).toISOString().slice(0, 10)}>
+              {formatRead(read)}
+            </time>
+            {tags.length > 0 && (
+              <span> · {tags.map(tag => `#${tag}`).join(" ")}</span>
+            )}
+          </p>
+          <Content />
+        </article>
+      );
+    })
+  }
+
+  {
+    entries.length === 0 && (
+      <p>
+        <em>Nothing here yet.</em>
+      </p>
+    )
+  }
+</AboutNowLayout>

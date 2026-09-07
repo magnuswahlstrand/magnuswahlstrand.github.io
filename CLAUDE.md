@@ -54,7 +54,7 @@ Astro 5 static site (Tailwind + React islands + MDX), originally based on the
 AstroPaper theme. Site config (title, author, socials, `postPerPage`) is in
 `src/config.ts`; global page shell and meta tags in `src/layouts/Layout.astro`.
 
-### Content sources — four separate mechanisms, deliberately
+### Content sources — five separate mechanisms, deliberately
 
 There are **no Astro content collections**. Each kind of content has its own loader:
 
@@ -87,7 +87,21 @@ There are **no Astro content collections**. Each kind of content has its own loa
    table, `images` feeds the carousel in the layout.
    These recipes used to be TS modules carrying an `operations` DAG rendered as a
    flow diagram; that subsystem (`src/lib/recipe-flow/`) was removed.
-4. **JSON data** — `src/data/food-log.json`, `src/pages/menu/_menus.json`,
+4. **Reading takes** — `src/reading/*.md`, one file per article read: the
+   frontmatter *is* the article (`title`, `url`, `author?`, `read`, `tags`), the
+   markdown body is the take. Loaded by `src/lib/reading/index.ts` (glob +
+   `readingSchema`, same pattern as posts/games) and rendered as sections of a
+   single page, `src/pages/lists/reading.astro`, newest `read` first. Adding a
+   take means dropping in a file — no registry, no route.
+   These deliberately live **outside `src/contents/`** so they never reach
+   `/posts`, RSS, search or the tag pages; that separation is the whole point of
+   the format. Each entry gets an `id` anchor from its filename with the date
+   prefix stripped (`readingSlug`), so a take is linkable as
+   `/lists/reading#some-article`.
+   The three `reading-summary-week-*.md` files in `src/contents/` are the old
+   week-batched version of this, still shipping as posts; they're meant to be
+   retired over time.
+5. **JSON data** — `src/data/food-log.json`, `src/pages/menu/_menus.json`,
    imported directly by their pages (`_`-prefixed files are not routed by Astro).
 
 ### Routing
