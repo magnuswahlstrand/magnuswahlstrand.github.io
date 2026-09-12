@@ -1,0 +1,123 @@
+---
+title: "Static website on Cloudflare behind magic link login"
+slug: static-website-on-cloudflare-behind-magic-link-login
+datetime: 2026-09-12
+tags: ["cloudflare", "serverless"]
+---
+
+import Caption from "../components/Caption.astro";
+
+A couple of days back, I was working on a project to extract and summarise information from my kids' school web platforms. This included **extracting information, parsing files, and summarising everything in a nicer format**. The actual project was a success, and ran on my local machine just fine. But then came the question:
+
+> How do I actually host this?
+
+I had a few requirements:
+
+- **The page and files should be accessible on the open internet.** My partner and kids should be able to access the page from their devices.
+- **We should avoid exposing sensitive information.** In general, the files from the school platform do not contain sensitive or personal information, but I'd like to avoid the risk of that happening and me accidentally sharing it.
+- **It should be free**, or at least very cheap.
+
+In the past, I've published numerous projects on [GitHub Pages](https://docs.github.com/en/pages). This goes for my personal website, [wahlstrand.dev](https://wahlstrand.dev), and for all the subdomains (wahlstrand.dev/tools, wahlstrand.dev/til). This works fine. However, GitHub Pages on the free plan requires **public Git repos**. Instead, I landed on a separate solution: **a Cloudflare Worker protected by Cloudflare Access.**
+
+## Our setup
+
+We will use three Cloudflare features:
+
+- [Workers](https://developers.cloudflare.com/workers/) - Used to serve our static website.
+- [Access](https://developers.cloudflare.com/cloudflare-one/access-controls/) - Identity-aware access control. Used to control who can access our site.
+- [R2](https://developers.cloudflare.com/r2/) - Used for storing and serving larger files.
+
+![Target architecture](/img/static-website-on-cloudflare-behind-magic-link-login/target.png)
+
+<Caption>Target setup on Cloudflare</Caption>
+
+## Configuring the worker
+
+So how do we do this? Cloudflare has a CLI called [`wrangler`](https://developers.cloudflare.com/workers/wrangler/) that can be used to configure and operate Cloudflare resources. As a home dev, I've used `wrangler` quite a bit, and it has been great so far. I imagine things get messier in a production environment.
+
+Below is our `wrangler.toml` which sets up a few things:
+
+- Names our worker `canvas-reader` and points to the main worker file
+- Sets up a public domain (`canvas-reader.wahlstrand.workers.dev`)
+- Specifies which files should be served as static assets
+- Ensures that the R2 bucket `canvas-reader` can be accessed by the worker
+
+```toml
+name = "canvas-reader"
+main = "worker/index.ts"
+compatibility_date = "2026-06-01"
+
+# Enables use of *.workers.dev domain
+workers_dev = true
+
+# Which static files to serve. /api/state and /files/<id> fall through to it.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Keep private: no r2.dev URL, no custom domain. The Worker is the only reader.
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "canvas-reader"
+```
+
+That's it! We need to create the R2 bucket separately, either through CLI or in the Cloudflare dashboard. In my small project I have 3 steps that I run manually each time I want to update data (weekly or so).
+
+1. (not related to Cloudflare) `pnpm run sync` - Extract data and files from a site and generate a new static site
+2. `pnpm run publish` - Runs a custom JavaScript script to publish large files to R2
+3. `pnpm run worker:deploy` - Deploy worker and static assets
+
+If we run these steps, we can access our site at [canvas-reader.wahlstrand.workers.dev](https://canvas-reader.wahlstrand.workers.dev)!
+
+## Limiting access
+
+I deployed this using some dummy data that wasn't sensitive. Before we deploy any real data, we can configure access to our worker in the Cloudflare dashboard. Do the following:
+
+- **Zero Trust > Access Controls > Policies > Add a policy** and create a policy that only allows certain emails. Let's call it "Blog policy".
+- From the main dashboard: **Compute > Workers & Pages > `your worker` > Access > Protect this Worker behind Access**. Choose "All traffic", and select our newly created Policy. Apply Access.
+
+![Protecting the Worker behind Access](/img/static-website-on-cloudflare-behind-magic-link-login/protect-worker-behind-access.png)
+
+<Caption>
+  Scope set to "All traffic", with our "Blog policy" allowing a single email
+  address, and a 24 hour session.
+</Caption>
+
+That's it! Now if we go to [canvas-reader.wahlstrand.workers.dev](https://canvas-reader.wahlstrand.workers.dev) we instead get a login screen:
+
+![Cloudflare Access login screen](/img/static-website-on-cloudflare-behind-magic-link-login/access-login-screen.png)
+
+<Caption>Anyone without a session now meets this instead of the site.</Caption>
+
+If we enter a valid e-mail address (matching our policy), Cloudflare sends us an email with a one-time code that lets us log in and get a session. Then finally, we can enter our website.
+
+## Fixing R2 downloads
+
+Now we have published a static site, and protected it behind Cloudflare Access. So far, we can't actually download anything from R2. We need to configure our worker so it can route certain requests to R2. Our `workers/index.ts` will now look something like this:
+
+```ts
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+
+    // A. Only allow GET/HEAD
+    if (request.method !== "GET" && request.method !== "HEAD")
+      return problem(405, "Method not allowed");
+
+    // B. If path matches, we serve files from R2
+    const file = url.pathname.match(/^\/files\/(\d+)$/);
+    if (file) {
+      // Send request to list, and get object from R2, and return to caller
+    }
+
+    // C. Everything else is the frontend, deployed alongside the worker.
+    return env.ASSETS.fetch(request);
+  },
+};
+```
+
+That's it (for the third time)! Now if we log in to our site, we can click around and download files stored in R2.
+
+## Conclusion
+
+We've set up a simple static site, hosted on Cloudflare using their lightweight workers. Larger files are served from R2. All access is protected by magic link login using the Cloudflare Access. All within Cloudflare's free tier. Pretty cool!
