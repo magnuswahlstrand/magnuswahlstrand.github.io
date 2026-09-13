@@ -2,50 +2,33 @@
 layout: ../layouts/AboutNowLayout.astro
 title: "About me"
 navName: "about"
+description: "I'm Magnus Wahlstrand, a freelance software engineer in Stockholm. I write about backend development and things I'm learning."
 ---
 
-My name is Magnus Wahlstrand. I am a software engineer, based in Stockholm, Sweden. I love programming, and I run my own company, [32 Bytes](https://32b.se).
+I'm Magnus Wahlstrand, a software engineer based in Stockholm, Sweden. I freelance through my company, [32 Bytes](https://32b.se).
 
-I enjoy developing things that are easy to maintain and observe long term. If shortcuts are needed, I believe in taking the time to clean up afterward to keep the quality of the code base high over time.
+This blog is where I share what I'm learning: backend development, Go, TypeScript, cloud systems, and experiments that sometimes turn into useful tools.
 
-I have the following qualities:
+I enjoy building systems that are easy to maintain and understand in production. Shortcuts are sometimes necessary, but I like making time to clean up afterward. Go, TypeScript, and Postgres are favorites; I also enjoy experimenting with graphics and games using Ebiten and Three.js.
 
-- Stubborn
-- Passionate
-- Hard-working
-- Curious
+For my professional background, see my [résumé](/resume). You can also [find me on LinkedIn](https://www.linkedin.com/in/magnus-wahlstrand).
 
-### Time line
+## A little background
 
-- 1987: Born in Kalmar, Sweden
-- 1999: Started my career as a Java developer
-- 2003: Got a summer job testing staplers
-- 2004: Started playing bass guitar
-- 2005: RSI
-- 2006: Moved to Gothenburg, Sweden
-- 2009: Studied mathematics and electronics at [N7](https://www.enseeiht.fr/fr/index.html) in France
-- 2013: Lived in China
-- 2018: Started programming in [Go](https://golang.org/)
-- 2019: Worked at a fintech startup in Stockholm
-- 2021: Started freelancing
-- 2021: My son was born
-- 2024: Started working at [TV4](https://tv4.se)
-- 2026: ?
+I was born in Kalmar and started programming in Java in 1999. Before software became my job, I spent a summer testing staplers. I started playing bass guitar in 2004, studied mathematics and electronics in France, and lived in China in 2013.
 
-### Technology I Love
+## Things I've made
 
-- [Go](https://golang.org/)
-- Typescript
-- Git
-- Postgres
-- My Macbook
-- Serverless
-- OpenCode
-- [Ebiten](https://ebiten.org)
-- [ThreeJS](https://threejs.org/)
+- [2D vision](https://github.com/magnuswahlstrand/2d-vision) — one of my first experiments with 2D graphics in Go.
+- [Particle system](https://github.com/magnuswahlstrand/particles) — another exploration of graphics in Go.
+- [Tools](/tools) — small tools developed with the help of AI.
 
-### Fun projects
+## Now
 
-- [2D vision](https://github.com/magnuswahlstrand/2d-vision) - one my of first experiments with 2D graphics and Go
-- [Particle system](https://github.com/magnuswahlstrand/particles) - also written in Go
-- [Tools](https://wahlstrand.dev/tools) - Developed with the help of AI
+_Updated September 2026._
+
+I'm currently freelancing at TV4. My son is five years old. Outside work, I'm focusing on:
+
+- **Experimenting with AI development**, including the tools linked above.
+- **Becoming a better cook** — I keep some of my [favorite recipes here](/recipes).
+- **Losing weight**, with a goal of reaching 85 kg.

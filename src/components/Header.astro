@@ -6,14 +6,7 @@ import LinkButton from "./LinkButton.astro";
 // import logoSVG from "/assets/logo.svg";
 
 export interface Props {
-  activeNav?:
-    | "posts"
-    | "tags"
-    | "about"
-    | "search"
-    | "resume"
-    | "now"
-    | "lists";
+  activeNav?: "posts" | "tags" | "about" | "search" | "resume" | "lists";
 }
 
 const { activeNav } = Astro.props;
@@ -37,11 +30,6 @@ const { activeNav } = Astro.props;
     <nav class="display-none sm:flex">
       <ul>
         <li>
-          <a href="/resume" class={activeNav === "resume" ? "active" : ""}
-            >Resumé</a
-          >
-        </li>
-        <li>
           <a href="/posts" class={activeNav === "posts" ? "active" : ""}
             >Posts</a
           >
@@ -62,7 +50,9 @@ const { activeNav } = Astro.props;
           >
         </li>
         <li>
-          <a href="/now" class={activeNav === "now" ? "active" : ""}>Now</a>
+          <a href="/resume" class={activeNav === "resume" ? "active" : ""}
+            >Resumé</a
+          >
         </li>
       </ul>
       <div class="button-wrapper sm:display-none">

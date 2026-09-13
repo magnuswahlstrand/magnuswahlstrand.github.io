@@ -1,6 +1,4 @@
 ---
-import { calculateDuration } from "../resume/resumeItems";
-import SocialsButton from "./SocialsButton.astro";
 export interface Props {
   role: {
     location?: string;
@@ -15,41 +13,60 @@ export interface Props {
   isOngoing?: boolean;
 }
 
-function formatParagraphs(input: string): string {
-  const lines = input.split("\n");
-
-  const formattedLines = lines.map(line => `<p>${line}</p>`);
-
-  return formattedLines.join("");
-}
-
 const { isFirst, isMultiRow, isOngoing, role } = Astro.props;
 const timespanText = `${role.from} - ${isOngoing && isFirst ? "Present" : role.to}`;
 ---
 
-<div
-  class:list={[
-    "px-4 pt-2 pb-4 text-sm",
-    !isFirst ? "border-t border-slate-500 pt-4" : "",
-  ]}
->
-  <div class="flex flex-row gap-2 items-center justify-between">
-    <div class="font-bold">{role.title}</div>
-    {isMultiRow && <div class="text-xs sm:block hidden">{timespanText}</div>}
+<div class:list={["resume-role", { "later-role": !isFirst }]}>
+  <h4>{role.title}</h4>
+  {isMultiRow && <div class="role-meta">{timespanText}</div>}
+  {role.location && <div class="role-meta">{role.location}</div>}
+  <div class="role-description">
+    {role.description.split("\n").map(paragraph => <p>{paragraph}</p>)}
   </div>
-  {role.location && <div>{role.location}</div>}
-  {isMultiRow && <div class="text-xs sm:hidden">{timespanText}</div>}
-  <div class="mt-2 prose-sm" set:html={formatParagraphs(role.description)} />
-  <div class={`flex flex-row gap-2 mt-3`}>
-    <div class="font-bold">Skills:</div>
-    <div class="flex flex-row flex-wrap gap-x-2">
-      {
-        role.tags.map((tag, index) => (
-          <div class="text-skin-accent">
-            {tag} {index !== role.tags.length - 1 ? "·" : ""}
-          </div>
-        ))
-      }
-    </div>
-  </div>
+  <ul class="role-skills" aria-label="Skills">
+    {role.tags.map(tag => <li>{tag}</li>)}
+  </ul>
 </div>
+<style>
+  .resume-role {
+    min-width: 0;
+  }
+  .later-role {
+    margin-top: 1.75rem;
+  }
+  h4 {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .role-meta {
+    font-size: 0.8125rem;
+    color: rgba(var(--color-text-base), 0.7);
+    margin-top: 0.25rem;
+  }
+  .role-description {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .role-description p {
+    margin: 0.75rem 0;
+  }
+  .role-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .role-skills li {
+    margin: 0;
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+    background: rgba(var(--color-card), 0.5);
+    color: rgba(var(--color-text-base), 0.8);
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+</style>

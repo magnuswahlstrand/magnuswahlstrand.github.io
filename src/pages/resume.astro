@@ -1,15 +1,42 @@
 ---
 import MySiteLayout from "../layouts/AboutNowLayout.astro";
-import { calculateDuration, nowDate, resumeItems } from "../resume/resumeItems";
+import { resumeItems } from "../resume/resumeItems";
 import ResumeItem from "../components/ResumeItem.astro";
 ---
 
-<MySiteLayout frontmatter={{ title: "Resumé" }}>
-  <div class="flex flex-row mb-3 items-end gap-1 text-skin-base">
-    <div class="text-2xl font-bold">Experience</div>
-    <div class="text-xs mb-1">({calculateDuration("Jan 2012", nowDate())})</div>
-  </div>
-  <div class="flex flex-col gap-6">
+<MySiteLayout
+  frontmatter={{
+    title: "Resumé",
+    navName: "resume",
+    description:
+      "Magnus Wahlstrand's experience in backend development, technical leadership, and operating production systems.",
+  }}
+>
+  <p>
+    I'm a freelance software engineer based in Stockholm, working through <a
+      href="https://32b.se">32 Bytes</a
+    >. My experience spans backend development, technical leadership, and
+    operating production systems, from banking and payments to streaming
+    services.
+  </p>
+  <p>
+    For consulting enquiries, <a
+      href="https://www.linkedin.com/in/magnus-wahlstrand"
+      >contact me on LinkedIn</a
+    >. For projects and interests outside work, see <a href="/about">About me</a
+    >.
+  </p>
+  <h2>Experience</h2>
+  <p class="experience-since">Since 2012</p>
+  <div class="flex flex-col gap-8">
     {resumeItems.map(item => <ResumeItem {...item} />)}
   </div>
 </MySiteLayout>
+
+<style>
+  .experience-since {
+    margin-top: -0.5rem;
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+</style>

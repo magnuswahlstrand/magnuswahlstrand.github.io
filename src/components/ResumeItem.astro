@@ -9,7 +9,7 @@ export interface Props {
   isOngoing?: boolean;
   type: "Freelance" | "Full-time";
   roles: {
-    location: string;
+    location?: string;
     title: string;
     description: string;
     from: string;
@@ -27,7 +27,7 @@ const from = item.roles[item.roles.length - 1].from;
 const titleProps = { ...item, to, from, isMultiRow };
 ---
 
-<div class="rounded border border-slate-500 text-skin-base">
+<div class="resume-company text-skin-base">
   <ResumeItemTitle {...titleProps} />
   {
     item.roles.map((role, index) => {
@@ -42,3 +42,11 @@ const titleProps = { ...item, to, from, isMultiRow };
     })
   }
 </div>
+
+<style>
+  .resume-company {
+    border-top: 1px solid rgba(var(--color-text-base), 0.2);
+    padding-top: 1.25rem;
+    min-width: 0;
+  }
+</style>

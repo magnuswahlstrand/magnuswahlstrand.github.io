@@ -1,6 +1,4 @@
 ---
-import { calculateDuration } from "../resume/resumeItems";
-import SocialsButton from "./SocialsButton.astro";
 export interface Props {
   company: {
     name: string;
@@ -15,26 +13,31 @@ export interface Props {
 }
 
 const { company, isOngoing, type, to, from, isMultiRow } = Astro.props;
-const durationText = calculateDuration(from, to);
 const timespanText = `${from} - ${isOngoing ? "Present" : to}`;
 ---
 
-<div
-  class="flex justify-between border-b border-slate-500 px-4 py-2 items-center"
->
-  <div class="flex flex-row gap-2 items-center">
-    <div class="font-bold">{company.name}</div>
-    <SocialsButton
-      name="Linkedin"
-      href={company.linkedin}
-      className="mb-1 pt-0"
-    />
-  </div>
-  <div class="flex flex-col text-xs text-right shrink-0">
-    <div class="flex flex-row gap-1 justify-end">
-      <div>{type}</div>
-      <div class="sm:block hidden">· {durationText}</div>
-    </div>
-    <div>{timespanText}</div>
-  </div>
+<div class="company-heading">
+  <h3><a href={company.linkedin}>{company.name}</a></h3>
+  <div class="company-dates">{type} · {timespanText}</div>
 </div>
+<style>
+  .company-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  h3 a {
+    text-decoration: none;
+  }
+  .company-dates {
+    font-size: 0.8125rem;
+    color: rgba(var(--color-text-base), 0.7);
+  }
+</style>

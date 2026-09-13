@@ -42,9 +42,11 @@ export async function getStaticPaths() {
     };
   });
 
-  const pagePaths: PagePaths = getPageNumbers(posts.length).map(pageNum => ({
-    params: { slug: String(pageNum) },
-  }));
+  const pagePaths: PagePaths = getPageNumbers(getSortedPosts(posts).length).map(
+    pageNum => ({
+      params: { slug: String(pageNum) },
+    })
+  );
   return [...postResult, ...pagePaths];
 }
 

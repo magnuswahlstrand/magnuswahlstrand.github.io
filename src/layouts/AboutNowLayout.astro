@@ -8,7 +8,7 @@ import Layout from "./Layout.astro";
 export interface Props {
   frontmatter: {
     title: string;
-    navName?: string;
+    navName?: "posts" | "tags" | "about" | "search" | "resume" | "lists";
     description?: string;
     images?: { src: string; alt?: string }[];
     source?: { label: string; url: string };
@@ -16,14 +16,24 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
+const profilePage = ["about", "resume"].includes(frontmatter.navName ?? "");
 const cookingMode = Astro.url.pathname.startsWith("/recipes/");
 ---
 
-<Layout title={`${frontmatter.title} | ${SITE.title}`}>
+<Layout
+  title={`${frontmatter.title} | ${SITE.title}`}
+  description={frontmatter.description}
+>
   <Header activeNav={frontmatter.navName} />
   <!--    <Breadcrumbs/>-->
   <main id="main-content">
-    <section id="about" class="mt-12 mb-28 prose max-w-3xl prose-img:border-0">
+    <section
+      id="about"
+      class:list={[
+        "mt-12 mb-28 prose max-w-3xl prose-img:border-0",
+        { "profile-page": profilePage },
+      ]}
+    >
       <h1 class="text-4xl sm:text-4xl tracking-wider text-center">
         {frontmatter.title}
       </h1>
@@ -66,6 +76,31 @@ const cookingMode = Astro.url.pathname.startsWith("/recipes/");
   <Footer />
 
   <style>
+    .profile-page {
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+    .profile-page > h1 {
+      text-align: left;
+      letter-spacing: -0.035em;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 2rem;
+    }
+    .profile-page > hr {
+      display: none;
+    }
+    .profile-page :global(h2) {
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      scroll-margin-top: 2rem;
+    }
+    @media (max-width: 639px) {
+      .profile-page {
+        margin-top: 2rem;
+      }
+    }
+
     .cooking-toggle[data-on="true"] {
       background-color: rgb(var(--color-accent));
     }
