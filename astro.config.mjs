@@ -35,8 +35,8 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkToc],
     shikiConfig: {
-      theme: "one-dark-pro",
-      wrap: true,
+      theme: "github-dark",
+      wrap: false,
       transformers: [
         addCopyButton({
           toggle: 500,

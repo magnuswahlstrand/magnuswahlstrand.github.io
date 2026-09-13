@@ -8,11 +8,11 @@
 
 @layer base {
   :root {
-    --color-fill: 242, 245, 236;
+    --color-fill: 250, 249, 246;
     --color-text-base: 53, 53, 56;
     --color-accent: 17, 88, 209;
-    --color-card: 206, 213, 180;
-    --color-card-muted: 187, 199, 137;
+    --color-card: 232, 231, 226;
+    --color-card-muted: 214, 213, 207;
     --color-border: 124, 173, 255;
   }
 
@@ -240,4 +240,90 @@ pre button.copy {
       display: none;
     }
   }
+}
+
+/* Shared article typography and navigation. */
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.article-body :is(h1, h2, h3, h4) {
+  scroll-margin-top: 2rem;
+  letter-spacing: -0.02em;
+}
+.article-body :is(h1, h2) {
+  font-size: 1.6rem;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+}
+.article-body > :first-child {
+  margin-top: 0;
+}
+.article-body a {
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(var(--color-text-base), 0.4);
+}
+.article-body img {
+  border: 1px solid rgba(var(--color-text-base), 0.15);
+  border-radius: 0.5rem;
+}
+.article-body :not(pre) > code {
+  padding: 0.15em 0.3em;
+  font-size: 0.85em;
+  font-weight: 500;
+  box-decoration-break: clone;
+}
+.article-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  white-space: pre;
+  overflow-wrap: normal;
+  tab-size: 2;
+}
+.article-body pre code {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  font-weight: 400;
+}
+.article-body pre:has(button.copy) {
+  padding-top: 3rem;
+}
+.article-body pre button.copy {
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+}
+.article-body pre button.copy:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.article-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.article-outline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.article-outline li + li {
+  margin-top: 0.5rem;
+}
+.article-outline a {
+  display: block;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(var(--color-text-base), 0.72);
+  text-decoration: none;
+}
+.article-outline a:hover {
+  color: rgb(var(--color-accent));
 }

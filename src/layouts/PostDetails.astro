@@ -7,7 +7,6 @@ import Datetime from "@components/Datetime";
 import TOC from "@components/TOC.tsx";
 import type { MarkdownInstance } from "astro";
 import type { Frontmatter } from "src/types";
-import GoBackButton from "../components/GoBackButton.astro";
 
 export interface Props {
   post: MarkdownInstance<Frontmatter>;
@@ -16,6 +15,7 @@ export interface Props {
 const { frontmatter, Content } = Astro.props.post;
 
 const { title, author, description, ogImage, datetime, tags } = frontmatter;
+const headings = Astro.props.post.getHeadings();
 ---
 
 <Layout
@@ -25,76 +25,124 @@ const { title, author, description, ogImage, datetime, tags } = frontmatter;
   ogImage={ogImage}
 >
   <Header />
-  <div class="">
-    <div class="mx-auto grid grid-cols-12 max-w-7xl">
-      <div class="col-1"></div>
-      <div class="col-2">
-        <GoBackButton />
-        <div class="justify-start mx-auto">
-          <h1 class="post-title">{title}</h1>
-          <Datetime datetime={datetime} size="lg" className="my-2" />
-          <ul class="tags-container">
-            {tags?.map(tag => <Tag name={tag} size="sm" />)}
-          </ul>
-        </div>
-      </div>
-      <div class="col-3"></div>
-    </div>
-    <div class="mx-auto grid grid-cols-12 max-w-7xl mt-4">
-      <!--Col 1 -->
-      <div class="col-1"></div>
-
-      <!--Col 2 -->
-      <div class="col-2">
-        <div>
-          <article id="article" role="article" class="prose max-w-3xl mb-24">
-            <Content />
-          </article>
-        </div>
-      </div>
-
-      <!--Col 3 -->
-      <div class="col-3 border-l-2 pl-3 prose-li:decoration-0">
-        <TOC headings={Astro.props.post.getHeadings()} />
-      </div>
-    </div>
-  </div>
+  <main id="main-content" tabindex="-1" class="post-layout">
+    <header class="post-header">
+      <a class="back-link" href="/posts">← All posts</a>
+      <h1 class="post-title">{title}</h1>
+      <Datetime datetime={datetime} size="sm" className="post-date" />
+      <ul class="tags-container" aria-label="Tags">
+        {tags?.map(tag => <Tag name={tag} size="sm" />)}
+      </ul>
+    </header>
+    {
+      headings.length > 0 && (
+        <details class="mobile-outline">
+          <summary>On this page</summary>
+          <TOC headings={headings} />
+        </details>
+      )
+    }
+    <article id="article" class="prose article-body">
+      <Content />
+    </article>
+    {
+      headings.length > 0 && (
+        <aside class="desktop-outline" aria-label="Article outline">
+          <div class="outline-sticky">
+            <p class="outline-label">On this page</p>
+            <TOC headings={headings} />
+          </div>
+        </aside>
+      )
+    }
+  </main>
   <Footer />
 </Layout>
 
 <style>
-  .col-1 {
-    @apply xl:col-span-3 hidden xl:block;
+  .post-layout {
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2.5rem 1rem 5rem;
   }
-
-  .col-2 {
-    @apply col-span-12 lg:col-span-9 xl:col-span-6 px-4;
+  .post-header {
+    margin-bottom: 2.5rem;
   }
-
-  .col-3 {
-    @apply lg:col-span-3 hidden lg:block;
+  .back-link {
+    font-size: 0.875rem;
+    color: rgba(var(--color-text-base), 0.7);
   }
-
-  main {
-    @apply px-2 pb-12 mx-auto w-full;
+  .back-link:hover {
+    color: rgb(var(--color-accent));
   }
-
-  #main-content-wrapper {
-    @apply mx-auto;
-  }
-
   .post-title {
-    @apply font-semibold text-2xl text-skin-accent;
+    margin: 1.25rem 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
-
   .tags-container {
-    @apply my-1 text-sm;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    margin-top: 0.5rem;
   }
-
-  .toc {
-    @apply text-xs border-l-2 pl-4;
+  .article-body {
+    min-width: 0;
+    max-width: none;
   }
-
-  .toc a {
+  .desktop-outline {
+    display: none;
+  }
+  .mobile-outline {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-block: 1px solid rgba(var(--color-text-base), 0.15);
+  }
+  .mobile-outline summary {
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  .mobile-outline[open] summary {
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 1280px) {
+    .post-layout {
+      position: relative;
+    }
+    .desktop-outline {
+      display: block;
+      position: absolute;
+      top: 2.5rem;
+      bottom: 5rem;
+      left: calc(100% + 1.5rem);
+      width: min(13rem, calc((100vw - 48rem) / 2 - 3rem));
+    }
+    .outline-sticky {
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+    .outline-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .mobile-outline {
+      display: none;
+    }
+  }
+  @media (max-width: 639px) {
+    .post-layout {
+      padding-top: 1.75rem;
+    }
+    .post-header {
+      margin-bottom: 1.75rem;
+    }
   }
 </style>
