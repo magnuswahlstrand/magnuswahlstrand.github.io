@@ -7,8 +7,6 @@ source:
   url: https://bigspud.co.uk/heston-blumenthals-sous-vide-scrambled-eggs/
 ---
 
-Serves 2.
-
 ## Ingredients
 
 - 6 eggs

@@ -7,6 +7,12 @@ import LinkButton from "@components/LinkButton.astro";
 ---
 
 <Layout title={`404 Not Found | ${SITE.title}`}>
+  <script is:inline>
+    // Renamed or removed recipes land on the recipe index instead.
+    if (location.pathname.startsWith("/recipes/")) {
+      location.replace("/recipes");
+    }
+  </script>
   <Header />
 
   <main id="main-content">

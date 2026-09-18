@@ -11,7 +11,6 @@ export interface Props {
     navName?: "posts" | "tags" | "about" | "search" | "resume" | "lists";
     description?: string;
     images?: { src: string; alt?: string }[];
-    source?: { label: string; url: string };
   };
 }
 
@@ -56,16 +55,6 @@ const cookingMode = Astro.url.pathname.startsWith("/recipes/");
         )
       }
       <slot />
-      {
-        frontmatter.source && (
-          <p>
-            <em>
-              {frontmatter.source.label} —{" "}
-              <a href={frontmatter.source.url}>{frontmatter.source.url}</a>
-            </em>
-          </p>
-        )
-      }
       {
         frontmatter.images && frontmatter.images.length > 0 && (
           <ImageCarousel images={frontmatter.images} />

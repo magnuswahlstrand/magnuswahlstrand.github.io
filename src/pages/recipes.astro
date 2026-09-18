@@ -20,7 +20,20 @@ const recipes = getSortedRecipes();
         recipes.map(recipe => (
           <tr>
             <td>
-              <a href={recipe.url}>{recipe.frontmatter.title}</a>
+              <a href={recipe.url} class="recipe-link">
+                {recipe.frontmatter.images?.[0] ? (
+                  <img
+                    src={recipe.frontmatter.images[0].src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    class="thumb"
+                  />
+                ) : (
+                  <span class="thumb" />
+                )}
+                {recipe.frontmatter.title}
+              </a>
             </td>
             <td>
               {recipe.frontmatter.added
@@ -44,3 +57,12 @@ const recipes = getSortedRecipes();
     </tbody>
   </SortableTable>
 </MySiteLayout>
+
+<style>
+  .recipe-link {
+    @apply flex items-center gap-3;
+  }
+  .thumb {
+    @apply block h-10 w-10 shrink-0 rounded bg-skin-card object-cover;
+  }
+</style>

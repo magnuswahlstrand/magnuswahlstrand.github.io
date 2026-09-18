@@ -2,6 +2,9 @@
 layout: ../../layouts/AboutNowLayout.astro
 title: "Japanese Sesame Dressing (Goma Dressing)"
 added: "2026-08"
+images:
+  - src: /img/recipes/goma/goma.jpg
+    alt: Frisée lettuce with sesame dressing and sesame seeds
 ---
 
 ## Ingredients

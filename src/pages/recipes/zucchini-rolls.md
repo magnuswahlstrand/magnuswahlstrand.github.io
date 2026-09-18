@@ -4,8 +4,6 @@ title: "Zucchini Tapenade Rolls"
 added: "2026-07"
 ---
 
-Serves 4.
-
 ## Ingredients
 
 - 2 zucchini (long, straight)
