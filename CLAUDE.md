@@ -85,6 +85,19 @@ There are **no Astro content collections**. Each kind of content has its own loa
    same guarantee posts and games get, just enforced from the side.
    `title` is required; `added` (`YYYY-MM`) and `source` (`{ label, url }`) feed the
    table, `images` feeds the carousel in the layout.
+   Photos live in `public/img/recipes/<recipe>/` and are served as-is — nothing
+   in the build resizes or re-encodes them, so a straight-off-the-phone JPEG
+   (3–5 MB, 3472×4624) ships at full size. **Always compress before committing:**
+
+   ```bash
+   sips -Z 1600 -s format jpeg -s formatOptions 60 <file> --out <file>
+   ```
+
+   The carousel renders inside `max-w-3xl` (768 px) and the lightbox at viewport
+   size, so a 1600 px long edge is plenty even on retina; q60 is visually clean
+   on food photos. That lands around 150–250 KB. Check with
+   `ls -lS public/img/recipes/*/*` — anything much over ~500 KB is bigger than it
+   needs to be, and over ~1 MB has slipped through uncompressed.
    These recipes used to be TS modules carrying an `operations` DAG rendered as a
    flow diagram; that subsystem (`src/lib/recipe-flow/`) was removed.
 4. **Reading takes** — `src/reading/*.md`, one file per article read: the
