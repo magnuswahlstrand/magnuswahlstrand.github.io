@@ -2,6 +2,9 @@
 layout: ../../layouts/AboutNowLayout.astro
 title: "Chili Egg & Avocado Toast"
 added: "2026-09"
+images:
+  - src: /img/recipes/chili-egg-avocado-toast/chili-egg-mash.jpeg
+    alt: Boiled eggs mashed with mayonnaise and crispy chili oil in a dark bowl
 ---
 
 A quick weekday breakfast. The egg mash is just boiled eggs, mayo and crispy
