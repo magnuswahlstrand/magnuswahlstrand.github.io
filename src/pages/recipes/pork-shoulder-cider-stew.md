@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Pork Shoulder Cider Stew (pressure cooker)"
-added: "2026-09"
+added: "2026-09-24"
 ---
 
 Serves 5. Serve with rice or mashed potatoes.

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Smashed Cucumber Salad"
-added: "2026-08"
+added: "2026-09-05"
 ---
 
 ## Ingredients

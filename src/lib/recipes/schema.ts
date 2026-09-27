@@ -12,10 +12,10 @@ export const recipeImageSchema = z.object({
 
 export const recipeSchema = z.object({
   title: z.string(),
-  // `YYYY-MM`; the recipes table sorts on this string and parses it as a date.
+  // `YYYY-MM-DD`; the recipes table displays month/year and sorts by day.
   added: z
     .string()
-    .regex(/^\d{4}-\d{2}$/, "added must be YYYY-MM")
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "added must be YYYY-MM-DD")
     .optional(),
   source: recipeSourceSchema.optional(),
   images: z.array(recipeImageSchema).optional(),

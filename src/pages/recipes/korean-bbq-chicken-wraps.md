@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Korean BBQ Chicken Wraps"
-added: "2026-09"
+added: "2026-09-20"
 source:
   label: Instagram reel
   url: https://www.instagram.com/reels/DdMn4eouz9U/

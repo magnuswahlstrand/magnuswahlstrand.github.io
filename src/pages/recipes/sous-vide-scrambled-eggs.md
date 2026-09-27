@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Brown Butter Sous Vide Scrambled Eggs"
-added: "2026-07"
+added: "2026-04-26"
 source:
   label: Based on Heston Blumenthal's recipe, via bigspud.co.uk
   url: https://bigspud.co.uk/heston-blumenthals-sous-vide-scrambled-eggs/

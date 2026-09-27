@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Bang Bang Ji Si (variant)"
-added: "2026-09"
+added: "2026-09-21"
 source:
   label: Serious Eats
   url: https://www.seriouseats.com/sichuan-chicken-salad-chinese-bang-bang-hot-and-numbing-recipe

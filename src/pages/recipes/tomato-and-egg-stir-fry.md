@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Tomato and Egg Stir-fry"
-added: "2026-09"
+added: "2026-09-21"
 images:
   - src: /img/recipes/tomato-egg/tomato-egg.jpeg
     alt: Bowl of scrambled eggs folded through stir-fried tomatoes with scallion

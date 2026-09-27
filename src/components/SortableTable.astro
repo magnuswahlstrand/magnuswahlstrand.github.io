@@ -48,8 +48,10 @@
         const current = header.getAttribute("data-sort");
         const next = current === "asc" ? "desc" : "asc";
         rows.sort((a, b) => {
-          const avText = a.children[index].textContent.trim();
-          const bvText = b.children[index].textContent.trim();
+          const aCell = a.children[index] as HTMLElement;
+          const bCell = b.children[index] as HTMLElement;
+          const avText = aCell.dataset.sortValue ?? aCell.textContent.trim();
+          const bvText = bCell.dataset.sortValue ?? bCell.textContent.trim();
           if (type === "number") {
             const isSet = (t: string) => t && t !== "–";
             const numeric = (t: string): number =>
@@ -69,7 +71,10 @@
             }
             return next === "asc" ? cmp : -cmp;
           }
-          const cmp = avText.localeCompare(bvText);
+          const cmp =
+            type === "date"
+              ? new Date(avText).getTime() - new Date(bvText).getTime()
+              : avText.localeCompare(bvText);
           return next === "asc" ? cmp : -cmp;
         });
         rows.forEach(row => tbody.appendChild(row));

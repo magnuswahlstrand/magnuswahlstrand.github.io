@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Vermicelli Rice with Shawarma-ish Chicken"
-added: "2026-09"
+added: "2026-09-18"
 images:
   - src: /img/recipes/shawarma/shawarma.jpg
     alt: Roasted chicken thighs, vermicelli rice, garlic yoghurt, blistered peppers and cabbage salad

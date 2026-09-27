@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Kimchi"
-added: "2026-07"
+added: "2026-04-04"
 images:
   - src: /img/recipes/kimchi/1.jpeg
     alt: Half napa cabbage

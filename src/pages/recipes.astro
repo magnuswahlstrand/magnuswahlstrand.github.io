@@ -11,7 +11,7 @@ const recipes = getSortedRecipes();
     <thead>
       <tr>
         <th data-sort="asc" data-type="text">Recipe</th>
-        <th data-sort="desc" data-type="text">Added</th>
+        <th data-sort="desc" data-type="date">Added</th>
         <th data-type="none">Source</th>
       </tr>
     </thead>
@@ -35,15 +35,14 @@ const recipes = getSortedRecipes();
                 {recipe.frontmatter.title}
               </a>
             </td>
-            <td>
+            <td data-sort-value={recipe.frontmatter.added}>
               {recipe.frontmatter.added
-                ? new Date(recipe.frontmatter.added + "-01").toLocaleDateString(
-                    "en-US",
-                    {
-                      month: "short",
-                      year: "numeric",
-                    }
-                  )
+                ? new Date(
+                    recipe.frontmatter.added + "T00:00:00"
+                  ).toLocaleDateString("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  })
                 : "–"}
             </td>
             <td>

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Baba Ghanoush"
-added: "2024-01"
+added: "2024-09-28"
 ---
 
 ## Ingredients

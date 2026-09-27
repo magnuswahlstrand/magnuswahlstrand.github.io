@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "5-Minute Chickpea Salad"
-added: "2026-08"
+added: "2026-09-05"
 ---
 
 ## Ingredients

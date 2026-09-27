@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Katsu Sando"
-added: "2026-09"
+added: "2026-09-05"
 source:
   label: ICA Recept
   url: https://www.ica.se/recept/katsu-sando-japansk-sandwich-med-schnitzel-727744/
