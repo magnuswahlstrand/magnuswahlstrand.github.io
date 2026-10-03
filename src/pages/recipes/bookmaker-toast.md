@@ -1,12 +1,12 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
-title: "Steak Toast with Horseradish and Mustard Mayo"
+title: "Bookmaker Toast"
 added: "2026-10-03"
 source:
   label: Tommy Myllymäki, Köket.se
   url: https://www.koket.se/tommy-myllymaki/mackor-och-wraps/kott/bookmaker-toast-med-biff-och-pepparrot
 images:
-  - src: /img/recipes/steak-toast/1.jpg
+  - src: /img/recipes/bookmaker-toast/1.jpg
     alt: Steak toast topped with grated horseradish and an egg yolk
 ---
 
