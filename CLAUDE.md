@@ -117,6 +117,8 @@ There are **no Astro content collections**. Each kind of content has its own loa
    `/tags/reading` no longer exist.
 5. **JSON data** — `src/data/food-log.json`, `src/pages/menu/_menus.json`,
    imported directly by their pages (`_`-prefixed files are not routed by Astro).
+   Adding a meal to the food log is written up as the `food-log` skill
+   (`.claude/skills/food-log/SKILL.md`).
 
 ### Routing
 
