@@ -35,11 +35,20 @@ Serves 5. About 90 minutes, using a pressure cooker.
 - 2 tsp gochugaru
 - 1 pearl onion (silverlök), thinly sliced
 
+### Gochujang sauce
+
+- 2 tbsp gochujang
+- 1 tbsp rice vinegar
+- 1 tsp soy sauce
+- 1 tsp sesame oil
+- 1 tsp honey or sugar (optional)
+- 2–3 tbsp water
+
 ## How to
 
 1. Cut the pork into large chunks and put everything for the pulled pork in the pressure cooker.
 2. Cook at high pressure for 55–60 minutes, then let the pressure release naturally for 15–20 minutes.
 3. Shred the pork coarsely and mix in a little of the cooking liquid.
-4. Cook the rice.
+4. Cook the rice, and mix the gochujang sauce until smooth.
 5. Divide the rice between bowls and top with salad greens, pork and kimchi.
-6. Drizzle with mayo, sprinkle with crispy onions and gochugaru, and finish with the raw onion.
+6. Drizzle with mayo and 1–2 tsp gochujang sauce per bowl, sprinkle with crispy onions and gochugaru, and finish with the raw onion.
