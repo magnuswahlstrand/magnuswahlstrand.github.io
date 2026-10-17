@@ -33,6 +33,13 @@ const cookingMode = Astro.url.pathname.startsWith("/recipes/");
         { "profile-page": profilePage },
       ]}
     >
+      {
+        cookingMode && (
+          <a class="back-link not-prose" href="/recipes">
+            ← All recipes
+          </a>
+        )
+      }
       <h1 class="text-4xl sm:text-4xl tracking-wider text-center">
         {frontmatter.title}
       </h1>
@@ -88,6 +95,14 @@ const cookingMode = Astro.url.pathname.startsWith("/recipes/");
       .profile-page {
         margin-top: 2rem;
       }
+    }
+
+    .back-link {
+      font-size: 0.875rem;
+      color: rgba(var(--color-text-base), 0.7);
+    }
+    .back-link:hover {
+      color: rgb(var(--color-accent));
     }
 
     .cooking-toggle[data-on="true"] {
