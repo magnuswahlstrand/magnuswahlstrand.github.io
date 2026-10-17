@@ -22,6 +22,7 @@ const cookingMode = Astro.url.pathname.startsWith("/recipes/");
 <Layout
   title={`${frontmatter.title} | ${SITE.title}`}
   description={frontmatter.description}
+  ogImage={frontmatter.images?.[0]?.src}
 >
   <Header activeNav={frontmatter.navName} />
   <!--    <Breadcrumbs/>-->
