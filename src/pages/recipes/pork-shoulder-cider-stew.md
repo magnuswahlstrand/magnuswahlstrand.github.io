@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Pork Shoulder Cider Stew (pressure cooker)"
+description: "Pork shoulder stewed with cider and apples in the pressure cooker."
 added: "2026-09-24"
 ---
 

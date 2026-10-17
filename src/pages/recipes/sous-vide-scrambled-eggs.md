@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Brown Butter Sous Vide Scrambled Eggs"
+description: "Extra creamy scrambled eggs cooked sous vide with brown butter."
 added: "2026-04-26"
 source:
   label: Based on Heston Blumenthal's recipe, via bigspud.co.uk

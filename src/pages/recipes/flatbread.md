@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Flatbread"
+description: "Soft, yeast-free flatbread made with milk and butter, cooked in a dry pan."
 added: "2026-10-10"
 source:
   label: RecipeTin Eats

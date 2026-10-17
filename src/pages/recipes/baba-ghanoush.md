@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Baba Ghanoush"
+description: "Oven-roasted eggplant dip with tahini, garlic and lemon."
 added: "2024-09-28"
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Xinjiang Cumin Lamb"
+description: "Pressure-cooked lamb, stir-fried with cumin and chili until dry and roasted."
 added: "2026-09-05"
 ---
 

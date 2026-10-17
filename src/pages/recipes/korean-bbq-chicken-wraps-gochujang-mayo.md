@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Korean BBQ Chicken Wraps with Gochujang Mayo"
+description: "Crispy-skinned chicken thighs with Korean BBQ sauce and gochujang mayo in wraps."
 added: "2026-10-16"
 ---
 

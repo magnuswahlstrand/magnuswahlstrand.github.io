@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Kimchi"
+description: "Simple homemade kimchi with napa cabbage, apple and garlic."
 added: "2026-04-04"
 images:
   - src: /img/recipes/kimchi/1.jpeg

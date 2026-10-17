@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Tomato and Egg Stir-fry"
+description: "Classic Chinese tomato and egg stir-fry."
 added: "2026-09-21"
 images:
   - src: /img/recipes/tomato-egg/tomato-egg.jpeg

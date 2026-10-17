@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Smashed Cucumber Salad"
+description: "Smashed cucumber with rice vinegar, soy sauce and sesame oil."
 added: "2026-09-05"
 ---
 

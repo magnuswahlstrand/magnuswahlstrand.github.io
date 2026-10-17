@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "5-Minute Chickpea Salad"
+description: "Quick chickpea salad with cucumber, tomato, red onion and feta."
 added: "2026-09-05"
 ---
 

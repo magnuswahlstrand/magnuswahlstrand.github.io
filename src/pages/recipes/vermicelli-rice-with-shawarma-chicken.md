@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Vermicelli Rice with Shawarma-ish Chicken"
+description: "Buttery vermicelli rice with shawarma-spiced chicken."
 added: "2026-09-18"
 images:
   - src: /img/recipes/shawarma/shawarma.jpg

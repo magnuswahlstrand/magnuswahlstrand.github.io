@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Spicy Pulled Pork"
+description: "Japanese-Korean pulled pork rice bowl with kimchi, mayo, crispy onions and gochugaru."
 added: "2026-10-12"
 images:
   - src: /img/recipes/spicy-pulled-pork/1.jpg

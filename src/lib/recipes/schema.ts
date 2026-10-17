@@ -12,6 +12,8 @@ export const recipeImageSchema = z.object({
 
 export const recipeSchema = z.object({
   title: z.string(),
+  // One line for link previews (og:description); not shown on the page.
+  description: z.string().optional(),
   // `YYYY-MM-DD`; the recipes table displays month/year and sorts by day.
   added: z
     .string()

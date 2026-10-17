@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Korean BBQ Chicken Wraps"
+description: "Oven-baked gochujang chicken thighs, served in wraps with carrot and cucumber salad."
 added: "2026-09-20"
 source:
   label: Instagram reel

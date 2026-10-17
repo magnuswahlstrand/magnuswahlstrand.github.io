@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Katsu Sando"
+description: "Tonkatsu sauce and soy-dressed cabbage for Japanese katsu sandwiches."
 added: "2026-09-05"
 source:
   label: ICA Recept

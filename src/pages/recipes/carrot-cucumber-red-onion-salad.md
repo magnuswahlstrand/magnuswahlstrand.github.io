@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Carrot, Cucumber and Red Onion Salad with Sriracha Dressing"
+description: "Crunchy carrot, cucumber and red onion salad with a sriracha dressing."
 added: "2026-09-20"
 source:
   label: Instagram reel

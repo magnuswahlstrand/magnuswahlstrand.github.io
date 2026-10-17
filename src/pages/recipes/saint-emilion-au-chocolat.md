@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Saint-Émilion au chocolat"
+description: "French chocolate dessert with rum-soaked almond biscuits, chilled overnight."
 added: "2026-10-16"
 images:
   - src: /img/recipes/saint-emilion-au-chocolat/1.jpg

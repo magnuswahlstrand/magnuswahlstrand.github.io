@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Chili Egg & Avocado Toast"
+description: "Avocado toast topped with boiled egg mashed with mayo and crispy chili oil."
 added: "2026-09-26"
 images:
   - src: /img/recipes/chili-egg-avocado-toast/toast.jpg

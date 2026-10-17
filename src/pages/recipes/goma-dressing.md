@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Japanese Sesame Dressing (Goma Dressing)"
+description: "Creamy Japanese sesame dressing with tahini, mayo and soy sauce."
 added: "2026-09-05"
 images:
   - src: /img/recipes/goma/goma.jpg

@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Bookmaker Toast"
+description: "Steak on toast with mustard mayo, grated horseradish and an egg yolk."
 added: "2026-10-03"
 source:
   label: Tommy Myllymäki, Köket.se

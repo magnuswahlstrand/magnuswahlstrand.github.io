@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Zucchini Tapenade Rolls"
+description: "Pan-fried zucchini ribbons rolled around tapenade and cream cheese."
 added: "2026-04-26"
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Bang Bang Ji Si (variant)"
+description: "Sous vide chicken thighs with a sizzling ginger, garlic and chili oil sauce."
 added: "2026-09-21"
 source:
   label: Serious Eats

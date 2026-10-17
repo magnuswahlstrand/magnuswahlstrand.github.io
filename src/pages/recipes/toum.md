@@ -1,6 +1,7 @@
 ---
 layout: ../../layouts/AboutNowLayout.astro
 title: "Toum"
+description: "Fluffy Lebanese garlic sauce."
 added: "2026-10-08"
 source:
   label: Zeina's Kitchen
