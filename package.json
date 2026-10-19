@@ -24,7 +24,7 @@
     "@github/clipboard-copy-element": "^1.1.2",
     "@shikijs/transformers": "^1.22.0",
     "asciinema-player": "^3.0.1",
-    "astro": "^5.8.1",
+    "astro": "^7.2.8",
     "astro-terminal-player": "^0.1.4",
     "fuse.js": "^7.0.0",
     "github-slugger": "^2.0.0",
